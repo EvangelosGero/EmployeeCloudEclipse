@@ -371,11 +371,11 @@ public class ApolisiController implements Initializable {
                 rs = stm.executeQuery(query);
                 rs.first();
                 epidomaAdeias = rs.getDouble(1);
-                pliroteoEpidomaAdeias = rs.getDouble(2);
-                epidomaAdeiasTextField.setText(numFormat.format(epidomaAdeias));
-                pliroteoEpidomaAdeiasTextField.setText(numFormat.format(pliroteoEpidomaAdeias));
+                pliroteoEpidomaAdeias = rs.getDouble(2);                
                 if (rs != null)rs.close(); 
             }
+            epidomaAdeiasTextField.setText(numFormat.format(epidomaAdeias));
+            pliroteoEpidomaAdeiasTextField.setText(numFormat.format(pliroteoEpidomaAdeias));
             
             //Compute the salary 
             
@@ -752,37 +752,39 @@ public class ApolisiController implements Initializable {
         document.newPage();
         
         try {
-            rs1 = stm.executeQuery("SELECT * FROM "+temporaryTableStr+" WHERE id = "
+            if(stm.isClosed())stm = employeegui.EmployeeGUI.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            if (paretisiDatePicker.getValue().isBefore(LocalDate.of(currentYear, 8, 1))){
+                rs1 = stm.executeQuery("SELECT * FROM "+temporaryTableStr+" WHERE id = "
                     +Integer.toString(idChoiceBox.getValue()));
-            rs1.first();        
+                rs1.first();        
         
-        param[5] = "Επίδομα Αδείας";
-        param[17] = numFormat.format(rs1.getDouble("salary"));
-        param[21] = rs1.getString("reason_isfores_text");
-        param[22] = decimalFormat.format(rs1.getDouble("isfores_ergazomenou"));
-        param[23] = numFormat.format(rs1.getInt("ensima")*1.2);
-        param[24] = decimalFormat.format(rs1.getDouble("adjusted_salary"));
-        param[27] = (rs1.getInt("tapit")==0?" ":(rs1.getInt("tapit")==1?
+                param[5] = "Επίδομα Αδείας";
+                param[17] = numFormat.format(rs1.getDouble("salary"));
+                param[21] = rs1.getString("reason_isfores_text");
+                param[22] = decimalFormat.format(rs1.getDouble("isfores_ergazomenou"));
+                param[23] = numFormat.format(rs1.getInt("ensima")*1.2);
+                param[24] = decimalFormat.format(rs1.getDouble("adjusted_salary"));
+                param[27] = (rs1.getInt("tapit")==0?" ":(rs1.getInt("tapit")==1?
                  "ΠΡΟΝΟΙΑ ΕΡΓ/ΛΩΝ ΜΕΤΑΛΛΟΥ(ΠΑΛ)":"ΠΡΟΝΟΙΑ ΕΡΓ/ΛΩΝ ΜΕΤΑΛΛΟΥ-ΝΕΟΙ"));
-        param[28] = rs1.getInt("tapit")==0?" ":  
+                param[28] = rs1.getInt("tapit")==0?" ":  
                  decimalFormat.format(rs1.getDouble("tapit_isfores_erg"));
-        param[34] = (rs1.getDouble("fmy") == 0 ? " " : "Φόρος" );                        
-        param[35] = (rs1.getDouble("fmy") == 0 ? " " : 
+                param[34] = (rs1.getDouble("fmy") == 0 ? " " : "Φόρος" );                        
+                param[35] = (rs1.getDouble("fmy") == 0 ? " " : 
                         decimalFormat.format(rs1.getDouble("fmy")));
-        param[41] = (rs1.getDouble("isfora_allilegiis") == 0 ? " " : "Εισφoρά Αλληλεγγύης" );                        
-        param[42] = (rs1.getDouble("isfora_allilegiis") == 0 ? " " : 
+                param[41] = (rs1.getDouble("isfora_allilegiis") == 0 ? " " : "Εισφoρά Αλληλεγγύης" );                        
+                param[42] = (rs1.getDouble("isfora_allilegiis") == 0 ? " " : 
                         decimalFormat.format(rs.getDouble("isfora_allilegiis")));
-        param[64] = decimalFormat.format(rs1.getDouble("adjusted_salary"));
-        param[65] = decimalFormat.format(0);
-        param[66] = decimalFormat.format(rs1.getDouble("kratisis"));
-        param[67] = param[64];
-        param[68] = decimalFormat.format(rs1.getDouble("kathara"));       
+                param[64] = decimalFormat.format(rs1.getDouble("adjusted_salary"));
+                param[65] = decimalFormat.format(0);
+                param[66] = decimalFormat.format(rs1.getDouble("kratisis"));
+                param[67] = param[64];
+                param[68] = decimalFormat.format(rs1.getDouble("kathara"));       
         
-        apodixisPDF.createPDF(param, document);
+                apodixisPDF.createPDF(param, document);
         
-        if (rs1 != null)rs1.close();
-        
-        Map<Integer, Double> cutHoursMap = new HashMap<>();
+                if (rs1 != null)rs1.close();
+            }    
+        Map<Integer, Double> cutHoursMap = new HashMap<>();       
         rs1 = stm.executeQuery("SELECT id, cut_hours FROM "+reportTableStr);
                 while (rs1.next())cutHoursMap.put(rs1.getInt("id"), rs1.getDouble("cut_hours"));
         if (rs1 != null) rs1.close();

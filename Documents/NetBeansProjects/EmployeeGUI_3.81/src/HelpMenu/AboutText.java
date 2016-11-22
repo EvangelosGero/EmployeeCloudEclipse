@@ -24,7 +24,7 @@ public class AboutText {
         Text text = new Text();
         text.setLineSpacing(2);
         text.setText("Dyna.HR \n."+
-                "Version Number : 3.79 \n"+ 
+                "Version Number : 3.82 \n"+ 
                 "Το πρόγραμμα Dyna.HR δημιουργήθηκε το 2015-2016. \n"+
                 "Author : Ευάγγελος Γερογιάννης. \n"+
                 "Εταιρία Dynamotors Software. \n"+
