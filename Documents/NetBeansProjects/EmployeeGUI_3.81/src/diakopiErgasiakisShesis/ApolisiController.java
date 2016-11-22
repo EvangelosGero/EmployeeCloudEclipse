@@ -89,7 +89,7 @@ public class ApolisiController implements Initializable {
     private PreparedStatement prs = null;
     private ResultSet rs = null, rs1 = null;
     private LocalDate hireDate, apolisiDate;
-    private int previousMonth, currentYear, remainingDays, relation;
+    private int currentYear, remainingDays, relation;
     private double salary;
     private int proMonths = 0;   
     @FXML
@@ -155,7 +155,7 @@ public class ApolisiController implements Initializable {
         paretisiDatePicker.setPromptText(utilities.DateFormatterGreek.promptText);        
         symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
-        numFormat = new DecimalFormat(".##", symbols);
+        numFormat = new DecimalFormat(".00", symbols);
         
         oristikopoiisiBtn.setDisable(true);
         excelBtn.setDisable(true);
@@ -344,7 +344,7 @@ public class ApolisiController implements Initializable {
     @FXML    
     private void handleIpologismosBtn(ActionEvent event) throws SQLException, InterruptedException, ExecutionException {
         String query;
-        numFormat = new DecimalFormat(".##");
+        numFormat = new DecimalFormat(".00");
         
         /* Create a recent employee_vacation table to capture the latest vacation days */
         
@@ -352,11 +352,9 @@ public class ApolisiController implements Initializable {
         
         
         
-        /* find which is the previous month */
-         
-        previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
-        int tableYear = LocalDate.now().minusMonths(1).getYear(); 
-        currentYear = LocalDate.now().getYear();   
+        /* find which is the current Year */        
+        
+        currentYear = paretisiDatePicker.getValue().getYear();   
         
         epidomaAdeias = 0;
         pliroteoEpidomaAdeias = 0;
@@ -367,17 +365,17 @@ public class ApolisiController implements Initializable {
             
             // Now compute epidoma adeias
         
-            if (paretisiDatePicker.getValue().isBefore(LocalDate.of(currentYear, 8, 1)))
-            computeEpidomaAdeias(idChoiceBox.getValue());
-            
-            query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+Integer.toString(idChoiceBox.getValue());
-            rs = stm.executeQuery(query);
-            rs.first();
-            epidomaAdeias = rs.getDouble(1);
-            pliroteoEpidomaAdeias = rs.getDouble(2);
-            epidomaAdeiasTextField.setText(numFormat.format(epidomaAdeias));
-            pliroteoEpidomaAdeiasTextField.setText(numFormat.format(pliroteoEpidomaAdeias));
-            if (rs != null)rs.close(); 
+            if (paretisiDatePicker.getValue().isBefore(LocalDate.of(currentYear, 8, 1))){
+                computeEpidomaAdeias(idChoiceBox.getValue());            
+                query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+Integer.toString(idChoiceBox.getValue());
+                rs = stm.executeQuery(query);
+                rs.first();
+                epidomaAdeias = rs.getDouble(1);
+                pliroteoEpidomaAdeias = rs.getDouble(2);
+                epidomaAdeiasTextField.setText(numFormat.format(epidomaAdeias));
+                pliroteoEpidomaAdeiasTextField.setText(numFormat.format(pliroteoEpidomaAdeias));
+                if (rs != null)rs.close(); 
+            }
             
             //Compute the salary 
             
