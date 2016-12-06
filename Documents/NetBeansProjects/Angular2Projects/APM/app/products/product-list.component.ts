@@ -1,15 +1,19 @@
 import {Component} from '@angular/core';
+import {IProduct} from './product';
 
 
 @Component({
     selector: 'pm-products',
-    templateUrl: 'app/products/product-list.component.html'
+    templateUrl: 'app/products/product-list.component.html',
+    styleUrls: ['app/products/product-list.component.css']
 })
 export class ProductListComponent{
     pageTitle: string ='Dyna Products';
     imageWidth: number = 50;
     imageMargin: number = 2;
-    products: any[] =[
+    showImage: boolean = false;
+    listFilter: string = 'cart';
+    products: IProduct[] =[
         {
         "productId": 2,
         "productName": "Garden Cart",
@@ -30,5 +34,8 @@ export class ProductListComponent{
         "starRating": 4.8,
         "imageUrl": "http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
     }
-    ];   
+    ];
+    toggleImage(): void {
+        this.showImage = !this.showImage;
+    }  
 }

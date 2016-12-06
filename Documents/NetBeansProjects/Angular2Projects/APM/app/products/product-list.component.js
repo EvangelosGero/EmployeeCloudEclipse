@@ -23,6 +23,8 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                     this.pageTitle = 'Dyna Products';
                     this.imageWidth = 50;
                     this.imageMargin = 2;
+                    this.showImage = false;
+                    this.listFilter = 'cart';
                     this.products = [
                         {
                             "productId": 2,
@@ -46,10 +48,14 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                         }
                     ];
                 }
+                ProductListComponent.prototype.toggleImage = function () {
+                    this.showImage = !this.showImage;
+                };
                 ProductListComponent = __decorate([
                     core_1.Component({
                         selector: 'pm-products',
-                        templateUrl: 'app/products/product-list.component.html'
+                        templateUrl: 'app/products/product-list.component.html',
+                        styleUrls: ['app/products/product-list.component.css']
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ProductListComponent);
