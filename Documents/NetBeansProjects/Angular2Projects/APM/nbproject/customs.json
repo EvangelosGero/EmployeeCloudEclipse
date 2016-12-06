@@ -2,5 +2,10 @@
     "elements": {
         "pm-app": {}
     },
-    "attributes": {}
+    "attributes": {
+        "*ngif": {
+            "context": "table"
+        },
+        "*ngfor": {}
+    }
 }
