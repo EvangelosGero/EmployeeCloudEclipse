@@ -440,7 +440,7 @@ public class CreateVacationReport {
              */
             DatabaseMetaData databaseMetaData = con.getMetaData();
             resul = databaseMetaData.getTables(null, null, "VACATION_REPORT_" +Integer.toString(refYear-1) , null);
-            if (resul.next()) query = "SELECT ID, LASTYEAR_DAYS FROM VACATION_REPORT_" +Integer.toString(refYear-1);
+            if (resul.next()) query = "SELECT ID, REMAINING_DAYS FROM VACATION_REPORT_" +Integer.toString(refYear-1);
             else {
                 if(resul != null)resul.close();
                 ButtonType ok = Alerts.showDialogOK_CANCEL("Δεν υπάρχουν ασφαλή στοιχεία για υπόλοιπα αδειών έτους "+Integer.toString(refYear-1)

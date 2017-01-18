@@ -1023,5 +1023,5 @@ public class EmployeeGUIController implements Initializable {
     @FXML
     private void handleShowCLSHistory(ActionEvent event) throws SQLException {
         new historyMenu.OldReports().oldReportsList(EmployeeGUI.con, ReportEnum.CSL01);
-    }
+    }    
 }

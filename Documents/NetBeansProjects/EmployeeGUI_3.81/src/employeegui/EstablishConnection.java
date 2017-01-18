@@ -24,6 +24,7 @@ public class EstablishConnection {
        //String host = "jdbc:derby://10.1.1.168:1527/C:/derby_10/employees";  
        //String host = "jdbc:derby://localhost:1527/C:/payara41/javadb/employees";
        String host = "jdbc:derby://localhost:1527/C:/derby_10/employees";
+       //String host = "jdbc:derby://10.1.1.23:1527/C:/derby_10/employees";
         
         /*MysqlDataSource dataSource = new MysqlDataSource();
         //dataSource.setUser("scott");
