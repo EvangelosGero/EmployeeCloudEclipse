@@ -389,11 +389,7 @@ public class CreateVacationReport {
                     }                    
                     else { switch (apolisiDate.getYear() - hireLocalDate.getYear()){                      
                         case 0 : entitledDays = (int)Math.round((ChronoUnit.DAYS.between(hireLocalDate, apolisiDate)*20D)/
-                                    (LocalDate.of(apolisiDate.getYear(), 12, 31).getDayOfYear()*1D));
-                                    System.out.println(hireLocalDate);
-                                    System.out.println(apolisiDate);
-                                    System.out.println(entitledDays+" = "+ChronoUnit.DAYS.between(hireLocalDate, apolisiDate)*20D+" / "+
-                                            LocalDate.of(apolisiDate.getYear(), 12, 31).getDayOfYear()*1D);
+                                    (LocalDate.of(apolisiDate.getYear(), 12, 31).getDayOfYear()*1D));                                    
                                 break;
                         case 1 : entitledDays = (int)Math.round((ChronoUnit.DAYS.between(LocalDate.of(apolisiDate.getYear(), 1, 1), apolisiDate)*20D)/
                                         (LocalDate.of(apolisiDate.getYear(), 12, 31).getDayOfYear()*1D));
