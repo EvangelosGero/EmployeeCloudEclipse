@@ -200,12 +200,13 @@ public class CreateVacationReport {
             ResultSet rsss = null;
             try {
                 createLastYearDayReport(currentYear-1, popStage);
-                String query2 = "SELECT remaining_days FROM VACATION_REPORT_" +Integer.toString(currentYear-1);
+                String query2 = "SELECT id, remaining_days FROM VACATION_REPORT_" +Integer.toString(currentYear-1);
                 ssss = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                         ResultSet.CONCUR_UPDATABLE);
                 rsss = ssss.executeQuery(query2);
                 while (rsss.next()){
-                    query1 = "UPDATE temp SET lastyear_days = "+Integer.toString(rsss.getInt("remaining_days")) ;
+                    query1 = "UPDATE temp SET lastyear_days = "+Integer.toString(rsss.getInt("remaining_days"))+
+                            " WHERE temp.id = "+Integer.toString(rsss.getInt("id"));
                     stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                         ResultSet.CONCUR_UPDATABLE);
                     int update1 = stm.executeUpdate(query1);
@@ -359,7 +360,7 @@ public class CreateVacationReport {
                 int id = rs12.getInt("ID");
                 LocalDate apolisiDate;
                 if (rs12.getInt("apolisi") != 0)apolisiDate = rs12.getDate("diakopi").toLocalDate();
-                        else apolisiDate = LocalDate.now().plusDays(1);
+                        else apolisiDate = (today.getMonthValue() == 12 && today.getDayOfMonth() == 31) ? today :  today.plusDays(1);
                 if (today.getYear()<=apolisiDate.getYear()){
                     LocalDate hireLocalDate = rs12.getDate("HIRE_DATE").toLocalDate();                 
                     int yearsBefore = rs12.getInt("YEARS_BEFORE");                    
@@ -508,7 +509,7 @@ public class CreateVacationReport {
                 if (statem!= null)statem.close();
             }
             
-         showInformationAlert("Η δημιουργία του report αδειών ολοκληρώθηκε!",null,null);    
+         showInformationAlert("Η δημιουργία του report αδειών 31/12/"+Integer.toString(refYear)+" ολοκληρώθηκε!",null,null);    
             
         } catch (SQLException ex) {
             Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);
