@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,11 +65,6 @@ public class ComputeEntitledDays {
             stm1 = con.prepareStatement("UPDATE EMPLOYEE_VACATION SET ENTITLED_DAYS = ? where ID = ?");           
             while (rs.next()) {
                 int id = rs.getInt("ID");
-                
-  /*   if (rs.getInt("id") == 23) 
-     {
-     int xxx=1;
-     }                */
                 LocalDate apolisiDate;
                 if (rs.getInt("apolisi") != 0)apolisiDate = rs.getDate("diakopi").toLocalDate();
                         else apolisiDate = LocalDate.now().plusDays(1);
@@ -90,17 +86,19 @@ public class ComputeEntitledDays {
                 
                     else if ((hireLocalDate.until(today).getYears()) >= 1  ) {
                         switch (today.getYear() - hireLocalDate.getYear()){ 
-                            case 1 : entitledDays = today.getMonthValue()*21/12;
+                            case 1 : entitledDays = (int)Math.round((ChronoUnit.DAYS.between(LocalDate.of(today.getYear(), 1, 1), today)*21D)/
+                                        (LocalDate.of(today.getYear(), 12, 31).getDayOfYear())*1D);
                                 break;
                             case 2 : entitledDays = 21;
                                 break;
                         }
                     }                    
                     else { switch (today.getYear() - hireLocalDate.getYear()){                      
-                        case 0 : entitledDays = hireLocalDate.until(today).getMonths()*20/12 ;
-
+                        case 0 : entitledDays = (int)Math.round((ChronoUnit.DAYS.between(hireLocalDate, today)*20D)/
+                                    (LocalDate.of(today.getYear(), 12, 31).getDayOfYear())*1D);
                             break;
-                        case 1 : entitledDays = today.getMonthValue()*20/12;
+                        case 1 : entitledDays = (int)Math.round((ChronoUnit.DAYS.between(LocalDate.of(today.getYear(), 1, 1), today)*20D)/
+                                    (LocalDate.of(today.getYear(), 12, 31).getDayOfYear())*1D);
                             break;
                         }
                     }

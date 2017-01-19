@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +85,8 @@ public class VacationReport {
             
             this.con = con;                    
             stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-            String sql = "select * from "+tbl;    
+            String sql = "select * from "+tbl; 
+            tableStr = tbl;
             rs = stm.executeQuery(sql);
       
       while (rs.next()){
@@ -103,10 +105,13 @@ public class VacationReport {
    
     final Label label = new Label(tableStr);
     label.setFont(new Font("Arial",20));
+    final Label label2 = new Label(LocalDate.now().toString());
+    label.setFont(new Font("Arial",18));
     
     final Button btn = new Button("Update Database");
         
     table.setEditable(true);
+    
     TableColumn idCol = new TableColumn("ID");
     idCol.setMinWidth(70);
     idCol.setCellValueFactory(
@@ -306,8 +311,8 @@ public class VacationReport {
                         PageLayout pageLayout = printer.createPageLayout(Paper.A4,PageOrientation.LANDSCAPE,
                                 Printer.MarginType.HARDWARE_MINIMUM);
                     for(int i=0; i <= (data.size() / 18); i++){ 
-                     PrinterJob job = PrinterJob.createPrinterJob(printer);
-                    if (job != null) {   
+                        PrinterJob job = PrinterJob.createPrinterJob(printer);
+                        if (job != null) {
                         dataA4 = FXCollections.observableArrayList(data.subList(i*18, (i+1)*18 < data.size() ? (i+1)*18 : data.size()));
                         table.setItems(dataA4);
                         table.setScaleX(Double.parseDouble(scaleXTextField.getText()));
@@ -315,20 +320,21 @@ public class VacationReport {
                         table.setTranslateX(Double.parseDouble(translateXTextField.getText()));
                         table.setTranslateY(Double.parseDouble(translateYTextField.getText()));
                     boolean success = job.printPage(pageLayout,table);
-                        if (success) {
-                             job.endJob(); 
-                        }
+                            if (success) {
+                                    job.endJob();                              
+                            }else{
+                                    Alerts.showErrorAlert("Printer Error", "Error", "Error");
+                            }
+                        }                        
                     }
-                        
-                    }
-                    dialogStage.close();
+                    dialogStage.close();                    
                     table.setItems(data);
                     table.setTranslateX(0);
                     table.setTranslateY(0);               
                     table.setScaleX(1.0);
                     table.setScaleY(1.0); 
-                        }                        
-                     });                   
+                     }                        
+                   });                   
                   }                       
             });
     cmItem3.setOnAction(new EventHandler<ActionEvent>() {   //JasperReport
@@ -404,7 +410,7 @@ public class VacationReport {
     vbox.setSpacing(5);
     vbox.setPadding(new Insets(10, 0, 0, 10));
     vbox.setAlignment(Pos.CENTER);
-    vbox.getChildren().addAll(label,sp,btn);
+    vbox.getChildren().addAll(label, label2, sp, btn);
     
     btn.setOnAction(new EventHandler<ActionEvent>() {
        @Override  

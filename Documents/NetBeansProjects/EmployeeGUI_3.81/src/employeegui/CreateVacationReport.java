@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -188,7 +190,7 @@ public class CreateVacationReport {
         
         popStage = new Stage(StageStyle.DECORATED);
         popStage.setTitle("Μεταφορά ημερών αδείας από προηγούμενο έτος");
-        Text text = new Text("Εφόσον δεν έχετε κάνει μεταφορά των ημερών αδείας"+
+        Text text = new Text("Εφόσον δεν έχετε κάνει μεταφορά των ημερών αδείας "+
                 "από το προηγούμενο έτος παρακαλώ πατείστε ΝΑΙ");
         text.setWrappingWidth(300);        
         Button btn = new Button("ΝΑΙ");
@@ -378,17 +380,24 @@ public class CreateVacationReport {
                 
                     else if ((hireLocalDate.until(apolisiDate).getYears()) >= 1  ) {
                         switch (apolisiDate.getYear() - hireLocalDate.getYear()){ 
-                            case 1 : entitledDays = apolisiDate.minusDays(1).getMonthValue()*21/12;
-                                break;
+                            case 1 : entitledDays = (int)Math.round((ChronoUnit.DAYS.between(LocalDate.of(apolisiDate.getYear(), 1, 1), apolisiDate)*21D)/
+                                        (LocalDate.of(apolisiDate.getYear(), 12, 31).getDayOfYear()*1D));
+                                    break;
                             case 2 : entitledDays = 21;
-                                break;
+                                    break;
                         }
                     }                    
                     else { switch (apolisiDate.getYear() - hireLocalDate.getYear()){                      
-                        case 0 : entitledDays = hireLocalDate.until(apolisiDate.minusDays(1)).getMonths()*20/12 ;
-                            break;
-                        case 1 : entitledDays = apolisiDate.minusDays(1).getMonthValue()*20/12;
-                            break;
+                        case 0 : entitledDays = (int)Math.round((ChronoUnit.DAYS.between(hireLocalDate, apolisiDate)*20D)/
+                                    (LocalDate.of(apolisiDate.getYear(), 12, 31).getDayOfYear()*1D));
+                                    System.out.println(hireLocalDate);
+                                    System.out.println(apolisiDate);
+                                    System.out.println(entitledDays+" = "+ChronoUnit.DAYS.between(hireLocalDate, apolisiDate)*20D+" / "+
+                                            LocalDate.of(apolisiDate.getYear(), 12, 31).getDayOfYear()*1D);
+                                break;
+                        case 1 : entitledDays = (int)Math.round((ChronoUnit.DAYS.between(LocalDate.of(apolisiDate.getYear(), 1, 1), apolisiDate)*20D)/
+                                        (LocalDate.of(apolisiDate.getYear(), 12, 31).getDayOfYear()*1D));
+                                break;
                         }
                     }                    
                     entitledDaysMap.put(id, entitledDays);
