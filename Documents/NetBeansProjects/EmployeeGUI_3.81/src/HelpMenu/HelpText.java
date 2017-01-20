@@ -45,10 +45,12 @@ public class HelpText {
 
     
     public void Help (Connection con) throws SQLException{
-    try {
+ //   try {
         
      //   InputStream is = (InputStream)HelpText.class.getResourceAsStream("Invoice.jrxml");
-        InputStream is2 = (InputStream)HelpText.class.getResourceAsStream("Invoice.jasper");
+      //  InputStream is2 = (InputStream)HelpText.class.getResourceAsStream("Invoice.jasper");
+    
+    //    InputStream is2 = (InputStream)HelpText.class.getResourceAsStream("Invoice.jasper");
         
           // Compile jrxml file.      
    
@@ -57,33 +59,33 @@ public class HelpText {
         
         //Or even better load the compiled file
         
-      JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is2);    
+    //  JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is2);    
       
        // Parameters for report
-       Map<String, Object> parameters = new HashMap<String, Object>();
+     //  Map<String, Object> parameters = new HashMap<String, Object>();
  
        // DataSource
        // This is simple example, no database.
        // then using empty datasource.
       // JRDataSource dataSource = new JREmptyDataSource(); 
         
-        Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs = statement.executeQuery("SELECT first_name, last_name from workers WHERE ID= 24");
-        JRResultSetDataSource jrDataSource = new JRResultSetDataSource(rs);
+    //    Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+    //    ResultSet rs = statement.executeQuery("SELECT first_name, last_name from workers WHERE ID= 24");
+     //   JRResultSetDataSource jrDataSource = new JRResultSetDataSource(rs);
        
-       JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
-               parameters, jrDataSource);
+     //  JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
+       //        parameters, jrDataSource);
       
-       jrViewer = new JRViewer(jasperPrint);
+    //   jrViewer = new JRViewer(jasperPrint);
        
        // Convert the JComponent to Node i.e. from swing to FX, run in another thread 
        
-      SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                swingNode.setContent(jrViewer);
-            }
-        });
+  //    SwingUtilities.invokeLater(new Runnable() {
+   //         @Override
+    //        public void run() {
+     //           swingNode.setContent(jrViewer);
+     //       }
+     //   });
        
     
        // Make sure the output directory exists.
@@ -91,13 +93,13 @@ public class HelpText {
       // outDir.mkdirs();
  
        // Export to PDF.
-       JasperExportManager.exportReportToPdfFile(jasperPrint,
-               "C:/EmployeeGUI/EmployeeGUIOutput/StyledTextReport.pdf");
+   //    JasperExportManager.exportReportToPdfFile(jasperPrint,
+    //           "C:/EmployeeGUI/EmployeeGUIOutput/StyledTextReport.pdf");
         
-       System.out.println("Done!");
-    } catch (JRException ex) {
-        Logger.getLogger(HelpText.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  //     System.out.println("Done!");
+  //  } catch (JRException ex) {
+  //      Logger.getLogger(HelpText.class.getName()).log(Level.SEVERE, null, ex);
+   // }
         VBox vBox = new VBox();
         vBox.setPrefWidth(500);
         vBox.setPadding(new Insets(15, 15, 15, 15));
