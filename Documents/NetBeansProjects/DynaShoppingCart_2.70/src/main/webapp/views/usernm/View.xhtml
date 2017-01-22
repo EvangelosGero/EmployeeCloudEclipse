@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsernmViewDlg" widgetVar="UsernmViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUsernmTitle}">
+            <h:form id="UsernmViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usernmController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUsernmLabel_id}"/>
+                        <h:outputText value="#{usernmController.selected.id}" title="#{bundle.ViewUsernmTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_usertype}"/>
+                        <h:outputText value="#{usernmController.selected.usertype}" title="#{bundle.ViewUsernmTitle_usertype}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_password}"/>
+                        <h:outputText value="#{usernmController.selected.password}" title="#{bundle.ViewUsernmTitle_password}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_roleuser}"/>
+                        <h:outputText value="#{usernmController.selected.roleuser}" title="#{bundle.ViewUsernmTitle_roleuser}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_createDate}"/>
+                        <h:outputText value="#{usernmController.selected.createDate}" title="#{bundle.ViewUsernmTitle_createDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_hint}"/>
+                        <h:outputText value="#{usernmController.selected.hint}" title="#{bundle.ViewUsernmTitle_hint}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_hintAns}"/>
+                        <h:outputText value="#{usernmController.selected.hintAns}" title="#{bundle.ViewUsernmTitle_hintAns}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_userName}"/>
+                        <h:outputText value="#{usernmController.selected.userName}" title="#{bundle.ViewUsernmTitle_userName}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_userEmail}"/>
+                        <h:outputText value="#{usernmController.selected.userEmail}" title="#{bundle.ViewUsernmTitle_userEmail}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_gender}"/>
+                        <h:outputText value="#{usernmController.selected.gender}" title="#{bundle.ViewUsernmTitle_gender}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_dob}"/>
+                        <h:outputText value="#{usernmController.selected.dob}" title="#{bundle.ViewUsernmTitle_dob}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_mobile}"/>
+                        <h:outputText value="#{usernmController.selected.mobile}" title="#{bundle.ViewUsernmTitle_mobile}"/>
+                        <h:outputText value="Country"/>
+                        <h:outputText value="#{usernmController.selected.country}" title="Country"/>
+                        <h:outputText value="City"/>
+                        <h:outputText value="#{usernmController.selected.city}" title="City"/>
+                        <h:outputText value="Postal Code"/>
+                        <h:outputText value="#{usernmController.selected.postalCode}" title="Postal Code"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_address}"/>
+                        <h:outputText value="#{usernmController.selected.address}" title="#{bundle.ViewUsernmTitle_address}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UsernmViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

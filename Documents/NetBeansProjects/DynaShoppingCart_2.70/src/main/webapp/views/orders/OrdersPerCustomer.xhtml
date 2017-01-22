@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle_orders.ListOrdersTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="OrdersListForm">
+                
+                   
+                <p:dataTable id="datalist" value="#{usernmController.loggedIn ? ordersController.items.stream()
+                                .filter(s -> s.userId eq usernmController.usernmLogged.id).toList() : null}" 
+                                var="item"
+                                 selectionMode="single" selection="#{ordersController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.orderid}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                    
+                        <p:ajax event="rowSelect"   update="datalist"/>
+                        <p:ajax event="rowUnselect" update="datalist"/>
+                        
+                        <p:column style="width: 50px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_orderid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.orderid}"/>
+                        </p:column>
+                        <p:column style="width:100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_orderDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.orderDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" timeZone="GMT+3"/>
+                            </h:outputText>
+                        </p:column>                        
+                        <p:column style="width:50px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_total}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.total}"/>
+                        </p:column>
+                         <p:column style="width:50px">
+                            <f:facet name="header">
+                                <h:outputText value="Προϊόντα"/>
+                            </f:facet>
+                            <p:commandLink  id="photos1" value="Προϊόντα"
+                                            update=":OrderItemsListForm2"
+                                            oncomplete="PF('opanel34').show()"
+                                            disabled="#{empty ordersController.selected}"
+                                           />                            
+                        </p:column>
+                        <p:column style="width:120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_orderState}"/>
+                            </f:facet>
+                            <h:outputText value="#{scheduleMasController.items.stream()
+                                                   .filter(s -> s.scheduleOrder eq item.orderState)
+                                                   .toList().get(0).scheduleType}"
+                                          style="color: red"/>
+                        </p:column>
+                        <p:column style="width:100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_discountCoupon}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.discountCoupon}"/>
+                        </p:column>
+                        <p:column style="width:100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_discountPercent}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.discountPercent}"/>
+                        </p:column>
+                        <p:column style="width:100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_discountPrice}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.discountPrice}"/>
+                        </p:column>
+                        <p:column style="width:70px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_totalFinal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalFinal}"/>
+                        </p:column>
+                        <p:column style="width:100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_paymentMethodId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.paymentMethodId}"/>
+                        </p:column>                        
+                        <p:column style="width:100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCost}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.shippingCost}"/>
+                        </p:column>
+                        <p:column style="width:70px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCostId}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.shippingCostId}" disabled="true"/>
+                        </p:column>
+                        <p:column style="width:50px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_affiliate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.affiliate}"/>
+                        </p:column>                        
+                        <p:column style="width:150px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_custName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custName}"/>
+                        </p:column>
+                        <p:column style="width:150px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_custEmail}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custEmail}"/>
+                        </p:column>
+                       <p:column style="width:120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_custPhone}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custPhone}"/>
+                        </p:column>
+                        <p:column style="width:200px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingAddress}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.shippingAddress}"/>
+                        </p:column>
+                        <p:column style="width:70px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingZip}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.shippingZip}"/>
+                        </p:column>
+                        <p:column style="width:120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCity}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.shippingCity}"/>
+                        </p:column>
+                        <p:column style="width:100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCountry}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.shippingCountry}"/>
+                        </p:column>
+                        <p:column style="width:120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_requestedInvoice}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.requestedInvoice}"/>
+                        </p:column>
+                        <p:column style="width:50px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_exported}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exported}"/>
+                        </p:column>
+                        <p:column style="width:120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCountryCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.shippingCountryCode}"/>
+                        </p:column>
+                        <p:column style="width:120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_countryCodeSession}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.countryCodeSession}"/>
+                        </p:column>                     
+                                              
+                    </p:dataTable>                 
+            </h:form>
+            
+            <p:commandLink  id="orderItems3" value="OrderItems"   rendered="false"/>
+            <p:overlayPanel id = "opanel34" widgetVar="opanel34" for="orderItems3" showCloseIcon="true"   dismissable="false" 
+                                        style="width: 1200px; height: 600px; "  my="bottom right" at="top left" appendToBody="true">                     >                                      
+                                <ui:include src="/views/orderItems/List_2.xhtml" />
+                                <div id="buttonOI3" style="position: absolute !important; 
+                                     bottom: 10px !important;  right: 10px !important; ">                          
+                                    <p:commandButton id="cancelBtnOI" value="Close" 
+                                                     onclick="PF('opanel34').hide()"/>                              
+                                </div>                                    
+            </p:overlayPanel>
+        </ui:define>
+    </ui:composition>
+
+</html>

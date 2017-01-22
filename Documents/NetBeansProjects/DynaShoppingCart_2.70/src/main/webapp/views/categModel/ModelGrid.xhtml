@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/template.xhtml">                       
+
+          
+   <ui:define name="westPane">
+            <ui:include src="/views/catgMas/categorySearch.xhtml" />
+   </ui:define>             
+              
+<ui:define name="body">
+    <h:form id="centerForm">
+        <p:fieldset id="itemContainer">
+            <p:dataGrid id="availableProducts" var="item" 
+                        value="#{categModelController.items.stream()
+                                 .filter(s -> s.mlParentId eq categMakeController.selected.mkId).toList()}" columns="6"
+                          paginator="true" paginatorPosition="bottom"
+                        rowsPerPageTemplate="3,6,9,12,15,18"
+                        rows="9" widgetVar="itemContainerDataGrid"
+                         >
+                <f:facet name="header" >
+                    <p:outputLabel for="SearchInputText" value="Αναζητηση με Κωδικο: "/> 
+                        <p:inputText id="SearchInputText"  value="#{itemsController.filterItemCode}" />
+                        <p:commandButton id="FilterCommandButton" 
+                               icon="ui-icon-search" action="#{categModelController.navigateAndSetCart()}"
+                               update=":centerForm:itemContainer " >                                             
+                        </p:commandButton>
+                        <p:commandButton id="ResetFiltersCommandButton" 
+                                         actionListener="#{itemsController.resetFilters()}" style="background:#ff9933" 
+                                         title="Αναζήτηση σε ολόκληρη την αποθήκη"
+                               icon="ui-icon-search" action="#{categModelController.navigateAndSetCart()}"
+                               update=":centerForm:itemContainer" >                                             
+                        </p:commandButton>
+                </f:facet>
+
+                <p:column>                                            
+                    
+                        <h:panelGrid columns="1" style="text-align:center; max-width: 140px;">
+                        <f:facet name="header">
+                            <h:outputText value="#{item.mlModelName} #{item.mlYearRange}" />
+                        </f:facet>
+                          <p:commandLink id="navToWelcome"
+                                         actionListener="#{categModelController.setSelected(item)}"
+                                         action="#{categModelController.navigateAndSetCart()}">
+                            <p:graphicImage   value="../../images1/#{item.mlFrontImage}" width="130" height="60"/> 
+                            <p:graphicImage   value="../../images1/#{item.mlRearImage}" width="130" height="60"/>
+                          </p:commandLink>
+                            <p:ajax event="mouseover" update="opanel13" oncomplete="PF('opanel13WV').show()"/>
+                            <p:ajax event="mouseout"   oncomplete="PF('opanel13WV').hide()"/>
+                        </h:panelGrid>                         
+                                                  
+                </p:column>
+                <p:dialog id="opanel13"  widgetVar="opanel13WV"  height="300"   width="300" position="left, bottom"                                   
+                              showHeader="true" header="#{item.mlModelName} #{item.mlYearRange}"  closable="true">                        
+                            <p:graphicImage   value="../../images1/#{item.mlFrontImage}" width="270" height="140"/> 
+                            <p:graphicImage   value="../../images1/#{item.mlRearImage}" width="270" height="140"/>                       
+                </p:dialog>
+            </p:dataGrid>
+        </p:fieldset> 
+       
+    </h:form>    
+  </ui:define>
+</ui:composition>
+</html>
+
+
