@@ -243,6 +243,10 @@ public class UsernmController implements Serializable {
         
     }
     
+    public void resetNewUsernm(){
+        this.newUsernm.setUserEmail("");
+    }
+    
      public String annulateFromHome(){
         categMakeController.setSelected(null);
         categModelController.setSelected(null);

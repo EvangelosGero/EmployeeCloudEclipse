@@ -32,11 +32,7 @@
         <resource-bundle>
             <base-name>/Bundle_zipCodes</base-name>
             <var>bundle_zipCodes</var>
-        </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle_Categ</base-name>
-            <var>bundle_Categ</var>
-        </resource-bundle>
+        </resource-bundle>        
         <resource-bundle>
             <base-name>/Bundle</base-name>
             <var>bundle</var>
@@ -52,11 +48,7 @@
         <resource-bundle>
             <base-name>/Bundle_itemsImages</base-name>
             <var>bundle_itemsImages</var>
-        </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle_itemsImages</base-name>
-            <var>bundle_itemsImages</var>
-        </resource-bundle>
+        </resource-bundle>        
         <resource-bundle>
             <base-name>/Bundle_OriginalCodes</base-name>
             <var>bundle_OriginalCodes</var>

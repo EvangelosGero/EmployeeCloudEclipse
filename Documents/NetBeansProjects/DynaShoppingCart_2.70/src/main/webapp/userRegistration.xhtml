@@ -32,28 +32,29 @@
        
         <p:dialog id="UserRegistrationDlg" widgetVar="UserRegistrationDialog" modal="true" resizable="false" 
                   appendTo="@(body)" header="#{bundle.UserRegistration}" onShow="$('.ui-growl').css('z-index',9000);"
+                  onHide=""
                    >
-        <h:form styleClass="form-inline" prependId="false" id="thisform">
-            <p:fieldset  style="margin:auto; text-align: center; text-align: -webkit-center;">
+        <h:form  prependId="true" id="thisform">
+            <p:fieldset id="fieldSet1" style="margin:auto;">
                 <p:panelGrid columns="3" columnClasses="label, value,label">
                     <p:outputLabel for="firstName" value="First Name"/>
                     <p:inputText id="firstName" value="#{usernmController.newUsernm.firstName}"
                                  required="true">
-                        <p:clientValidator/>
+                        <p:clientValidator event="change"/>
                     </p:inputText>    
                     <p:message for="firstName" />
                     
                     <p:outputLabel for="lastName" value="Last Name"/>
                     <p:inputText id="lastName" value="#{usernmController.newUsernm.lastName}"
                                  required="true">
-                        <p:clientValidator/>
+                        <p:clientValidator event="change"/>
                     </p:inputText>
                     <p:message for="lastName" />
                     
                     <p:outputLabel for="txtName" value="Username"/>
                     <p:inputText id="txtName" value="#{usernmController.newUsernm.userName}"
                                  required="true">
-                        <p:clientValidator/>
+                        <p:clientValidator event="change"/>
                     </p:inputText>
                     <p:message for="txtName" />                   
                     
@@ -61,15 +62,15 @@
                     <p:inputText id="txtemail" value="#{usernmController.newUsernm.userEmail}"
                                  required="true">
                         <f:validator validatorId="custom.emailValidator" />
-                        <p:clientValidator/>
+                        <p:clientValidator event="change"/>
                     </p:inputText>
                     <p:message for="txtemail"/>
                     
                     <p:outputLabel for="txtpasswd" value="Password"/>
-                    <h:inputSecret id="txtpasswd" value="#{usernmController.newUsernm.password}"
-                                   required="true">
-                        <p:clientValidator/>
-                    </h:inputSecret>
+                    <p:password id="txtpasswd" value="#{usernmController.newUsernm.password}"
+                                required="true"  feedback="true">
+                        <p:clientValidator event="change"/>
+                    </p:password>
                     <p:message for="txtpasswd"/>
                     
                     <p:outputLabel for="hintAnswer" value="Password Hint"/>
@@ -83,7 +84,7 @@
                     
                     
                     <p:outputLabel for="hintAnswer" value="Answer to Hint"/>
-                    <h:inputSecret id="hintAnswer" value="#{usernmController.newUsernm.hintAns}"/>
+                    <p:inputText id="hintAnswer" value="#{usernmController.newUsernm.hintAns}"/>
                     <h:outputText></h:outputText>
                     
                     <h:outputText value="Gender: " />
@@ -97,7 +98,7 @@
                     <p:outputLabel for="dob" value="Date of birth: " />
                     <p:calendar id="dob" value="#{usernmController.newUsernm.dob}"
                             required="true"  pattern="dd-MM-yyyy" effect="slideDown"
-                            navigator="true" showButtonPanel="true" yearRange="c-50:c+50"  >
+                            navigator="true" showButtonPanel="true" yearRange="c-1000:c"  >
                         <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+3"/>
                         <p:clientValidator event="dateSelect"/>
                     </p:calendar>
@@ -119,21 +120,21 @@
                                          >
                             
                         </f:selectItems>
-                        <p:clientValidator/>
+                        <p:clientValidator event="change"/>
                     </p:selectOneMenu>
                     <p:message  for="country"/>
                     
                     <p:outputLabel for="city" value="City"/>
                     <p:inputText id="city" value="#{usernmController.newUsernm.city}"
                                  required="true">
-                        <p:clientValidator/>
+                        <p:clientValidator event="change"/>
                     </p:inputText>
                     <p:message  for="city"/>
                     
                     <p:outputLabel for="postalCode" value="Postal Code"/>
                     <p:inputText id="postalCode" value="#{usernmController.newUsernm.postalCode}"
                                  required="true">
-                        <p:clientValidator />                        
+                        <p:clientValidator event="change"/>                        
                     </p:inputText>
                     <p:message  for="postalCode"/>
                     
@@ -144,7 +145,7 @@
 			validatorMessage="Length should not be less than 5 characters"
 			counterTemplate="{0} more characters remaining.">
                         <f:validateLength minimum="5" />
-			<p:clientValidator />
+			<p:clientValidator event="change"/>
                     </p:inputTextarea>
                     <p:message for="textarea" />
                     
@@ -153,12 +154,22 @@
                     <h:outputText></h:outputText>
 
                 </p:panelGrid>
-                <p:commandButton value="Submit" ajax="true" update="thisform, :growl" 
+                <h:panelGrid columns="3" 
+                       style="border: 0px; width: 100%;  text-align: center; background-color: #ff9933;">
+                    <p:commandButton value="Submit" ajax="true" update="thisform, :growl" 
                                  actionListener="#{usernmController.saveUsernmInfo()}"   
                                  validateClient="true"
-                                 oncomplete="PF('UserRegistrationDialog').hide()"                                 
-                                 />                                                       
-                                 
+                                 oncomplete="PF('UserRegistrationDialog').hide()" >                                
+                                 <p:resetInput target="fieldSet1" />                                                       
+                    </p:commandButton> 
+                    <p:commandButton value="Reset"  update="thisform" process="@this">    
+                                 <p:resetInput target="fieldSet1" />                                         
+                    </p:commandButton>
+                    <p:commandButton value="Cancel"  update="thisform" process="@this"                               
+                                 oncomplete="PF('UserRegistrationDialog').hide()" >                                
+                                 <p:resetInput target="fieldSet1" />                                                       
+                    </p:commandButton> 
+                </h:panelGrid>
             </p:fieldset>
             
         </h:form>

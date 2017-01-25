@@ -82,63 +82,53 @@
                         <p:graphicImage  library="images" name="DYNAmarket-logo.jpg" height="72"
                                         style="margin-left: 10%"/>                       
                                                          
-                                <p:panelGrid  style="margin-left: 20%;  width: 900px;"
-                                               styleClass="outerpanelgrid" > 
-                                              
-                                    <p:row>
-                                        <p:column colspan="3" style="border: 0px;">
+                        <p:panelGrid  style="margin-left: 20%;  width: 900px;"
+                                       styleClass="outerpanelgrid" >                                               
+                            <p:row>
+                                <p:column colspan="3" style="border: 0px;">
                                     <p:commandButton id="accountBtn" value="Λογαριασμός" style="border: none;"
-                                                     disabled="#{not usernmController.loggedIn}"
-                                                     
-                                                     action="/views/invoice/Account.xhtml?faces-redirect=true"/> 
-                                        </p:column> 
-                                        <p:column colspan="3">
+                                            disabled="#{not usernmController.loggedIn}"                                                     
+                                            action="/views/invoice/Account.xhtml?faces-redirect=true"/> 
+                                </p:column> 
+                                <p:column colspan="3">
                                     <p:commandButton value="FeedBack" disabled="#{not usernmController.loggedIn}"
-                                                     actionListener="#{itemsReviewsController.produceItemsReviewsPerCustomer()}"
-                                                     action="#{itemsReviewsController.findItemsReviewsPerCustomer()}"/>
-                                        </p:column>
-                                        <p:column colspan="3">
-                                            <p:commandButton value="My Cart" disabled="#{not usernmController.loggedIn}"
-                                                     actionListener="#{itemsController.produceCartItems()}"                        
-                                                     action="/views/items/welcome.xhtml?faces-redirect=true"/>
-                                     </p:column>
-                                     <p:column colspan="3">
-                                        <p:commandButton value="My Orders" disabled="#{not usernmController.loggedIn}"
-                                                     action="/views/orderItems/OrderItemsPerCustomer.xhtml?faces-redirect=true"
-                                                     />
-                                     </p:column>
-                                     <p:column colspan="3">
-                                        <p:commandButton value="Tracking Orders" disabled="#{not usernmController.loggedIn}"
-                                                     action="/views/orders/OrdersPerCustomer.xhtml?faces-redirect=true"
-                                                     />  
-                                     </p:column>
-                                     <p:column colspan="3">
-                                         <p:commandButton value="Upload" rendered="#{usernmController.usernmLogged.roleuser.contains('s')}"
-                                                     actionListener="#{itemsController.produceItemsOfSeller()}"
-                                                     action="/views/seller/SellerList.xhtml?faces-redirect=true"
-                                                     />  
-                                     </p:column>
-                                    </p:row>
-                                    <p:row>
+                                            actionListener="#{itemsReviewsController.produceItemsReviewsPerCustomer()}"
+                                            action="#{itemsReviewsController.findItemsReviewsPerCustomer()}"/>
+                                </p:column>
+                                <p:column colspan="3">
+                                    <p:commandButton value="My Cart" disabled="#{not usernmController.loggedIn}"
+                                            actionListener="#{itemsController.produceCartItems()}"                        
+                                            action="/views/items/welcome.xhtml?faces-redirect=true"/>
+                                </p:column>
+                                <p:column colspan="3">
+                                    <p:commandButton value="My Orders" disabled="#{not usernmController.loggedIn}"
+                                            action="/views/orderItems/OrderItemsPerCustomer.xhtml?faces-redirect=true"/>                                                     
+                                </p:column>
+                                <p:column colspan="3">
+                                    <p:commandButton value="Tracking Orders" disabled="#{not usernmController.loggedIn}"
+                                            action="/views/orders/OrdersPerCustomer.xhtml?faces-redirect=true"/>                                                       
+                                </p:column>
                                     <p:column colspan="3">
-                                        <h:outputLabel id="sessionrole" value="Role:#{usernmController.usernmLogged.roleuser }"/>
-                                    </p:column>  
-                                    <p:column colspan="3"> 
-                                        <h:outputLabel id="sessionuser" value="User:#{usernmController.usernmLogged.userName}"/> 
-                                    </p:column > 
-                                      <p:column colspan="9">
-                                        <h:outputLabel id="sessionctg" 
-                                                 value="Αναζήτηση: #{itemsController.anazitisiString}"/> 
-                                      </p:column> 
-                                    </p:row>   
-                                </p:panelGrid>                                                   
-                        
-                    </p:panelGrid>
-                   
-                
-                
-                    <p:menubar id="menubar" model="#{menuController.model1}" >
-                        
+                                        <p:commandButton value="Upload" rendered="#{usernmController.usernmLogged.roleuser.contains('s')}"
+                                            actionListener="#{itemsController.produceItemsOfSeller()}"
+                                            action="/views/seller/SellerList.xhtml?faces-redirect=true"/>                                                       
+                                    </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column colspan="3">
+                                    <h:outputLabel id="sessionrole" value="Role:#{usernmController.usernmLogged.roleuser }"/>
+                                </p:column>  
+                                <p:column colspan="3"> 
+                                    <h:outputLabel id="sessionuser" value="User:#{usernmController.usernmLogged.userName}"/> 
+                                </p:column > 
+                                <p:column colspan="9">
+                                    <h:outputLabel id="sessionctg" 
+                                        value="Αναζήτηση: #{itemsController.anazitisiString}"/> 
+                                    </p:column> 
+                            </p:row>   
+                        </p:panelGrid> 
+                    </p:panelGrid> 
+                    <p:menubar id="menubar" model="#{menuController.model1}" >                        
                         <f:facet name="options">
                             <p:outputLabel value="Καλάθι : " style=" color: #009999; font-weight: bold; font-size: 15px !important;" />
                             <p:spacer width="10" height="10" />
@@ -147,20 +137,18 @@
                                                     ' Αδειο ': itemsController.stringTotal.concat('&euro;')} " 
                                     style=" color: #009999; font-weight: bold; font-size: 15px !important;" />                                          
                             <p:spacer width="200" height="10" />
-                                <p:commandButton icon="ui-icon-locked" value="Login" rendered="#{!usernmController.loggedIn}"
-                                     onclick="PF('loginDialog').show();"/>
-                                
-                                <p:commandButton icon="ui-icon-unlocked" value="Αλλαγή Στοιχείων μου" rendered="#{usernmController.loggedIn}"
+                            <p:commandButton icon="ui-icon-locked" value="Login" rendered="#{!usernmController.loggedIn}"
+                                     onclick="PF('loginDialog').show();"/>                                
+                            <p:commandButton icon="ui-icon-unlocked" value="Αλλαγή Στοιχείων μου" rendered="#{usernmController.loggedIn}"
                                      actionListener="#{usernmController.changeUsernmLogged()}"            
                                      onclick="PF('UserRegistrationDialog').show();"
                                      update=":thisform"/>
-                                <p:commandButton icon="ui-icon-unlocked" value="Logout" rendered="#{usernmController.loggedIn}"                                                 
+                            <p:commandButton icon="ui-icon-unlocked" value="Logout" rendered="#{usernmController.loggedIn}"                                                 
                                      action="#{usernmController.loginMeOut}"/>
-                                <p:commandButton icon="ui-icon-unlocked" value="User Dashboard" rendered="#{usernmController.loggedIn}"
+                            <p:commandButton icon="ui-icon-unlocked" value="User Dashboard" rendered="#{usernmController.loggedIn}"
                                                  actionListener="#{itemsController.produceCartItems()}"                        
                                                  action="/views/items/welcome.xhtml?faces-redirect=true" />                                
-                        </f:facet>
-                        
+                        </f:facet>                        
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>
@@ -224,9 +212,7 @@
                     </p:keyboard>
                     <p:commandButton id="loginBtn" value="Login" ajax="true" immediate="false"
                                      update=":growl"  action="#{usernmController.loginMeIn()}">                        
-                    </p:commandButton>
-                                                       
-
+                    </p:commandButton> 
                     <p:commandButton value="Register" actionListener="#{usernmController.prepareAddNewUser}"
                                      onstart="PF('loginDialog').hide()" oncomplete="PF('UserRegistrationDialog').show()"/>
                     <p:commandButton value="e-shop without Login" 
