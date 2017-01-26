@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+   
+    <p:dialog id="AboutUs" widgetVar="AboutUsWV"  modal="true" dynamic="true" width="400"  height="200">
+        <h:form id='AboutUsForm'>
+            <p:outputPanel>
+                <h:outputText  value="#{systemtableController.items.get(0).aboutUs}"/>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    <p:dialog id="ContactUs" widgetVar="$ContactUs" modal="true" dynamic="true" width="400"  height="200">
+        <h:form id='ContactUsForm'>
+            <p:outputPanel>
+                <h:outputText value="#{systemtableController.items.get(0).contactUs}"/>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    <p:dialog id="SiteMap" widgetVar="$SiteMap" modal="true" dynamic="true" >
+        <h:form id='SiteMapForm'>
+            <p:outputPanel >
+                <ui:include src="/views/menu/SiteMap.xhtml"/>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    <p:dialog id="FAQ" widgetVar="$FAQ" modal="true" dynamic="true" width="400"  height="200">
+        <h:form id='FAQForm'>
+            <p:outputPanel>
+                <h:outputText value="#{systemtableController.items.get(0).faq}"/>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    
+</html>
+
