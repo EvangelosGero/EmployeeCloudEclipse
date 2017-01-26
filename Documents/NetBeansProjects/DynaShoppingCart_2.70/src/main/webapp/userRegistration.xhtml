@@ -32,7 +32,7 @@
        
         <p:dialog id="UserRegistrationDlg" widgetVar="UserRegistrationDialog" modal="true" resizable="false" 
                   appendTo="@(body)" header="#{bundle.UserRegistration}" onShow="$('.ui-growl').css('z-index',9000);"
-                  onHide=""
+                  onHide="document.getElementById('thisform').reset();"
                    >
         <h:form  prependId="true" id="thisform">
             <p:fieldset id="fieldSet1" style="margin:auto;">
