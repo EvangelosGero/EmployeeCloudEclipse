@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsImagesEditDlg1" widgetVar="ItemsImagesEditDialog1" modal="true"
+                  resizable="false" appendTo="@(body)" header="#{bundle_itemsImages.EditItemsImagesTitle}">
+           <h:form id="Edit_1Form">
+                <h:panelGroup id="display11">
+                    <p:panelGrid columns="2" rendered="#{itemsImagesController.selected != null}">
+                        <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_id}" for="id11" />
+                        <p:inputText id="id11" value="#{itemsImagesController.selected.id}" title="#{bundle_itemsImages.EditItemsImagesTitle_id}" 
+                                     required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_id}" disabled="true"/>
+                        <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_filename}" for="filename11" />
+                        <p:inputText id="filename11" value="#{itemsImagesController.selected.filename}" title="#{bundle_itemsImages.EditItemsImagesTitle_filename}" required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_filename}"/>
+                        <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_isbasic}" for="isbasic11" />
+                        <p:inputText id="isbasic11" value="#{itemsImagesController.selected.isbasic}" title="#{bundle_itemsImages.EditItemsImagesTitle_isbasic}" required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_isbasic}"/>
+                        <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_items}" for="items11" />
+                        <p:outputLabel id="items11" value="#{itemsImagesController.selected.items.itemCode}"  />                       
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemsImagesController.update}" value="#{bundle_itemsImages.Save}"                                     
+                                     update="display11, :ImagesForm1:datalist1, :growl"  process="@form"
+                                     oncomplete="handleSubmit(args, 'ItemsImagesEditDialog1');"/>
+                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesEditDialog1').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
