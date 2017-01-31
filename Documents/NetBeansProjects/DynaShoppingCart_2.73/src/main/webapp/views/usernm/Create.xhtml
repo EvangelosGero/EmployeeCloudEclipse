@@ -19,7 +19,8 @@
                         <p:outputLabel value="#{bundle.CreateUsernmLabel_roleuser}" for="roleuser" />
                         <p:inputText id="roleuser" value="#{usernmController.selected.roleuser}" title="#{bundle.CreateUsernmTitle_roleuser}" />
                         <p:outputLabel value="#{bundle.CreateUsernmLabel_createDate}" for="createDate" />
-                        <p:calendar id="createDate" pattern="MM/dd/yyyy" value="#{usernmController.selected.createDate}" title="#{bundle.EditUsernmTitle_createDate}"  showOn="button"/>
+                        <p:calendar id="createDate" pattern="MM/dd/yyyy"  timeZone="GMT+3" value="#{usernmController.selected.createDate}" 
+                                    title="#{bundle.EditUsernmTitle_createDate}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateUsernmLabel_hint}" for="hint" />
                         <p:inputText id="hint" value="#{usernmController.selected.hint}" title="#{bundle.CreateUsernmTitle_hint}" />
                         <p:outputLabel value="#{bundle.CreateUsernmLabel_hintAns}" for="hintAns" />
@@ -31,19 +32,21 @@
                         <p:outputLabel value="#{bundle.CreateUsernmLabel_gender}" for="gender" />
                         <p:inputText id="gender" value="#{usernmController.selected.gender}" title="#{bundle.CreateUsernmTitle_gender}" />
                         <p:outputLabel value="#{bundle.CreateUsernmLabel_dob}" for="dob" />
-                        <p:calendar id="dob" pattern="MM/dd/yyyy" value="#{usernmController.selected.dob}" title="#{bundle.EditUsernmTitle_dob}"  showOn="button"/>
+                        <p:calendar id="dob" pattern="MM/dd/yyyy" value="#{usernmController.selected.dob}" 
+                                    title="#{bundle.EditUsernmTitle_dob}" timeZone="GMT+3"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateUsernmLabel_mobile}" for="mobile" />
                         <p:inputText id="mobile" value="#{usernmController.selected.mobile}" title="#{bundle.CreateUsernmTitle_mobile}" />
-                        <p:outputLabel value="Country" for="country" />
-                        <p:inputText id="country" value="#{usernmController.selected.country}" title="Country" />
-                        <p:outputLabel value="City" for="city" />
-                        <p:inputText id="city" value="#{usernmController.selected.city}" title="City" />
-                        <p:outputLabel value="Postal Code" for="postalCode" />
-                        <p:inputText id="postalCode" value="#{usernmController.selected.postalCode}" title="Postal Code" />
+                        <p:outputLabel value="#{bundle.CreateUsernmLabel_country}" for="country" />
+                        <p:inputText id="country" value="#{usernmController.selected.country}" title="#{bundle.CreateUsernmTitle_country}" />
+                        <p:outputLabel value="#{bundle.CreateUsernmLabel_city}" for="city" />
+                        <p:inputText id="city" value="#{usernmController.selected.city}" title="#{bundle.CreateUsernmTitle_city}" />
+                        <p:outputLabel value="#{bundle.CreateUsernmLabel_postalCode}" for="postalCode" />
+                        <p:inputText id="postalCode" value="#{usernmController.selected.postalCode}" title="#{bundle.CreateUsernmTitle_postalCode}" />
                         <p:outputLabel value="#{bundle.CreateUsernmLabel_address}" for="address" />
                         <p:inputText id="address" value="#{usernmController.selected.address}" title="#{bundle.CreateUsernmTitle_address}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usernmController.create}" value="#{bundle.Save}" update="display,:UsernmListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsernmCreateDialog');"/>
+                    <p:commandButton actionListener="#{usernmController.create}" value="#{bundle.Save}" update="display,:UsernmListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'UsernmCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsernmCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

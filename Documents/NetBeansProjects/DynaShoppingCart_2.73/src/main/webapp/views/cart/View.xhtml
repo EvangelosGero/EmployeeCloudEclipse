@@ -27,7 +27,7 @@
                             <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewCartLabel_quantity}"/>
-                        <h:outputText value="#{cartController.selected.quantity}" title="#{bundle.ViewCartTitle_quantity}">
+                        <h:outputText value="#{cartController.selected.quantity}" title="#{bundle.ViewCartTitle_quantity}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CartViewDialog.hide()"/>
                 </h:panelGroup>

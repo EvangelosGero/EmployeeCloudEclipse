@@ -16,10 +16,8 @@
                     <p:dataTable id="datalist" value="#{menuController.items}" var="item"
                                  selectionMode="single" selection="#{menuController.selected}"
                                  paginator="false"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 style =' width: 200px'
+                                 rowKey="#{item.id}"                                 
+                                 style =' width: 350px' scrollable="true"  scrollHeight="300"
                                  >                           
                                                 
                         <p:column >
@@ -32,14 +30,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMenuTitle_menuLongName}"/>
                             </f:facet>
-                            <h:outputText value="#{item.menuLongName}"/>
-                        </p:column>                       
-                        
-                                         
+                            <p:commandLink value="#{item.menuLongName}" action="#{menuController.siteMapAction(item)}"
+                                           oncomplete="PF('$SiteMap').hide()">                               
+                            </p:commandLink>                            
+                        </p:column>  
                     </p:dataTable>
                 </p:panel>
-            </h:form>   
-        
+            </h:form>  
     </ui:composition>
 
 </html>

@@ -16,11 +16,7 @@
         <resource-bundle>
             <base-name>/Bundle_itemsReviews</base-name>
             <var>bundle_itemsReviews</var>
-        </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle_countries</base-name>
-            <var>bundle_countries</var>
-        </resource-bundle>
+        </resource-bundle>        
         <resource-bundle>
             <base-name>/Bundle_zipCodes</base-name>
             <var>bundle_zipCodes</var>
@@ -28,31 +24,11 @@
         <resource-bundle>
             <base-name>/Bundle_countries</base-name>
             <var>bundle_countries</var>
-        </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle_zipCodes</base-name>
-            <var>bundle_zipCodes</var>
-        </resource-bundle>
+        </resource-bundle>        
         <resource-bundle>
             <base-name>/Bundle_Categ</base-name>
             <var>bundle_Categ</var>
-        </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle</base-name>
-            <var>bundle</var>
-        </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle_Categ</base-name>
-            <var>bundle_Categ</var>
-        </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle</base-name>
-            <var>bundle</var>
-        </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle_itemsImages</base-name>
-            <var>bundle_itemsImages</var>
-        </resource-bundle>
+        </resource-bundle>        
         <resource-bundle>
             <base-name>/Bundle_itemsImages</base-name>
             <var>bundle_itemsImages</var>

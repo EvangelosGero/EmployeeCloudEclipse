@@ -13,8 +13,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.el.ELContext;
-import javax.el.ExpressionFactory;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -157,6 +155,11 @@ public class MenuController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+    
+    public String siteMapAction(Menu menu){
+        String urlToReturn = menu.getMenuRunOption() + "?faces-redirect=true";
+        return urlToReturn;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
