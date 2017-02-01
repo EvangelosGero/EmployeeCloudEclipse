@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="Categ1CreateDlg" widgetVar="Categ1CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.CreateCateg1Title}">
+            <h:form id="Categ1CreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{categ1Controller.selected != null}">                        
+                        <p:outputLabel value="#{bundle_Categ.CreateCateg1Label_descr}" for="descr" />
+                        <p:inputText id="descr" value="#{categ1Controller.selected.c1Descr}" title="#{bundle_Categ.CreateCateg1Title_descr}" 
+                                     required="true" requiredMessage="#{bundle_Categ.CreateCateg1RequiredMessage_descr}"/>                       
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{categ1Controller.create}" value="#{bundle_Categ.Save}" update="display,:Categ1ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Categ1CreateDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="Categ1CreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

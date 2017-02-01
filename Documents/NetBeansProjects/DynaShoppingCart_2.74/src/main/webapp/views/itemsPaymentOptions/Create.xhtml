@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsPaymentOptionsCreateDlg" widgetVar="ItemsPaymentOptionsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateItemsPaymentOptionsTitle}">
+            <h:form id="ItemsPaymentOptionsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemsPaymentOptionsController.selected != null}">                        
+                        <p:outputLabel value="#{bundle.CreateItemsPaymentOptionsLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode" value="#{itemsPaymentOptionsController.selected.itemCode}" title="#{bundle.CreateItemsPaymentOptionsTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.CreateItemsPaymentOptionsLabel_paymentOptions}" for="paymentOptions" />
+                        <p:inputText id="paymentOptions" value="#{itemsPaymentOptionsController.selected.paymentOptions}" title="#{bundle.CreateItemsPaymentOptionsTitle_paymentOptions}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemsPaymentOptionsController.create}" value="#{bundle.Save}" update="display,:ItemsPaymentOptionsListForm:datalist,:growl" oncomplete="handleSubmit(args,'ItemsPaymentOptionsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemsPaymentOptionsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
