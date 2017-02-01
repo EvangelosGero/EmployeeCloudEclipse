@@ -7,7 +7,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
-        <title><ui:insert name="title">Dynamotors</ui:insert></title>
+        <title>Dynamotors<ui:insert name="title"></ui:insert></title>
+        <link rel="shortcut icon" href="../../resources/images/favicon-16x16.png"/>        
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript>
             function handleSubmit(args, dialog) {
@@ -57,8 +58,7 @@
                 $(".nuli").elevateZoom({
                 zoomType : ""});
               }    
-        </h:outputScript>
-        <link rel="shortcut icon" href="resources/images/favicon.ico"/>
+        </h:outputScript>        
         <ui:insert name="head"/>
     </h:head>
 
