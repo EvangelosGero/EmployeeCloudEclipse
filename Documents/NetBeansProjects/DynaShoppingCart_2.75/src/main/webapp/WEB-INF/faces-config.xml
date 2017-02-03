@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>        
+        <resource-bundle>
+            <base-name>/Bundle_schedule</base-name>
+            <var>bundle_schedule</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle_itemsReviews</base-name>
+            <var>bundle_itemsReviews</var>
+        </resource-bundle>        
+        <resource-bundle>
+            <base-name>/Bundle_zipCodes</base-name>
+            <var>bundle_zipCodes</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle_countries</base-name>
+            <var>bundle_countries</var>
+        </resource-bundle>        
+        <resource-bundle>
+            <base-name>/Bundle_Categ</base-name>
+            <var>bundle_Categ</var>
+        </resource-bundle>        
+        <resource-bundle>
+            <base-name>/Bundle_itemsImages</base-name>
+            <var>bundle_itemsImages</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle_OriginalCodes</base-name>
+            <var>bundle_OriginalCodes</var>
+        </resource-bundle>
+        <navigation-rule>
+            <from-view-id>*</from-view-id>
+            <navigation-case>
+                <from-action>#{usernmController.annulateFromHome()}</from-action>                                                  
+                <to-view-id>#{usernmController.navigateHelper()}</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        <resource-bundle>
+            <base-name>/Bundle_orders</base-name>
+            <var>bundle_orders</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle_invoice</base-name>
+            <var>bundle_invoice</var>
+        </resource-bundle>
+    </application>
+</faces-config>

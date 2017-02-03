@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CountriesViewDlg" widgetVar="CountriesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_countries.ViewCountriesTitle}">
+            <h:form id="CountriesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{countriesController.selected != null}">
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_id}"/>
+                        <h:outputText value="#{countriesController.selected.id}" title="#{bundle_countries.ViewCountriesTitle_id}"/>
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_code}"/>
+                        <h:outputText value="#{countriesController.selected.code}" title="#{bundle_countries.ViewCountriesTitle_code}"/>
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_name}"/>
+                        <h:outputText value="#{countriesController.selected.name}" title="#{bundle_countries.ViewCountriesTitle_name}"/>
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_fullName}"/>
+                        <h:outputText value="#{countriesController.selected.fullName}" title="#{bundle_countries.ViewCountriesTitle_fullName}"/>
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_iso3}"/>
+                        <h:outputText value="#{countriesController.selected.iso3}" title="#{bundle_countries.ViewCountriesTitle_iso3}"/>
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_number}"/>
+                        <h:outputText value="#{countriesController.selected.number}" title="#{bundle_countries.ViewCountriesTitle_number}"/>
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_continentCode}"/>
+                        <h:outputText value="#{countriesController.selected.continentCode}" title="#{bundle_countries.ViewCountriesTitle_continentCode}"/>
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_inEU}"/>
+                        <h:outputText value="#{countriesController.selected.inEU}" title="#{bundle_countries.ViewCountriesTitle_inEU}"/>
+                        <h:outputText value="#{bundle_countries.ViewCountriesLabel_enabled}"/>
+                        <h:outputText value="#{countriesController.selected.enabled}" title="#{bundle_countries.ViewCountriesTitle_enabled}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle_countries.Close}" onclick="CountriesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

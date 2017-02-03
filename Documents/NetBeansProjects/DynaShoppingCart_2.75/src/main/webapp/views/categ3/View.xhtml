@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="Categ3ViewDlg" widgetVar="Categ3ViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.ViewCateg3Title}">
+            <h:form id="Categ3ViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{categ3Controller.selected != null}">
+                        <h:outputText value="#{bundle_Categ.ViewCateg3Label_id}"/>
+                        <h:outputText value="#{categ3Controller.selected.c3Id}" title="#{bundle_Categ.ViewCateg3Title_id}"/>
+                        <h:outputText value="#{bundle_Categ.ViewCateg3Label_descr}"/>
+                        <h:outputText value="#{categ3Controller.selected.c3Descr}" title="#{bundle_Categ.ViewCateg3Title_descr}"/>
+                        <h:outputText value="#{bundle_Categ.ViewCateg3Label_parentId}"/>
+                        <h:outputText value="#{not empty categ2Controller.items.stream()
+                                                   .filter(s -> s.c2Id eq categ3Controller.selected.c3ParentId)
+                                                       .toList()? categ2Controller.items.stream()
+                                                   .filter(s -> s.c2Id eq categ3Controller.selected.c3ParentId)
+                                                       .toList().get(0).c2Descr: null}" 
+                                      title="#{bundle_Categ.ViewCateg3Title_parentId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle_Categ.Close}" onclick="Categ3ViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

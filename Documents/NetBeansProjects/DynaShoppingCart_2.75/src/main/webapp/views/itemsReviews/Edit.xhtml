@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsReviewsEditDlg" widgetVar="ItemsReviewsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_itemsReviews.EditItemsReviewsTitle}">
+            <h:form id="ItemsReviewsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemsReviewsController.selected != null}">
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{itemsReviewsController.selected.id}" title="#{bundle_itemsReviews.EditItemsReviewsTitle_id}" required="true" requiredMessage="#{bundle_itemsReviews.EditItemsReviewsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode" value="#{itemsReviewsController.selected.itemCode}" title="#{bundle_itemsReviews.EditItemsReviewsTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_reviews}" for="reviews" />
+                        <p:inputText id="reviews" value="#{itemsReviewsController.selected.reviews}" title="#{bundle_itemsReviews.EditItemsReviewsTitle_reviews}" />
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_userName}" for="userName" />
+                        <p:inputText id="userName" value="#{itemsReviewsController.selected.userName}" title="#{bundle_itemsReviews.EditItemsReviewsTitle_userName}" />
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_userId}" for="userId" />
+                        <p:inputText id="userId" value="#{itemsReviewsController.selected.userId}" title="#{bundle_itemsReviews.EditItemsReviewsTitle_userId}" />
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_itemId}" for="itemId" />
+                        <p:inputText id="itemId" value="#{itemsReviewsController.selected.itemId}" title="#{bundle_itemsReviews.EditItemsReviewsTitle_itemId}" />
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_dated}" for="dated" />
+                        <p:calendar id="dated" pattern="MM-dd-yyyy" value="#{itemsReviewsController.selected.dated}" 
+                                    title="#{bundle_itemsReviews.EditItemsReviewsTitle_dated}"  showOn="button">
+                                <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+3"/>
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.EditPaymentsLabel_id}" for="paymentsId" />
+                        <p:inputText id="paymentsId" value="#{itemsReviewsController.selected.paymentsId}" title="#{bundle.EditPaymentsTitle_id}" required="true" requiredMessage="#{bundle.EditPaymentsRequiredMessage_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemsReviewsController.update}" value="#{bundle_itemsReviews.Save}" update="display,:ItemsReviewsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsReviewsEditDialog');"/>
+                    <p:commandButton value="#{bundle_itemsReviews.Cancel}" onclick="ItemsReviewsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

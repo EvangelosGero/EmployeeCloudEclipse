@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsPaymentOptionsViewDlg" widgetVar="ItemsPaymentOptionsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewItemsPaymentOptionsTitle}">
+            <h:form id="ItemsPaymentOptionsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemsPaymentOptionsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewItemsPaymentOptionsLabel_id}"/>
+                        <h:outputText value="#{itemsPaymentOptionsController.selected.id}" title="#{bundle.ViewItemsPaymentOptionsTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewItemsPaymentOptionsLabel_itemCode}"/>
+                        <h:outputText value="#{itemsPaymentOptionsController.selected.itemCode}" title="#{bundle.ViewItemsPaymentOptionsTitle_itemCode}"/>
+                        <h:outputText value="#{bundle.ViewItemsPaymentOptionsLabel_paymentOptions}"/>
+                        <h:outputText value="#{itemsPaymentOptionsController.selected.paymentOptions}" title="#{bundle.ViewItemsPaymentOptionsTitle_paymentOptions}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ItemsPaymentOptionsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
