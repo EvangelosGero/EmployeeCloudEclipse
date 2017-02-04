@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrderItemsViewDlg" widgetVar="OrderItemsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_orders.ViewOrderItemsTitle}">
+            <h:form id="OrderItemsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{orderItemsController.selected != null}">
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_id}"/>
+                        <h:outputText value="#{orderItemsController.selected.id}" title="#{bundle_orders.ViewOrderItemsTitle_id}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemCode}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemCode}" title="#{bundle_orders.ViewOrderItemsTitle_itemCode}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemPriceOld}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemPriceOld}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceOld}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemLongDescr}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemLongDescr}" title="#{bundle_orders.ViewOrderItemsTitle_itemLongDescr}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemPriceRetail}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemPriceRetail}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceRetail}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemDiscount}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemDiscount}" title="#{bundle_orders.ViewOrderItemsTitle_itemDiscount}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemSize}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemSize}" title="#{bundle_orders.ViewOrderItemsTitle_itemSize}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemColor}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemColor}" title="#{bundle_orders.ViewOrderItemsTitle_itemColor}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_quantity}"/>
+                        <h:outputText value="#{orderItemsController.selected.quantity}" title="#{bundle_orders.ViewOrderItemsTitle_quantity}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_returnsCount}"/>
+                        <h:outputText value="#{orderItemsController.selected.returnsCount}" title="#{bundle_orders.ViewOrderItemsTitle_returnsCount}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemPriceWholesale}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemPriceWholesale}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceWholesale}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_userId}"/>
+                        <h:outputText value="#{orderItemsController.selected.userId}" title="#{bundle_orders.ViewOrderItemsTitle_userId}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemId}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemId}" title="#{bundle_orders.ViewOrderItemsTitle_itemId}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_orders}"/>
+                        <h:outputText value="#{orderItemsController.selected.orders.orderid}" title="#{bundle_orders.ViewOrderItemsTitle_orders}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle_orders.Close}" onclick="OrderItemsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

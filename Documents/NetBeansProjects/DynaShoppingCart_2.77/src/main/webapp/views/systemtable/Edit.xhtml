@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SystemtableEditDlg" widgetVar="SystemtableEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSystemtableTitle}">
+            <h:form id="SystemtableEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{systemtableController.selected != null}">                        
+                        <p:outputLabel value="#{bundle.EditSystemtableLabel_companyName}" for="companyName" />
+                        <p:inputText id="companyName" value="#{systemtableController.selected.companyName}" title="#{bundle.EditSystemtableTitle_companyName}" />
+                        <p:outputLabel value="#{bundle.EditSystemtableLabel_add1}" for="add1" />
+                        <p:inputText id="add1" value="#{systemtableController.selected.add1}" title="#{bundle.EditSystemtableTitle_add1}" />
+                        <p:outputLabel value="#{bundle.EditSystemtableLabel_add3}" for="add3" />
+                        <p:inputText id="add3" value="#{systemtableController.selected.add3}" title="#{bundle.EditSystemtableTitle_add3}" />
+                        <p:outputLabel value="#{bundle.EditSystemtableLabel_bottomMessage}" for="bottomMessage" />
+                        <p:inputText id="bottomMessage" value="#{systemtableController.selected.bottomMessage}" title="#{bundle.EditSystemtableTitle_bottomMessage}" />
+                        <p:outputLabel value="#{bundle.EditSystemtableLabel_aboutUs}" for="aboutUs" />
+                        <p:inputText id="aboutUs" value="#{systemtableController.selected.aboutUs}" title="#{bundle.EditSystemtableTitle_aboutUs}" />
+                        <p:outputLabel value="#{bundle.EditSystemtableLabel_contactUs}" for="contactUs" />
+                        <p:inputText id="contactUs" value="#{systemtableController.selected.contactUs}" title="#{bundle.EditSystemtableTitle_contactUs}" />
+                        <p:outputLabel value="#{bundle.EditSystemtableLabel_faq}" for="faq" />
+                        <p:inputText id="faq" value="#{systemtableController.selected.faq}" title="#{bundle.EditSystemtableTitle_faq}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{systemtableController.update}" value="#{bundle.Save}" update="display,:SystemtableListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SystemtableEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SystemtableEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
