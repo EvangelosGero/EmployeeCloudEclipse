@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CartEditDlg" widgetVar="CartEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCartTitle}">
+            <h:form id="CartEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cartController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCartLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{cartController.selected.id}" title="#{bundle.EditCartTitle_id}" 
+                                     disabled="true" required="true" requiredMessage="#{bundle.EditCartRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditCartLabel_usercode}" for="usercode" />
+                        <p:inputText id="usercode" value="#{cartController.selected.usercode}" title="#{bundle.EditCartTitle_usercode}" />
+                        <p:outputLabel value="#{bundle.EditCartLabel_shopper}" for="shopper" />
+                        <p:inputText id="shopper" value="#{cartController.selected.shopper}" title="#{bundle.EditCartTitle_shopper}" />
+                        <p:outputLabel value="#{bundle.EditCartLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode" value="#{cartController.selected.itemCode}" title="#{bundle.EditCartTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.EditCartLabel_itemValue}" for="itemValue" />
+                        <p:inputText id="itemValue" value="#{cartController.selected.itemValue}" title="#{bundle.EditCartTitle_itemValue}" />
+                        <p:outputLabel value="#{bundle.EditCartLabel_cartDate}" for="cartDate" />
+                        <p:calendar id="cartDate" pattern="MM-dd-yyyy" value="#{cartController.selected.cartDate}" 
+                                    title="#{bundle.EditCartTitle_cartDate}"  showOn="button">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+3"/>
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.EditCartLabel_quantity}" for="quantity" />
+                        <p:inputText id="quantity" value="#{cartController.selected.quantity}" title="#{bundle.EditCartTitle_quantity}" />
+                    </p:panelGrid>                    
+                    <p:commandButton actionListener="#{cartController.update}" value="#{bundle.Save}" update="display,:CartListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CartEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CartEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

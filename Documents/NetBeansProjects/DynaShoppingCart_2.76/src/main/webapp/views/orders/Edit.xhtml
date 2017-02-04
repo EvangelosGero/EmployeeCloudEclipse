@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdersEditDlg" widgetVar="OrdersEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_orders.EditOrdersTitle}">
+            <h:form id="OrdersEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{ordersController.selected != null}">
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_orderid}" for="orderid" />
+                        <p:inputText id="orderid" value="#{ordersController.selected.orderid}" title="#{bundle_orders.EditOrdersTitle_orderid}" 
+                                     disabled="true"  required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_orderid}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_orderDate}" for="orderDate" />
+                        <p:calendar id="orderDate" pattern="MM/dd/yyyy HH:mm:ss" timeZone="GMT+3"
+                                    value="#{ordersController.selected.orderDate}" title="#{bundle_orders.EditOrdersTitle_orderDate}" 
+                                    required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_orderDate}" showOn="button"/>                       
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{ordersController.selected.total}" title="#{bundle_orders.EditOrdersTitle_total}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_total}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_discountCoupon}" for="discountCoupon" />
+                        <p:inputText id="discountCoupon" value="#{ordersController.selected.discountCoupon}" title="#{bundle_orders.EditOrdersTitle_discountCoupon}" />
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_discountPercent}" for="discountPercent" />
+                        <p:inputText id="discountPercent" value="#{ordersController.selected.discountPercent}" title="#{bundle_orders.EditOrdersTitle_discountPercent}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_discountPercent}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_discountPrice}" for="discountPrice" />
+                        <p:inputText id="discountPrice" value="#{ordersController.selected.discountPrice}" title="#{bundle_orders.EditOrdersTitle_discountPrice}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_discountPrice}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_totalFinal}" for="totalFinal" />
+                        <p:inputText id="totalFinal" value="#{ordersController.selected.totalFinal}" title="#{bundle_orders.EditOrdersTitle_totalFinal}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_totalFinal}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_paymentMethodId}" for="paymentMethodId" />
+                        <p:inputText id="paymentMethodId" value="#{ordersController.selected.paymentMethodId}" title="#{bundle_orders.EditOrdersTitle_paymentMethodId}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_paymentMethodId}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_deltapayId}" for="deltapayId" />
+                        <p:inputText id="deltapayId" value="#{ordersController.selected.deltapayId}" title="#{bundle_orders.EditOrdersTitle_deltapayId}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_deltapayId}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_shippingCost}" for="shippingCost" />
+                        <p:inputText id="shippingCost" value="#{ordersController.selected.shippingCost}" title="#{bundle_orders.EditOrdersTitle_shippingCost}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_shippingCost}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_shippingCostId}" for="shippingCostId" />
+                        <p:selectBooleanCheckbox id="shippingCostId" value="#{ordersController.selected.shippingCostId}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_shippingCostId}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_affiliate}" for="affiliate" />
+                        <p:inputText id="affiliate" value="#{ordersController.selected.affiliate}" title="#{bundle_orders.EditOrdersTitle_affiliate}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_affiliate}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_orderState}" for="orderState" />
+                        <p:selectOneMenu id="orderState" value="#{ordersController.selected.orderState}"
+                                     converter="javax.faces.Integer"  style ="width: 100%">                            
+                            <f:selectItems  value="#{scheduleMasController.items}" var="se"                                        
+                                        itemLabel="#{se.scheduleType}" itemValue="#{se.id}" >                                                                
+                            </f:selectItems>                      
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_custName}" for="custName" />
+                        <p:inputText id="custName" value="#{ordersController.selected.custName}" title="#{bundle_orders.EditOrdersTitle_custName}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_custName}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_custEmail}" for="custEmail" />
+                        <p:inputText id="custEmail" value="#{ordersController.selected.custEmail}" title="#{bundle_orders.EditOrdersTitle_custEmail}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_custEmail}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_custPhone}" for="custPhone" />
+                        <p:inputText id="custPhone" value="#{ordersController.selected.custPhone}" title="#{bundle_orders.EditOrdersTitle_custPhone}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_custPhone}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_shippingAddress}" for="shippingAddress" />
+                        <p:inputText id="shippingAddress" value="#{ordersController.selected.shippingAddress}" title="#{bundle_orders.EditOrdersTitle_shippingAddress}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_shippingAddress}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_shippingZip}" for="shippingZip" />
+                        <p:inputText id="shippingZip" value="#{ordersController.selected.shippingZip}" title="#{bundle_orders.EditOrdersTitle_shippingZip}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_shippingZip}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_shippingCity}" for="shippingCity" />
+                        <p:inputText id="shippingCity" value="#{ordersController.selected.shippingCity}" title="#{bundle_orders.EditOrdersTitle_shippingCity}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_shippingCity}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_shippingCountry}" for="shippingCountry" />
+                        <p:inputText id="shippingCountry" value="#{ordersController.selected.shippingCountry}" title="#{bundle_orders.EditOrdersTitle_shippingCountry}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_shippingCountry}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_requestedInvoice}" for="requestedInvoice" />
+                        <p:inputText id="requestedInvoice" value="#{ordersController.selected.requestedInvoice}" title="#{bundle_orders.EditOrdersTitle_requestedInvoice}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_requestedInvoice}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_exported}" for="exported" />
+                        <p:inputText id="exported" value="#{ordersController.selected.exported}" title="#{bundle_orders.EditOrdersTitle_exported}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_exported}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_shippingCountryCode}" for="shippingCountryCode" />
+                        <p:inputText id="shippingCountryCode" value="#{ordersController.selected.shippingCountryCode}" title="#{bundle_orders.EditOrdersTitle_shippingCountryCode}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_shippingCountryCode}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_countryCodeSession}" for="countryCodeSession" />
+                        <p:inputText id="countryCodeSession" value="#{ordersController.selected.countryCodeSession}" title="#{bundle_orders.EditOrdersTitle_countryCodeSession}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_countryCodeSession}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_clientIp}" for="clientIp" />
+                        <p:inputText id="clientIp" value="#{ordersController.selected.clientIp}" title="#{bundle_orders.EditOrdersTitle_clientIp}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_clientIp}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrdersLabel_userId}" for="userId" />
+                        <p:inputText id="userId" value="#{ordersController.selected.userId}" title="#{bundle_orders.EditOrdersTitle_userId}" required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordersController.update}" value="#{bundle_orders.Save}" update="display,:OrdersListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OrdersEditDialog');"/>
+                    <p:commandButton value="#{bundle_orders.Cancel}" onclick="OrdersEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
