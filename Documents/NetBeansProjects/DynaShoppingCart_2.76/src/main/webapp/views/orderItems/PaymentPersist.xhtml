@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/template.xhtml">
         <ui:define name="body"> 
-            <p:growl id="growlFFF"  life="10000"  />
+            <p:growl id="growlFFF"  life="10000" />
             <style>
                 .ui-growl{
                     z-index: 9000;
@@ -44,7 +44,8 @@
                     <div id="button1" style="position: absolute !important; bottom: 10px !important; vertical-align: bottom !important;">
                       
                         <p:commandButton id="payBtn" value="Make Payment" actionListener="#{orderItemsController.orderItemsPersist()}"
-                                         update=":formGreat:totalsOL :growlFFF"  oncomplete="@this:payBtn.disable();"/> 
+                                         update=":formGreat:totalsOL :growlFFF"  oncomplete="@payBtn.disable();"
+                                         action="/index.xhtml?faces-redirect=true"/> 
                     </div>
                     <div id="button2" style="position: absolute !important; bottom: 10px !important;  right: 10px !important; 
                           ">
