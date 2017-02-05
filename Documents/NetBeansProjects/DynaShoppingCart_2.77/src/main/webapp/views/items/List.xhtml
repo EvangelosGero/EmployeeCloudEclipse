@@ -41,7 +41,7 @@
                         </p:column>
                         <p:column style="width: 100px">
                             <f:facet name="header">
-                                <h:outputText value="Διαθεσιμότητα"/>
+                                <h:outputText value="#{bundle.ListItemsTitle_itemAvailability}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemAvailability}"/>
                         </p:column>
@@ -65,7 +65,7 @@
                         </p:column>
                        <p:column style="width: 100px">
                             <f:facet name="header">
-                                <h:outputText value="Τιμή Χονδρικής"/>
+                                <h:outputText value="#{bundle.ListItemsTitle_itemWholesalesValue}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemWholesalesValue}"/>
                         </p:column>
@@ -89,7 +89,7 @@
                         </p:column>
                         <p:column style="width: 100px">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListItemsTitle_itemValue}"/>
+                                <h:outputText value="#{bundle.ListItemsTitle_itemRetailValue}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemRetailValue}"/>
                         </p:column>
@@ -97,7 +97,7 @@
                         
                         <p:column style="width: 100px">
                             <f:facet name="header">
-                                <h:outputText value="Φωτογραφίες"/>
+                                <h:outputText value="#{bundle.ListItemsTitle_itemImage}"/>
                             </f:facet>
                             <p:commandLink  id="photos1" value="Φωτογραφίες"
                                             update=":ImagesForm1"
