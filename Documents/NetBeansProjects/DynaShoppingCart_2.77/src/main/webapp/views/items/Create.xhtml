@@ -12,7 +12,7 @@
             <h:form id="ItemsCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{itemsController.selected != null}">                        
-                        <p:outputLabel value="Διαθεσιμότητα" for="Availability" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemAvailability}" for="Availability" />
                         <p:inputText id="Availability" value="#{itemsController.selected.itemAvailability}" title="Availability" />
                         <p:outputLabel value="#{bundle.CreateItemsLabel_itemCode}" for="itemCode" />
                         <p:inputText id="itemCode" value="#{itemsController.selected.itemCode}" title="#{bundle.CreateItemsTitle_itemCode}" />
@@ -20,7 +20,7 @@
                         <p:inputText id="itemShortDesc" value="#{itemsController.selected.itemShortDesc}" title="#{bundle.CreateItemsTitle_itemShortDesc}" />
                         <p:outputLabel value="#{bundle.CreateItemsLabel_itemLongDesc}" for="itemLongDesc" />
                         <p:inputText id="itemLongDesc" value="#{itemsController.selected.itemLongDesc}" title="#{bundle.CreateItemsTitle_itemLongDesc}" />
-                        <p:outputLabel value="Τιμή Χονδρικής με ΦΠΑ" for="wholesales" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemWholesalesValue}" for="wholesales" />
                         <p:inputText id="wholesales" value="#{itemsController.selected.itemWholesalesValue}" title="wholesales" />
                         <p:outputLabel value="#{bundle.CreateItemsLabel_itemColor}" for="itemColor" />
                         <p:inputText id="itemColor" value="#{itemsController.selected.itemColor}" title="#{bundle.CreateItemsTitle_itemColor}" />
@@ -28,7 +28,7 @@
                         <p:inputText id="itemWarranty" value="#{itemsController.selected.itemWarranty}" title="#{bundle.CreateItemsTitle_itemWarranty}" />
                         <p:outputLabel value="#{bundle.CreateItemsLabel_itemSize}" for="itemSize" />
                         <p:inputText id="itemSize" value="#{itemsController.selected.itemSize}" title="#{bundle.CreateItemsTitle_itemSize}" />                                      
-                        <p:outputLabel value="Τιμή Λιανικής με ΦΠΑ" for="itemValue" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemValue}" for="itemValue" />
                         <p:inputText id="itemValue" value="#{itemsController.selected.itemRetailValue}" title="#{bundle.CreateItemsTitle_itemValue}" />
                         <p:outputLabel value="#{bundle.CreateItemsLabel_deliveryDays}" for="deliveryDays" />
                         <p:inputText id="deliveryDays" value="#{itemsController.selected.deliveryDays}" title="#{bundle.CreateItemsTitle_deliveryDays}" />

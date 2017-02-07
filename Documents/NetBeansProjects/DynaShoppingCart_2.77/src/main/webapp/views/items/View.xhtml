@@ -56,7 +56,18 @@
                         <h:outputText value="#{bundle.ViewItemsLabel_usernmSellerId}"/>
                         <h:outputText value="#{usernmController.items.stream().filter(
                                     s -> s.id eq itemsController.selected.usernmSellerId).toList().get(0).userName}" 
-                                      title="#{bundle.ViewItemsTitle_usernmSellerId}"/>                        
+                                      title="#{bundle.ViewItemsTitle_usernmSellerId}"/> 
+                        <h:outputText/>
+                        <h:outputText/>
+                        <h:outputText value="Κατηγορία 1:"/>
+                        <h:outputText value="#{categ1Controller.items.stream().filter(
+                                    s -> s.c1Id eq itemsController.selected.itemCateg1Id).toList().get(0).c1Descr}"/>
+                        <h:outputText value="Κατηγορία 2:"/>
+                        <h:outputText value="#{categ2Controller.items.stream().filter(
+                                    s -> s.c2Id eq itemsController.selected.itemCateg2Id).toList().get(0).c2Descr}"/>
+                        <h:outputText value="Κατηγορία 3:"/>
+                        <h:outputText value="#{categ3Controller.items.stream().filter(
+                                    s -> s.c3Id eq itemsController.selected.itemCateg3Id).toList().get(0).c3Descr}"/>                        
                       </h:panelGrid>                 
                         <p:panelGrid columns="6" style="width: 100%"> 
                             <ui:include src="/views/items/makesPerItem.xhtml" />

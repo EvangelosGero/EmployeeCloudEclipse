@@ -171,7 +171,9 @@
             </p:layoutUnit>
                 
             <p:layoutUnit position="east" size="200">
-                <ui:include src="/views/catgDetails/offers.xhtml" />
+                <ui:insert name="eastPane">
+                    <ui:include src="/views/catgDetails/offers.xhtml" />
+                </ui:insert>
             </p:layoutUnit>
 
             <p:layoutUnit position="center" >

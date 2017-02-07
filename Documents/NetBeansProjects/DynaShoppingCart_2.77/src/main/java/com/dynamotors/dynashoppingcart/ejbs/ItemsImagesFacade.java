@@ -37,8 +37,7 @@ public class ItemsImagesFacade extends AbstractFacade<ItemsImages> {
     public ItemsImagesFacade() {
         super(ItemsImages.class);
     }
-    public List<ItemsImages> produceSelectedList(int id){
-        System.out.println("Hello");
+    public List<ItemsImages> produceSelectedList(int id){        
       CriteriaBuilder cb = em.getCriteriaBuilder();
       CriteriaQuery<ItemsImages> cq = cb.createQuery(ItemsImages.class);
       Root<ItemsImages> itemsImages = cq.from(ItemsImages.class);
@@ -46,9 +45,7 @@ public class ItemsImagesFacade extends AbstractFacade<ItemsImages> {
       cq.where(cb.equal(items.get(Items_.itemId), id));
       cq.select(itemsImages);
       TypedQuery<ItemsImages> q = em.createQuery(cq);
-      List<ItemsImages> result = q.getResultList();
-      System.out.println(result.isEmpty());
-      result.forEach(r -> System.out.println(r.getId()));
+      List<ItemsImages> result = q.getResultList();      
       return result;
       
    }
