@@ -8,7 +8,7 @@
 
     <ui:composition >        
         
-            <h:form id="CatgMasListForm3">
+            <h:form id="CatgMasListFormAdmin">
                 <p:panelGrid  id="searchPanelGrid"  style="border: none;" columns="1">
                     <f:facet name ="header" >
                         <p:outputLabel value="#{bundle.SearchTitle}"/>
@@ -82,6 +82,19 @@
                      <p:commandButton id="categorySearchBtn" value="Αναζήτηση Τώρα!"  
                                       action="/views/items/List.xhtml?faces-redirect=true"/>                                      
                 </div>
+                <p:spacer height="60" width="100%"/>
+                <h:panelGrid  id="searchPanelGridAdmin"  style="border: none;" columns="1">
+                    <p:outputLabel for="SearchInputTextAdmin" value="Αναζητηση με Κωδικο: "/>                     
+                    <p:inputText id="SearchInputTextAdmin"  value="#{itemsController.filterItemCode}" />
+                    <p:commandButton id="FilterCommandButtonAdmin" value ="Αναζήτηση" title="Αναζήτηση" 
+                               icon="ui-icon-search" action="/views/items/List.xhtml?faces-redirect=true" >                                                                            
+                    </p:commandButton>
+                    <p:commandButton id="ResetFiltersCommandButtonAdmin" value ="Ολική Αναζήτηση"
+                                         actionListener="#{itemsController.resetFilters()}" style="background:#ff9933" 
+                                         title="Αναζήτηση σε ολόκληρη την αποθήκη"
+                               icon="ui-icon-search" action="/views/items/List.xhtml?faces-redirect=true" >                                                                           
+                    </p:commandButton>                   
+                </h:panelGrid>
             </h:form>
             
         
