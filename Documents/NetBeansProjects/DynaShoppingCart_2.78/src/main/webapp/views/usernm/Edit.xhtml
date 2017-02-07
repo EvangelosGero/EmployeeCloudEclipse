@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsernmEditDlg" widgetVar="UsernmEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUsernmTitle}">
+            <h:form id="UsernmEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usernmController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{usernmController.selected.id}" title="#{bundle.EditUsernmTitle_id}" required="true" requiredMessage="#{bundle.EditUsernmRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_usertype}" for="usertype" />
+                        <p:inputText id="usertype" value="#{usernmController.selected.usertype}" title="#{bundle.EditUsernmTitle_usertype}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{usernmController.selected.password}" title="#{bundle.EditUsernmTitle_password}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_roleuser}" for="roleuser" />
+                        <p:inputText id="roleuser" value="#{usernmController.selected.roleuser}" title="#{bundle.EditUsernmTitle_roleuser}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_createDate}" for="createDate" />
+                        <p:calendar id="createDate" pattern="MM/dd/yyyy"  timeZone="GMT+3" value="#{usernmController.selected.createDate}" 
+                                    title="#{bundle.EditUsernmTitle_createDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_hint}" for="hint" />
+                        <p:inputText id="hint" value="#{usernmController.selected.hint}" title="#{bundle.EditUsernmTitle_hint}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_hintAns}" for="hintAns" />
+                        <p:inputText id="hintAns" value="#{usernmController.selected.hintAns}" title="#{bundle.EditUsernmTitle_hintAns}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_userName}" for="userName" />
+                        <p:inputText id="userName" value="#{usernmController.selected.userName}" title="#{bundle.EditUsernmTitle_userName}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_userEmail}" for="userEmail" />
+                        <p:inputText id="userEmail" value="#{usernmController.selected.userEmail}" title="#{bundle.EditUsernmTitle_userEmail}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_gender}" for="gender" />
+                        <p:inputText id="gender" value="#{usernmController.selected.gender}" title="#{bundle.EditUsernmTitle_gender}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_dob}" for="dob" />
+                        <p:calendar id="dob" pattern="MM/dd/yyyy"  timeZone="GMT+3" value="#{usernmController.selected.dob}" 
+                                    title="#{bundle.EditUsernmTitle_dob}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_mobile}" for="mobile" />
+                        <p:inputText id="mobile" value="#{usernmController.selected.mobile}" title="#{bundle.EditUsernmTitle_mobile}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_country}" for="country" />
+                        <p:inputText id="country" value="#{usernmController.selected.country}" title="#{bundle.EditUsernmTitle_country}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_city}" for="city" />
+                        <p:inputText id="city" value="#{usernmController.selected.city}" title="#{bundle.EditUsernmTitle_city}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_postalCode}" for="postalCode" />
+                        <p:inputText id="postalCode" value="#{usernmController.selected.postalCode}" title="#{bundle.EditUsernmTitle_postalCode}" />
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_address}" for="address" />
+                        <p:inputText id="address" value="#{usernmController.selected.address}" title="#{bundle.EditUsernmTitle_address}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usernmController.update}" value="#{bundle.Save}" update="display,:UsernmListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'UsernmEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsernmEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

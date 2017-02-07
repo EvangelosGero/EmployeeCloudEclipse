@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsPaymentOptionsEditDlg" widgetVar="ItemsPaymentOptionsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditItemsPaymentOptionsTitle}">
+            <h:form id="ItemsPaymentOptionsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemsPaymentOptionsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditItemsPaymentOptionsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{itemsPaymentOptionsController.selected.id}" title="#{bundle.EditItemsPaymentOptionsTitle_id}" required="true" requiredMessage="#{bundle.EditItemsPaymentOptionsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditItemsPaymentOptionsLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode" value="#{itemsPaymentOptionsController.selected.itemCode}" title="#{bundle.EditItemsPaymentOptionsTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.EditItemsPaymentOptionsLabel_paymentOptions}" for="paymentOptions" />
+                        <p:inputText id="paymentOptions" value="#{itemsPaymentOptionsController.selected.paymentOptions}" title="#{bundle.EditItemsPaymentOptionsTitle_paymentOptions}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemsPaymentOptionsController.update}" value="#{bundle.Save}" update="display,:ItemsPaymentOptionsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsPaymentOptionsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemsPaymentOptionsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

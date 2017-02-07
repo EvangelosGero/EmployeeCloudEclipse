@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdersViewDlg" widgetVar="OrdersViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_orders.ViewOrdersTitle}">
+            <h:form id="OrdersViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{ordersController.selected != null}">
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_orderid}"/>
+                        <h:outputText value="#{ordersController.selected.orderid}" title="#{bundle_orders.ViewOrdersTitle_orderid}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_orderDate}"/>
+                        <h:outputText value="#{ordersController.selected.orderDate}" title="#{bundle_orders.ViewOrdersTitle_orderDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" timeZone="GMT+3"/>
+                        </h:outputText>                        
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_total}"/>
+                        <h:outputText value="#{ordersController.selected.total}" title="#{bundle_orders.ViewOrdersTitle_total}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_discountCoupon}"/>
+                        <h:outputText value="#{ordersController.selected.discountCoupon}" title="#{bundle_orders.ViewOrdersTitle_discountCoupon}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_discountPercent}"/>
+                        <h:outputText value="#{ordersController.selected.discountPercent}" title="#{bundle_orders.ViewOrdersTitle_discountPercent}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_discountPrice}"/>
+                        <h:outputText value="#{ordersController.selected.discountPrice}" title="#{bundle_orders.ViewOrdersTitle_discountPrice}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_totalFinal}"/>
+                        <h:outputText value="#{ordersController.selected.totalFinal}" title="#{bundle_orders.ViewOrdersTitle_totalFinal}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_paymentMethodId}"/>
+                        <h:outputText value="#{ordersController.selected.paymentMethodId}" title="#{bundle_orders.ViewOrdersTitle_paymentMethodId}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_deltapayId}"/>
+                        <h:outputText value="#{ordersController.selected.deltapayId}" title="#{bundle_orders.ViewOrdersTitle_deltapayId}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_shippingCost}"/>
+                        <h:outputText value="#{ordersController.selected.shippingCost}" title="#{bundle_orders.ViewOrdersTitle_shippingCost}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_shippingCostId}"/>
+                        <p:selectBooleanCheckbox value="#{ordersController.selected.shippingCostId}" disabled="true"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_affiliate}"/>
+                        <h:outputText value="#{ordersController.selected.affiliate}" title="#{bundle_orders.ViewOrdersTitle_affiliate}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_orderState}"/>
+                        <h:outputText value="#{ordersController.selected.orderState}" title="#{bundle_orders.ViewOrdersTitle_orderState}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_custName}"/>
+                        <h:outputText value="#{ordersController.selected.custName}" title="#{bundle_orders.ViewOrdersTitle_custName}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_custEmail}"/>
+                        <h:outputText value="#{ordersController.selected.custEmail}" title="#{bundle_orders.ViewOrdersTitle_custEmail}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_custPhone}"/>
+                        <h:outputText value="#{ordersController.selected.custPhone}" title="#{bundle_orders.ViewOrdersTitle_custPhone}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_shippingAddress}"/>
+                        <h:outputText value="#{ordersController.selected.shippingAddress}" title="#{bundle_orders.ViewOrdersTitle_shippingAddress}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_shippingZip}"/>
+                        <h:outputText value="#{ordersController.selected.shippingZip}" title="#{bundle_orders.ViewOrdersTitle_shippingZip}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_shippingCity}"/>
+                        <h:outputText value="#{ordersController.selected.shippingCity}" title="#{bundle_orders.ViewOrdersTitle_shippingCity}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_shippingCountry}"/>
+                        <h:outputText value="#{ordersController.selected.shippingCountry}" title="#{bundle_orders.ViewOrdersTitle_shippingCountry}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_requestedInvoice}"/>
+                        <h:outputText value="#{ordersController.selected.requestedInvoice}" title="#{bundle_orders.ViewOrdersTitle_requestedInvoice}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_exported}"/>
+                        <h:outputText value="#{ordersController.selected.exported}" title="#{bundle_orders.ViewOrdersTitle_exported}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_shippingCountryCode}"/>
+                        <h:outputText value="#{ordersController.selected.shippingCountryCode}" title="#{bundle_orders.ViewOrdersTitle_shippingCountryCode}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_countryCodeSession}"/>
+                        <h:outputText value="#{ordersController.selected.countryCodeSession}" title="#{bundle_orders.ViewOrdersTitle_countryCodeSession}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_clientIp}"/>
+                        <h:outputText value="#{ordersController.selected.clientIp}" title="#{bundle_orders.ViewOrdersTitle_clientIp}"/>
+                        <h:outputText value="#{bundle_orders.ViewOrdersLabel_userId}"/>
+                        <h:outputText value="#{ordersController.selected.userId}" title="#{bundle_orders.ViewOrdersTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle_orders.Close}" onclick="OrdersViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
