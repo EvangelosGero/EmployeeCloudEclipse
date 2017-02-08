@@ -62,7 +62,7 @@ public class OriginalCodesController implements Serializable {
 
     public OriginalCodes prepareCreate() {
         selected = new OriginalCodes();
-        selected.setItems(itemsController.getSelected());
+        if(itemsController.getSelected() != null)selected.setItems(itemsController.getSelected());
         initializeEmbeddableKey();
         return selected;
     }

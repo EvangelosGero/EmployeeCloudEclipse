@@ -46,10 +46,18 @@
                             <h:outputText value="#{item.items.itemCode}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_OriginalCodes.Create}" actionListener="#{originalCodesController.prepareCreate}" update=":OriginalCodesCreateForm" oncomplete="PF('OriginalCodesCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_OriginalCodes.View}" update=":OriginalCodesViewForm" oncomplete="PF('OriginalCodesViewDialog').show()" disabled="#{empty originalCodesController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_OriginalCodes.Edit}" update=":OriginalCodesEditForm" oncomplete="PF('OriginalCodesEditDialog').show()" disabled="#{empty originalCodesController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_OriginalCodes.Delete}" actionListener="#{originalCodesController.destroy}" update=":growl,datalist" disabled="#{empty originalCodesController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_OriginalCodes.Create}" 
+                                             actionListener="#{originalCodesController.prepareCreate}" update=":OriginalCodesCreateForm" 
+                                             oncomplete="PF('OriginalCodesCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_OriginalCodes.View}" 
+                                             update=":OriginalCodesViewForm" oncomplete="PF('OriginalCodesViewDialog').show()" 
+                                             disabled="#{empty originalCodesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_OriginalCodes.Edit}" 
+                                             update=":OriginalCodesEditForm" oncomplete="PF('OriginalCodesEditDialog').show()" 
+                                             disabled="#{empty originalCodesController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_OriginalCodes.Delete}" 
+                                             actionListener="#{originalCodesController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty originalCodesController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -51,7 +51,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="Μάρκες" for="makes" />
                         <p:selectCheckboxMenu id="makes" value="#{itemsController.selected.categMakesList}"  label="Μάρκες"
-                                         required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_items}"
+                                         required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_id}"
                                          converter="entityConverter" style="width:90%"
                                          valueChangeListener="#{categModelController.handleMakeChangeList}">                             
                             <f:selectItems value="#{categMakeController.itemsAvailableSelectMany}"
@@ -66,51 +66,54 @@
                                            var="model"
                                            itemValue="#{model}" itemLabel="#{model.mlModelName} #{model.mlYearRange}"/>                            
                         </p:selectCheckboxMenu>                   
-                    <p:outputLabel value="Κατηγορία 1" for="ctg1" />
+                        <p:outputLabel value="Κατηγορία 1" for="ctg1" />
                         <p:selectOneMenu id="ctg1" value="#{itemsController.selected.itemCateg1Id}"
                                      converter="javax.faces.Integer"  style ="width: 90%"
                                      valueChangeListener="#{categ2Controller.handleMakeChangeWithId}">
-                        <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
-                        <f:selectItems  value="#{categ1Controller.items}" var="it"                                        
+                            <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
+                            <f:selectItems  value="#{categ1Controller.items}" var="it"                                        
                                         itemLabel="#{it.c1Descr}" itemValue="#{it.c1Id}" >                                                                
-                        </f:selectItems>                         
-                        <p:ajax event="change" update="ctg2 ctg3"/>
+                            </f:selectItems>                         
+                            <p:ajax event="change" update="ctg2 ctg3"/>
                         </p:selectOneMenu>
-                    <p:outputLabel value="Κατηγορία 2" for="ctg2" />                    
-                    <p:selectOneMenu id="ctg2" value="#{itemsController.selected.itemCateg2Id}"
+                        <p:outputLabel value="Κατηγορία 2" for="ctg2" />                    
+                        <p:selectOneMenu id="ctg2" value="#{itemsController.selected.itemCateg2Id}"
                                      converter="javax.faces.Integer"  style ="width: 90%"
                                      valueChangeListener="#{categ3Controller.handleMakeChangeWithId}">
-                        <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
-                        <f:selectItems  value="#{categ2Controller.matchedItems}" var="ite"                                        
+                            <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
+                            <f:selectItems  value="#{categ2Controller.matchedItems}" var="ite"                                        
                                         itemLabel="#{ite.c2Descr}" itemValue="#{ite.c2Id}" >                                                                
-                        </f:selectItems>                         
-                        <p:ajax event="change" update="ctg3"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Κατηγορία 3" for="ctg3" />
-                    <p:selectOneMenu id="ctg3" value="#{itemsController.selected.itemCateg3Id}"
+                            </f:selectItems>                         
+                            <p:ajax event="change" update="ctg3"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Κατηγορία 3" for="ctg3" />
+                        <p:selectOneMenu id="ctg3" value="#{itemsController.selected.itemCateg3Id}"
                                      converter="javax.faces.Integer" style ="width: 90%" >
-                        <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
-                        <f:selectItems  value="#{categ3Controller.matchedItems}" var="itt"                                        
+                            <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
+                            <f:selectItems  value="#{categ3Controller.matchedItems}" var="itt"                                        
                                         itemLabel="#{itt.c3Descr}" itemValue="#{itt.c3Id}" >                                                                
-                        </f:selectItems>                                                
-                    </p:selectOneMenu>     
-                    <p:outputLabel value="Φωτογραφίες" for="photos49" />
-                    <p:commandLink  id="photos49" value="Φωτογραφίες"
+                            </f:selectItems>                                                
+                        </p:selectOneMenu>     
+                        <p:outputLabel value="Φωτογραφίες" for="photos49" />
+                        <p:commandLink  id="photos49" value="Φωτογραφίες"
                                             update=":ImagesForm1"
                                             oncomplete="PF('opanel2').show()"
+                                            style ="text-decoration: underline !important;"
                                             disabled="#{empty itemsController.selected}"  />
-                    <p:outputLabel value="Γνήσιοι Κωδικοί" for="orig49" />
-                    <p:commandLink  id="orig49" value="Γνήσιοι Κωδικοί"
+                        <p:outputLabel value="Γνήσιοι Κωδικοί" for="orig49" />
+                        <p:commandLink  id="orig49" value="Γνήσιοι Κωδικοί"
                                             update=":OriginalCodesListForm1"
                                             oncomplete="PF('origpanel').show()"
+                                            style ="text-decoration: underline !important;"
                                             disabled="#{empty itemsController.selected}"
                                            />
-                    <p:outputLabel value="Enabled" for="bool1" />
-                    <p:selectBooleanCheckbox id="bool1" value="#{itemsController.selected.itemEnabled}" />                                                 
+                        <p:outputLabel value="Enabled" for="bool1" />
+                        <p:selectBooleanCheckbox id="bool1" value="#{itemsController.selected.itemEnabled}" />                                                 
                    
                     </p:panelGrid> 
-                    <p:commandButton actionListener="#{itemsController.update}" value="#{bundle.Save}" update="display,:ItemsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemsEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{itemsController.update}" value="#{bundle.Save}" 
+                                     update="display,:ItemsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsEditDialog');"/>
+                    <p:commandButton value="Close" onclick="ItemsEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

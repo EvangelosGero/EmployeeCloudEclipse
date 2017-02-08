@@ -13,13 +13,16 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{originalCodesController.selected != null}">
                         <h:outputText value="#{bundle_OriginalCodes.ViewOriginalCodesLabel_ocId}"/>
-                        <h:outputText value="#{originalCodesController.selected.ocId}" title="#{bundle_OriginalCodes.ViewOriginalCodesTitle_ocId}"/>
+                        <h:outputText value="#{originalCodesController.selected.ocId}" 
+                                      title="#{bundle_OriginalCodes.ViewOriginalCodesTitle_ocId}"/>
                         <h:outputText value="#{bundle_OriginalCodes.ViewOriginalCodesLabel_ocVal}"/>
-                        <h:outputText value="#{originalCodesController.selected.ocVal}" title="#{bundle_OriginalCodes.ViewOriginalCodesTitle_ocVal}"/>
+                        <h:outputText value="#{originalCodesController.selected.ocVal}" 
+                                      title="#{bundle_OriginalCodes.ViewOriginalCodesTitle_ocVal}"/>
                         <h:outputText value="#{bundle_OriginalCodes.ViewOriginalCodesLabel_items}"/>
-                        <h:outputText value="#{originalCodesController.selected.items}" title="#{bundle_OriginalCodes.ViewOriginalCodesTitle_items}"/>
+                        <h:outputText value="#{originalCodesController.selected.items.itemCode}" 
+                                      title="#{bundle_OriginalCodes.ViewOriginalCodesTitle_items}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_OriginalCodes.Close}" onclick="OriginalCodesViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_OriginalCodes.Close}" onclick="PF('OriginalCodesViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

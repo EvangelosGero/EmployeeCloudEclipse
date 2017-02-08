@@ -20,7 +20,8 @@
                         <h:outputText value="#{bundle_itemsImages.ViewItemsImagesLabel_isbasic}"/>
                         <h:outputText value="#{itemsImagesController.selected.isbasic}" title="#{bundle_itemsImages.ViewItemsImagesTitle_isbasic}"/>
                         <h:outputText value="#{bundle_itemsImages.ViewItemsImagesLabel_items}"/>
-                        <h:outputText value="#{itemsImagesController.selected.items}" title="#{bundle_itemsImages.ViewItemsImagesTitle_items}"/>
+                        <h:outputText value="#{itemsImagesController.selected.items.itemCode}" 
+                                      title="#{bundle_itemsImages.ViewItemsImagesTitle_items}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle_itemsImages.Close}" onclick="PF('ItemsImagesViewDialog1').hide()"/>
                 </h:panelGroup>

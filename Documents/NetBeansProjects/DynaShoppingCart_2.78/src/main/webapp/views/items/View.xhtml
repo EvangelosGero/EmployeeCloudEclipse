@@ -60,13 +60,16 @@
                         <h:outputText/>
                         <h:outputText/>
                         <h:outputText value="Κατηγορία 1:"/>
-                        <h:outputText value="#{itemsController.selected.itemCateg1Id ne null ? categ1Controller.items.stream().filter(
+                        <h:outputText value="#{not empty categ1Controller.items.stream().filter(
+                                    s -> s.c1Id eq itemsController.selected.itemCateg1Id).toList() ? categ1Controller.items.stream().filter(
                                     s -> s.c1Id eq itemsController.selected.itemCateg1Id).toList().get(0).c1Descr : ''}"/>
                         <h:outputText value="Κατηγορία 2:"/>
-                        <h:outputText value="#{itemsController.selected.itemCateg2Id ne null ? categ2Controller.items.stream().filter(
+                        <h:outputText value="#{not empty categ2Controller.items.stream().filter(
+                                    s -> s.c2Id eq itemsController.selected.itemCateg2Id).toList() ? categ2Controller.items.stream().filter(
                                     s -> s.c2Id eq itemsController.selected.itemCateg2Id).toList().get(0).c2Descr : ''}"/>
                         <h:outputText value="Κατηγορία 3:"/>
-                        <h:outputText value="#{itemsController.selected.itemCateg3Id ne null ? categ3Controller.items.stream().filter(
+                        <h:outputText value="#{not empty  categ3Controller.items.stream().filter(
+                                    s -> s.c3Id eq itemsController.selected.itemCateg3Id).toList() ? categ3Controller.items.stream().filter(
                                     s -> s.c3Id eq itemsController.selected.itemCateg3Id).toList().get(0).c3Descr : ''}"/>                        
                       </h:panelGrid>                 
                         <p:panelGrid columns="6" style="width: 100%"> 

@@ -20,10 +20,9 @@
                         <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_isbasic}" for="isbasic" />
                         <p:inputText id="isbasic" value="#{itemsImagesController.selected.isbasic}" title="#{bundle_itemsImages.EditItemsImagesTitle_isbasic}" required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_isbasic}"/>
                         <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_items}" for="items" />
-                        <p:selectOneMenu id="items" value="#{itemsImagesController.selected.items}" var="p"
+                        <p:selectOneMenu id="items" value="#{itemsImagesController.selected.items}" var="p" 
                                          required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_items}"
-                                         converter="#{itemsImagesConverter}">
-                            
+                                         converter="#{itemsImagesConverter}" filter="true">                            
                             <f:selectItems value="#{itemsController.itemsAvailableSelectOne}"
                                            var="product"
                                            itemValue="#{product}" itemLabel="#{product.itemCode}"/>
@@ -32,8 +31,10 @@
                             </p:column>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{itemsImagesController.update}" value="#{bundle_itemsImages.Save}" update="display,:ItemsImagesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsImagesEditDialog');"/>
-                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="ItemsImagesEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{itemsImagesController.update}" value="#{bundle_itemsImages.Save}" 
+                                     update="display,:ItemsImagesListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'ItemsImagesEditDialog');"/>
+                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

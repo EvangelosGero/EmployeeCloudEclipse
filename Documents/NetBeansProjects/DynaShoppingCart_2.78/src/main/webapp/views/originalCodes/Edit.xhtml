@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="OriginalCodesEditDlg" widgetVar="OriginalCodesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_OriginalCodes.EditOriginalCodesTitle}">
+        <p:dialog id="OriginalCodesEditDlg" widgetVar="OriginalCodesEditDialog" modal="true" resizable="false" appendTo="@(body)"
+                  header="#{bundle_OriginalCodes.EditOriginalCodesTitle}">
             <h:form id="OriginalCodesEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{originalCodesController.selected != null}">
@@ -18,11 +19,12 @@
                                      requiredMessage="#{bundle_OriginalCodes.EditOriginalCodesRequiredMessage_ocId}"
                                      disabled="true"/>
                         <p:outputLabel value="#{bundle_OriginalCodes.EditOriginalCodesLabel_ocVal}" for="ocVal" />
-                        <p:inputText id="ocVal" value="#{originalCodesController.selected.ocVal}" title="#{bundle_OriginalCodes.EditOriginalCodesTitle_ocVal}" />
+                        <p:inputText id="ocVal" value="#{originalCodesController.selected.ocVal}" 
+                                     title="#{bundle_OriginalCodes.EditOriginalCodesTitle_ocVal}" />
                         <p:outputLabel value="#{bundle_OriginalCodes.EditOriginalCodesLabel_items}" for="items" />
                        <p:selectOneMenu id="items" value="#{originalCodesController.selected.items}" var="p"
                                          required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_items}"
-                                         converter="#{originalCodesConverter}">
+                                         converter="#{originalCodesConverter}" filter="true">
                             
                             <f:selectItems value="#{itemsController.itemsAvailableSelectOne}"
                                            var="product"
@@ -33,7 +35,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{originalCodesController.update}" value="#{bundle_OriginalCodes.Save}" update="display,:OriginalCodesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OriginalCodesEditDialog');"/>
-                    <p:commandButton value="#{bundle_OriginalCodes.Cancel}" onclick="OriginalCodesEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle_OriginalCodes.Cancel}" onclick="PF('OriginalCodesEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

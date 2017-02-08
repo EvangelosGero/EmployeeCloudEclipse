@@ -52,10 +52,18 @@
                             <h:outputText value="#{item.items.itemCode}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_itemsImages.Create}" actionListener="#{itemsImagesController.prepareCreate}" update=":ItemsImagesCreateForm" oncomplete="PF('ItemsImagesCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_itemsImages.View}" update=":ItemsImagesViewForm" oncomplete="PF('ItemsImagesViewDialog').show()" disabled="#{empty itemsImagesController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_itemsImages.Edit}" update=":ItemsImagesEditForm" oncomplete="PF('ItemsImagesEditDialog').show()" disabled="#{empty itemsImagesController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_itemsImages.Delete}" actionListener="#{itemsImagesController.destroy}" update=":growl,datalist" disabled="#{empty itemsImagesController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_itemsImages.Create}" 
+                                             actionListener="#{itemsImagesController.prepareCreate}" update=":ItemsImagesCreateForm" 
+                                             oncomplete="PF('ItemsImagesCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_itemsImages.View}" 
+                                             update=":ItemsImagesViewForm" oncomplete="PF('ItemsImagesViewDialog').show()" 
+                                             disabled="#{empty itemsImagesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_itemsImages.Edit}" 
+                                             update=":ItemsImagesEditForm" oncomplete="PF('ItemsImagesEditDialog').show()" 
+                                             disabled="#{empty itemsImagesController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_itemsImages.Delete}" 
+                                             actionListener="#{itemsImagesController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty itemsImagesController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

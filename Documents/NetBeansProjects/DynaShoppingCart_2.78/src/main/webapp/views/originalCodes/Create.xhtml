@@ -17,8 +17,7 @@
                         <p:outputLabel value="#{bundle_OriginalCodes.CreateOriginalCodesLabel_items}" for="items" />
                         <p:selectOneMenu id="items" value="#{originalCodesController.selected.items}" var="p"
                                          required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_items}"
-                                         converter="#{originalCodesConverter}">
-                            
+                                         converter="#{originalCodesConverter}" filter="true">                            
                             <f:selectItems value="#{itemsController.itemsAvailableSelectOne}"
                                            var="product"
                                            itemValue="#{product}" itemLabel="#{product.itemCode}"/>
@@ -27,8 +26,9 @@
                             </p:column>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{originalCodesController.create}" value="#{bundle_OriginalCodes.Save}" update="display,:OriginalCodesListForm:datalist,:growl" oncomplete="handleSubmit(args,'OriginalCodesCreateDialog');"/>
-                    <p:commandButton value="#{bundle_OriginalCodes.Cancel}" onclick="OriginalCodesCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{originalCodesController.create}" value="#{bundle_OriginalCodes.Save}" 
+                        update="display,:OriginalCodesListForm:datalist,:growl" oncomplete="handleSubmit(args,'OriginalCodesCreateDialog');"/>
+                    <p:commandButton value="#{bundle_OriginalCodes.Cancel}" onclick="PF('OriginalCodesCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

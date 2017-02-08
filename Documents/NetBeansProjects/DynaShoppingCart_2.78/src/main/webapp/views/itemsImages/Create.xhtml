@@ -17,10 +17,9 @@
                         <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_isbasic}" for="isbasic" />
                         <p:inputText id="isbasic" value="#{itemsImagesController.selected.isbasic}" title="#{bundle_itemsImages.CreateItemsImagesTitle_isbasic}" required="true" requiredMessage="#{bundle_itemsImages.CreateItemsImagesRequiredMessage_isbasic}"/>
                         <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_items}" for="items" />
-                        <p:selectOneMenu id="items" value="#{itemsImagesController.selected.items}" var="p"
+                        <p:selectOneMenu id="items" value="#{itemsImagesController.selected.items}" var="p"  
                                          required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_items}"
-                                         converter="#{itemsImagesConverter}">
-                            
+                                         converter="#{itemsImagesConverter}" filter="true">                            
                             <f:selectItems value="#{itemsController.itemsAvailableSelectOne}"
                                            var="product"
                                            itemValue="#{product}" itemLabel="#{product.itemCode}"/>
@@ -29,8 +28,10 @@
                             </p:column>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{itemsImagesController.create}" value="#{bundle_itemsImages.Save}" update="display, :ItemsImagesListForm:datalist, :growl" oncomplete="handleSubmit(args,'ItemsImagesCreateDialog');"/>
-                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="ItemsImagesCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{itemsImagesController.create}" value="#{bundle_itemsImages.Save}" 
+                                     update="display, :ItemsImagesListForm:datalist, :growl" 
+                                     oncomplete="handleSubmit(args,'ItemsImagesCreateDialog');"/>
+                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

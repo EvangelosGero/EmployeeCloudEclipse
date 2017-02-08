@@ -29,8 +29,8 @@
                                  selectionMode="single"
                                  selection="#{itemsController.selected}"
                                  paginator="true"                                 
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rows="12"
+                                 rowsPerPageTemplate="12,24,36,48,60"
                                  first="0"
                                  widgetVar="dataTableWV"  
                                  rowKey="#{item.itemId}"
@@ -109,6 +109,7 @@
                             </f:facet>
                             <p:commandLink  id="photos1" value="#{bundle.ListItemsTitle_itemImage}"
                                             update=":ImagesForm1"
+                                            style ="text-decoration: underline !important;"
                                             oncomplete="PF('opanel2').show()"
                                             disabled="#{empty itemsController.selected}"
                                            />                            
@@ -119,6 +120,7 @@
                             </f:facet>
                             <p:commandLink  id="orig" value="Γνήσιοι Κωδικοί" 
                                             update=":OriginalCodesListForm1"
+                                            style ="text-decoration: underline !important;"
                                             oncomplete="PF('origpanel').show()"
                                             disabled="#{empty itemsController.selected}"
                                             />                            
@@ -153,7 +155,8 @@
                                              actionListener="#{itemsController.prepareCreate}" update=":ItemsCreateForm" 
                                              oncomplete="PF('ItemsCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
-                                             update=":ItemsViewForm" oncomplete="PF('ItemsViewDialog').show()" 
+                                             update=":ItemsViewForm :ItemsViewForm:ItemsOriginalCodesListForm" 
+                                             oncomplete="PF('ItemsViewDialog').show()" 
                                              disabled="#{empty itemsController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
                                              update=":ItemsEditForm" oncomplete="PF('ItemsEditDialog').show()"
