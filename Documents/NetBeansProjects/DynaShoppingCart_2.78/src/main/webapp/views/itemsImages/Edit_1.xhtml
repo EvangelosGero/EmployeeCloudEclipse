@@ -25,7 +25,7 @@
                     </p:panelGrid>
                     <p:commandButton actionListener="#{itemsImagesController.update}" value="#{bundle_itemsImages.Save}"                                     
                                      update="display11, :ImagesForm1:datalist1, :growl"  process="@form"
-                                     oncomplete="handleSubmit(args, 'ItemsImagesEditDialog1');"/>
+                                     oncomplete="PF('ItemsImagesEditDialog1').hide(); PF('opanel2').hide();"/>
                     <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesEditDialog1').hide()"/>
                 </h:panelGroup>
             </h:form>

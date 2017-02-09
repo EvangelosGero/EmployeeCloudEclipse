@@ -6,22 +6,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition >
-
-
-        <ui:define name="title">
-            <h:outputText value="Μοντέλα"></h:outputText>
-        </ui:define>        
-            <h:form id="ItemsModelsListForm"> 
+    <ui:composition >            
                 <p:panel header="Μοντελα" style="height: 150px;">
-                    <h:dataTable id="datalist" value="#{itemsController.selected.categModelsList}" var="model" 
+                    <h:dataTable id="ItemsModelsList" value="#{itemsController.selected.categModelsList}" var="model" 
                                  style="margin-left: 0px !important; margin-right: 0px !important">                              
                          <p:column>                            
                             <h:outputText value="#{model.mlModelName} #{model.mlYearRange}"/>                            
                         </p:column>                                             
                     </h:dataTable>
-              </p:panel>  
-            </h:form>         
+              </p:panel> 
     </ui:composition>
 
 </html>

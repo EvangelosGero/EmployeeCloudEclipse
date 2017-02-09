@@ -20,7 +20,7 @@
                     </p:panelGrid>
                     <p:commandButton actionListener="#{originalCodesController.create}" value="#{bundle_OriginalCodes.Save}" 
                                      update="display7,:OriginalCodesListForm1:datalist9,:growl" 
-                                     oncomplete="handleSubmit(args,'OriginalCodesCreateDialog1');"/>
+                                     oncomplete="PF('OriginalCodesCreateDialog1').hide(); PF('origpanel').hide();"/>
                     <p:commandButton value="#{bundle_OriginalCodes.Cancel}" onclick="PF('OriginalCodesCreateDialog1').hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -155,7 +155,9 @@
                                              actionListener="#{itemsController.prepareCreate}" update=":ItemsCreateForm" 
                                              oncomplete="PF('ItemsCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
-                                             update=":ItemsViewForm :ItemsViewForm:ItemsOriginalCodesListForm" 
+                                             update=":ItemsViewForm, :viewHelperForm:ItemsOriginalCodesList, :viewHelperForm:ItemsMakesList,
+                                              :viewHelperForm:ItemsModelsList, :viewHelperForm:CatgDetailsList, 
+                                              :viewHelperForm:PaymantOptions, :viewHelperForm:AvailablePins"
                                              oncomplete="PF('ItemsViewDialog').show()" 
                                              disabled="#{empty itemsController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 

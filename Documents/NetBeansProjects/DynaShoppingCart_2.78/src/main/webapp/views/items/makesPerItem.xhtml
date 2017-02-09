@@ -7,21 +7,16 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition >
-
-
-        <ui:define name="title">
-            <h:outputText value="Μάρκες"></h:outputText>
-        </ui:define>        
-            <h:form id="ItemsMakesListForm">
+            
                 <p:panel header="Μαρκες" style="height: 150px;">
-                    <h:dataTable id="datalist" value="#{itemsController.selected.categMakesList}" var="item"                                 
+                    <h:dataTable id="ItemsMakesList" value="#{itemsController.selected.categMakesList}" var="item"                                 
                                  style="margin-left: 0px; margin-right: 0px;  ">                      
                        <p:column>                            
                             <h:outputText value="#{item.mkDescription}"/>                            
                         </p:column>                                           
                     </h:dataTable>
                  </p:panel> 
-            </h:form>         
+                     
     </ui:composition>
 
 </html>

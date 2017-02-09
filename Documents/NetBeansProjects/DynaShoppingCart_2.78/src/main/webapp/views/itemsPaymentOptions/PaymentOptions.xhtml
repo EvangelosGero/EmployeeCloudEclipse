@@ -5,17 +5,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-     <ui:composition >                
-            <h:form id="PaymantOptionsForm"> 
+     <ui:composition >  
                 <p:panel header="Πληρωμη" style="height: 150px;">
-                    <h:dataTable id="datalist" value="#{itemsPaymentOptionsController.paymentOptions}" var="item"
+                    <h:dataTable id="PaymantOptions" value="#{itemsPaymentOptionsController.paymentOptions}" var="item"
                                   style="margin-left: 0px !important; margin-right: 0px !important">                        
                         <p:column>                            
                             <h:outputText value="#{item.paymentOptions}"/>                            
                         </p:column>                                             
                     </h:dataTable>                
-                </p:panel>
-            </h:form>         
+                </p:panel>                  
     </ui:composition>
 </html>
 
