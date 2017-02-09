@@ -19,12 +19,16 @@
                         <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_filename}" for="filename11" />
                         <p:inputText id="filename11" value="#{itemsImagesController.selected.filename}" title="#{bundle_itemsImages.EditItemsImagesTitle_filename}" required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_filename}"/>
                         <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_isbasic}" for="isbasic11" />
-                        <p:inputText id="isbasic11" value="#{itemsImagesController.selected.isbasic}" title="#{bundle_itemsImages.EditItemsImagesTitle_isbasic}" required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_isbasic}"/>
+                        <p:selectOneMenu id="isbasic11" value="#{itemsImagesController.selected.isbasic}" title="#{bundle_itemsImages.EditItemsImagesTitle_isbasic}"                               
+                                         required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_isbasic}">
+                            <f:selectItems value="#{[0, 1]}" var="p"
+                                           itemLabel="#{p}" itemValue="#{p}"/>
+                        </p:selectOneMenu>                        
                         <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_items}" for="items11" />
                         <p:outputLabel id="items11" value="#{itemsImagesController.selected.items.itemCode}"  />                       
                     </p:panelGrid>
                     <p:commandButton actionListener="#{itemsImagesController.update}" value="#{bundle_itemsImages.Save}"                                     
-                                     update="display11, :ImagesForm1:datalist1, :growl"  process="@form"
+                                     update="display11, :ImagesForm1:datalist1, :ItemsViewForm, :growl"  process="@form"
                                      oncomplete="PF('ItemsImagesEditDialog1').hide(); PF('opanel2').hide();"/>
                     <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesEditDialog1').hide()"/>
                 </h:panelGroup>

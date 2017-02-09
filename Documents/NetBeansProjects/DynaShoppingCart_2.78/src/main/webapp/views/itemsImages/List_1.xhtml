@@ -60,7 +60,8 @@
                                              update=":ImagesForm1 :Edit_1Form" process=":Edit_1Form" oncomplete="PF('ItemsImagesEditDialog1').show()" 
                                              disabled="#{empty itemsImagesController.selected}"/>
                             <p:commandButton id="deleteButton1" icon="ui-icon-trash"  value="#{bundle_itemsImages.Delete}" 
-                                             actionListener="#{itemsImagesController.destroy}" update=":growl,datalist1" 
+                                             actionListener="#{itemsImagesController.destroy}" 
+                                             update=":growl,datalist1, :ItemsListForm:datalist, :ItemsViewForm:ViewCarousel" 
                                              disabled="#{empty itemsImagesController.selected}"/>
                         </f:facet>
                     </p:dataTable>

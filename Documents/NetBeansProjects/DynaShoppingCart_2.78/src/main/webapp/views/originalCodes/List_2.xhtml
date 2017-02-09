@@ -56,7 +56,8 @@
                                              oncomplete="PF('OriginalCodesEditDialog1').show()" 
                                              disabled="#{empty originalCodesController.selected}"/>
                             <p:commandButton id="deleteButton7" icon="ui-icon-trash"  value="#{bundle_OriginalCodes.Delete}" 
-                                             actionListener="#{originalCodesController.destroy}" update=":growl,datalist9" 
+                                             actionListener="#{originalCodesController.destroy}" 
+                                             update=":growl,datalist9,:viewHelperForm:ItemsOriginalCodesList " 
                                              disabled="#{empty originalCodesController.selected}"/>
                         </f:facet>
                     </p:dataTable>

@@ -468,7 +468,7 @@ public class ItemsController  implements Serializable{
         initializeEmbeddableKey();
         return selected;
     }
-
+    
     public void create() {       
         
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ItemsCreated"));

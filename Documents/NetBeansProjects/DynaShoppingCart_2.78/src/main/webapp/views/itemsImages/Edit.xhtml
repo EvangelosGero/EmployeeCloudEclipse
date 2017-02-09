@@ -18,7 +18,11 @@
                         <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_filename}" for="filename" />
                         <p:inputText id="filename" value="#{itemsImagesController.selected.filename}" title="#{bundle_itemsImages.EditItemsImagesTitle_filename}" required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_filename}"/>
                         <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_isbasic}" for="isbasic" />
-                        <p:inputText id="isbasic" value="#{itemsImagesController.selected.isbasic}" title="#{bundle_itemsImages.EditItemsImagesTitle_isbasic}" required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_isbasic}"/>
+                        <p:selectOneMenu id="isbasic" value="#{itemsImagesController.selected.isbasic}" title="#{bundle_itemsImages.EditItemsImagesTitle_isbasic}"                               
+                                         required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_isbasic}">
+                            <f:selectItems value="#{[0, 1]}" var="p"
+                                           itemLabel="#{p}" itemValue="#{p}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle_itemsImages.EditItemsImagesLabel_items}" for="items" />
                         <p:selectOneMenu id="items" value="#{itemsImagesController.selected.items}" var="p" 
                                          required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_items}"

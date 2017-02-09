@@ -18,7 +18,7 @@
                 <h:panelGroup id="display">                                        
                     <p:panelGrid id="viewPG"   columns="1" style="width: 1000px;">
                       <h:form id="ItemsViewForm">
-                        <p:carousel value="#{itemsController.selected.itemsImagesList}" var="picture" 
+                          <p:carousel id="ViewCarousel" value="#{itemsController.selected.itemsImagesList}" var="picture" 
                                     vertical="true" itemStyle="width:400px" numVisible="3" style="width:1000px;"
                                     rendered="#{not empty itemsController.selected.itemsImagesList}"
                                     headerText="#{itemsController.selected.itemLongDesc} #{itemsController.selected.itemCode}" 

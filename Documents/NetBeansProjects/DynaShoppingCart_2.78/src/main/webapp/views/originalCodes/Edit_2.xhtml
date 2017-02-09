@@ -24,8 +24,8 @@
                         <p:outputLabel id="items33" value="#{originalCodesController.selected.items.itemCode}" />                       
                     </p:panelGrid>
                     <p:commandButton actionListener="#{originalCodesController.update}" value="#{bundle_OriginalCodes.Save}" 
-                                     update="display8,:OriginalCodesListForm1:datalist9,:growl" 
-                                     oncomplete="handleSubmit(args, 'OriginalCodesEditDialog1');"/>
+                                     update="display8,:OriginalCodesListForm1:datalist9,:viewHelperForm:ItemsOriginalCodesList,:growl"                                      
+                                     oncomplete="PF('OriginalCodesEditDialog1').hide();"/>
                     <p:commandButton value="#{bundle_OriginalCodes.Cancel}" onclick="PF('OriginalCodesEditDialog1').hide()"/>
                 </h:panelGroup>
             </h:form>

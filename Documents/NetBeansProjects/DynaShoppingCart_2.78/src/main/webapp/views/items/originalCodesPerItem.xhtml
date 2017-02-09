@@ -7,14 +7,16 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition >            
-          <p:panel header="Συναφεiς Κωδικοi" style="height: 150px;">                
+          <p:panel header="Συναφεiς Κωδικοi" style="height: 150px;"> 
+              <div style="height: 100px; overflow: auto;">
                     <h:dataTable id="ItemsOriginalCodesList" value="#{itemsController.selected.originalCodesList}" var="code"                               
-                                 style="margin-left: 0px !important; margin-right: 0px !important; "  
+                                 style="margin-left: 0px !important; margin-right: 0px !important; "   
                                   > 
                         <p:column>                            
                             <h:outputText value="#{code.ocVal} "/>                    
                         </p:column>                                             
-                    </h:dataTable>                              
+                    </h:dataTable>
+              </div>                              
            </p:panel>                
     </ui:composition>
 
