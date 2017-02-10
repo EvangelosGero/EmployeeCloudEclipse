@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsReviewsViewDlg" widgetVar="ItemsReviewsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_itemsReviews.ViewItemsReviewsTitle}">
+            <h:form id="ItemsReviewsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemsReviewsController.selected != null}">                        
+                        <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_itemCode}"/>
+                        <h:outputText value="#{itemsReviewsController.selected.itemCode}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_itemCode}"/>
+                        <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_reviews}"/>
+                        <h:inputTextarea readonly="true"  cols="30" rows="5" 
+                                         value="#{itemsReviewsController.selected.reviews}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_reviews}"/>
+                        <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_userName}"/>
+                        <h:outputText value="#{itemsReviewsController.selected.userName}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_userName}"/>                       
+                        <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_dated}"/>
+                        <h:outputText value="#{itemsReviewsController.selected.dated}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_dated}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
+                        </h:outputText>
+                        <h:outputText value="Αρ. Παραγγελίας: "/>
+                        <h:outputText value="#{itemsReviewsController.selected.orderId}" 
+                                      title="#{bundle.ViewPaymentsTitle_itemId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle_itemsReviews.Close}" onclick="PF('ItemsReviewsViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

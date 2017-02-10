@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition >
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMenuTitle}"></h:outputText>
+        </ui:define>
+        
+        <style>
+                a:link {
+                    text-decoration: none !important;
+                }
+
+                a:visited {
+                    text-decoration: none !important;
+                }
+
+                a:hover {
+                    text-decoration: none !important;
+                }
+
+                a:active {
+                    text-decoration: none !important;
+                }
+            </style>
+            <h:form id="MenuListFormSLWP">
+                <p:panel header="#{bundle.ListMenuTitle}">
+                    <p:dataTable id="datalistSLWP" value="#{menuController.items.stream()
+                                 .filter(c -> c.roleuser.contains(usernmController.loggedIn? usernmController.usernmLogged.roleuser : 'c'))
+                                 .toList()}" var="item"                                 
+                                 selectionMode="single" selection="#{menuController.selected}"
+                                 paginator="false" rowKey="#{item.id}"                                                                  
+                                 scrollable="true"  
+                                 >  
+                        
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMenuTitle_menuLongName}"/>
+                            </f:facet>
+                            <p:commandLink value="#{item.menuLongName}" action="#{menuController.siteMapAction(item)}">                                                                        
+                            </p:commandLink>                            
+                        </p:column> 
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>         
+    </ui:composition>
+
+</html>
+
+

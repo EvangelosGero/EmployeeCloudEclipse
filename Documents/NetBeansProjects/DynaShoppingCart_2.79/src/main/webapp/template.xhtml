@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title"></ui:insert></title>                
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript>
+            function handleSubmit(args, dialog) {
+                var jqDialog = $('#' + dialog);
+                if (args.validationFailed) {
+                    jqDialog.effect('shake', {times: 3}, 100);
+                } else {
+                    PF(dialog).hide();
+                }
+            }
+            var hiddenFlag = false;
+            function hideShow() {
+            hiddenFlag = !hiddenFlag;
+            var switcherId = $("#switcherId");
+            if (hiddenFlag) {
+            PF('layoutit').hide('north');
+            PF('layoutit').hide('west');
+            PF('layoutit').hide('east');
+            PF('layoutit').hide('south');
+            switcherId.attr("title", "Restore Window");
+            }else {
+            PF('layoutit').show('north');
+            PF('layoutit').show('west');
+            PF('layoutit').show('east');
+            PF('layoutit').show('south');
+            switcherId.attr("title", "Maximize Window");
+            }
+            }
+            function hideTitle(){
+            if(!hiddenFlag)PF('layoutit').hide('north');
+            }
+            function restoreTitle(){
+            if(!hiddenFlag)PF('layoutit').show('north');
+            }
+        </h:outputScript> 
+        <h:outputScript  library="js" name = "jquery.elevatezoom.js"/>
+        <h:outputScript>
+              function zoomaki(){
+                $(".nuli").elevateZoom({
+			zoomType : "lens",
+                        lensShape : "round",
+                        lensSize    : 200,
+                        scrollZoom : true
+                });
+              } 
+               function stopZoom(){
+                $(".nuli").elevateZoom({
+                zoomType : ""});
+              }    
+        </h:outputScript>        
+        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/images/favicon-16x16.png" />
+        <ui:insert name="head"/>
+    </h:head>
+
+    <h:body>
+        <style type="text/css">
+            .outerpanelgrid>tbody>tr{
+                border: none !important;
+            }
+            .outerpanelgrid>tbody>tr>td{
+                border: none !important;
+            }
+        </style>
+       
+            <p:growl id="growl" life="10000" />
+        
+        <p:layout fullPage="true" widgetVar="layoutit">
+            <p:layoutUnit position="north" size="150" header="#{bundle.AppName}">
+                 <h:form id="formGreat">
+                     
+                    <p:panelGrid columns="2" style="width: 100%">
+                        <p:graphicImage  library="images" name="DYNAmarket-logo.jpg" height="72"
+                                        style="margin-left: 10%"/>                       
+                                                         
+                        <p:panelGrid  style="margin-left: 20%;  width: 900px;"
+                                       styleClass="outerpanelgrid" >                                               
+                            <p:row>
+                                <p:column colspan="3" style="border: 0px;">
+                                    <p:commandButton id="accountBtn" value="Λογαριασμός" style="border: none;"
+                                            disabled="#{not usernmController.loggedIn}"                                                     
+                                            action="/views/invoice/Account.xhtml?faces-redirect=true"/> 
+                                </p:column> 
+                                <p:column colspan="3">
+                                    <p:commandButton value="FeedBack" disabled="#{not usernmController.loggedIn}"
+                                            actionListener="#{itemsReviewsController.produceItemsReviewsPerCustomer()}"
+                                            action="#{itemsReviewsController.findItemsReviewsPerCustomer()}"/>
+                                </p:column>
+                                <p:column colspan="3">
+                                    <p:commandButton value="My Cart" disabled="#{not usernmController.loggedIn}"
+                                            actionListener="#{itemsController.produceCartItems()}"                        
+                                            action="/views/items/welcome.xhtml?faces-redirect=true"/>
+                                </p:column>
+                                <p:column colspan="3">
+                                    <p:commandButton value="My Orders" disabled="#{not usernmController.loggedIn}"
+                                            action="/views/orderItems/OrderItemsPerCustomer.xhtml?faces-redirect=true"/>                                                     
+                                </p:column>
+                                <p:column colspan="3">
+                                    <p:commandButton value="Tracking Orders" disabled="#{not usernmController.loggedIn}"
+                                            action="/views/orders/OrdersPerCustomer.xhtml?faces-redirect=true"/>                                                       
+                                </p:column>
+                                    <p:column colspan="3">
+                                        <p:commandButton value="Upload" rendered="#{usernmController.usernmLogged.roleuser.contains('s')}"
+                                            actionListener="#{itemsController.produceItemsOfSeller()}"
+                                            action="/views/seller/SellerList.xhtml?faces-redirect=true"/>                                                       
+                                    </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column colspan="3">
+                                    <h:outputLabel id="sessionrole" value="Role:#{usernmController.usernmLogged.roleuser }"/>
+                                </p:column>  
+                                <p:column colspan="3"> 
+                                    <h:outputLabel id="sessionuser" value="User:#{usernmController.usernmLogged.userName}"/> 
+                                </p:column > 
+                                <p:column colspan="9">
+                                    <h:outputLabel id="sessionctg" 
+                                        value="Αναζήτηση: #{itemsController.anazitisiString}"/> 
+                                    </p:column> 
+                            </p:row>   
+                        </p:panelGrid> 
+                    </p:panelGrid> 
+                    <p:menubar id="menubar" model="#{menuController.model1}" >                        
+                        <f:facet name="options">
+                            <p:outputLabel value="Καλάθι : " style=" color: #009999; font-weight: bold; font-size: 15px !important;" />
+                            <p:spacer width="10" height="10" />
+                            <p:outputLabel id="totalsOL"
+                                    value="#{empty itemsController.cartProducts ?
+                                                    ' Αδειο ': itemsController.stringTotal.concat('&euro;')} " 
+                                    style=" color: #009999; font-weight: bold; font-size: 15px !important;" />                                          
+                            <p:spacer width="200" height="10" />
+                            <p:commandButton icon="ui-icon-locked" value="Login" rendered="#{!usernmController.loggedIn}"
+                                     onclick="PF('loginDialog').show();"/>                                
+                            <p:commandButton icon="ui-icon-unlocked" value="Αλλαγή Στοιχείων μου" rendered="#{usernmController.loggedIn}"
+                                     actionListener="#{usernmController.changeUsernmLogged()}"            
+                                     onclick="PF('UserRegistrationDialog').show();"
+                                     update=":thisform"/>
+                            <p:commandButton icon="ui-icon-unlocked" value="Logout" rendered="#{usernmController.loggedIn}"                                                 
+                                     action="#{usernmController.loginMeOut}"/>
+                            <p:commandButton icon="ui-icon-unlocked" value="User Dashboard" rendered="#{usernmController.loggedIn}"
+                                                 actionListener="#{itemsController.produceCartItems()}"                        
+                                                 action="/views/items/welcome.xhtml?faces-redirect=true" />                                
+                        </f:facet>                        
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="60">
+                <h:form id="southForm">
+                <h:panelGrid id="FooterGrid" columns="4" style="border:0px;">
+                    <p:commandButton id="btn1" value="About us" oncomplete="PF('AboutUsWV').show()"/> 
+                    <p:commandButton id="btn2" value="Contact us" oncomplete="PF('$ContactUs').show()"/> 
+                    <p:commandButton id="btn3" value="Site Map" oncomplete="PF('$SiteMap').show()"/> 
+                    <p:commandButton id="btn4" value="FAQ" oncomplete="PF('$FAQ').show()"/> 
+                </h:panelGrid>
+                </h:form>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="west" size="200">                
+                <ui:insert name="westPane">
+                    <ui:include src="/views/menu/SiteListWestPane.xhtml" />
+                </ui:insert>
+            </p:layoutUnit>
+                
+            <p:layoutUnit position="east" size="200">
+                <ui:insert name="eastPane">
+                    <ui:include src="/views/catgDetails/offers.xhtml" />
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" >
+                <div style="position:absolute; top:10px; right:2px;">
+                    <p:commandLink id="switcherId"  onclick="hideShow();"  
+                                   title="Maximize Window">
+                        <span class="ui-icon ui-icon-arrowthick-2-ne-sw" style="background-color:  white"/>
+                    </p:commandLink>
+                </div>
+                <ui:insert name="body"/>
+            </p:layoutUnit>            
+        </p:layout>        
+        
+    
+    <ui:include src="/partoffooter.xhtml"/>    
+         <p:dialog header="User Login"
+                      id="dialog1"
+                      modal="true"
+                      closable="true"
+                      position="center"
+                      widgetVar="loginDialog"
+                      showEffect="slide"
+                      draggable="true"
+                      resizable="false"
+                      visible="false">   
+            
+            <h:form id="loginForm">
+                <h:panelGrid id="loginBox" columns="2" cellpadding="3" 
+                             style="margin: 0 auto; border: 0px; padding-top: 20px;"  >                    
+                    <h:outputLabel for="j_username" value="Username "/>
+                    <h:outputLabel for="j_password" value="Password "/>
+                    <p:keyboard id="j_username" required="true" widgetVar="usernameKeyBoard"
+                                value="#{usernmController.useremail}" label="Username" showMode="button">                   
+                        <p:clientValidator/>       
+                    </p:keyboard>
+                                  
+                    <p:keyboard id="j_password" required="true" password="true"
+                                value="#{usernmController.password}" label="Password" showMode="button">                                
+                        <p:clientValidator/>
+                    </p:keyboard>
+                    <p:commandButton id="loginBtn" value="Login" ajax="true" immediate="false"
+                                     update=":growl"  action="#{usernmController.loginMeIn()}">                        
+                    </p:commandButton> 
+                    <p:commandButton value="Register" actionListener="#{usernmController.prepareAddNewUser}"
+                                     onstart="PF('loginDialog').hide()" oncomplete="PF('UserRegistrationDialog').show()"/>
+                    <p:commandButton value="e-shop without Login" 
+                                     action="/views/items/welcome.xhtml?faces-redirect=true"   onclick="PF('loginDialog').hide()"/>
+                    <p:commandButton value="Cancel" onclick="PF('loginDialog').hide()"/>
+                    <p:defaultCommand target="loginBtn"/>
+                    <p:commandLink value="Change Password"
+                        onstart="PF('loginDialog').hide()" oncomplete="PF('$changepwd').show();">                            
+                    </p:commandLink> 
+                </h:panelGrid>
+            </h:form>
+            </p:dialog> 
+    <ui:include src="/userRegistration.xhtml"/>
+    <ui:include src="/ChangePassword.xhtml"/>
+    </h:body>
+ 
+</html>
