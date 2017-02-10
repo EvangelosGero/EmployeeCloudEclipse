@@ -27,13 +27,13 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.id}" filterBy="#{item.id}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_itemsImages.ListItemsImagesTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.filename}"  filterBy="#{item.filename}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_itemsImages.ListItemsImagesTitle_filename}"/>
                             </f:facet>
@@ -45,7 +45,7 @@
                             </f:facet>
                             <h:outputText value="#{item.isbasic}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.items.itemCode}" filterBy="#{item.items.itemCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_itemsImages.ListItemsImagesTitle_items}"/>
                             </f:facet>

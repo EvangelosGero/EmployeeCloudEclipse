@@ -27,19 +27,19 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.ocId}" filterBy="#{item.ocId}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_OriginalCodes.ListOriginalCodesTitle_ocId}"/>
                             </f:facet>
                             <h:outputText value="#{item.ocId}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.ocVal}" filterBy="#{item.ocVal}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_OriginalCodes.ListOriginalCodesTitle_ocVal}"/>
                             </f:facet>
                             <h:outputText value="#{item.ocVal}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.items.itemCode}" filterBy="#{item.items.itemCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_OriginalCodes.ListOriginalCodesTitle_items}"/>
                             </f:facet>

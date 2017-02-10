@@ -8,12 +8,14 @@
 
     <ui:composition >            
                 <p:panel header="Μοντελα" style="height: 150px;">
-                    <h:dataTable id="ItemsModelsList" value="#{itemsController.selected.categModelsList}" var="model" 
+                    <div style="height: 100px; overflow: auto;">
+                        <h:dataTable id="ItemsModelsList" value="#{itemsController.selected.categModelsList}" var="model" 
                                  style="margin-left: 0px !important; margin-right: 0px !important">                              
-                         <p:column>                            
-                            <h:outputText value="#{model.mlModelName} #{model.mlYearRange}"/>                            
-                        </p:column>                                             
-                    </h:dataTable>
+                            <p:column>                            
+                                <h:outputText value="#{model.mlModelName} #{model.mlYearRange}"/>                            
+                            </p:column>                                             
+                        </h:dataTable>
+                   </div>
               </p:panel> 
     </ui:composition>
 

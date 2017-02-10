@@ -7,12 +7,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition > 
                 <p:panel header="Αποθηκες" style="height: 150px;">
-                    <h:dataTable id="AvailablePins" value="#{itemsDeliveryAvailablePinController.availPin}" var="item"
+                    <div style="height: 100px; overflow: auto;">
+                        <h:dataTable id="AvailablePins" value="#{itemsDeliveryAvailablePinController.availPin}" var="item"
                                  style="margin-left: 0px !important; margin-right: 0px !important" >                             
-                         <p:column>                            
-                            <h:outputText value="#{item.pin}"/>                            
-                        </p:column>                                             
-                    </h:dataTable>
+                            <p:column>                            
+                                <h:outputText value="#{item.pin}"/>                            
+                            </p:column>                                             
+                        </h:dataTable>
+                    </div>
                </p:panel>
     </ui:composition>
 </html>
