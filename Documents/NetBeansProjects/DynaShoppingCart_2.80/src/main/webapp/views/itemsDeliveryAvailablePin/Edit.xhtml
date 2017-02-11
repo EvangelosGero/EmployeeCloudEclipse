@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="ItemsDeliveryAvailablePinEditDlg" widgetVar="ItemsDeliveryAvailablePinEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditItemsDeliveryAvailablePinTitle}">
+        <p:dialog id="ItemsDeliveryAvailablePinEditDlg" widgetVar="ItemsDeliveryAvailablePinEditDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{bundle.EditItemsDeliveryAvailablePinTitle}">
             <h:form id="ItemsDeliveryAvailablePinEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{itemsDeliveryAvailablePinController.selected != null}">
@@ -16,12 +17,19 @@
                         <p:inputText id="id" value="#{itemsDeliveryAvailablePinController.selected.id}" 
                                      title="#{bundle.EditItemsDeliveryAvailablePinTitle_id}" required="true" 
                                      disabled="true" requiredMessage="#{bundle.EditItemsDeliveryAvailablePinRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditItemsDeliveryAvailablePinLabel_itemCode}" for="itemCode" />
-                        <p:inputText id="itemCode" value="#{itemsDeliveryAvailablePinController.selected.itemCode}" title="#{bundle.EditItemsDeliveryAvailablePinTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.EditItemsDeliveryAvailablePinLabel_address}" for="address" />
+                        <p:inputText id="address" value="#{itemsDeliveryAvailablePinController.selected.address}" 
+                                     title="#{bundle.EditItemsDeliveryAvailablePinTitle_address}" />
+                        <p:outputLabel value="#{bundle.EditItemsDeliveryAvailablePinLabel_town}" for="town" />
+                        <p:inputText id="town" value="#{itemsDeliveryAvailablePinController.selected.town}" 
+                                     title="#{bundle.EditItemsDeliveryAvailablePinTitle_town}" />
                         <p:outputLabel value="#{bundle.EditItemsDeliveryAvailablePinLabel_pin}" for="pin" />
-                        <p:inputText id="pin" value="#{itemsDeliveryAvailablePinController.selected.pin}" title="#{bundle.EditItemsDeliveryAvailablePinTitle_pin}" />
+                        <p:inputText id="pin" value="#{itemsDeliveryAvailablePinController.selected.pin}" 
+                                     title="#{bundle.EditItemsDeliveryAvailablePinTitle_pin}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{itemsDeliveryAvailablePinController.update}" value="#{bundle.Save}" update="display,:ItemsDeliveryAvailablePinListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsDeliveryAvailablePinEditDialog');"/>
+                    <p:commandButton actionListener="#{itemsDeliveryAvailablePinController.update}" value="#{bundle.Save}" 
+                                     update="display,:ItemsDeliveryAvailablePinListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'ItemsDeliveryAvailablePinEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('ItemsDeliveryAvailablePinEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>

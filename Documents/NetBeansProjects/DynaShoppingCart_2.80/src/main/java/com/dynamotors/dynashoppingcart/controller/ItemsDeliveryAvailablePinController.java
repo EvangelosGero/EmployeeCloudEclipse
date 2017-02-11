@@ -66,9 +66,9 @@ public class ItemsDeliveryAvailablePinController implements Serializable {
         this.availPin = availPin;
     }   
     
-    public void producePin(String itemCode){
+ /*   public void producePin(String itemCode){
         availPin = ejbFacade.producePinList(itemCode);
-    }
+    }*/
 
     public ItemsDeliveryAvailablePin prepareCreate() {
         selected = new ItemsDeliveryAvailablePin();

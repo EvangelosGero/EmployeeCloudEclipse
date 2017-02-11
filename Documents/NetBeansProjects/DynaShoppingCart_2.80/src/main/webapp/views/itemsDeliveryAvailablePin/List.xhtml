@@ -35,9 +35,15 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListItemsDeliveryAvailablePinTitle_itemCode}"/>
+                                <h:outputText value="#{bundle.ListItemsDeliveryAvailablePinTitle_address}"/>
                             </f:facet>
-                            <h:outputText value="#{item.itemCode}"/>
+                            <h:outputText value="#{item.address}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsDeliveryAvailablePinTitle_town}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.town}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -46,10 +52,18 @@
                             <h:outputText value="#{item.pin}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{itemsDeliveryAvailablePinController.prepareCreate}" update=":ItemsDeliveryAvailablePinCreateForm" oncomplete="PF('ItemsDeliveryAvailablePinCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ItemsDeliveryAvailablePinViewForm" oncomplete="PF('ItemsDeliveryAvailablePinViewDialog').show()" disabled="#{empty itemsDeliveryAvailablePinController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ItemsDeliveryAvailablePinEditForm" oncomplete="PF('ItemsDeliveryAvailablePinEditDialog').show()" disabled="#{empty itemsDeliveryAvailablePinController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{itemsDeliveryAvailablePinController.destroy}" update=":growl,datalist" disabled="#{empty itemsDeliveryAvailablePinController.selected}"/>                        
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                      actionListener="#{itemsDeliveryAvailablePinController.prepareCreate}" 
+                                      update=":ItemsDeliveryAvailablePinCreateForm" oncomplete="PF('ItemsDeliveryAvailablePinCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
+                                      update=":ItemsDeliveryAvailablePinViewForm" oncomplete="PF('ItemsDeliveryAvailablePinViewDialog').show()" 
+                                      disabled="#{empty itemsDeliveryAvailablePinController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                      update=":ItemsDeliveryAvailablePinEditForm" oncomplete="PF('ItemsDeliveryAvailablePinEditDialog').show()" 
+                                      disabled="#{empty itemsDeliveryAvailablePinController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                      actionListener="#{itemsDeliveryAvailablePinController.destroy}" update=":growl,datalist" 
+                                      disabled="#{empty itemsDeliveryAvailablePinController.selected}"/>                        
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -33,7 +33,7 @@ public class ItemsDeliveryAvailablePinFacade extends AbstractFacade<ItemsDeliver
     public ItemsDeliveryAvailablePinFacade() {
         super(ItemsDeliveryAvailablePin.class);
     }
-    public List<ItemsDeliveryAvailablePin> producePinList(String itemCode){
+  /*  public List<ItemsDeliveryAvailablePin> producePinList(String itemCode){
       CriteriaBuilder cb = em.getCriteriaBuilder();
       CriteriaQuery <ItemsDeliveryAvailablePin> cq = cb.createQuery(ItemsDeliveryAvailablePin.class);
       Root<ItemsDeliveryAvailablePin> items = cq.from(ItemsDeliveryAvailablePin.class);
@@ -42,5 +42,5 @@ public class ItemsDeliveryAvailablePinFacade extends AbstractFacade<ItemsDeliver
       TypedQuery<ItemsDeliveryAvailablePin> q = em.createQuery(cq);
       List<ItemsDeliveryAvailablePin> result = q.getResultList();
       return result;
-   } 
+   }*/ 
 }

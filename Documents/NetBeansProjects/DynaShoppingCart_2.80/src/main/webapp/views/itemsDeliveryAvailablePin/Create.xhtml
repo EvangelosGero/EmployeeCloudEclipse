@@ -12,14 +12,19 @@
             <h:form id="ItemsDeliveryAvailablePinCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{itemsDeliveryAvailablePinController.selected != null}">                       
-                        <p:outputLabel value="#{bundle.CreateItemsDeliveryAvailablePinLabel_itemCode}" for="itemCode" />
-                        <p:inputText id="itemCode" value="#{itemsDeliveryAvailablePinController.selected.itemCode}" 
-                                     title="#{bundle.CreateItemsDeliveryAvailablePinTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.CreateItemsDeliveryAvailablePinLabel_address}" for="address" />
+                        <p:inputText id="address" value="#{itemsDeliveryAvailablePinController.selected.address}" 
+                                     title="#{bundle.CreateItemsDeliveryAvailablePinTitle_address}" />
+                        <p:outputLabel value="#{bundle.CreateItemsDeliveryAvailablePinLabel_town}" for="town" />
+                        <p:inputText id="town" value="#{itemsDeliveryAvailablePinController.selected.town}" 
+                                     title="#{bundle.CreateItemsDeliveryAvailablePinTitle_town}" />
                         <p:outputLabel value="#{bundle.CreateItemsDeliveryAvailablePinLabel_pin}" for="pin" />
                         <p:inputText id="pin" value="#{itemsDeliveryAvailablePinController.selected.pin}" 
                                      title="#{bundle.CreateItemsDeliveryAvailablePinTitle_pin}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{itemsDeliveryAvailablePinController.create}" value="#{bundle.Save}" update="display,:ItemsDeliveryAvailablePinListForm:datalist,:growl" oncomplete="handleSubmit(args,'ItemsDeliveryAvailablePinCreateDialog');"/>
+                    <p:commandButton actionListener="#{itemsDeliveryAvailablePinController.create}" value="#{bundle.Save}" 
+                                     update="display,:ItemsDeliveryAvailablePinListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'ItemsDeliveryAvailablePinCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('ItemsDeliveryAvailablePinCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>

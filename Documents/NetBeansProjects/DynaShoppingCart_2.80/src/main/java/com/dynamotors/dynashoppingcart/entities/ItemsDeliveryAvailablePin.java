@@ -31,11 +31,14 @@ public class ItemsDeliveryAvailablePin implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Size(max = 10)
-    @Column(name = "item_code", length = 10)
-    private String itemCode;
-    @Size(max = 10)
-    @Column(name = "pin", length = 10)
+    @Size(max = 40)
+    @Column(name = "address", length = 40)
+    private String address;
+    @Size(max = 30)
+    @Column(name = "town", length = 30)
+    private String town;
+    @Size(max = 15)
+    @Column(name = "pin", length = 15)
     private String pin;
 
     public ItemsDeliveryAvailablePin() {
@@ -53,14 +56,6 @@ public class ItemsDeliveryAvailablePin implements Serializable {
         this.id = id;
     }
 
-    public String getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
-    }
-
     public String getPin() {
         return pin;
     }
@@ -69,6 +64,22 @@ public class ItemsDeliveryAvailablePin implements Serializable {
         this.pin = pin;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+        
     @Override
     public int hashCode() {
         Integer hash = 0;
