@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategMakeEditDlg" widgetVar="CategMakeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.EditCategMakeTitle}">
+            <h:form id="CategMakeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{categMakeController.selected != null}">
+                        <p:outputLabel value="#{bundle_Categ.EditCategMakeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{categMakeController.selected.mkId}" title="#{bundle_Categ.EditCategMakeTitle_id}" 
+                                     required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_id}" disabled="true"/>
+                        <p:outputLabel value="#{bundle_Categ.EditCategMakeLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{categMakeController.selected.mkDescription}" title="#{bundle_Categ.EditCategMakeTitle_description}" required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_description}"/>
+                        <p:outputLabel value="#{bundle_Categ.EditCategMakeLabel_logo}" for="logo" />
+                        <p:inputText id="logo" value="#{categMakeController.selected.mkLogo}" title="#{bundle_Categ.EditCategMakeTitle_logo}" required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_logo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{categMakeController.update}" value="#{bundle_Categ.Save}" update="display,:CategMakeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CategMakeEditDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="CategMakeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >       
+          
+<ui:composition template="/template.xhtml">
+<ui:define name="title">Dynamotors</ui:define>
+<ui:define name="head"> 
+     <h:outputScript>
+        function handleDrop(event, ui) {
+        var droppedCar = ui.draggable;
+        droppedCar.fadeOut('fast');
+        }
+    </h:outputScript>         
+    <h:outputStylesheet>        
+            .outerpanelgrid>tbody>tr{
+                border: none !important;
+            }
+            .outerpanelgrid>tbody>tr>td{
+                border: none !important;
+            }            
+    </h:outputStylesheet> 
+</ui:define>
+<ui:define name="north">     
+</ui:define>
+<ui:define name="westPane">
+      <ui:include src="/views/catgMas/categorySearch.xhtml" />
+</ui:define>
+<ui:define name="body">
+    
+    <h:outputStylesheet>
+        .ui-button {
+            margin-top: 0px !important;
+        }
+        .ui-spinner-input {
+            background: #66ff99 !important;
+        }
+    </h:outputStylesheet>
+    
+    <h:form id="centerForm">        
+        <p:fieldset id="itemContainer">
+            <p:dataGrid id="availableProducts" var="item" lazy="true"
+                        value="#{itemsController.model}" columns="4"
+                          paginator="true" paginatorPosition="bottom"
+                        rowsPerPageTemplate="4,8,12,16,20,24"
+                        rows="12" widgetVar="itemContainerDataGrid" 
+                         >
+                <f:facet name="header" >
+                    <p:outputLabel for="SearchInputText" value="Αναζητηση με Κωδικο: "/> 
+                        <p:inputText id="SearchInputText"  value="#{itemsController.filterItemCode}" />
+                        <p:commandButton id="FilterCommandButton" 
+                               icon="ui-icon-search" action="#{categModelController.navigateAndSetCart()}"
+                               update=":centerForm:itemContainer" >                                             
+                        </p:commandButton>
+                        <p:commandButton id="ResetFiltersCommandButton" 
+                                         actionListener="#{itemsController.resetFilters()}" style="background:#ff9933" 
+                                         title="Αναζήτηση σε ολόκληρη την αποθήκη"
+                               icon="ui-icon-search" action="#{categModelController.navigateAndSetCart()}"
+                               update=":centerForm:itemContainer" >                                             
+                        </p:commandButton>
+                </f:facet>
+
+                <p:column>
+                                            
+                    <p:panel id="pnl" header="#{item.itemCode} #{item.itemShortDesc}" 
+                             style="text-align:center ; max-width: 380px"  >
+                             
+                        <h:panelGrid columns="2" style="width:100%; background-color: #ffffcc! important" 
+                                     title="Σύρε από την επικεφαλίδα στο καλάθι" >
+                            <h:outputText value="Λιανική με ΦΠΑ :"/> 
+                            <h:outputText value="#{item.itemRetailValue}"/>
+                            <h:outputText value="Κόστος με ΦΠΑ :" rendered="#{usernmController.usernmLogged.roleuser eq 'a' 
+                                                                         || usernmController.usernmLogged.roleuser eq 's'}"/> 
+                            <h:outputText value="#{item.itemWholesalesValue}" rendered="#{usernmController.usernmLogged.roleuser eq 'a' 
+                                                                         || usernmController.usernmLogged.roleuser eq 's'}"/>
+                            <p:ajax event="mouseover"  async="true"  update="opanel12" 
+                                    oncomplete="$('.smallDialogs').hide(); PF('opanel12WV').show()"/>
+                            <p:ajax event="mouseout"   async="true"    
+                                    oncomplete="$('.smallDialogs').hide();"/>                            
+                        </h:panelGrid>
+                        <p:spacer height="8"/>
+                        <h:panelGrid id="pgrid1" columns="3" style="border:0px; width: 100%;">                           
+                            <p:commandButton value="Καλάθι" icon="ui-icon-plus"
+                                         update=":centerForm:dropArea :centerForm:itemContainer :formGreat:totalsOL"
+                                         actionListener="#{itemsController.checkForNulls(item)}"
+                                         action="#{itemsController.addToCart(item)}"/>                                                        
+                            <p:spinner min="0" max="#{item.itemAvailability}"  placeholder="Ποσότητα"
+                                       value="#{item.quantity}"  size="4"   title="Ποσότητα"
+                                       valueChangeListener="#{itemsController.handleSpinner}">                                
+                                <p:ajax />
+                            </p:spinner>
+                                                                                                                                      
+                            <p:commandButton value="More" icon="ui-icon-search"
+                                             immediate="true"  
+                                             action="#{itemsController.setSelected(item)}"                                             
+                                             update=":ItemsViewForm" oncomplete="PF('ItemsViewDialog').show()" />                            
+                        </h:panelGrid> 
+                        
+                    </p:panel>
+                    <p:dialog id="opanel12"  widgetVar="opanel12WV" closeOnEscape="true"   styleClass="smallDialogs"                                 
+                              appendTo="@(body)"   showHeader="true" header="#{item.itemCode}"  closable="true">                        
+                            <p:graphicImage value="../../images1/#{not empty item.itemsImagesList ? item.itemsImagesList.get(0).filename : ''}"
+                                            height="130" width="260" alt="Δεν υπάρχει φωτογραφία"/>                        
+                    </p:dialog>
+                    <p:draggable for="pnl" revert="true"  scope="forward"
+                        handle=".ui-panel-titlebar" stack=".ui-panel" >                        
+                    </p:draggable>
+                </p:column>
+
+            </p:dataGrid>
+        </p:fieldset>   
+        <p:fieldset id="selectedProducts" style="margin-top:20px">
+
+            <p:outputPanel id="dropArea"   style="min-height: 200px;">
+                <h:outputText value="Καλάθι"
+                              rendered="#{empty itemsController.cartProducts}"
+                              style="font-size:24px;"/>
+
+                <p:dataTable id="cartTable"  var="prod" value="#{itemsController.cartProducts}"                            
+                             rendered="#{not empty itemsController.cartProducts}"
+                             rowIndexVar="index" >                  
+                               
+                    <p:column headerText="Κωδικός">
+                        <h:outputText value="#{prod.itemCode}"/>
+                    </p:column>
+                    <p:column headerText="Ονομασία">
+                        <h:outputText value="#{prod.itemShortDesc}"/>
+                    </p:column>                    
+                    <p:column headerText="Τιμή Λιανικής με ΦΠΑ">
+                        <h:outputText value="#{prod.itemRetailValue}"/>
+                    </p:column>
+                    <p:column headerText="Τιμή Χονδρικής με ΦΠΑ" rendered="#{usernmController.usernmLogged.roleuser eq 's'}">
+                        <h:outputText value="#{prod.itemRetailValue}"/>
+                    </p:column>
+                    <p:column headerText="Ποσότητα">
+                        <h:outputText value="#{prod.quantity}"/>
+                    </p:column>
+                    <p:column>                                                    
+                            <p:commandButton value="Show More" icon="ui-icon-search"
+                                    action="#{itemsController.setSelected(prod)}"                                    
+                                    update=":ItemsViewForm" oncomplete="PF('ItemsViewDialog').show()" />                    
+                            <p:commandButton value="Remove" 
+                                             actionListener="#{itemsController.removeItemNow(index)}"
+                                             update=":centerForm:dropArea :formGreat:totalsOL" />                       
+                    </p:column>
+
+                    <p:columnGroup type="footer">
+                        <p:row>
+                            <p:column colspan="#{usernmController.usernmLogged.roleuser eq 's' ? '3' : '4'}" footerText="Totals:"
+                                      style="text-align:right"/>
+                            <p:column footerText="#{itemsController.stringTotal}$"/>
+                        </p:row>
+                    </p:columnGroup>
+                </p:dataTable>
+                <p:spacer height="10"/>
+                <p:commandButton value="Checkout" id="checkBtn" widgetVar="$saveBtn"
+                                 rendered="#{(not empty itemsController.cartProducts) and usernmController.loggedIn }"
+                                 actionListener="#{cartController.cartPersist()}"
+                                 action="/views/cart/Confirmation.xhtml?faces-redirect=true"
+                                 onclick="PF('$saveBtn').disable();" ignoreAutoUpdate="true" />
+                <p:commandButton value="Save to MyCart and Logout" id="saveLogoutBtn" widgetVar="$saveLogoutBtn"
+                                 style="float: right"
+                                 rendered="#{(not empty itemsController.cartProducts) and usernmController.loggedIn }"
+                                 actionListener="#{cartController.cartPersist()}"
+                                 action="#{usernmController.loginMeOut()}"
+                                 ignoreAutoUpdate="true" />
+                <p:commandButton value="Login" id="loginFromCartBtn"
+                                 rendered="#{(not empty itemsController.cartProducts) and (not usernmController.loggedIn) }"
+                                 onclick="PF('loginDialog').show();"/>
+                
+            </p:outputPanel>
+
+        </p:fieldset>
+          
+
+        <p:droppable for="selectedProducts" tolerance="touch" 
+                     activeStyleClass="ui-state-highlight" onDrop="handleDrop"
+                     datasource=":centerForm:availableProducts"  scope="forward" >
+            <p:ajax  listener="#{itemsController.onProdDrop}"                     
+                    update=":centerForm:dropArea :centerForm:availableProducts :formGreat:totalsOL"/>
+        </p:droppable>
+    </h:form>
+    <ui:include src="View.xhtml"/>
+    <ui:include src="/views/seller/View.xhtml"/>
+</ui:define>
+</ui:composition>
+</html>
+
+

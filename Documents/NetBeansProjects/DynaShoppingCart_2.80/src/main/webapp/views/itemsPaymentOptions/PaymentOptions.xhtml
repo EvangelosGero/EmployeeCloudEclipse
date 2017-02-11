@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <ui:composition >  
+                <p:panel header="Πληρωμη" style="height: 150px;">
+                    <div style="height: 100px; overflow: auto;">
+                        <h:dataTable id="PaymentOptions" value="#{itemsPaymentOptionsController.items}" var="item"
+                                  style="margin-left: 0px !important; margin-right: 0px !important">                        
+                            <p:column>                            
+                                <h:outputText value="#{item.paymentOptions}"/>                            
+                            </p:column>                                             
+                        </h:dataTable>            
+                    </div>    
+                </p:panel>                  
+    </ui:composition>
+</html>
+
