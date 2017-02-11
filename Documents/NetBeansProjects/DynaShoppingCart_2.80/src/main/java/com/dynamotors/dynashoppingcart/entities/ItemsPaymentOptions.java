@@ -31,11 +31,11 @@ public class ItemsPaymentOptions implements Serializable {
     @Basic(optional = false)
     @Column(name ="id", nullable = false)
     private Integer id;
-    @Size(max = 10)
-    @Column(name = "item_code", length = 10)
+    @Size(max = 40)
+    @Column(name = "item_code", length = 40)
     private String itemCode;
-    @Size(max = 10)
-    @Column(name = "payment_options", length = 10)
+    @Size(max = 40)
+    @Column(name = "payment_options", length = 40)
     private String paymentOptions;
 
     public ItemsPaymentOptions() {
