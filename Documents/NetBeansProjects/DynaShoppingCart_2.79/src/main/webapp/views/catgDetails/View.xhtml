@@ -8,22 +8,27 @@
 
     <ui:composition>
 
-        <p:dialog id="CatgDetailsViewDlg" widgetVar="CatgDetailsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCatgDetailsTitle}">
+        <p:dialog id="CatgDetailsViewDlg" widgetVar="CatgDetailsViewDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle.ViewCatgDetailsTitle}">
             <h:form id="CatgDetailsViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{catgDetailsController.selected != null}">
                         <h:outputText value="#{bundle.ViewCatgDetailsLabel_id}"/>
                         <h:outputText value="#{catgDetailsController.selected.id}" title="#{bundle.ViewCatgDetailsTitle_id}"/>
                         <h:outputText value="#{bundle.ViewCatgDetailsLabel_discountsProviderName}"/>
-                        <h:outputText value="#{catgDetailsController.selected.discountsProviderName}" title="#{bundle.ViewCatgDetailsTitle_discountsProviderName}"/>
+                        <h:outputText value="#{catgDetailsController.selected.discountsProviderName}" 
+                                      title="#{bundle.ViewCatgDetailsTitle_discountsProviderName}"/>
                         <h:outputText value="#{bundle.ViewCatgDetailsLabel_discountsDetails}"/>
-                        <h:outputText value="#{catgDetailsController.selected.discountsDetails}" title="#{bundle.ViewCatgDetailsTitle_discountsDetails}"/>
+                        <h:outputText value="#{catgDetailsController.selected.discountsDetails}" 
+                                      title="#{bundle.ViewCatgDetailsTitle_discountsDetails}"/>
                         <h:outputText value="#{bundle.ViewCatgDetailsLabel_discountsValue}"/>
-                        <h:outputText value="#{catgDetailsController.selected.discountsValue}" title="#{bundle.ViewCatgDetailsTitle_discountsValue}"/>
+                        <h:outputText value="#{catgDetailsController.selected.discountsValue}" 
+                                      title="#{bundle.ViewCatgDetailsTitle_discountsValue}"/>
                         <h:outputText value="#{bundle.ViewCatgDetailsLabel_discountsPers}"/>
-                        <h:outputText value="#{catgDetailsController.selected.discountsPers}" title="#{bundle.ViewCatgDetailsTitle_discountsPers}"/>
+                        <h:outputText value="#{catgDetailsController.selected.discountsPers}" 
+                                      title="#{bundle.ViewCatgDetailsTitle_discountsPers}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CatgDetailsViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('CatgDetailsViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

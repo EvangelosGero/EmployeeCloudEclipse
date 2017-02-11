@@ -8,7 +8,7 @@
      <ui:composition >  
                 <p:panel header="Πληρωμη" style="height: 150px;">
                     <div style="height: 100px; overflow: auto;">
-                        <h:dataTable id="PaymentOptions" value="#{itemsPaymentOptionsController.paymentOptions}" var="item"
+                        <h:dataTable id="PaymentOptions" value="#{itemsPaymentOptionsController.items}" var="item"
                                   style="margin-left: 0px !important; margin-right: 0px !important">                        
                             <p:column>                            
                                 <h:outputText value="#{item.paymentOptions}"/>                            

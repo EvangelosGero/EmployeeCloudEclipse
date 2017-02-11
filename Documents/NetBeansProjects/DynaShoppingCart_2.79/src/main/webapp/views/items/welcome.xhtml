@@ -102,7 +102,7 @@
                     <p:dialog id="opanel12"  widgetVar="opanel12WV" closeOnEscape="true"   styleClass="smallDialogs"                                 
                               appendTo="@(body)"   showHeader="true" header="#{item.itemCode}"  closable="true">                        
                             <p:graphicImage value="../../images1/#{not empty item.itemsImagesList ? item.itemsImagesList.get(0).filename : ''}"
-                                             height="130" width="260"/>                        
+                                            height="130" width="260" alt="Δεν υπάρχει φωτογραφία"/>                        
                     </p:dialog>
                     <p:draggable for="pnl" revert="true"  scope="forward"
                         handle=".ui-panel-titlebar" stack=".ui-panel" >                        

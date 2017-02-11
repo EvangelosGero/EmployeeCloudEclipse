@@ -13,13 +13,16 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{itemsPaymentOptionsController.selected != null}">
                         <h:outputText value="#{bundle.ViewItemsPaymentOptionsLabel_id}"/>
-                        <h:outputText value="#{itemsPaymentOptionsController.selected.id}" title="#{bundle.ViewItemsPaymentOptionsTitle_id}"/>
+                        <h:outputText value="#{itemsPaymentOptionsController.selected.id}" 
+                                      title="#{bundle.ViewItemsPaymentOptionsTitle_id}"/>
                         <h:outputText value="#{bundle.ViewItemsPaymentOptionsLabel_itemCode}"/>
-                        <h:outputText value="#{itemsPaymentOptionsController.selected.itemCode}" title="#{bundle.ViewItemsPaymentOptionsTitle_itemCode}"/>
+                        <h:outputText value="#{itemsPaymentOptionsController.selected.itemCode}" 
+                                      title="#{bundle.ViewItemsPaymentOptionsTitle_itemCode}"/>
                         <h:outputText value="#{bundle.ViewItemsPaymentOptionsLabel_paymentOptions}"/>
-                        <h:outputText value="#{itemsPaymentOptionsController.selected.paymentOptions}" title="#{bundle.ViewItemsPaymentOptionsTitle_paymentOptions}"/>
+                        <h:outputText value="#{itemsPaymentOptionsController.selected.paymentOptions}" 
+                                      title="#{bundle.ViewItemsPaymentOptionsTitle_paymentOptions}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="ItemsPaymentOptionsViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('ItemsPaymentOptionsViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

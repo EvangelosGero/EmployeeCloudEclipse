@@ -17,16 +17,22 @@
                                      required="true" requiredMessage="#{bundle.EditCatgDetailsRequiredMessage_id}"
                                      disabled="true"   />
                         <p:outputLabel value="#{bundle.EditCatgDetailsLabel_discountsProviderName}" for="discountsProviderName" />
-                        <p:inputText id="discountsProviderName" value="#{catgDetailsController.selected.discountsProviderName}" title="#{bundle.EditCatgDetailsTitle_discountsProviderName}" />
+                        <p:inputText id="discountsProviderName" value="#{catgDetailsController.selected.discountsProviderName}" 
+                                     title="#{bundle.EditCatgDetailsTitle_discountsProviderName}" />
                         <p:outputLabel value="#{bundle.EditCatgDetailsLabel_discountsDetails}" for="discountsDetails" />
-                        <p:inputText id="discountsDetails" value="#{catgDetailsController.selected.discountsDetails}" title="#{bundle.EditCatgDetailsTitle_discountsDetails}" />
+                        <p:inputText id="discountsDetails" value="#{catgDetailsController.selected.discountsDetails}" 
+                                     title="#{bundle.EditCatgDetailsTitle_discountsDetails}" />
                         <p:outputLabel value="#{bundle.EditCatgDetailsLabel_discountsValue}" for="discountsValue" />
-                        <p:inputText id="discountsValue" value="#{catgDetailsController.selected.discountsValue}" title="#{bundle.EditCatgDetailsTitle_discountsValue}" />
+                        <p:inputText id="discountsValue" value="#{catgDetailsController.selected.discountsValue}" 
+                                     title="#{bundle.EditCatgDetailsTitle_discountsValue}" />
                         <p:outputLabel value="#{bundle.EditCatgDetailsLabel_discountsPers}" for="discountsPers" />
-                        <p:inputText id="discountsPers" value="#{catgDetailsController.selected.discountsPers}" title="#{bundle.EditCatgDetailsTitle_discountsPers}" />
+                        <p:inputText id="discountsPers" value="#{catgDetailsController.selected.discountsPers}" 
+                                     title="#{bundle.EditCatgDetailsTitle_discountsPers}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{catgDetailsController.update}" value="#{bundle.Save}" update="display,:CatgDetailsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CatgDetailsEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CatgDetailsEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{catgDetailsController.update}" value="#{bundle.Save}" 
+                                     update="display,:CatgDetailsListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'CatgDetailsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CatgDetailsEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

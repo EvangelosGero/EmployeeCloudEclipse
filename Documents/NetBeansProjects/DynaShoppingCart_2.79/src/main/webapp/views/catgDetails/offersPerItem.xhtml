@@ -8,7 +8,12 @@
 
     <ui:composition >            
                 <p:panel header="Προσφορες" style="height: 150px;">
-                    <p:dataGrid id="CatgDetailsList" value="#{catgDetailsController.offersPerItemId}" var="item"
+                    <p:dataGrid id="CatgDetailsList" 
+                                value="#{not empty catgDetailsController.items.stream()
+                                         .filter(s -> s.id eq itemsController.selected.catgDetailsId).toList()? 
+                                         catgDetailsController.items.stream()
+                                         .filter(s -> s.id eq itemsController.selected.catgDetailsId).toList().get(0) : null}" 
+                                var="item"
                                 style="margin-left: 0px !important; margin-right: 0px !important" columns="1">                       
                       <p:column>
                             <f:facet name="header">

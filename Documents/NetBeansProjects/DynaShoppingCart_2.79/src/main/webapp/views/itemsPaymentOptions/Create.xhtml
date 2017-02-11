@@ -8,17 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="ItemsPaymentOptionsCreateDlg" widgetVar="ItemsPaymentOptionsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateItemsPaymentOptionsTitle}">
+        <p:dialog id="ItemsPaymentOptionsCreateDlg" widgetVar="ItemsPaymentOptionsCreateDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{bundle.CreateItemsPaymentOptionsTitle}">
             <h:form id="ItemsPaymentOptionsCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{itemsPaymentOptionsController.selected != null}">                        
                         <p:outputLabel value="#{bundle.CreateItemsPaymentOptionsLabel_itemCode}" for="itemCode" />
-                        <p:inputText id="itemCode" value="#{itemsPaymentOptionsController.selected.itemCode}" title="#{bundle.CreateItemsPaymentOptionsTitle_itemCode}" />
+                        <p:inputText id="itemCode" value="#{itemsPaymentOptionsController.selected.itemCode}" 
+                                     title="#{bundle.CreateItemsPaymentOptionsTitle_itemCode}" />
                         <p:outputLabel value="#{bundle.CreateItemsPaymentOptionsLabel_paymentOptions}" for="paymentOptions" />
-                        <p:inputText id="paymentOptions" value="#{itemsPaymentOptionsController.selected.paymentOptions}" title="#{bundle.CreateItemsPaymentOptionsTitle_paymentOptions}" />
+                        <p:inputText id="paymentOptions" value="#{itemsPaymentOptionsController.selected.paymentOptions}" 
+                                     title="#{bundle.CreateItemsPaymentOptionsTitle_paymentOptions}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{itemsPaymentOptionsController.create}" value="#{bundle.Save}" update="display,:ItemsPaymentOptionsListForm:datalist,:growl" oncomplete="handleSubmit(args,'ItemsPaymentOptionsCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemsPaymentOptionsCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{itemsPaymentOptionsController.create}" value="#{bundle.Save}" 
+                                     update="display,:ItemsPaymentOptionsListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'ItemsPaymentOptionsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ItemsPaymentOptionsCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -13,14 +13,16 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{itemsDeliveryAvailablePinController.selected != null}">
                         <p:outputLabel value="#{bundle.EditItemsDeliveryAvailablePinLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{itemsDeliveryAvailablePinController.selected.id}" title="#{bundle.EditItemsDeliveryAvailablePinTitle_id}" required="true" requiredMessage="#{bundle.EditItemsDeliveryAvailablePinRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{itemsDeliveryAvailablePinController.selected.id}" 
+                                     title="#{bundle.EditItemsDeliveryAvailablePinTitle_id}" required="true" 
+                                     disabled="true" requiredMessage="#{bundle.EditItemsDeliveryAvailablePinRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditItemsDeliveryAvailablePinLabel_itemCode}" for="itemCode" />
                         <p:inputText id="itemCode" value="#{itemsDeliveryAvailablePinController.selected.itemCode}" title="#{bundle.EditItemsDeliveryAvailablePinTitle_itemCode}" />
                         <p:outputLabel value="#{bundle.EditItemsDeliveryAvailablePinLabel_pin}" for="pin" />
                         <p:inputText id="pin" value="#{itemsDeliveryAvailablePinController.selected.pin}" title="#{bundle.EditItemsDeliveryAvailablePinTitle_pin}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{itemsDeliveryAvailablePinController.update}" value="#{bundle.Save}" update="display,:ItemsDeliveryAvailablePinListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsDeliveryAvailablePinEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemsDeliveryAvailablePinEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ItemsDeliveryAvailablePinEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

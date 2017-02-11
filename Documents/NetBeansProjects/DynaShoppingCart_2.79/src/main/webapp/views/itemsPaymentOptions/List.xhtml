@@ -46,10 +46,18 @@
                             <h:outputText value="#{item.paymentOptions}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{itemsPaymentOptionsController.prepareCreate}" update=":ItemsPaymentOptionsCreateForm" oncomplete="PF('ItemsPaymentOptionsCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ItemsPaymentOptionsViewForm" oncomplete="PF('ItemsPaymentOptionsViewDialog').show()" disabled="#{empty itemsPaymentOptionsController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ItemsPaymentOptionsEditForm" oncomplete="PF('ItemsPaymentOptionsEditDialog').show()" disabled="#{empty itemsPaymentOptionsController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{itemsPaymentOptionsController.destroy}" update=":growl,datalist" disabled="#{empty itemsPaymentOptionsController.selected}"/> 
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   
+                                             value="#{bundle.Create}" actionListener="#{itemsPaymentOptionsController.prepareCreate}" 
+                                             update=":ItemsPaymentOptionsCreateForm" oncomplete="PF('ItemsPaymentOptionsCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
+                                             update=":ItemsPaymentOptionsViewForm" oncomplete="PF('ItemsPaymentOptionsViewDialog').show()" 
+                                             disabled="#{empty itemsPaymentOptionsController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             update=":ItemsPaymentOptionsEditForm" oncomplete="PF('ItemsPaymentOptionsEditDialog').show()" 
+                                             disabled="#{empty itemsPaymentOptionsController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                             actionListener="#{itemsPaymentOptionsController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty itemsPaymentOptionsController.selected}"/> 
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -44,7 +44,8 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="Εκπτωση" for="catgDetailsId" />
                         <p:selectOneMenu id="catgDetailsId" value="#{itemsController.selected.catgDetailsId}"
-                                     converter="javax.faces.Integer"  style ="width: 90%">                         
+                                     converter="javax.faces.Integer"  style ="width: 90%">
+                            <f:selectItem itemLabel="Καμία" itemValue=""/>
                             <f:selectItems  value="#{catgDetailsController.items}" var="ek"                                        
                                         itemLabel="#{ek.discountsProviderName}" itemValue="#{ek.id}" >                                                                
                             </f:selectItems>                      

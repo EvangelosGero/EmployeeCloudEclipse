@@ -8,21 +8,28 @@
 
     <ui:composition>
 
-        <p:dialog id="CatgDetailsCreateDlg" widgetVar="CatgDetailsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCatgDetailsTitle}">
+        <p:dialog id="CatgDetailsCreateDlg" widgetVar="CatgDetailsCreateDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{bundle.CreateCatgDetailsTitle}">
             <h:form id="CatgDetailsCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{catgDetailsController.selected != null}">                        
                         <p:outputLabel value="#{bundle.CreateCatgDetailsLabel_discountsProviderName}" for="discountsProviderName" />
-                        <p:inputText id="discountsProviderName" value="#{catgDetailsController.selected.discountsProviderName}" title="#{bundle.CreateCatgDetailsTitle_discountsProviderName}" />
+                        <p:inputText id="discountsProviderName" value="#{catgDetailsController.selected.discountsProviderName}" 
+                                     title="#{bundle.CreateCatgDetailsTitle_discountsProviderName}" />
                         <p:outputLabel value="#{bundle.CreateCatgDetailsLabel_discountsDetails}" for="discountsDetails" />
-                        <p:inputText id="discountsDetails" value="#{catgDetailsController.selected.discountsDetails}" title="#{bundle.CreateCatgDetailsTitle_discountsDetails}" />
+                        <p:inputText id="discountsDetails" value="#{catgDetailsController.selected.discountsDetails}" 
+                                     title="#{bundle.CreateCatgDetailsTitle_discountsDetails}" />
                         <p:outputLabel value="#{bundle.CreateCatgDetailsLabel_discountsValue}" for="discountsValue" />
-                        <p:inputText id="discountsValue" value="#{catgDetailsController.selected.discountsValue}" title="#{bundle.CreateCatgDetailsTitle_discountsValue}" />
+                        <p:inputText id="discountsValue" value="#{catgDetailsController.selected.discountsValue}" 
+                                     title="#{bundle.CreateCatgDetailsTitle_discountsValue}" />
                         <p:outputLabel value="#{bundle.CreateCatgDetailsLabel_discountsPers}" for="discountsPers" />
-                        <p:inputText id="discountsPers" value="#{catgDetailsController.selected.discountsPers}" title="#{bundle.CreateCatgDetailsTitle_discountsPers}" />
+                        <p:inputText id="discountsPers" value="#{catgDetailsController.selected.discountsPers}" 
+                                     title="#{bundle.CreateCatgDetailsTitle_discountsPers}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{catgDetailsController.create}" value="#{bundle.Save}" update="display,:CatgDetailsListForm:datalist,:growl" oncomplete="handleSubmit(args,'CatgDetailsCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CatgDetailsCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{catgDetailsController.create}" value="#{bundle.Save}" 
+                                     update="display,:CatgDetailsListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'CatgDetailsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CatgDetailsCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
