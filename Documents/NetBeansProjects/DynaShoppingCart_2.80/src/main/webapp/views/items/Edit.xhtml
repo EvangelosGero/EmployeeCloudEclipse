@@ -50,6 +50,14 @@
                                         itemLabel="#{ek.discountsProviderName}" itemValue="#{ek.id}" >                                                                
                             </f:selectItems>                      
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditItemsLabel_storage}" for="storage" />
+                        <p:selectOneMenu id="storage" value="#{itemsController.selected.deliveryAvailablePinId}"
+                                     converter="javax.faces.Integer"  style ="width: 90%">
+                            <f:selectItem itemLabel="Κανένας" itemValue=""/>
+                            <f:selectItems  value="#{itemsDeliveryAvailablePinController.items}" var="ek"                                        
+                                            itemLabel="#{ek.address}" itemValue="#{ek.id}" >                                                                
+                            </f:selectItems>                      
+                        </p:selectOneMenu>
                         <p:outputLabel value="Μάρκες" for="makes" />
                         <p:selectCheckboxMenu id="makes" value="#{itemsController.selected.categMakesList}"  label="Μάρκες"
                                          required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_id}"

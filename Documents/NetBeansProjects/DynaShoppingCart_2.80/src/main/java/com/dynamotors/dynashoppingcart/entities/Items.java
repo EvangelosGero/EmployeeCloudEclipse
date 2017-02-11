@@ -39,7 +39,9 @@ public class Items implements Serializable {
     @Column(name = "usernm_seller_id")
     private Integer usernmSellerId;
     @Column(name = "catg_details_id")
-    private Integer catgDetailsId;    
+    private Integer catgDetailsId; 
+    @Column(name = "delivery_available_pin_id")
+    private Integer deliveryAvailablePinId; 
     @OneToMany(mappedBy = "items", fetch=FetchType.EAGER)
     private List<ItemsImages> itemsImagesList;
     
@@ -250,6 +252,15 @@ public class Items implements Serializable {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+    public Integer getDeliveryAvailablePinId() {
+        return deliveryAvailablePinId;
+    }
+
+    public void setDeliveryAvailablePinId(Integer deliveryAvailablePinId) {
+        this.deliveryAvailablePinId = deliveryAvailablePinId;
+    }
+       
 
     @Override
     public int hashCode() {
