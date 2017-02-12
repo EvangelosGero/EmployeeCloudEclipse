@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="CartViewDlg" widgetVar="CartViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCartTitle}">
+        <p:dialog id="CartViewDlg" widgetVar="CartViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.ViewCartTitle}">
             <h:form id="CartViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cartController.selected != null}">
@@ -29,7 +30,7 @@
                         <h:outputText value="#{bundle.ViewCartLabel_quantity}"/>
                         <h:outputText value="#{cartController.selected.quantity}" title="#{bundle.ViewCartTitle_quantity}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CartViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('CartViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

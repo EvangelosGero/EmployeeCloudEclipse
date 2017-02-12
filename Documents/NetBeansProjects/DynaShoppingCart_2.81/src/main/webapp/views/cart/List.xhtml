@@ -26,37 +26,37 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
                         
-                        <p:column>
+                        <p:column filterBy="#{item.id}" sortBy="#{item.id}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.usercode}" sortBy="#{item.usercode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_usercode}"/>
                             </f:facet>
                             <h:outputText value="#{item.usercode}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.shopper}" sortBy="#{item.shopper}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_shopper}"/>
                             </f:facet>
                             <h:outputText value="#{item.shopper}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemCode}" sortBy="#{item.itemCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_itemCode}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemCode}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemValue}" sortBy="#{item.itemValue}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_itemValue}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemValue}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.cartDate}" sortBy="#{item.cartDate}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_cartDate}"/>
                             </f:facet>
@@ -64,17 +64,23 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.quantity}" sortBy="#{item.quantity}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_quantity}"/>
                             </f:facet>
                             <h:outputText value="#{item.quantity}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cartController.prepareCreate}" update=":CartCreateForm" oncomplete="PF('CartCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CartViewForm" oncomplete="PF('CartViewDialog').show()" disabled="#{empty cartController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CartEditForm" oncomplete="PF('CartEditDialog').show()" disabled="#{empty cartController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{cartController.destroy}" update=":growl,datalist" disabled="#{empty cartController.selected}"/>                            
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                             actionListener="#{cartController.prepareCreate}" update=":CartCreateForm" 
+                                             oncomplete="PF('CartCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CartViewForm" 
+                                             oncomplete="PF('CartViewDialog').show()" disabled="#{empty cartController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CartEditForm" 
+                                             oncomplete="PF('CartEditDialog').show()" disabled="#{empty cartController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                             actionListener="#{cartController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty cartController.selected}"/>                            
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

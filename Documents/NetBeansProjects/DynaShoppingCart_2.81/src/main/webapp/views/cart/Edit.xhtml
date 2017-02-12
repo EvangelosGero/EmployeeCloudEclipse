@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="CartEditDlg" widgetVar="CartEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCartTitle}">
+        <p:dialog id="CartEditDlg" widgetVar="CartEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.EditCartTitle}">
             <h:form id="CartEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cartController.selected != null}">
@@ -32,7 +33,7 @@
                         <p:inputText id="quantity" value="#{cartController.selected.quantity}" title="#{bundle.EditCartTitle_quantity}" />
                     </p:panelGrid>                    
                     <p:commandButton actionListener="#{cartController.update}" value="#{bundle.Save}" update="display,:CartListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CartEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CartEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CartEditDialog).hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
