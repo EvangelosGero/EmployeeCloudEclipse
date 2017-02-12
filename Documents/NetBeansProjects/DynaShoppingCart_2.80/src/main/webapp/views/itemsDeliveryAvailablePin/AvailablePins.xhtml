@@ -8,10 +8,15 @@
     <ui:composition > 
                 <p:panel header="Αποθηκες" style="height: 150px;">
                     <div style="height: 100px; overflow: auto;">
-                        <h:dataTable id="AvailablePins" value="#{itemsDeliveryAvailablePinController.items}" var="item"
-                                 style="margin-left: 0px !important; margin-right: 0px !important" >                             
+                        <h:dataTable id="AvailablePins" 
+                                     value="#{not empty itemsDeliveryAvailablePinController.items.stream()
+                                         .filter(s -> s.id eq itemsController.selected.deliveryAvailablePinId).toList()? 
+                                         itemsDeliveryAvailablePinController.items.stream()
+                                         .filter(s -> s.id eq itemsController.selected.deliveryAvailablePinId).toList().get(0) : null}" 
+                                    var="item"
+                                    style="margin-left: 0px !important; margin-right: 0px !important" >                             
                             <p:column>                            
-                                <h:outputText value="#{item.pin}"/>                            
+                                <h:outputText value="#{item.address}"/>                            
                             </p:column>                                             
                         </h:dataTable>
                     </div>
