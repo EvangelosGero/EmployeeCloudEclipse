@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OriginalCodesEditDlg1" widgetVar="OriginalCodesEditDialog1" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle_OriginalCodes.EditOriginalCodesTitle}">
+            <h:form id="OriginalCodesEditForm1">
+                <h:panelGroup id="display8">
+                    <p:panelGrid columns="2" rendered="#{originalCodesController.selected != null}">
+                        <p:outputLabel value="#{bundle_OriginalCodes.EditOriginalCodesLabel_ocId}" for="ocId" />
+                        <p:inputText id="ocId" value="#{originalCodesController.selected.ocId}" 
+                                     title="#{bundle_OriginalCodes.EditOriginalCodesTitle_ocId}" required="true" 
+                                     requiredMessage="#{bundle_OriginalCodes.EditOriginalCodesRequiredMessage_ocId}"
+                                     disabled="true"/>
+                        <p:outputLabel value="#{bundle_OriginalCodes.EditOriginalCodesLabel_ocVal}" for="ocVal" />
+                        <p:inputText id="ocVal" value="#{originalCodesController.selected.ocVal}" title="#{bundle_OriginalCodes.EditOriginalCodesTitle_ocVal}" />
+                        <p:outputLabel value="#{bundle_OriginalCodes.EditOriginalCodesLabel_items}" for="items33" />
+                        <p:outputLabel id="items33" value="#{originalCodesController.selected.items.itemCode}" />                       
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{originalCodesController.update}" value="#{bundle_OriginalCodes.Save}" 
+                                     update="display8,:OriginalCodesListForm1:datalist9,:viewHelperForm:ItemsOriginalCodesList,:growl"                                      
+                                     oncomplete="PF('OriginalCodesEditDialog1').hide();"/>
+                    <p:commandButton value="#{bundle_OriginalCodes.Cancel}" onclick="PF('OriginalCodesEditDialog1').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
