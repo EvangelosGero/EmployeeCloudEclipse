@@ -17,9 +17,10 @@
                         <h:outputText value="#{bundle.ViewCatgMasLabel_catgCode}"/>
                         <h:outputText value="#{catgMasController.selected.catgCode}" title="#{bundle.ViewCatgMasTitle_catgCode}"/>
                         <h:outputText value="#{bundle.ViewCatgMasLabel_catgDiscountScheme}"/>
-                        <h:outputText value="#{catgMasController.selected.catgDiscountScheme}" title="#{bundle.ViewCatgMasTitle_catgDiscountScheme}"/>
+                        <h:outputText value="#{catgMasController.selected.catgDiscountScheme}" 
+                                      title="#{bundle.ViewCatgMasTitle_catgDiscountScheme}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CatgMasViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('CatgMasViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

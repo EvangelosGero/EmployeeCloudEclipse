@@ -19,13 +19,15 @@
                         <h:outputText value="#{cartController.selected.usercode}" title="#{bundle.ViewCartTitle_usercode}"/>
                         <h:outputText value="#{bundle.ViewCartLabel_shopper}"/>
                         <h:outputText value="#{cartController.selected.shopper}" title="#{bundle.ViewCartTitle_shopper}"/>
+                        <h:outputText value="#{bundle.ViewCartLabel_itemId}"/>
+                        <h:outputText value="#{cartController.selected.itemId}" title="#{bundle.ViewCartTitle_itemId}"/>
                         <h:outputText value="#{bundle.ViewCartLabel_itemCode}"/>
                         <h:outputText value="#{cartController.selected.itemCode}" title="#{bundle.ViewCartTitle_itemCode}"/>
                         <h:outputText value="#{bundle.ViewCartLabel_itemValue}"/>
                         <h:outputText value="#{cartController.selected.itemValue}" title="#{bundle.ViewCartTitle_itemValue}"/>
                         <h:outputText value="#{bundle.ViewCartLabel_cartDate}"/>
                         <h:outputText value="#{cartController.selected.cartDate}" title="#{bundle.ViewCartTitle_cartDate}">                        
-                            <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewCartLabel_quantity}"/>
                         <h:outputText value="#{cartController.selected.quantity}" title="#{bundle.ViewCartTitle_quantity}"/>

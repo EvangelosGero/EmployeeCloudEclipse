@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="Categ3ViewDlg" widgetVar="Categ3ViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.ViewCateg3Title}">
+        <p:dialog id="Categ3ViewDlg" widgetVar="Categ3ViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.ViewCateg3Title}">
             <h:form id="Categ3ViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categ3Controller.selected != null}">
@@ -24,7 +25,7 @@
                                                        .toList().get(0).c2Descr: null}" 
                                       title="#{bundle_Categ.ViewCateg3Title_parentId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_Categ.Close}" onclick="Categ3ViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_Categ.Close}" onclick="PF('Categ3ViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

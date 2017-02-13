@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="CountriesViewDlg" widgetVar="CountriesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_countries.ViewCountriesTitle}">
+        <p:dialog id="CountriesViewDlg" widgetVar="CountriesViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_countries.ViewCountriesTitle}">
             <h:form id="CountriesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{countriesController.selected != null}">
@@ -31,7 +32,7 @@
                         <h:outputText value="#{bundle_countries.ViewCountriesLabel_enabled}"/>
                         <h:outputText value="#{countriesController.selected.enabled}" title="#{bundle_countries.ViewCountriesTitle_enabled}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_countries.Close}" onclick="CountriesViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_countries.Close}" onclick="PF('CountriesViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

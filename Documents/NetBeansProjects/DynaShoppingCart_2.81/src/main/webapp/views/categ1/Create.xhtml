@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="Categ1CreateDlg" widgetVar="Categ1CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.CreateCateg1Title}">
+        <p:dialog id="Categ1CreateDlg" widgetVar="Categ1CreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.CreateCateg1Title}">
             <h:form id="Categ1CreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categ1Controller.selected != null}">                        
@@ -16,8 +17,9 @@
                         <p:inputText id="descr" value="#{categ1Controller.selected.c1Descr}" title="#{bundle_Categ.CreateCateg1Title_descr}" 
                                      required="true" requiredMessage="#{bundle_Categ.CreateCateg1RequiredMessage_descr}"/>                       
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{categ1Controller.create}" value="#{bundle_Categ.Save}" update="display,:Categ1ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Categ1CreateDialog');"/>
-                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="Categ1CreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{categ1Controller.create}" value="#{bundle_Categ.Save}" 
+                            update="display,:Categ1ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Categ1CreateDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="PF('Categ1CreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

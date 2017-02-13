@@ -8,17 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="CategMakeCreateDlg" widgetVar="CategMakeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.CreateCategMakeTitle}">
+        <p:dialog id="CategMakeCreateDlg" widgetVar="CategMakeCreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.CreateCategMakeTitle}">
             <h:form id="CategMakeCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categMakeController.selected != null}">                        
                         <p:outputLabel value="#{bundle_Categ.CreateCategMakeLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{categMakeController.selected.mkDescription}" title="#{bundle_Categ.CreateCategMakeTitle_description}" required="true" requiredMessage="#{bundle_Categ.CreateCategMakeRequiredMessage_description}"/>
+                        <p:inputText id="description" value="#{categMakeController.selected.mkDescription}" 
+                                     title="#{bundle_Categ.CreateCategMakeTitle_description}" required="true" 
+                                     requiredMessage="#{bundle_Categ.CreateCategMakeRequiredMessage_description}"/>
                         <p:outputLabel value="#{bundle_Categ.CreateCategMakeLabel_logo}" for="logo" />
-                        <p:inputText id="logo" value="#{categMakeController.selected.mkLogo}" title="#{bundle_Categ.CreateCategMakeTitle_logo}" required="true" requiredMessage="#{bundle_Categ.CreateCategMakeRequiredMessage_logo}"/>
+                        <p:inputText id="logo" value="#{categMakeController.selected.mkLogo}" title="#{bundle_Categ.CreateCategMakeTitle_logo}" 
+                                     required="true" requiredMessage="#{bundle_Categ.CreateCategMakeRequiredMessage_logo}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{categMakeController.create}" value="#{bundle_Categ.Save}" update="display,:CategMakeListForm:datalist,:growl" oncomplete="handleSubmit(args,'CategMakeCreateDialog');"/>
-                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="CategMakeCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{categMakeController.create}" value="#{bundle_Categ.Save}" 
+                                     update="display,:CategMakeListForm:datalist,:growl" oncomplete="handleSubmit(args,'CategMakeCreateDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="PF('CategMakeCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

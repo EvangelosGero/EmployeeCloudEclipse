@@ -27,13 +27,13 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column filterBy="#{item.c2Id}" sortBy="#{item.c2Id}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_Categ.ListCateg2Title_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.c2Id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.c2Descr}" sortBy="#{item.c2Descr}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_Categ.ListCateg2Title_descr}"/>
                             </f:facet>
@@ -50,10 +50,18 @@
                                                        .toList().get(0).c1Descr: null}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_Categ.Create}" actionListener="#{categ2Controller.prepareCreate}" update=":Categ2CreateForm" oncomplete="PF('Categ2CreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_Categ.View}" update=":Categ2ViewForm" oncomplete="PF('Categ2ViewDialog').show()" disabled="#{empty categ2Controller.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_Categ.Edit}" update=":Categ2EditForm" oncomplete="PF('Categ2EditDialog').show()" disabled="#{empty categ2Controller.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_Categ.Delete}" actionListener="#{categ2Controller.destroy}" update=":growl,datalist" disabled="#{empty categ2Controller.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_Categ.Create}" 
+                                             actionListener="#{categ2Controller.prepareCreate}" update=":Categ2CreateForm" 
+                                             oncomplete="PF('Categ2CreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_Categ.View}" 
+                                             update=":Categ2ViewForm" oncomplete="PF('Categ2ViewDialog').show()" 
+                                             disabled="#{empty categ2Controller.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_Categ.Edit}" 
+                                             update=":Categ2EditForm" oncomplete="PF('Categ2EditDialog').show()" 
+                                             disabled="#{empty categ2Controller.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_Categ.Delete}" 
+                                             actionListener="#{categ2Controller.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty categ2Controller.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

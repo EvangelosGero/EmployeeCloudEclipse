@@ -18,7 +18,7 @@
                         <p:inputText id="catgDiscountScheme" value="#{catgMasController.selected.catgDiscountScheme}" title="#{bundle.CreateCatgMasTitle_catgDiscountScheme}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{catgMasController.create}" value="#{bundle.Save}" update="display,:CatgMasListForm:datalist,:growl" oncomplete="handleSubmit(args,'CatgMasCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CatgMasCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CatgMasCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

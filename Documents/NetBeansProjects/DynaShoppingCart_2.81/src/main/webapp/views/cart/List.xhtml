@@ -44,6 +44,12 @@
                             </f:facet>
                             <h:outputText value="#{item.shopper}"/>
                         </p:column>
+                        <p:column filterBy="#{item.itemId}" sortBy="#{item.itemId}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCartTitle_itemId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemId}"/>
+                        </p:column>
                         <p:column filterBy="#{item.itemCode}" sortBy="#{item.itemCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_itemCode}"/>
@@ -61,7 +67,7 @@
                                 <h:outputText value="#{bundle.ListCartTitle_cartDate}"/>
                             </f:facet>
                             <h:outputText value="#{item.cartDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                             </h:outputText>
                         </p:column>
                         <p:column filterBy="#{item.quantity}" sortBy="#{item.quantity}">

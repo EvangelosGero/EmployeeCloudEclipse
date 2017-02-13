@@ -8,19 +8,23 @@
 
     <ui:composition>
 
-        <p:dialog id="CatgMasEditDlg" widgetVar="CatgMasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCatgMasTitle}">
+        <p:dialog id="CatgMasEditDlg" widgetVar="CatgMasEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.EditCatgMasTitle}">
             <h:form id="CatgMasEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{catgMasController.selected != null}">
                         <p:outputLabel value="#{bundle.EditCatgMasLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{catgMasController.selected.id}" title="#{bundle.EditCatgMasTitle_id}" required="true" requiredMessage="#{bundle.EditCatgMasRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{catgMasController.selected.id}" title="#{bundle.EditCatgMasTitle_id}" required="true" 
+                                     requiredMessage="#{bundle.EditCatgMasRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditCatgMasLabel_catgCode}" for="catgCode" />
                         <p:inputText id="catgCode" value="#{catgMasController.selected.catgCode}" title="#{bundle.EditCatgMasTitle_catgCode}" />
                         <p:outputLabel value="#{bundle.EditCatgMasLabel_catgDiscountScheme}" for="catgDiscountScheme" />
-                        <p:inputText id="catgDiscountScheme" value="#{catgMasController.selected.catgDiscountScheme}" title="#{bundle.EditCatgMasTitle_catgDiscountScheme}" />
+                        <p:inputText id="catgDiscountScheme" value="#{catgMasController.selected.catgDiscountScheme}" 
+                                     title="#{bundle.EditCatgMasTitle_catgDiscountScheme}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{catgMasController.update}" value="#{bundle.Save}" update="display,:CatgMasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CatgMasEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CatgMasEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{catgMasController.update}" value="#{bundle.Save}" 
+                                     update="display,:CatgMasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CatgMasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CatgMasEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

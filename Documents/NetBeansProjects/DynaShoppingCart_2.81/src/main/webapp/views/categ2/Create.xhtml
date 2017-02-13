@@ -8,12 +8,14 @@
 
     <ui:composition>
 
-        <p:dialog id="Categ2CreateDlg" widgetVar="Categ2CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.CreateCateg2Title}">
+        <p:dialog id="Categ2CreateDlg" widgetVar="Categ2CreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.CreateCateg2Title}">
             <h:form id="Categ2CreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categ2Controller.selected != null}">                        
                         <p:outputLabel value="#{bundle_Categ.CreateCateg2Label_descr}" for="descr" />
-                        <p:inputText id="descr" value="#{categ2Controller.selected.c2Descr}" title="#{bundle_Categ.CreateCateg2Title_descr}" required="true" requiredMessage="#{bundle_Categ.CreateCateg2RequiredMessage_descr}"/>
+                        <p:inputText id="descr" value="#{categ2Controller.selected.c2Descr}" title="#{bundle_Categ.CreateCateg2Title_descr}" 
+                                     required="true" requiredMessage="#{bundle_Categ.CreateCateg2RequiredMessage_descr}"/>
                         <p:outputLabel value="#{bundle_Categ.CreateCateg2Label_parentId}" for="parentId" />                        
                         <p:selectOneMenu id="parentId" value="#{categ2Controller.selected.c2ParentId}"
                                          converter="javax.faces.Integer"  style ="width: 100%" required="true" 
@@ -24,8 +26,9 @@
                         </f:selectItems>                      
                         </p:selectOneMenu> 
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{categ2Controller.create}" value="#{bundle_Categ.Save}" update="display,:Categ2ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Categ2CreateDialog');"/>
-                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="Categ2CreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{categ2Controller.create}" value="#{bundle_Categ.Save}" 
+                                     update="display,:Categ2ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Categ2CreateDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="PF('Categ2CreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

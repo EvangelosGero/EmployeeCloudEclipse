@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="Categ2EditDlg" widgetVar="Categ2EditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.EditCateg2Title}">
+        <p:dialog id="Categ2EditDlg" widgetVar="Categ2EditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.EditCateg2Title}">
             <h:form id="Categ2EditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categ2Controller.selected != null}">
@@ -16,19 +17,21 @@
                         <p:inputText id="id" value="#{categ2Controller.selected.c2Id}" title="#{bundle_Categ.EditCateg2Title_id}" 
                                      required="true" requiredMessage="#{bundle_Categ.EditCateg2RequiredMessage_id}" disabled="true"/>
                         <p:outputLabel value="#{bundle_Categ.EditCateg2Label_descr}" for="descr" />
-                        <p:inputText id="descr" value="#{categ2Controller.selected.c2Descr}" title="#{bundle_Categ.EditCateg2Title_descr}" required="true" requiredMessage="#{bundle_Categ.EditCateg2RequiredMessage_descr}"/>
+                        <p:inputText id="descr" value="#{categ2Controller.selected.c2Descr}" title="#{bundle_Categ.EditCateg2Title_descr}" 
+                                     required="true" requiredMessage="#{bundle_Categ.EditCateg2RequiredMessage_descr}"/>
                         <p:outputLabel value="#{bundle_Categ.EditCateg2Label_parentId}" for="parentId" />
                          <p:selectOneMenu id="parentId" value="#{categ2Controller.selected.c2ParentId}"
                                          converter="javax.faces.Integer"  style ="width: 100%" required="true" 
                                          requiredMessage="Επιλογή Κατηγορίας 1 υποχρεωτική">                                     
-                        <f:selectItem itemLabel="Επίλεξε Κατηγορία 1" itemValue=""/>
-                        <f:selectItems  value="#{categ1Controller.items}" var="categ1"                                        
+                            <f:selectItem itemLabel="Επίλεξε Κατηγορία 1" itemValue=""/>
+                            <f:selectItems  value="#{categ1Controller.items}" var="categ1"                                        
                                         itemLabel="#{categ1.c1Descr}" itemValue="#{categ1.c1Id}" >                                                                
-                        </f:selectItems>                      
+                            </f:selectItems>                      
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{categ2Controller.update}" value="#{bundle_Categ.Save}" update="display,:Categ2ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Categ2EditDialog');"/>
-                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="Categ2EditDialog.hide()"/>
+                    <p:commandButton actionListener="#{categ2Controller.update}" value="#{bundle_Categ.Save}" 
+                                     update="display,:Categ2ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Categ2EditDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="PF('Categ2EditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="CategMakeEditDlg" widgetVar="CategMakeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.EditCategMakeTitle}">
+        <p:dialog id="CategMakeEditDlg" widgetVar="CategMakeEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.EditCategMakeTitle}">
             <h:form id="CategMakeEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categMakeController.selected != null}">
@@ -16,12 +17,16 @@
                         <p:inputText id="id" value="#{categMakeController.selected.mkId}" title="#{bundle_Categ.EditCategMakeTitle_id}" 
                                      required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_id}" disabled="true"/>
                         <p:outputLabel value="#{bundle_Categ.EditCategMakeLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{categMakeController.selected.mkDescription}" title="#{bundle_Categ.EditCategMakeTitle_description}" required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_description}"/>
+                        <p:inputText id="description" value="#{categMakeController.selected.mkDescription}" 
+                                     title="#{bundle_Categ.EditCategMakeTitle_description}" required="true" 
+                                     requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_description}"/>
                         <p:outputLabel value="#{bundle_Categ.EditCategMakeLabel_logo}" for="logo" />
-                        <p:inputText id="logo" value="#{categMakeController.selected.mkLogo}" title="#{bundle_Categ.EditCategMakeTitle_logo}" required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_logo}"/>
+                        <p:inputText id="logo" value="#{categMakeController.selected.mkLogo}" title="#{bundle_Categ.EditCategMakeTitle_logo}" 
+                                     required="true" requiredMessage="#{bundle_Categ.EditCategMakeRequiredMessage_logo}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{categMakeController.update}" value="#{bundle_Categ.Save}" update="display,:CategMakeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CategMakeEditDialog');"/>
-                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="CategMakeEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{categMakeController.update}" value="#{bundle_Categ.Save}" 
+                                     update="display,:CategMakeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CategMakeEditDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="PF('CategMakeEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

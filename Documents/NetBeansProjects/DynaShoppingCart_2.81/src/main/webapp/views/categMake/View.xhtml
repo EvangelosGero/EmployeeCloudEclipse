@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="CategMakeViewDlg" widgetVar="CategMakeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.ViewCategMakeTitle}">
+        <p:dialog id="CategMakeViewDlg" widgetVar="CategMakeViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.ViewCategMakeTitle}">
             <h:form id="CategMakeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categMakeController.selected != null}">
@@ -19,7 +20,7 @@
                         <h:outputText value="#{bundle_Categ.ViewCategMakeLabel_logo}"/>
                         <h:outputText value="#{categMakeController.selected.mkLogo}" title="#{bundle_Categ.ViewCategMakeTitle_logo}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_Categ.Close}" onclick="CategMakeViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_Categ.Close}" onclick="PF('CategMakeViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

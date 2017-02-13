@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="Categ1EditDlg" widgetVar="Categ1EditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Categ.EditCateg1Title}">
+        <p:dialog id="Categ1EditDlg" widgetVar="Categ1EditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.EditCateg1Title}">
             <h:form id="Categ1EditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categ1Controller.selected != null}">
@@ -16,10 +17,12 @@
                         <p:inputText id="id" value="#{categ1Controller.selected.c1Id}" title="#{bundle_Categ.EditCateg1Title_id}" 
                                      required="true" requiredMessage="#{bundle_Categ.EditCateg1RequiredMessage_id}" disabled="true"/>
                         <p:outputLabel value="#{bundle_Categ.EditCateg1Label_descr}" for="descr" />
-                        <p:inputText id="descr" value="#{categ1Controller.selected.c1Descr}" title="#{bundle_Categ.EditCateg1Title_descr}" required="true" requiredMessage="#{bundle_Categ.EditCateg1RequiredMessage_descr}"/>                        
+                        <p:inputText id="descr" value="#{categ1Controller.selected.c1Descr}" title="#{bundle_Categ.EditCateg1Title_descr}" 
+                                     required="true" requiredMessage="#{bundle_Categ.EditCateg1RequiredMessage_descr}"/>                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{categ1Controller.update}" value="#{bundle_Categ.Save}" update="display,:Categ1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Categ1EditDialog');"/>
-                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="Categ1EditDialog.hide()"/>
+                    <p:commandButton actionListener="#{categ1Controller.update}" value="#{bundle_Categ.Save}" 
+                                     update="display,:Categ1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Categ1EditDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="PF('Categ1EditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

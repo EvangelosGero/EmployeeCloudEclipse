@@ -46,10 +46,18 @@
                             <h:outputText value="#{item.catgDiscountScheme}"/>
                         </p:column>
                         <f:facet name="footer">
-                          <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{catgMasController.prepareCreate}" update=":CatgMasCreateForm" oncomplete="PF('CatgMasCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CatgMasViewForm" oncomplete="PF('CatgMasViewDialog').show()" disabled="#{empty catgMasController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CatgMasEditForm" oncomplete="PF('CatgMasEditDialog').show()" disabled="#{empty catgMasController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{catgMasController.destroy}" update=":growl,datalist" disabled="#{empty catgMasController.selected}"/> 
+                          <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                           actionListener="#{catgMasController.prepareCreate}" update=":CatgMasCreateForm" 
+                                           oncomplete="PF('CatgMasCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
+                                             update=":CatgMasViewForm" oncomplete="PF('CatgMasViewDialog').show()" 
+                                             disabled="#{empty catgMasController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             update=":CatgMasEditForm" oncomplete="PF('CatgMasEditDialog').show()" 
+                                             disabled="#{empty catgMasController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                             actionListener="#{catgMasController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty catgMasController.selected}"/> 
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

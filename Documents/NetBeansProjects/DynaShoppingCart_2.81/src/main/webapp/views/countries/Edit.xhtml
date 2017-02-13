@@ -8,31 +8,49 @@
 
     <ui:composition>
 
-        <p:dialog id="CountriesEditDlg" widgetVar="CountriesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_countries.EditCountriesTitle}">
+        <p:dialog id="CountriesEditDlg" widgetVar="CountriesEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_countries.EditCountriesTitle}">
             <h:form id="CountriesEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{countriesController.selected != null}">
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{countriesController.selected.id}" title="#{bundle_countries.EditCountriesTitle_id}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{countriesController.selected.id}" title="#{bundle_countries.EditCountriesTitle_id}"
+                                     required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_code}" for="code" />
-                        <p:inputText id="code" value="#{countriesController.selected.code}" title="#{bundle_countries.EditCountriesTitle_code}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_code}"/>
+                        <p:inputText id="code" value="#{countriesController.selected.code}" title="#{bundle_countries.EditCountriesTitle_code}" 
+                                     required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_code}"/>
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{countriesController.selected.name}" title="#{bundle_countries.EditCountriesTitle_name}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_name}"/>
+                        <p:inputText id="name" value="#{countriesController.selected.name}" title="#{bundle_countries.EditCountriesTitle_name}" 
+                                     required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_name}"/>
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_fullName}" for="fullName" />
-                        <p:inputText id="fullName" value="#{countriesController.selected.fullName}" title="#{bundle_countries.EditCountriesTitle_fullName}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_fullName}"/>
+                        <p:inputText id="fullName" value="#{countriesController.selected.fullName}" title="#{bundle_countries.EditCountriesTitle_fullName}" 
+                                     required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_fullName}"/>
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_iso3}" for="iso3" />
-                        <p:inputText id="iso3" value="#{countriesController.selected.iso3}" title="#{bundle_countries.EditCountriesTitle_iso3}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_iso3}"/>
+                        <p:inputText id="iso3" value="#{countriesController.selected.iso3}" title="#{bundle_countries.EditCountriesTitle_iso3}" 
+                                     required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_iso3}"/>
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_number}" for="number" />
-                        <p:inputText id="number" value="#{countriesController.selected.number}" title="#{bundle_countries.EditCountriesTitle_number}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_number}"/>
+                        <p:inputText id="number" value="#{countriesController.selected.number}" title="#{bundle_countries.EditCountriesTitle_number}" 
+                                     required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_number}"/>
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_continentCode}" for="continentCode" />
-                        <p:inputText id="continentCode" value="#{countriesController.selected.continentCode}" title="#{bundle_countries.EditCountriesTitle_continentCode}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_continentCode}"/>
+                        <p:inputText id="continentCode" value="#{countriesController.selected.continentCode}" 
+                                     title="#{bundle_countries.EditCountriesTitle_continentCode}" required="true" 
+                                     requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_continentCode}"/>
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_inEU}" for="inEU" />
-                        <p:inputText id="inEU" value="#{countriesController.selected.inEU}" title="#{bundle_countries.EditCountriesTitle_inEU}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_inEU}"/>
+                        <p:selectOneMenu id="inEU" value="#{countriesController.selected.inEU}" title="#{bundle_countries.EditCountriesTitle_inEU}"                               
+                                         required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_inEU}">
+                            <f:selectItems value="#{[0, 1]}" var="p"
+                                           itemLabel="#{p}" itemValue="#{p}"/>
+                        </p:selectOneMenu>                        
                         <p:outputLabel value="#{bundle_countries.EditCountriesLabel_enabled}" for="enabled" />
-                        <p:inputText id="enabled" value="#{countriesController.selected.enabled}" title="#{bundle_countries.EditCountriesTitle_enabled}" required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_enabled}"/>
+                        <p:selectOneMenu id="enabled" value="#{countriesController.selected.enabled}" title="#{bundle_countries.EditCountriesTitle_enabled}"                               
+                                         required="true" requiredMessage="#{bundle_countries.EditCountriesRequiredMessage_enabled}">
+                            <f:selectItems value="#{[0, 1]}" var="p"
+                                           itemLabel="#{p}" itemValue="#{p}"/>
+                        </p:selectOneMenu>                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{countriesController.update}" value="#{bundle_countries.Save}" update="display,:CountriesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CountriesEditDialog');"/>
-                    <p:commandButton value="#{bundle_countries.Cancel}" onclick="CountriesEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{countriesController.update}" value="#{bundle_countries.Save}" 
+                                     update="display,:CountriesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CountriesEditDialog');"/>
+                    <p:commandButton value="#{bundle_countries.Cancel}" onclick="PF('CountriesEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
