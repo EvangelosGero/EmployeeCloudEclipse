@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="InvoiceEditDlg" widgetVar="InvoiceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_invoice.EditInvoiceTitle}">
+        <p:dialog id="InvoiceEditDlg" widgetVar="InvoiceEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_invoice.EditInvoiceTitle}">
             <h:form id="InvoiceEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{invoiceController.selected != null}">
@@ -17,14 +18,16 @@
                                      disabled="true" required="true" requiredMessage="#{bundle_invoice.EditInvoiceRequiredMessage_id}"/>
                         <p:outputLabel value="Πελάτης" for="usernmId" />                        
                         <p:selectOneMenu id="usernmId" value="#{invoiceController.selected.usernmId}"
-                                     converter="javax.faces.Integer"  style ="width: 90%">                                     
+                                         converter="javax.faces.Integer"  style ="width: 90%" 
+                                         required="true" requiredMessage="#{bundle_invoice.EditInvoiceRequiredMessage_user}">                                     
                             <f:selectItem itemLabel="Επίλεξε Πελάτη" itemValue=""/>
                             <f:selectItems  value="#{usernmController.items}" var="se"                                        
                                         itemLabel="#{se.userName}" itemValue="#{se.id}" >                                                                
                             </f:selectItems>                      
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle_invoice.EditInvoiceLabel_invoiceCode}" for="invoiceCode" />
-                        <p:inputText id="invoiceCode" value="#{invoiceController.selected.invoiceCode}" title="#{bundle_invoice.EditInvoiceTitle_invoiceCode}" />
+                        <p:inputText id="invoiceCode" value="#{invoiceController.selected.invoiceCode}" 
+                                     title="#{bundle_invoice.EditInvoiceTitle_invoiceCode}" />
                         <p:outputLabel value="#{bundle_invoice.EditInvoiceLabel_date}" for="date" />
                         <p:calendar id="date" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" value="#{invoiceController.selected.date}" 
                                     title="#{bundle_invoice.EditInvoiceTitle_date}" required="true" 
@@ -35,8 +38,9 @@
                         <p:inputText id="invoiceImg" value="#{invoiceController.selected.invoiceImg}" 
                                      title="#{bundle_invoice.EditInvoiceTitle_invoiceImg}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{invoiceController.update}" value="#{bundle_invoice.Save}" update="display,:InvoiceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InvoiceEditDialog');"/>
-                    <p:commandButton value="#{bundle_invoice.Cancel}" onclick="InvoiceEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{invoiceController.update}" value="#{bundle_invoice.Save}" 
+                                     update="display,:InvoiceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InvoiceEditDialog');"/>
+                    <p:commandButton value="#{bundle_invoice.Cancel}" onclick="PF('InvoiceEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

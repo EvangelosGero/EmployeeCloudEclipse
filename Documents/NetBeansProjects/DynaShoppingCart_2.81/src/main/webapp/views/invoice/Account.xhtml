@@ -29,7 +29,7 @@
                             </f:facet>
                             <h:outputText value="#{item.invoiceImg}"/>
                         </p:column>
-                        <p:column sortBy="#{item.date}">
+                        <p:column sortBy="#{item.date}" filterBy="#{item.date}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.AccountCol2}"/>
                             </f:facet>
@@ -37,31 +37,31 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy"  timeZone="GMT+3"  />  
                             </h:outputText>            
                         </p:column>
-                        <p:column sortBy="#{item.transactionType}">
+                        <p:column sortBy="#{item.transactionType}" filterBy="#{item.transactionType}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.AccountCol3}"/>
                             </f:facet>
                             <h:outputText value="#{item.transactionType}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.transactionCode}" sortBy="#{item.transactionCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.AccountCol4}"/>
                             </f:facet>
                             <h:outputText value="#{item.transactionCode}"/>
                         </p:column>
-                        <p:column sortBy="#{item.bank}">
+                        <p:column sortBy="#{item.bank}" filterBy="#{item.bank}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.AccountCol5}"/>
                             </f:facet>
                             <h:outputText value="#{item.bank}"/>
                         </p:column>
-                        <p:column sortBy="#{item.paymentMethod}">
+                        <p:column sortBy="#{item.paymentMethod}" filterBy="#{item.paymentMethod}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.AccountCol6}"/>
                             </f:facet>
                             <h:outputText value="#{item.paymentMethod == 0? 'Κατάθεση' : 'Πιστ. Κάρτα'}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.total}" sortBy="#{item.total}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.AccountCol7}"/>
                             </f:facet>

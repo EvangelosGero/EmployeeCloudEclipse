@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="InvoiceViewDlg" widgetVar="InvoiceViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_invoice.ViewInvoiceTitle}">
+        <p:dialog id="InvoiceViewDlg" widgetVar="InvoiceViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_invoice.ViewInvoiceTitle}">
             <h:form id="InvoiceViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{invoiceController.selected != null}">
@@ -27,7 +28,7 @@
                         <h:outputText value="#{bundle_invoice.ViewInvoiceLabel_invoiceImg}"/>
                         <h:outputText value="#{invoiceController.selected.invoiceImg}" title="#{bundle_invoice.ViewInvoiceTitle_invoiceImg}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_invoice.Close}" onclick="InvoiceViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_invoice.Close}" onclick="PF('InvoiceViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
