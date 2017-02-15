@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="SystemtableViewDlg" widgetVar="SystemtableViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSystemtableTitle}">
+        <p:dialog id="SystemtableViewDlg" widgetVar="SystemtableViewDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle.ViewSystemtableTitle}">
             <h:form id="SystemtableViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{systemtableController.selected != null}">
@@ -21,15 +22,23 @@
                         <h:outputText value="#{bundle.ViewSystemtableLabel_add3}"/>
                         <h:outputText value="#{systemtableController.selected.add3}" title="#{bundle.ViewSystemtableTitle_add3}"/>
                         <h:outputText value="#{bundle.ViewSystemtableLabel_bottomMessage}"/>
-                        <h:outputText value="#{systemtableController.selected.bottomMessage}" title="#{bundle.ViewSystemtableTitle_bottomMessage}"/>
+                        <h:inputTextarea readonly="true"  cols="60"   
+                                         value="#{systemtableController.selected.bottomMessage}" 
+                                      title="#{bundle.ViewSystemtableTitle_bottomMessage}"/>                        
                         <h:outputText value="#{bundle.ViewSystemtableLabel_aboutUs}"/>
-                        <h:outputText value="#{systemtableController.selected.aboutUs}" title="#{bundle.ViewSystemtableTitle_aboutUs}"/>
+                         <h:inputTextarea readonly="true"  cols="60"   
+                                          value="#{systemtableController.selected.aboutUs}" 
+                                      title="#{bundle.ViewSystemtableTitle_aboutUs}"/>                        
                         <h:outputText value="#{bundle.ViewSystemtableLabel_contactUs}"/>
-                        <h:outputText value="#{systemtableController.selected.contactUs}" title="#{bundle.ViewSystemtableTitle_contactUs}"/>
+                        <h:inputTextarea readonly="true"  cols="60"   
+                                          value="#{systemtableController.selected.contactUs}" 
+                                      title="#{bundle.ViewSystemtableTitle_contactUs}"/>
                         <h:outputText value="#{bundle.ViewSystemtableLabel_faq}"/>
-                        <h:outputText value="#{systemtableController.selected.faq}" title="#{bundle.ViewSystemtableTitle_faq}"/>
+                        <h:inputTextarea readonly="true"  cols="60"   
+                                          value="#{systemtableController.selected.faq}" 
+                                      title="#{bundle.ViewSystemtableTitle_faq}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="SystemtableViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('SystemtableViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

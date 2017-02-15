@@ -201,7 +201,7 @@ public class UsernmController implements Serializable {
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
-    
+
     Object request = FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
     public String loginMeIn() throws IOException  {
@@ -372,9 +372,9 @@ public class UsernmController implements Serializable {
             FacesMessage msg = new FacesMessage("change password is successful");
             FacesContext.getCurrentInstance().addMessage(null, msg);
 	} else {
-            FacesMessage msg = new FacesMessage(
-		"change password is unsuccessful",
-		"Please try with valid data");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+		"Change of password is unsuccessful. Please try with valid data","");
+		
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }

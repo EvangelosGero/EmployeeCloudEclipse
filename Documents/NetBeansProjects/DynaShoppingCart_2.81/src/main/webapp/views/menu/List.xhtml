@@ -17,7 +17,7 @@
             <h:form id="MenuListForm">
                 <p:panel header="#{bundle.ListMenuTitle}">
                     <p:dataTable id="datalist" value="#{menuController.items}" var="item"
-                                 selectionMode="single" selection="#{menuController.selected}"
+                                 selectionMode="single" selection="#{menuController.selected}" sortMode="multiple"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -27,25 +27,25 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column filterBy="#{item.id}" sortBy="#{item.id}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMenuTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.menucode}" sortBy="#{item.menucode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMenuTitle_menucode}"/>
                             </f:facet>
                             <h:outputText value="#{item.menucode}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.menuShortName}" sortBy="#{item.menuShortName}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMenuTitle_menuShortName}"/>
                             </f:facet>
                             <h:outputText value="#{item.menuShortName}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.menuLongName}" sortBy="#{item.menuLongName}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMenuTitle_menuLongName}"/>
                             </f:facet>
@@ -57,13 +57,13 @@
                             </f:facet>
                             <h:outputText value="#{item.menuRunOption}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.menuOrder}" sortBy="#{item.menuOrder}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMenuTitle_menuOrder}"/>
                             </f:facet>
                             <h:outputText value="#{item.menuOrder}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.roleuser}" sortBy="#{item.roleuser}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMenuTitle_roleuser}"/>
                             </f:facet>

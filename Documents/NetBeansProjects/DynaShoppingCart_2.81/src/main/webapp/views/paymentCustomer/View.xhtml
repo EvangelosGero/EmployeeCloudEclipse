@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="PaymentCustomerViewDlg" widgetVar="PaymentCustomerViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_invoice.ViewPaymentCustomerTitle}">
+        <p:dialog id="PaymentCustomerViewDlg" widgetVar="PaymentCustomerViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_invoice.ViewPaymentCustomerTitle}">
             <h:form id="PaymentCustomerViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{paymentCustomerController.selected != null}">
@@ -29,7 +30,7 @@
                         <h:outputText value="#{bundle_invoice.ViewPaymentCustomerLabel_total}"/>
                         <h:outputText value="#{paymentCustomerController.selected.total}" title="#{bundle_invoice.ViewPaymentCustomerTitle_total}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_invoice.Close}" onclick="PaymentCustomerViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_invoice.Close}" onclick="PF('PaymentCustomerViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

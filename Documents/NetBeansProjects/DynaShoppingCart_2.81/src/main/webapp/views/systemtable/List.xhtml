@@ -76,10 +76,18 @@
                             <h:outputText value="#{item.faq}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{systemtableController.prepareCreate}" update=":SystemtableCreateForm" oncomplete="PF('SystemtableCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SystemtableViewForm" oncomplete="PF('SystemtableViewDialog').show()" disabled="#{empty systemtableController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SystemtableEditForm" oncomplete="PF('SystemtableEditDialog').show()" disabled="#{empty systemtableController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{systemtableController.destroy}" update=":growl,datalist" disabled="#{empty systemtableController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                             actionListener="#{systemtableController.prepareCreate}" update=":SystemtableCreateForm" 
+                                             oncomplete="PF('SystemtableCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
+                                             update=":SystemtableViewForm" oncomplete="PF('SystemtableViewDialog').show()" 
+                                             disabled="#{empty systemtableController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             update=":SystemtableEditForm" oncomplete="PF('SystemtableEditDialog').show()" 
+                                             disabled="#{empty systemtableController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                             actionListener="#{systemtableController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty systemtableController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

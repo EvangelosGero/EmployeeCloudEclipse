@@ -15,23 +15,31 @@
                         <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_id}"/>
                         <h:outputText value="#{itemsReviewsController.selected.id}" title="#{bundle_itemsReviews.ViewItemsReviewsTitle_id}"/>
                         <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_itemCode}"/>
-                        <h:outputText value="#{itemsReviewsController.selected.itemCode}" title="#{bundle_itemsReviews.ViewItemsReviewsTitle_itemCode}"/>
+                        <h:outputText value="#{itemsReviewsController.selected.itemCode}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_itemCode}"/>
                         <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_reviews}"/>
-                        <h:outputText value="#{itemsReviewsController.selected.reviews}" title="#{bundle_itemsReviews.ViewItemsReviewsTitle_reviews}"/>
+                        <h:inputTextarea readonly="true"  cols="30" rows="5" 
+                                         value="#{itemsReviewsController.selected.reviews}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_reviews}"/>
                         <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_userName}"/>
-                        <h:outputText value="#{itemsReviewsController.selected.userName}" title="#{bundle_itemsReviews.ViewItemsReviewsTitle_userName}"/>
+                        <h:outputText value="#{itemsReviewsController.selected.userName}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_userName}"/>
                         <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_userId}"/>
-                        <h:outputText value="#{itemsReviewsController.selected.userId}" title="#{bundle_itemsReviews.ViewItemsReviewsTitle_userId}"/>
+                        <h:outputText value="#{itemsReviewsController.selected.userId}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_userId}"/>
                         <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_itemId}"/>
-                        <h:outputText value="#{itemsReviewsController.selected.itemId}" title="#{bundle_itemsReviews.ViewItemsReviewsTitle_itemId}"/>
+                        <h:outputText value="#{itemsReviewsController.selected.itemId}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_itemId}"/>
                         <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_dated}"/>
-                        <h:outputText value="#{itemsReviewsController.selected.dated}" title="#{bundle_itemsReviews.ViewItemsReviewsTitle_dated}">
+                        <h:outputText value="#{itemsReviewsController.selected.dated}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_dated}">
                             <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewPaymentsLabel_id}"/>
-                        <h:outputText value="#{itemsReviewsController.selected.paymentsId}" title="#{bundle.ViewPaymentsTitle_itemId}"/>
+                        <h:outputText value="#{bundle_itemsReviews.ViewItemsReviewsLabel_orderId}"/>
+                        <h:outputText value="#{itemsReviewsController.selected.orderId}" 
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_orderId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_itemsReviews.Close}" onclick="ItemsReviewsViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_itemsReviews.Close}" onclick="PF('ItemsReviewsViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

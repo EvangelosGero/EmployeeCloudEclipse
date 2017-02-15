@@ -37,7 +37,9 @@
                         </p:calendar>
                         <p:outputLabel value="Αρ. Παραγγελίας" for="orderId" />
                         <p:inputText id="orderId" value="#{itemsReviewsController.selected.orderId}" 
-                                     title="#{bundle.EditPaymentsTitle_id}"  disabled="true"/>
+                                     title="#{bundle_itemsReviews.ViewItemsReviewsTitle_orderId}"  disabled="true"
+                                     required="true"
+                                     requiredMessage="#{bundle_itemsReviews.EditItemsReviewsRequiredMessage_orderId}"/> 
                     </p:panelGrid>
                     <p:commandButton actionListener="#{itemsReviewsController.update}" value="#{bundle_itemsReviews.Save}" 
                                      update="display,:ItemsReviewsListForm:datalist,:growl" 

@@ -17,7 +17,7 @@
             <h:form id="PaymentCustomerListForm">
                 <p:panel header="#{bundle_invoice.ListPaymentCustomerTitle}">
                     <p:dataTable id="datalist" value="#{paymentCustomerController.items}" var="item"
-                                 selectionMode="single" selection="#{paymentCustomerController.selected}"
+                                 selectionMode="single" selection="#{paymentCustomerController.selected}" sortMode="multiple"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -27,37 +27,43 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column filterBy="#{item.id}" sortBy="#{item.id}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_invoice.ListPaymentCustomerTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.usernmId}" sortBy="#{item.usernmId}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_invoice.ListPaymentCustomerTitle_usernmId}"/>
                             </f:facet>
-                            <h:outputText value="#{usernmController.getUsernm(item.usernmId).userName}"/>
+                            <h:outputText value="#{item.usernmId}"/>
                         </p:column>
                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_invoice.ListPaymentCustomerTitle_userName}"/>
+                            </f:facet>
+                            <h:outputText value="#{usernmController.getUsernm(item.usernmId).userName}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.bank}" sortBy="#{item.bank}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_invoice.ListPaymentCustomerTitle_bank}"/>
                             </f:facet>
                             <h:outputText value="#{item.bank}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.paymentCode}" sortBy="#{item.paymentCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_invoice.ListPaymentCustomerTitle_paymentCode}"/>
                             </f:facet>
                             <h:outputText value="#{item.paymentCode}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.paymentMethod}" sortBy="#{item.paymentMethod}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_invoice.ListPaymentCustomerTitle_paymentMethod}"/>
                             </f:facet>
                             <h:outputText value="#{item.paymentMethod}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.date}" sortBy="#{item.date}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_invoice.ListPaymentCustomerTitle_date}"/>
                             </f:facet>
@@ -65,17 +71,25 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.total}" sortBy="#{item.total}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_invoice.ListPaymentCustomerTitle_total}"/>
                             </f:facet>
                             <h:outputText value="#{item.total}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_invoice.Create}" actionListener="#{paymentCustomerController.prepareCreate}" update=":PaymentCustomerCreateForm" oncomplete="PF('PaymentCustomerCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_invoice.View}" update=":PaymentCustomerViewForm" oncomplete="PF('PaymentCustomerViewDialog').show()" disabled="#{empty paymentCustomerController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_invoice.Edit}" update=":PaymentCustomerEditForm" oncomplete="PF('PaymentCustomerEditDialog').show()" disabled="#{empty paymentCustomerController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_invoice.Delete}" actionListener="#{paymentCustomerController.destroy}" update=":growl,datalist" disabled="#{empty paymentCustomerController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_invoice.Create}" 
+                                             actionListener="#{paymentCustomerController.prepareCreate}" 
+                                             update=":PaymentCustomerCreateForm" oncomplete="PF('PaymentCustomerCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_invoice.View}" 
+                                             update=":PaymentCustomerViewForm" oncomplete="PF('PaymentCustomerViewDialog').show()" 
+                                             disabled="#{empty paymentCustomerController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_invoice.Edit}" 
+                                             update=":PaymentCustomerEditForm" oncomplete="PF('PaymentCustomerEditDialog').show()" 
+                                             disabled="#{empty paymentCustomerController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_invoice.Delete}" 
+                                             actionListener="#{paymentCustomerController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty paymentCustomerController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

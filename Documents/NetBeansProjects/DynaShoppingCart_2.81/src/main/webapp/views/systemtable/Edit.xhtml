@@ -13,22 +13,63 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{systemtableController.selected != null}">                        
                         <p:outputLabel value="#{bundle.EditSystemtableLabel_companyName}" for="companyName" />
-                        <p:inputText id="companyName" value="#{systemtableController.selected.companyName}" title="#{bundle.EditSystemtableTitle_companyName}" />
+                        <p:inputText id="companyName" value="#{systemtableController.selected.companyName}" 
+                                     title="#{bundle.EditSystemtableTitle_companyName}" />
                         <p:outputLabel value="#{bundle.EditSystemtableLabel_add1}" for="add1" />
-                        <p:inputText id="add1" value="#{systemtableController.selected.add1}" title="#{bundle.EditSystemtableTitle_add1}" />
+                        <p:inputText id="add1" value="#{systemtableController.selected.add1}" 
+                                     title="#{bundle.EditSystemtableTitle_add1}" />
                         <p:outputLabel value="#{bundle.EditSystemtableLabel_add3}" for="add3" />
-                        <p:inputText id="add3" value="#{systemtableController.selected.add3}" title="#{bundle.EditSystemtableTitle_add3}" />
+                        <p:inputText id="add3" value="#{systemtableController.selected.add3}" 
+                                     title="#{bundle.EditSystemtableTitle_add3}" />
                         <p:outputLabel value="#{bundle.EditSystemtableLabel_bottomMessage}" for="bottomMessage" />
-                        <p:inputText id="bottomMessage" value="#{systemtableController.selected.bottomMessage}" title="#{bundle.EditSystemtableTitle_bottomMessage}" />
+                        <p:inputTextarea id="bottomMessage" title="#{bundle.EditSystemtableTitle_bottomMessage}"
+                                         value="#{systemtableController.selected.bottomMessage}" rows="5"
+                            cols="60" counter="counter" maxlength="150" 
+                            validatorMessage="Length should not be less than 5 characters"
+                            counterTemplate="{0} more characters remaining.">
+                            <f:validateLength minimum="5" />
+                            <p:clientValidator />
+                        </p:inputTextarea>
+                        <h:outputText></h:outputText>
+                        <h:outputText id="counter" style="color: #0000cc; font-weight: bold;"></h:outputText>
                         <p:outputLabel value="#{bundle.EditSystemtableLabel_aboutUs}" for="aboutUs" />
-                        <p:inputText id="aboutUs" value="#{systemtableController.selected.aboutUs}" title="#{bundle.EditSystemtableTitle_aboutUs}" />
+                        <p:inputTextarea id="aboutUs" title="#{bundle.EditSystemtableTitle_aboutUs}"
+                                         value="#{systemtableController.selected.aboutUs}" rows="5"
+                            cols="60" counter="counter1" maxlength="150" 
+                            validatorMessage="Length should not be less than 5 characters"
+                            counterTemplate="{0} more characters remaining.">
+                            <f:validateLength minimum="5" />
+                            <p:clientValidator />
+                        </p:inputTextarea>
+                        <h:outputText></h:outputText>
+                        <h:outputText id="counter1" style="color: #0000cc; font-weight: bold;"></h:outputText>
                         <p:outputLabel value="#{bundle.EditSystemtableLabel_contactUs}" for="contactUs" />
-                        <p:inputText id="contactUs" value="#{systemtableController.selected.contactUs}" title="#{bundle.EditSystemtableTitle_contactUs}" />
+                        <p:inputTextarea id="contactUs" title="#{bundle.EditSystemtableTitle_contactUs}"
+                                         value="#{systemtableController.selected.contactUs}" rows="5"
+                            cols="60" counter="counter2" maxlength="150" 
+                            validatorMessage="Length should not be less than 5 characters"
+                            counterTemplate="{0} more characters remaining.">
+                            <f:validateLength minimum="5" />
+                            <p:clientValidator />
+                        </p:inputTextarea>
+                        <h:outputText></h:outputText>
+                        <h:outputText id="counter2" style="color: #0000cc; font-weight: bold;"></h:outputText>
                         <p:outputLabel value="#{bundle.EditSystemtableLabel_faq}" for="faq" />
-                        <p:inputText id="faq" value="#{systemtableController.selected.faq}" title="#{bundle.EditSystemtableTitle_faq}" />
+                        <p:inputTextarea id="faq" title="#{bundle.EditSystemtableTitle_faq}"
+                                         value="#{systemtableController.selected.faq}" rows="5"
+                                         cols="60" counter="counter3" maxlength="2000"  autoResize="true"
+                            validatorMessage="Length should not be less than 5 characters"
+                            counterTemplate="{0} more characters remaining.">
+                            <f:validateLength minimum="5" />
+                            <p:clientValidator />
+                        </p:inputTextarea>
+                        <h:outputText></h:outputText>
+                        <h:outputText id="counter3" style="color: #0000cc; font-weight: bold;"></h:outputText>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{systemtableController.update}" value="#{bundle.Save}" update="display,:SystemtableListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SystemtableEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SystemtableEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{systemtableController.update}" value="#{bundle.Save}" 
+                                     update="display,:SystemtableListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'SystemtableEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SystemtableEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

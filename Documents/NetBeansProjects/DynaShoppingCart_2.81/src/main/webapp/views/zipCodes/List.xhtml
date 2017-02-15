@@ -18,6 +18,7 @@
                 <p:panel header="#{bundle_zipCodes.ListZipCodesTitle}">
                     <p:dataTable id="datalist" value="#{zipCodesController.items}" var="item"
                                  selectionMode="single" selection="#{zipCodesController.selected}"
+                                 sortMode="multiple"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -27,41 +28,49 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column filterBy="#{item.id}" sortBy="#{item.id}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_zipCodes.ListZipCodesTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.zpCode}" sortBy="#{item.zpCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_zipCodes.ListZipCodesTitle_zpCode}"/>
                             </f:facet>
                             <h:outputText value="#{item.zpCode}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.zpDescr}" sortBy="#{item.zpDescr}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_zipCodes.ListZipCodesTitle_zpDescr}"/>
                             </f:facet>
                             <h:outputText value="#{item.zpDescr}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.zpg}" sortBy="#{item.zpg}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_zipCodes.ListZipCodesTitle_zpg}"/>
                             </f:facet>
                             <h:outputText value="#{item.zpg}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.zpgDescr}" sortBy="#{item.zpgDescr}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_zipCodes.ListZipCodesTitle_zpgDescr}"/>
                             </f:facet>
                             <h:outputText value="#{item.zpgDescr}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_zipCodes.Create}" actionListener="#{zipCodesController.prepareCreate}" update=":ZipCodesCreateForm" oncomplete="PF('ZipCodesCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_zipCodes.View}" update=":ZipCodesViewForm" oncomplete="PF('ZipCodesViewDialog').show()" disabled="#{empty zipCodesController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_zipCodes.Edit}" update=":ZipCodesEditForm" oncomplete="PF('ZipCodesEditDialog').show()" disabled="#{empty zipCodesController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_zipCodes.Delete}" actionListener="#{zipCodesController.destroy}" update=":growl,datalist" disabled="#{empty zipCodesController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_zipCodes.Create}" 
+                                             actionListener="#{zipCodesController.prepareCreate}" update=":ZipCodesCreateForm" 
+                                             oncomplete="PF('ZipCodesCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_zipCodes.View}" 
+                                             update=":ZipCodesViewForm" oncomplete="PF('ZipCodesViewDialog').show()" 
+                                             disabled="#{empty zipCodesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_zipCodes.Edit}" 
+                                             update=":ZipCodesEditForm" oncomplete="PF('ZipCodesEditDialog').show()" 
+                                             disabled="#{empty zipCodesController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_zipCodes.Delete}" 
+                                             actionListener="#{zipCodesController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty zipCodesController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

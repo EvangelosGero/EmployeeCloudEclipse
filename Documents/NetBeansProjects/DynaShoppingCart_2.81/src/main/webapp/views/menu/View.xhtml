@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="MenuViewDlg" widgetVar="MenuViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMenuTitle}">
+        <p:dialog id="MenuViewDlg" widgetVar="MenuViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.ViewMenuTitle}">
             <h:form id="MenuViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{menuController.selected != null}">
@@ -27,7 +28,7 @@
                         <h:outputText value="#{bundle.ViewMenuLabel_roleuser}"/>
                         <h:outputText value="#{menuController.selected.roleuser}" title="#{bundle.ViewMenuTitle_roleuser}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="MenuViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('MenuViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

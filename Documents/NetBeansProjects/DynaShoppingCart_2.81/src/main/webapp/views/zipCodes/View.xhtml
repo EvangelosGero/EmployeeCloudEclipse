@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="ZipCodesViewDlg" widgetVar="ZipCodesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_zipCodes.ViewZipCodesTitle}">
+        <p:dialog id="ZipCodesViewDlg" widgetVar="ZipCodesViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_zipCodes.ViewZipCodesTitle}">
             <h:form id="ZipCodesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{zipCodesController.selected != null}">
@@ -23,7 +24,7 @@
                         <h:outputText value="#{bundle_zipCodes.ViewZipCodesLabel_zpgDescr}"/>
                         <h:outputText value="#{zipCodesController.selected.zpgDescr}" title="#{bundle_zipCodes.ViewZipCodesTitle_zpgDescr}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_zipCodes.Close}" onclick="ZipCodesViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_zipCodes.Close}" onclick="PF('ZipCodesViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

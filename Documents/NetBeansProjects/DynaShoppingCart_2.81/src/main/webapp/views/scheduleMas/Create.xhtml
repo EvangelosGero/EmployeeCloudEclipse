@@ -8,17 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="ScheduleMasCreateDlg" widgetVar="ScheduleMasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateScheduleMasTitle}">
+        <p:dialog id="ScheduleMasCreateDlg" widgetVar="ScheduleMasCreateDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle.CreateScheduleMasTitle}">
             <h:form id="ScheduleMasCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{scheduleMasController.selected != null}">                        
                         <p:outputLabel value="#{bundle.CreateScheduleMasLabel_scheduleOrder}" for="scheduleOrder" />
-                        <p:inputText id="scheduleOrder" value="#{scheduleMasController.selected.scheduleOrder}" title="#{bundle.CreateScheduleMasTitle_scheduleOrder}" />
+                        <p:inputText id="scheduleOrder" value="#{scheduleMasController.selected.scheduleOrder}" 
+                                     title="#{bundle.CreateScheduleMasTitle_scheduleOrder}" />
                         <p:outputLabel value="#{bundle.CreateScheduleMasLabel_scheduleType}" for="scheduleType" />
-                        <p:inputText id="scheduleType" value="#{scheduleMasController.selected.scheduleType}" title="#{bundle.CreateScheduleMasTitle_scheduleType}" />
+                        <p:inputText id="scheduleType" value="#{scheduleMasController.selected.scheduleType}" 
+                                     title="#{bundle.CreateScheduleMasTitle_scheduleType}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{scheduleMasController.create}" value="#{bundle.Save}" update="display,:ScheduleMasListForm:datalist,:growl" oncomplete="handleSubmit(args,'ScheduleMasCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ScheduleMasCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{scheduleMasController.create}" value="#{bundle.Save}" 
+                                     update="display,:ScheduleMasListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'ScheduleMasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ScheduleMasCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

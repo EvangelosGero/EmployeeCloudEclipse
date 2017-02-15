@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="UsernmViewDlg" widgetVar="UsernmViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUsernmTitle}">
+        <p:dialog id="UsernmViewDlg" widgetVar="UsernmViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.ViewUsernmTitle}">
             <h:form id="UsernmViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usernmController.selected != null}">
@@ -48,8 +49,12 @@
                         <h:outputText value="#{usernmController.selected.postalCode}" title="#{bundle.ViewUsernmTitle_postalCode}"/>
                         <h:outputText value="#{bundle.ViewUsernmLabel_address}"/>
                         <h:outputText value="#{usernmController.selected.address}" title="#{bundle.ViewUsernmTitle_address}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_firstName}"/>
+                        <h:outputText value="#{usernmController.selected.firstName}" title="#{bundle.ViewUsernmTitle_firstName}"/>
+                        <h:outputText value="#{bundle.ViewUsernmLabel_lastName}"/>
+                        <h:outputText value="#{usernmController.selected.lastName}" title="#{bundle.ViewUsernmTitle_lastName}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="UsernmViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('UsernmViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

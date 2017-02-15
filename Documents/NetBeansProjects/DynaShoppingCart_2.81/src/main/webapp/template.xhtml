@@ -9,11 +9,13 @@
     <h:head>
         <title><ui:insert name="title"></ui:insert></title>                
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+        </script>
         <h:outputScript>
             function handleSubmit(args, dialog) {
                 var jqDialog = $('#' + dialog);
                 if (args.validationFailed) {
-                    jqDialog.effect('shake', {times: 3}, 100);
+                    jqDialog.effect('shake', {times: 4}, 1000);
                 } else {
                     PF(dialog).hide();
                 }
@@ -72,7 +74,7 @@
             }
         </style>
        
-            <p:growl id="growl" life="10000" />
+            <p:growl id="growl" life="10000"  />
         
         <p:layout fullPage="true" widgetVar="layoutit">
             <p:layoutUnit position="north" size="150" header="#{bundle.AppName}">
@@ -224,7 +226,7 @@
                     <p:commandButton value="Cancel" onclick="PF('loginDialog').hide()"/>
                     <p:defaultCommand target="loginBtn"/>
                     <p:commandLink value="Change Password"
-                        onstart="PF('loginDialog').hide()" oncomplete="PF('$changepwd').show();">                            
+                        onstart="PF('loginDialog').hide()" oncomplete="PF('WVchangepwd').show();">                            
                     </p:commandLink> 
                 </h:panelGrid>
             </h:form>

@@ -30,17 +30,17 @@ public class Systemtable implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Size(max = 20)
-    @Column(name = "company_name", length = 20)
+    @Size(max = 100)
+    @Column(name = "company_name", length = 100)
     private String companyName;
-    @Size(max = 25)
-    @Column(name = "add1", length = 25)
+    @Size(max = 100)
+    @Column(name = "add1", length = 100)
     private String add1;
-    @Size(max = 25)
-    @Column(name = "add3", length = 25)
+    @Size(max = 100)
+    @Column(name = "add3", length = 100)
     private String add3;
-    @Size(max = 25)
-    @Column(name = "bottom_message", length = 25)
+    @Size(max = 200)
+    @Column(name = "bottom_message", length = 200)
     private String bottomMessage;
     @Size(max = 200)
     @Column(name = "about_us", length = 200)
@@ -48,8 +48,8 @@ public class Systemtable implements Serializable {
     @Size(max = 200)
     @Column(name = "contact_us", length = 200)
     private String contactUs;
-    @Size(max = 200)
-    @Column(name = "faq", length = 200)
+    @Size(max = 2000)
+    @Column(name = "faq", length = 2000)
     private String faq;
 
     public Systemtable() {

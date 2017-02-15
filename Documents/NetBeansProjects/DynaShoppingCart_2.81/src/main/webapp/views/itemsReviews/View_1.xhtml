@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="ItemsReviewsViewDlg" widgetVar="ItemsReviewsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_itemsReviews.ViewItemsReviewsTitle}">
+        <p:dialog id="ItemsReviewsViewDlg" widgetVar="ItemsReviewsViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_itemsReviews.ViewItemsReviewsTitle}">
             <h:form id="ItemsReviewsViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{itemsReviewsController.selected != null}">                        
@@ -27,9 +28,9 @@
                                       title="#{bundle_itemsReviews.ViewItemsReviewsTitle_dated}">
                             <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
-                        <h:outputText value="Αρ. Παραγγελίας: "/>
+                        <h:outputText value="Αρ. Παραγγελίας: "/>                        
                         <h:outputText value="#{itemsReviewsController.selected.orderId}" 
-                                      title="#{bundle.ViewPaymentsTitle_itemId}"/>
+                                      title="#{bundle_itemsReviews.ViewItemsReviewsTitle_orderId}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle_itemsReviews.Close}" onclick="PF('ItemsReviewsViewDialog').hide()"/>
                 </h:panelGroup>

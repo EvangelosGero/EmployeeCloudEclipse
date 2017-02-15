@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{zipCodesController.selected != null}">
                         <p:outputLabel value="#{bundle_zipCodes.EditZipCodesLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{zipCodesController.selected.id}" title="#{bundle_zipCodes.EditZipCodesTitle_id}" required="true" requiredMessage="#{bundle_zipCodes.EditZipCodesRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{zipCodesController.selected.id}" title="#{bundle_zipCodes.EditZipCodesTitle_id}" 
+                                     disabled="true" required="true" requiredMessage="#{bundle_zipCodes.EditZipCodesRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle_zipCodes.EditZipCodesLabel_zpCode}" for="zpCode" />
                         <p:inputText id="zpCode" value="#{zipCodesController.selected.zpCode}" title="#{bundle_zipCodes.EditZipCodesTitle_zpCode}" required="true" requiredMessage="#{bundle_zipCodes.EditZipCodesRequiredMessage_zpCode}"/>
                         <p:outputLabel value="#{bundle_zipCodes.EditZipCodesLabel_zpDescr}" for="zpDescr" />
@@ -23,8 +24,9 @@
                         <p:outputLabel value="#{bundle_zipCodes.EditZipCodesLabel_zpgDescr}" for="zpgDescr" />
                         <p:inputText id="zpgDescr" value="#{zipCodesController.selected.zpgDescr}" title="#{bundle_zipCodes.EditZipCodesTitle_zpgDescr}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{zipCodesController.update}" value="#{bundle_zipCodes.Save}" update="display,:ZipCodesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ZipCodesEditDialog');"/>
-                    <p:commandButton value="#{bundle_zipCodes.Cancel}" onclick="ZipCodesEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{zipCodesController.update}" value="#{bundle_zipCodes.Save}" 
+                                     update="display,:ZipCodesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ZipCodesEditDialog');"/>
+                    <p:commandButton value="#{bundle_zipCodes.Cancel}" onclick="PF('ZipCodesEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

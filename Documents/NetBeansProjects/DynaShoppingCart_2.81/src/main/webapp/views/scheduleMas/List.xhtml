@@ -46,10 +46,18 @@
                             <h:outputText value="#{item.scheduleType}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{scheduleMasController.prepareCreate}" update=":ScheduleMasCreateForm" oncomplete="PF('ScheduleMasCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ScheduleMasViewForm" oncomplete="PF('ScheduleMasViewDialog').show()" disabled="#{empty scheduleMasController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ScheduleMasEditForm" oncomplete="PF('ScheduleMasEditDialog').show()" disabled="#{empty scheduleMasController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{scheduleMasController.destroy}" update=":growl,datalist" disabled="#{empty scheduleMasController.selected}"/> 
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                             actionListener="#{scheduleMasController.prepareCreate}" 
+                                             update=":ScheduleMasCreateForm" oncomplete="PF('ScheduleMasCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
+                                             update=":ScheduleMasViewForm" oncomplete="PF('ScheduleMasViewDialog').show()" 
+                                             disabled="#{empty scheduleMasController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             update=":ScheduleMasEditForm" oncomplete="PF('ScheduleMasEditDialog').show()" 
+                                             disabled="#{empty scheduleMasController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                             actionListener="#{scheduleMasController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty scheduleMasController.selected}"/> 
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
