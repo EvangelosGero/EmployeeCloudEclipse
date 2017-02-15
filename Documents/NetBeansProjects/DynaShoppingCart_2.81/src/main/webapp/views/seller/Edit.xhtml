@@ -8,17 +8,30 @@
 
     <ui:composition>
 
-        <p:dialog id="SellerEditDlg" widgetVar="SellerEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSellerTitle}">
+        <p:dialog id="SellerEditDlg" widgetVar="SellerEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.EditSellerTitle}">
             <h:form id="SellerEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sellerController.selected != null}">                        
                         <p:outputLabel value="#{bundle.EditSellerLabel_sellerCode}" for="sellerCode" />
-                        <p:inputText id="sellerCode" value="#{sellerController.selected.usernmId}" title="#{bundle.EditSellerTitle_sellerCode}" />
-                        <p:outputLabel value="#{bundle.EditSellerLabel_sellerAFM}" for="sellerName" />
-                        <p:inputText id="sellerName" value="#{sellerController.selected.sellerAFM}" title="#{bundle.EditSellerTitle_sellerAFM}" />                       
+                        <p:selectOneMenu  id="sellerCode" required="true" requiredMessage="#{bundle.EditSellerRequiredMessage_userID}"
+                                          value="#{sellerController.selected.usernmId}" title="#{bundle.EditSellerTitle_sellerCode}"
+                                          filter="true" converter="javax.faces.Integer">
+                            <f:selectItem id="sItem" itemLabel="Επίλεξε Κωδικό προμηθευτή" itemValue=""/>
+                            <f:selectItems id="sItemMany"  
+                                           value="#{usernmController.items.stream()
+                                           .filter(s -> s.roleuser eq 's').toList()}" 
+                                           var="se" 
+                                           itemLabel="#{se.userName}" itemValue="#{se.id}">
+                            </f:selectItems>
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="#{bundle.EditSellerLabel_sellerAFM}" for="sellerAFM" />
+                        <p:inputText id="sellerAFM" value="#{sellerController.selected.sellerAFM}" 
+                                     title="#{bundle.EditSellerTitle_sellerAFM}" />                       
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{sellerController.update}" value="#{bundle.Save}" update="display,:SellerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SellerEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SellerEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{sellerController.update}" value="#{bundle.Save}" 
+                                     update="display,:SellerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SellerEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SellerEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -8,20 +8,36 @@
 
     <ui:composition>
 
-        <p:dialog id="SellerViewDlg" widgetVar="SellerViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSellerTitle}">
+        <p:dialog id="SellerViewDlg" widgetVar="SellerViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.ViewSellerTitle}">
             <h:form id="SellerViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sellerController.selected != null}">
                         <h:outputText value="#{bundle.ViewSellerLabel_sellerCode}"/>
-                        <h:outputText value="#{sellerController.selected.sellerCode}" title="#{bundle.ViewSellerTitle_sellerCode}"/>
+                        <h:outputText value="#{not empty usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).userName : ''}" 
+                                      title="#{bundle.ViewSellerTitle_sellerCode}"/>
                         <h:outputText value="#{bundle.ViewSellerLabel_sellerName}"/>
-                        <h:outputText value="#{sellerController.selected.sellerName}" title="#{bundle.ViewSellerTitle_sellerName}"/>
+                        <h:outputText  value="#{not empty usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).firstName : ''} #{not empty 
+                                    usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).lastName : ''}"                                       
+                                      title="#{bundle.ViewSellerTitle_sellerName}"/>
                         <h:outputText value="#{bundle.ViewSellerLabel_sellerMob}"/>
-                        <h:outputText value="#{sellerController.selected.sellerMob}" title="#{bundle.ViewSellerTitle_sellerMob}"/>
+                        <h:outputText  value="#{not empty usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).mobile : ''}" 
+                                      title="#{bundle.ViewSellerTitle_sellerMob}"/>
                         <h:outputText value="#{bundle.ViewSellerLabel_sellerAddress}" />
-                        <h:outputText value="#{sellerController.selected.sellerAddress}" title="#{bundle.ViewSellerTitle_sellerAddress}"/>
+                        <h:outputText  value="#{not empty usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).address : ''}" 
+                                      title="#{bundle.ViewSellerTitle_sellerAddress}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="SellerViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('SellerViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
