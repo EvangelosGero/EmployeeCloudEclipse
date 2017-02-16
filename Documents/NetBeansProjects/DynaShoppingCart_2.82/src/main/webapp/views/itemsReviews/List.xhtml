@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ItemsReviewsListForm">
+                <p:panel header="#{bundle_itemsReviews.ListItemsReviewsTitle}">
+                    <p:dataTable id="datalist" value="#{itemsReviewsController.items}" var="item"
+                                 selectionMode="single" selection="#{itemsReviewsController.selected}" sortMode="multiple"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column filterBy="#{item.id}" sortBy="#{item.id}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.itemId}" sortBy="#{item.itemId}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle_itemId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemId}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.itemCode}" sortBy="#{item.itemCode}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle_itemCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemCode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle_reviews}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reviews}"/>
+                        </p:column>                        
+                        <p:column filterBy="#{item.userName}" sortBy="#{item.userName}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle_userName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userName}"/>
+                        </p:column>                        
+                        <p:column filterBy="#{item.userId}" sortBy="#{item.userId}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle_userId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userId}"/>
+                        </p:column>
+                        
+                        <p:column sortBy="#{item.dated}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle_dated}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dated}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{item.orderId}" sortBy="#{item.orderId}">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle_itemsReviews.ListItemsReviewsTitle_orderId}"/>
+                                </f:facet>
+                            <h:outputText value="#{item.orderId}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_itemsReviews.Create}" 
+                                             actionListener="#{itemsReviewsController.prepareCreate}" update=":ItemsReviewsCreateForm" 
+                                             oncomplete="PF('ItemsReviewsCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_itemsReviews.View}" 
+                                             update=":ItemsReviewsViewForm" oncomplete="PF('ItemsReviewsViewDialog').show()" 
+                                             disabled="#{empty itemsReviewsController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_itemsReviews.Edit}" 
+                                             update=":ItemsReviewsEditForm" oncomplete="PF('ItemsReviewsEditDialog').show()" 
+                                             disabled="#{empty itemsReviewsController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_itemsReviews.Delete}" 
+                                             actionListener="#{itemsReviewsController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty itemsReviewsController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

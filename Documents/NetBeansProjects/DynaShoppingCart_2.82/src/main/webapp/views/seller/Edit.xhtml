@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SellerEditDlg" widgetVar="SellerEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.EditSellerTitle}">
+            <h:form id="SellerEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sellerController.selected != null}">                        
+                        <p:outputLabel value="#{bundle.EditSellerLabel_sellerCode}" for="sellerCode" />
+                        <p:selectOneMenu  id="sellerCode" required="true" requiredMessage="#{bundle.EditSellerRequiredMessage_userID}"
+                                          value="#{sellerController.selected.usernmId}" title="#{bundle.EditSellerTitle_sellerCode}"
+                                          filter="true" converter="javax.faces.Integer">
+                            <f:selectItem id="sItem" itemLabel="Επίλεξε Κωδικό προμηθευτή" itemValue=""/>
+                            <f:selectItems id="sItemMany"  
+                                           value="#{usernmController.items.stream()
+                                           .filter(s -> s.roleuser eq 's').toList()}" 
+                                           var="se" 
+                                           itemLabel="#{se.userName}" itemValue="#{se.id}">
+                            </f:selectItems>
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="#{bundle.EditSellerLabel_sellerAFM}" for="sellerAFM" />
+                        <p:inputText id="sellerAFM" value="#{sellerController.selected.sellerAFM}" 
+                                     title="#{bundle.EditSellerTitle_sellerAFM}" />                       
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sellerController.update}" value="#{bundle.Save}" 
+                                     update="display,:SellerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SellerEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SellerEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

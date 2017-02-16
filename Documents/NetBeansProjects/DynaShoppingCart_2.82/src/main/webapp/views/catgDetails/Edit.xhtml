@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CatgDetailsEditDlg" widgetVar="CatgDetailsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCatgDetailsTitle}">
+            <h:form id="CatgDetailsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{catgDetailsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCatgDetailsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{catgDetailsController.selected.id}" title="#{bundle.EditCatgDetailsTitle_id}" 
+                                     required="true" requiredMessage="#{bundle.EditCatgDetailsRequiredMessage_id}"
+                                     disabled="true"   />
+                        <p:outputLabel value="#{bundle.EditCatgDetailsLabel_discountsProviderName}" for="discountsProviderName" />
+                        <p:inputText id="discountsProviderName" value="#{catgDetailsController.selected.discountsProviderName}" 
+                                     title="#{bundle.EditCatgDetailsTitle_discountsProviderName}" />
+                        <p:outputLabel value="#{bundle.EditCatgDetailsLabel_discountsDetails}" for="discountsDetails" />
+                        <p:inputText id="discountsDetails" value="#{catgDetailsController.selected.discountsDetails}" 
+                                     title="#{bundle.EditCatgDetailsTitle_discountsDetails}" />
+                        <p:outputLabel value="#{bundle.EditCatgDetailsLabel_discountsValue}" for="discountsValue" />
+                        <p:inputText id="discountsValue" value="#{catgDetailsController.selected.discountsValue}" 
+                                     title="#{bundle.EditCatgDetailsTitle_discountsValue}" />
+                        <p:outputLabel value="#{bundle.EditCatgDetailsLabel_discountsPers}" for="discountsPers" />
+                        <p:inputText id="discountsPers" value="#{catgDetailsController.selected.discountsPers}" 
+                                     title="#{bundle.EditCatgDetailsTitle_discountsPers}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{catgDetailsController.update}" value="#{bundle.Save}" 
+                                     update="display,:CatgDetailsListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'CatgDetailsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CatgDetailsEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

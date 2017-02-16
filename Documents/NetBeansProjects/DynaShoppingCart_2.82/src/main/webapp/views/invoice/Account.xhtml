@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle_invoice.ListAccountTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AccountListForm">
+                <p:panel header="#{bundle_invoice.ListAccountTitle}">
+                    <p:dataTable id="datalist" value="#{accountController.accountList}" var="item"
+                                 sortMode="multiple"
+                                 paginator="true"                                 
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.AccountCol1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.invoiceImg}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.date}" filterBy="#{item.date}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.AccountCol2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.date}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"  timeZone="GMT+3"  />  
+                            </h:outputText>            
+                        </p:column>
+                        <p:column sortBy="#{item.transactionType}" filterBy="#{item.transactionType}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.AccountCol3}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.transactionType}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.transactionCode}" sortBy="#{item.transactionCode}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.AccountCol4}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.transactionCode}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.bank}" filterBy="#{item.bank}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.AccountCol5}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bank}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.paymentMethod}" filterBy="#{item.paymentMethod}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.AccountCol6}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.paymentMethod == 0? 'Κατάθεση' : 'Πιστ. Κάρτα'}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.total}" sortBy="#{item.total}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.AccountCol7}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.total}"/>
+                        </p:column>                        
+                        
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="6" style="text-align:right" footerText="Totals:"/>
+                                <p:column footerText="#{accountController.total}€" />                               
+                            </p:row>
+                        </p:columnGroup>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>            
+        </ui:define>
+    </ui:composition>
+
+</html>
