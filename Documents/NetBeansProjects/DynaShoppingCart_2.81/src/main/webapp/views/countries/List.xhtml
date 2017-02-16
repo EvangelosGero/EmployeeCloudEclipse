@@ -19,6 +19,7 @@
                     <p:dataTable id="datalist" value="#{countriesController.items}" var="item"
                                  selectionMode="single" selection="#{countriesController.selected}"
                                  paginator="true"
+                                 sortMode="multiple"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"

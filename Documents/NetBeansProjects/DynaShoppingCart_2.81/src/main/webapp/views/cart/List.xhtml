@@ -19,6 +19,7 @@
                     <p:dataTable id="datalist" value="#{cartController.items}" var="item"
                                  selectionMode="single" selection="#{cartController.selected}"
                                  paginator="true"
+                                 sortMode="multiple"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
@@ -62,7 +63,7 @@
                             </f:facet>
                             <h:outputText value="#{item.itemValue}"/>
                         </p:column>
-                        <p:column filterBy="#{item.cartDate}" sortBy="#{item.cartDate}">
+                        <p:column sortBy="#{item.cartDate}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_cartDate}"/>
                             </f:facet>
