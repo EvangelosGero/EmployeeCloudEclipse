@@ -64,9 +64,11 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_orderState}"/>
                             </f:facet>
-                            <h:outputText value="#{scheduleMasController.items.stream()
+                            <h:outputText value="#{not empty scheduleMasController.items.stream()
                                                    .filter(s -> s.scheduleOrder eq item.orderState)
-                                                   .toList().get(0).scheduleType}"
+                                                   .toList() ? scheduleMasController.items.stream()
+                                                   .filter(s -> s.scheduleOrder eq item.orderState)
+                                                   .toList().get(0).scheduleType : ''}"
                                           style="color: red"/>
                         </p:column>
                         <p:column style="width:100px">

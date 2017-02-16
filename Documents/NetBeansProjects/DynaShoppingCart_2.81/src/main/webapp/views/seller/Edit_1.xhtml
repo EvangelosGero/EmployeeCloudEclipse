@@ -36,10 +36,12 @@
                         <p:outputLabel value="#{bundle.EditItemsLabel_deliveryDays}" for="deliveryDays" />
                         <p:inputText id="deliveryDays" value="#{itemsController.selected.deliveryDays}" title="#{bundle.EditItemsTitle_deliveryDays}" />
                         <p:outputLabel value="Πωλητής" for="seller" />                        
-                        <p:inputText id="seller" value="#{itemsController.selected.usernmSellerId}"  disabled="true" title="Πωλητής" />
+                        <p:inputText id="seller" value="#{itemsController.selected.usernmSellerId}"  
+                                     disabled="true" title="Πωλητής" />
                         <p:outputLabel value="Εκπτωση" for="catgDetailsId" />
                         <p:selectOneMenu id="catgDetailsId" value="#{itemsController.selected.catgDetailsId}"
-                                     converter="javax.faces.Integer"  style ="width: 90%">                         
+                                     converter="javax.faces.Integer"  style ="width: 90%">
+                            <f:selectItem itemLabel="Καμία" itemValue=""/>
                             <f:selectItems  value="#{catgDetailsController.items}" var="ek"                                        
                                         itemLabel="#{ek.discountsProviderName}" itemValue="#{ek.id}" >                                                                
                             </f:selectItems>                      

@@ -16,6 +16,7 @@
                 <p:panel header="#{bundle_orders.ListOrderItemsTitle}">
                     <p:dataTable id="datalist" value="#{ordersController.selected.orderItemsList}" var="item"
                                  selectionMode="single" selection="#{orderItemsController.selected}"
+                                 sortMode="multiple"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -25,85 +26,85 @@
                         <p:ajax event="rowSelect"   update="createButton1 viewButton1 editButton1 deleteButton1"/>
                         <p:ajax event="rowUnselect" update="createButton1 viewButton1 editButton1 deleteButton1"/>
 
-                        <p:column>
+                        <p:column filterBy="#{item.id}" sortBy="#{item.id}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemCode}" sortBy="#{item.itemCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemCode}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemCode}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemPriceOld}" sortBy="#{item.itemPriceOld}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceOld}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemPriceOld}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemLongDescr}" sortBy="#{item.itemLongDescr}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemLongDescr}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemLongDescr}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemPriceRetail}" sortBy="#{item.itemPriceRetail}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceRetail}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemPriceRetail}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemDiscount}" sortBy="#{item.itemDiscount}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemDiscount}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemDiscount}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemSize}" sortBy="#{item.itemSize}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemSize}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemSize}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemColor}" sortBy="#{item.itemColor}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemColor}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemColor}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.quantity}" sortBy="#{item.quantity}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_quantity}"/>
                             </f:facet>
                             <h:outputText value="#{item.quantity}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.returnsCount}" sortBy="#{item.returnsCount}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_returnsCount}"/>
                             </f:facet>
                             <h:outputText value="#{item.returnsCount}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemPriceWholesale}" sortBy="#{item.itemPriceWholesale}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceWholesale}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemPriceWholesale}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.userId}" sortBy="#{item.userId}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_userId}"/>
                             </f:facet>
                             <h:outputText value="#{item.userId}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.itemId}" sortBy="#{item.itemId}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemId}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemId}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.orders.orderid}" sortBy="#{item.orders.orderid}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_orders}"/>
                             </f:facet>

@@ -20,6 +20,7 @@
                     <p:dataTable id="datalist" value="#{ordersController.items}" var="item"
                                  selectionMode="single" selection="#{ordersController.selected}"
                                  paginator="true"
+                                 sortMode="multiple"
                                  rowKey="#{item.orderid}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
@@ -30,13 +31,13 @@
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton 
                                 datalist"/>
                         
-                        <p:column style="width: 50px">
+                        <p:column style="width: 50px"  filterBy="#{item.orderid}" sortBy="#{item.orderid}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_orderid}"/>
                             </f:facet>
                             <h:outputText value="#{item.orderid}"/>
                         </p:column>
-                        <p:column style="width:100px">
+                        <p:column style="width:100px" sortBy="#{item.orderDate}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_orderDate}"/>
                             </f:facet>
@@ -84,7 +85,7 @@
                             </f:facet>
                             <h:outputText value="#{item.totalFinal}"/>
                         </p:column>
-                        <p:column style="width:100px">
+                        <p:column style="width:100px" filterBy="#{item.paymentMethodId}" sortBy="#{item.paymentMethodId}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_paymentMethodId}"/>
                             </f:facet>
@@ -108,91 +109,91 @@
                             </f:facet>
                             <p:selectBooleanCheckbox value="#{item.shippingCostId}" disabled="true"/>
                         </p:column>
-                        <p:column style="width:50px">
+                        <p:column style="width:50px" filterBy="#{item.affiliate}" sortBy="#{item.affiliate}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_affiliate}"/>
                             </f:facet>
                             <h:outputText value="#{item.affiliate}"/>
                         </p:column>
-                        <p:column style="width:70px">
+                        <p:column style="width:70px" filterBy="#{item.orderState}" sortBy="#{item.orderState}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_orderState}"/>
                             </f:facet>
                             <h:outputText value="#{item.orderState}"/>
                         </p:column>
-                        <p:column style="width:150px">
+                        <p:column style="width:150px" filterBy="#{item.custName}" sortBy="#{item.custName}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_custName}"/>
                             </f:facet>
                             <h:outputText value="#{item.custName}"/>
                         </p:column>
-                        <p:column style="width:150px">
+                        <p:column style="width:150px" filterBy="#{item.custEmail}" sortBy="#{item.custEmail}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_custEmail}"/>
                             </f:facet>
                             <h:outputText value="#{item.custEmail}"/>
                         </p:column>
-                       <p:column style="width:120px">
+                       <p:column style="width:120px" filterBy="#{item.custPhone}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_custPhone}"/>
                             </f:facet>
                             <h:outputText value="#{item.custPhone}"/>
                         </p:column>
-                        <p:column style="width:200px">
+                        <p:column style="width:200px" filterBy="#{item.shippingAddress}" sortBy="#{item.shippingAddress}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingAddress}"/>
                             </f:facet>
                             <h:outputText value="#{item.shippingAddress}"/>
                         </p:column>
-                        <p:column style="width:70px">
+                        <p:column style="width:70px" filterBy="#{item.shippingZip}" sortBy="#{item.shippingZip}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingZip}"/>
                             </f:facet>
                             <h:outputText value="#{item.shippingZip}"/>
                         </p:column>
-                        <p:column style="width:120px">
+                        <p:column style="width:120px" filterBy="#{item.shippingCity}" sortBy="#{item.shippingCity}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCity}"/>
                             </f:facet>
                             <h:outputText value="#{item.shippingCity}"/>
                         </p:column>
-                        <p:column style="width:100px">
+                        <p:column style="width:100px" filterBy="#{item.shippingCountry}" sortBy="#{item.shippingCountry}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCountry}"/>
                             </f:facet>
                             <h:outputText value="#{item.shippingCountry}"/>
                         </p:column>
-                        <p:column style="width:120px">
+                        <p:column style="width:120px" filterBy="#{item.requestedInvoice}" sortBy="#{item.requestedInvoice}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_requestedInvoice}"/>
                             </f:facet>
                             <h:outputText value="#{item.requestedInvoice}"/>
                         </p:column>
-                        <p:column style="width:50px">
+                        <p:column style="width:50px" filterBy="#{item.exported}" sortBy="#{item.exported}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_exported}"/>
                             </f:facet>
                             <h:outputText value="#{item.exported}"/>
                         </p:column>
-                        <p:column style="width:120px">
+                        <p:column style="width:120px" filterBy="#{item.shippingCountryCode}" sortBy="#{item.shippingCountryCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCountryCode}"/>
                             </f:facet>
                             <h:outputText value="#{item.shippingCountryCode}"/>
                         </p:column>
-                        <p:column style="width:120px">
+                        <p:column style="width:120px" filterBy="#{item.countryCodeSession}" sortBy="#{item.countryCodeSession}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_countryCodeSession}"/>
                             </f:facet>
                             <h:outputText value="#{item.countryCodeSession}"/>
                         </p:column>
-                        <p:column style="width:50px">
+                        <p:column style="width:50px" filterBy="#{item.clientIp}" sortBy="#{item.clientIp}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_clientIp}"/>
                             </f:facet>
                             <h:outputText value="#{item.clientIp}"/>
                         </p:column>
-                        <p:column style="width:50px">
+                        <p:column style="width:50px" filterBy="#{item.userId}" sortBy="#{item.userId}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_userId}"/>
                             </f:facet>

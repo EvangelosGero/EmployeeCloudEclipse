@@ -19,6 +19,7 @@
                     <p:dataTable id="datalist" value="#{orderItemsController.items}" var="item"
                                  selectionMode="single" selection="#{orderItemsController.selected}"
                                  paginator="true"
+                                 sortMode="multiple"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
@@ -27,95 +28,103 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.id}" sortBy="#{item.id}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemCode}"  sortBy="#{item.itemCode}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemCode}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemCode}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemPriceOld}" sortBy="#{item.itemPriceOld}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceOld}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemPriceOld}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemLongDescr}" sortBy="#{item.itemLongDescr}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemLongDescr}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemLongDescr}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemPriceRetail}" sortBy="#{item.itemPriceRetail}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceRetail}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemPriceRetail}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemDiscount}" sortBy="#{item.itemDiscount}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemDiscount}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemDiscount}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemSize}" sortBy="#{item.itemSize}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemSize}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemSize}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemColor}" sortBy="#{item.itemColor}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemColor}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemColor}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.quantity}" sortBy="#{item.quantity}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_quantity}"/>
                             </f:facet>
                             <h:outputText value="#{item.quantity}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.returnsCount}" sortBy="#{item.returnsCount}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_returnsCount}"/>
                             </f:facet>
                             <h:outputText value="#{item.returnsCount}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemPriceWholesale}" sortBy="#{item.itemPriceWholesale}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceWholesale}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemPriceWholesale}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.userId}" sortBy="#{item.userId}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_userId}"/>
                             </f:facet>
                             <h:outputText value="#{item.userId}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.itemId}" sortBy="#{item.itemId}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemId}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemId}"/>
                         </p:column>
-                        <p:column style="width: 100px">
+                        <p:column style="width: 100px" filterBy="#{item.orders.orderid}" sortBy="#{item.orders.orderid}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_orders}"/>
                             </f:facet>
                             <h:outputText value="#{item.orders.orderid}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_orders.Create}" actionListener="#{orderItemsController.prepareCreate}" update=":OrderItemsCreateForm" oncomplete="PF('OrderItemsCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_orders.View}" update=":OrderItemsViewForm" oncomplete="PF('OrderItemsViewDialog').show()" disabled="#{empty orderItemsController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_orders.Edit}" update=":OrderItemsEditForm" oncomplete="PF('OrderItemsEditDialog').show()" disabled="#{empty orderItemsController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_orders.Delete}" actionListener="#{orderItemsController.destroy}" update=":growl,datalist" disabled="#{empty orderItemsController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_orders.Create}" 
+                                             actionListener="#{orderItemsController.prepareCreate}" update=":OrderItemsCreateForm" 
+                                             oncomplete="PF('OrderItemsCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_orders.View}" 
+                                             update=":OrderItemsViewForm" oncomplete="PF('OrderItemsViewDialog').show()" 
+                                             disabled="#{empty orderItemsController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_orders.Edit}" 
+                                             update=":OrderItemsEditForm" oncomplete="PF('OrderItemsEditDialog').show()" 
+                                             disabled="#{empty orderItemsController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_orders.Delete}" 
+                                             actionListener="#{orderItemsController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty orderItemsController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

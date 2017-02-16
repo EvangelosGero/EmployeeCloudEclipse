@@ -103,6 +103,7 @@ public class SellerController implements Serializable {
     }    
     public Seller prepareCreate() {
         selected = new Seller();
+        selected.setUsernmId(usernmController.getUsernmLogged().getId());
         initializeEmbeddableKey();
         return selected;
     }

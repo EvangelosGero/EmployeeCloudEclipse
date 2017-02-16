@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="OrderItemsViewDlg" widgetVar="OrderItemsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_orders.ViewOrderItemsTitle}">
+        <p:dialog id="OrderItemsViewDlg" widgetVar="OrderItemsViewDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle_orders.ViewOrderItemsTitle}">
             <h:form id="OrderItemsViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{orderItemsController.selected != null}">
@@ -41,7 +42,7 @@
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_orders}"/>
                         <h:outputText value="#{orderItemsController.selected.orders.orderid}" title="#{bundle_orders.ViewOrderItemsTitle_orders}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_orders.Close}" onclick="OrderItemsViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_orders.Close}" onclick="PF('OrderItemsViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

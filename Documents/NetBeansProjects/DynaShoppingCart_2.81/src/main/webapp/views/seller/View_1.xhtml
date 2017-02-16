@@ -11,13 +11,14 @@
 
         <p:dialog id="ItemsViewDlg" widgetVar="ItemsViewDialog"  position="bottom"  fitViewport="true" 
                   closeOnEscape="true" closable="true"  onShow="zoomaki(); PF('layoutit').hide('north');"  maximizable="true" minimizable="true"
-                  draggable="true" onHide="stopZoom(); PF('layoutit').show('north');" header="ΣΤΟΙΧΕΙΑ ΠΡΟΪΟΝΤΟΣ"  resizable="true"   responsive="true"
+                  draggable="true" onHide="stopZoom(); restoreTitle();" header="ΣΤΟΙΧΕΙΑ ΠΡΟΪΟΝΤΟΣ"  resizable="true"   responsive="true"
                   showHeader="true"    >                        
             
-            <h:form id="ItemsViewForm">               
+                           
                 <h:panelGroup id="display">                     
                     <p:panelGrid id="viewPG"   columns="1" style="width: 1000px;">
-                        <p:carousel value="#{itemsController.selected.itemsImagesList}" var="picture" 
+                      <h:form id="ItemsViewForm">
+                          <p:carousel id="ViewCarousel" value="#{itemsController.selected.itemsImagesList}" var="picture" 
                                     vertical="true" itemStyle="width:400px" numVisible="3" style="width:1000px;"
                                     rendered="#{not empty itemsController.selected.itemsImagesList}"
                                     headerText="#{itemsController.selected.itemLongDesc} #{itemsController.selected.itemCode}" 
@@ -57,20 +58,23 @@
                         <h:outputText value="#{usernmController.items.stream().filter(
                                     s -> s.id eq itemsController.selected.usernmSellerId).toList().get(0).userName}" 
                                       title="#{bundle.ViewItemsTitle_usernmSellerId}"/>                        
-                      </h:panelGrid>                 
-                        <p:panelGrid columns="6" > 
-                            <ui:include src="/views/items/makesPerItem.xhtml" />
-                            <ui:include src="/views/items/modelsPerItem.xhtml" />
-                            <ui:include src="/views/items/originalCodesPerItem.xhtml" />
-                            <ui:include src="/views/catgDetails/offersPerItem.xhtml" />                                  
-                            <ui:include src="/views/itemsPaymentOptions/PaymentOptions.xhtml" />
-                            <ui:include src="/views/itemsDeliveryAvailablePin/AvailablePins.xhtml" />
-                      </p:panelGrid>                     
+                      </h:panelGrid> 
+                     </h:form>     
+                        <h:form id='viewHelperForm'> 
+                            <p:panelGrid columns="6" > 
+                                <ui:include src="/views/items/makesPerItem.xhtml" />
+                                <ui:include src="/views/items/modelsPerItem.xhtml" />
+                                <ui:include src="/views/items/originalCodesPerItem.xhtml" />
+                                <ui:include src="/views/catgDetails/offersPerItem.xhtml" />                                  
+                                <ui:include src="/views/itemsPaymentOptions/PaymentOptions.xhtml" />
+                                <ui:include src="/views/itemsDeliveryAvailablePin/AvailablePins.xhtml" />
+                            </p:panelGrid>
+                        </h:form>                     
                    </p:panelGrid>                  
                 
                 <p:commandButton value="#{bundle.Close}" onclick="PF('ItemsViewDialog').hide()"/> 
                </h:panelGroup>              
-            </h:form>
+            
         </p:dialog>
 
     </ui:composition>
