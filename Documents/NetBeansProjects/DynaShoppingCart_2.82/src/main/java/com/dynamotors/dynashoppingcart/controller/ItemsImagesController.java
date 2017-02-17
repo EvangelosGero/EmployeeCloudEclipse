@@ -4,14 +4,18 @@ import com.dynamotors.dynashoppingcart.entities.ItemsImages;
 import com.dynamotors.dynashoppingcart.controller.util.JsfUtil;
 import com.dynamotors.dynashoppingcart.controller.util.JsfUtil.PersistAction;
 import com.dynamotors.dynashoppingcart.ejbs.ItemsImagesFacade;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -21,6 +25,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @Named("itemsImagesController")
 @SessionScoped
@@ -75,6 +81,24 @@ public class ItemsImagesController implements Serializable {
         if(itemsController.getSelected() != null)selected.setItems(itemsController.getSelected());
         initializeEmbeddableKey();
         return selected;
+    }
+    
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
+        UploadedFile uploadedFile = event.getFile();
+        InputStream inputStr = null;
+        try{
+            inputStr = uploadedFile.getInputstream();            
+        }catch(IOException e){
+            Logger.getLogger(ItemsImagesController.class.getName()).log(Level.SEVERE, null, e);
+        }
+        Path destFile = Paths.get("C:", "ShoppingCart", "images1", uploadedFile.getFileName()); 
+                       
+        try {
+            Files.copy(inputStr, destFile, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ex) {
+            Logger.getLogger(ItemsImagesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void create() {
