@@ -8,21 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="PhotoUploadDlg1" widgetVar="PhotoUploadDialog1" fitViewport="true" appendTo="@(body)" 
+        <p:dialog id="PhotoUploadDlg" widgetVar="PhotoUploadDialog" fitViewport="true" appendTo="@(body)" 
                   closeOnEscape="true" closable="true"  maximizable="true" minimizable="true" width="700" minHeight="500"
                   draggable="true" header="#{bundle_itemsImages.FileuploadTitle}"  resizable="true"   
                   responsive="true" showHeader="true">                  
-            <h:form id="PhotoUploadForm1" enctype="multipart/form-data">
+            <h:form id="PhotoUploadForm" enctype="multipart/form-data">
                 <h:panelGroup id="display">
                     <p:fileUpload fileUploadListener="#{itemsImagesController.handleFileUpload}"
                                   mode="advanced" dragDropSupport="true" sizeLimit="100000"
                                   allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
-                                  update=":ItemsImagesCreateForm:display">
+                                  update=":Create_1Form:display1">                                 
                     </p:fileUpload>                    
-                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('PhotoUploadDialog1').hide()"/>
+                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('PhotoUploadDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
 
     </ui:composition>
 </html>
+

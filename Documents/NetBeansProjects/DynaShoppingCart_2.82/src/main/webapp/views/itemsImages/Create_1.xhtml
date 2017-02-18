@@ -16,7 +16,9 @@
                         <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_filename}" for="filename1" />
                         <p:inputText id="filename1" value="#{itemsImagesController.selected.filename}" 
                                      title="#{bundle_itemsImages.CreateItemsImagesTitle_filename}" required="true" 
-                                     requiredMessage="#{bundle_itemsImages.CreateItemsImagesRequiredMessage_filename}"/>
+                                     requiredMessage="#{bundle_itemsImages.CreateItemsImagesRequiredMessage_filename}">
+                            <p:clientValidator event="change"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_isbasic}" for="isbasic1" />
                         <p:selectOneMenu id="isbasic1" value="#{itemsImagesController.selected.isbasic}" 
                                          title="#{bundle_itemsImages.EditItemsImagesTitle_isbasic}"                               
@@ -30,11 +32,12 @@
                     <p:commandButton actionListener="#{itemsImagesController.create}" value="#{bundle_itemsImages.Save}"                                      
                                      update="display1, :ImagesForm1:datalist1,  :ItemsViewForm, :growl"  
                                      oncomplete="PF('ItemsImagesCreateDialog1').hide(); "/>
-                    <p:commandButton value="Upload Photos" ajax='true' update=":PhotoUploadForm" oncomplete="PF('PhotoUploadDialog').show()"/>
+                    <p:commandButton value="Upload Photos" ajax='true' update=":PhotoUploadForm" oncomplete="PF('PhotoUploadDialog').show()"
+                                     immediate="true"/>                                     
                     <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesCreateDialog1').hide()"/>
                 </h:panelGroup>
              </h:form>
         </p:dialog>
-        <ui:include src="PhotoUpload.xhtml"/>
+        <ui:include src="PhotoUpload_1.xhtml"/>
     </ui:composition>
 </html>

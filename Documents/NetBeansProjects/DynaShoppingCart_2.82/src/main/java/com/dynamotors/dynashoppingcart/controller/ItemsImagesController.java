@@ -91,14 +91,14 @@ public class ItemsImagesController implements Serializable {
         }catch(IOException e){
             Logger.getLogger(ItemsImagesController.class.getName()).log(Level.SEVERE, null, e);
         }
-        Path destFile = Paths.get("C:", "ShoppingCart", "images1", uploadedFile.getFileName()); 
-                       
+        Path destFile = Paths.get("C:", "ShoppingCart", "images1", uploadedFile.getFileName());
+        selected.setFilename(uploadedFile.getFileName());   //update create.xhtml and create_1.xhtml
         try {
             Files.copy(inputStr, destFile, StandardCopyOption.REPLACE_EXISTING);
+            
         } catch (IOException ex) {
             Logger.getLogger(ItemsImagesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     public void create() {

@@ -35,10 +35,12 @@
                     <p:commandButton actionListener="#{itemsImagesController.create}" value="#{bundle_itemsImages.Save}" 
                                      update="display, :ItemsImagesListForm:datalist, :growl" 
                                      oncomplete="handleSubmit(args,'ItemsImagesCreateDialog');"/>
+                    <p:commandButton value="Upload Photos" ajax='true' update=":PhotoUploadForm1" oncomplete="PF('PhotoUploadDialog1').show()"
+                                     immediate="true"/>
                     <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
-
+         <ui:include src="PhotoUpload.xhtml"/>
     </ui:composition>
 </html>
