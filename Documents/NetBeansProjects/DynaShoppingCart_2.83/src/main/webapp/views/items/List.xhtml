@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+            
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListItemsTitle}"></h:outputText>
+        </ui:define>
+        
+        <ui:define name="westPane">
+            <ui:include src="/views/catgMas/categorySearchForAdmin.xhtml" />
+        </ui:define>
+        
+        <ui:define name="eastPane">
+            <ui:include src="/views/menu/SiteListWestPane.xhtml" />
+        </ui:define>
+
+        <ui:define name="body">             
+            <h:form id="ItemsListForm">                
+                <p:panel header="#{bundle.ListItemsTitle}">                                 
+                    <p:dataTable id="datalist" value="#{itemsController.model}" var="item"
+                                 lazy="true"
+                                 selectionMode="single"
+                                 selection="#{itemsController.selected}"
+                                 paginator="true"                                 
+                                 rows="12"
+                                 rowsPerPageTemplate="12,24,36,48,60"
+                                 first="0"
+                                 widgetVar="dataTableWV"  
+                                 rowKey="#{item.itemId}"
+                                 > 
+                        
+                        <p:ajax event="rowSelect"   update="createButton, viewButton, editButton, deleteButton, 
+                                datalist"/>
+                        <p:ajax event="rowUnselect" update="createButton, viewButton, editButton, deleteButton, 
+                                datalist"/>
+
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemId}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemAvailability}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemAvailability}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemCode}"/>
+                        </p:column>
+                        <p:column style="width: 200px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemShortDesc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemShortDesc}"/>
+                        </p:column>
+                        <p:column style="width: 200px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemLongDesc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemLongDesc}"/>
+                        </p:column>
+                       <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemWholesalesValue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemWholesalesValue}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemColor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemColor}"/>
+                        </p:column>                        
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemWarranty}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemWarranty}"/>
+                        </p:column>
+                        <p:column style="width: 70px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemSize}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemSize}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemRetailValue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemRetailValue}"/>
+                        </p:column>
+                        
+                        
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemImage}"/>
+                            </f:facet>
+                            <p:commandLink  id="photos1" value="#{bundle.ListItemsTitle_itemImage}"
+                                            update=":ImagesForm1"
+                                            style ="text-decoration: underline !important;"
+                                            oncomplete="PF('opanel2').show()"
+                                            disabled="#{empty itemsController.selected}"
+                                           />                            
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="Γνήσιοι Κωδικοί"/>
+                            </f:facet>
+                            <p:commandLink  id="orig" value="Γνήσιοι Κωδικοί" 
+                                            update=":OriginalCodesListForm1"
+                                            style ="text-decoration: underline !important;"
+                                            oncomplete="PF('origpanel').show()"
+                                            disabled="#{empty itemsController.selected}"
+                                            />                            
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_deliveryDays}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.deliveryDays}"/>
+                        </p:column>
+                         <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_usernmSellerId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usernmSellerId}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="catg_Details_Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.catgDetailsId}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_storage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.catgDetailsId}"/>
+                        </p:column>                        
+                        <p:column style="width: 50px">
+                            <f:facet name="header">
+                                <h:outputText value="enabled"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox id="bool1" value="#{item.itemEnabled}"
+                                                     disabled="true"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                             actionListener="#{itemsController.prepareCreate}" update=":ItemsCreateForm" 
+                                             oncomplete="PF('ItemsCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
+                                             update=":ItemsViewForm, :viewHelperForm:ItemsOriginalCodesList, :viewHelperForm:ItemsMakesList,
+                                              :viewHelperForm:ItemsModelsList, :viewHelperForm:CatgDetailsList, 
+                                              :viewHelperForm:PaymentOptions, :viewHelperForm:AvailablePins"
+                                             oncomplete="PF('ItemsViewDialog').show()" 
+                                             disabled="#{empty itemsController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             update=":ItemsEditForm" oncomplete="PF('ItemsEditDialog').show()"
+                                             actionListener="#{itemsController.prepareEdit}"
+                                             disabled="#{empty itemsController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                             actionListener="#{itemsController.destroy}" update=":growl,datalist"                                             
+                                             disabled="#{empty itemsController.selected}">                                             
+                            </p:commandButton>                        
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+                        
+            </h:form>
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/> 
+            <p:commandLink  id="photos2" value="Φωτογραφίες"   rendered="false"/>
+            <p:overlayPanel id = "opanel" widgetVar="opanel2" for="photos2" showCloseIcon="true"   dismissable="false" 
+                                        style="width: 500px; height: 400px; "  my="bottom right" at="top left" appendToBody="true">                     >                                      
+                                <ui:include src="/views/itemsImages/List_1.xhtml" />
+                                <div id="buttonPhotos3" style="position: absolute !important; 
+                                     bottom: 10px !important;  right: 10px !important; ">                          
+                                    <p:commandButton id="cancelBtn3" value="Close" 
+                                                     onclick="PF('opanel2').hide()"/>                              
+                                </div>                                    
+            </p:overlayPanel>
+            <p:commandLink  id="orig2" value="Γνήσιοι Κωδικοί"   rendered="false"/>
+            <p:overlayPanel id = "origpanel" widgetVar="origpanel" for="orig2" showCloseIcon="true"   dismissable="false" 
+                                        style="width: 500px; height: 400px; "  my="bottom right" at="top left" appendToBody="true">                     >                                      
+                                <ui:include src="/views/originalCodes/List_2.xhtml" />
+                                <div id="origBtn3" style="position: absolute !important; 
+                                     bottom: 10px !important;  right: 10px !important; ">                          
+                                    <p:commandButton id="cancelBtn33" value="Close" 
+                                                     onclick="PF('origpanel').hide()"/>                              
+                                </div>                                    
+            </p:overlayPanel>            
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaymentCustomerEditDlg" widgetVar="PaymentCustomerEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_invoice.EditPaymentCustomerTitle}">
+            <h:form id="PaymentCustomerEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paymentCustomerController.selected != null}">
+                        <p:outputLabel value="#{bundle_invoice.EditPaymentCustomerLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{paymentCustomerController.selected.id}"  disabled="true"
+                                     title="#{bundle_invoice.EditPaymentCustomerTitle_id}" required="true" 
+                                     requiredMessage="#{bundle_invoice.EditPaymentCustomerRequiredMessage_id}"/>
+                        <p:outputLabel value="Πελάτης" for="usernmId" />                        
+                        <p:selectOneMenu id="usernmId" value="#{paymentCustomerController.selected.usernmId}"
+                                     converter="javax.faces.Integer"  style ="width: 90%"
+                                     required="true" requiredMessage="#{bundle_invoice.EditPaymentCustomerRequiredMessage_user}">                                     
+                            <f:selectItem itemLabel="Επίλεξε Πελάτη" itemValue=""/>
+                            <f:selectItems  value="#{usernmController.items}" var="se"                                        
+                                        itemLabel="#{se.userName}" itemValue="#{se.id}" >                                                                
+                            </f:selectItems>                      
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle_invoice.EditPaymentCustomerLabel_bank}" for="bank" />
+                        <p:inputText id="bank" value="#{paymentCustomerController.selected.bank}" 
+                                     title="#{bundle_invoice.EditPaymentCustomerTitle_bank}" />
+                        <p:outputLabel value="#{bundle_invoice.EditPaymentCustomerLabel_paymentCode}" for="paymentCode" />
+                        <p:inputText id="paymentCode" value="#{paymentCustomerController.selected.paymentCode}" 
+                                     title="#{bundle_invoice.EditPaymentCustomerTitle_paymentCode}" />
+                        <p:outputLabel value="#{bundle_invoice.EditPaymentCustomerLabel_paymentMethod}" for="paymentMethod" />
+                        <p:inputText id="paymentMethod" value="#{paymentCustomerController.selected.paymentMethod}" 
+                                     title="#{bundle_invoice.EditPaymentCustomerTitle_paymentMethod}" />
+                        <p:outputLabel value="#{bundle_invoice.EditPaymentCustomerLabel_date}" for="date" />
+                        <p:calendar id="date" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" value="#{paymentCustomerController.selected.date}" 
+                                    title="#{bundle_invoice.EditPaymentCustomerTitle_date}" required="true" 
+                                    requiredMessage="#{bundle_invoice.EditPaymentCustomerRequiredMessage_date}" showOn="button"/>
+                        <p:outputLabel value="#{bundle_invoice.EditPaymentCustomerLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{paymentCustomerController.selected.total}" 
+                                     title="#{bundle_invoice.EditPaymentCustomerTitle_total}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{paymentCustomerController.update}" value="#{bundle_invoice.Save}" 
+                                     update="display,:PaymentCustomerListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'PaymentCustomerEditDialog');"/>
+                    <p:commandButton value="#{bundle_invoice.Cancel}" onclick="PF('PaymentCustomerEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
