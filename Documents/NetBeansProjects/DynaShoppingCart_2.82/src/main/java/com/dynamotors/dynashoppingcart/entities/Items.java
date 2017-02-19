@@ -8,6 +8,7 @@ package com.dynamotors.dynashoppingcart.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 public class Items implements Serializable {
 
-    @OneToMany(mappedBy = "items")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "items")
     private List<OriginalCodes> originalCodesList;
 
     @Column(name = "usernm_seller_id")
@@ -42,7 +43,7 @@ public class Items implements Serializable {
     private Integer catgDetailsId; 
     @Column(name = "delivery_available_pin_id")
     private Integer deliveryAvailablePinId; 
-    @OneToMany(mappedBy = "items", fetch=FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "items", fetch=FetchType.EAGER)
     private List<ItemsImages> itemsImagesList;
     
     @ManyToMany
