@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvoiceEditDlg" widgetVar="InvoiceEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_invoice.EditInvoiceTitle}">
+            <h:form id="InvoiceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{invoiceController.selected != null}">
+                        <p:outputLabel value="#{bundle_invoice.EditInvoiceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{invoiceController.selected.id}" title="#{bundle_invoice.EditInvoiceTitle_id}" 
+                                     disabled="true" required="true" requiredMessage="#{bundle_invoice.EditInvoiceRequiredMessage_id}"/>
+                        <p:outputLabel value="Πελάτης" for="usernmId" />                        
+                        <p:selectOneMenu id="usernmId" value="#{invoiceController.selected.usernmId}"
+                                         converter="javax.faces.Integer"  style ="width: 90%" 
+                                         required="true" requiredMessage="#{bundle_invoice.EditInvoiceRequiredMessage_user}">                                     
+                            <f:selectItem itemLabel="Επίλεξε Πελάτη" itemValue=""/>
+                            <f:selectItems  value="#{usernmController.items}" var="se"                                        
+                                        itemLabel="#{se.userName}" itemValue="#{se.id}" >                                                                
+                            </f:selectItems>                      
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle_invoice.EditInvoiceLabel_invoiceCode}" for="invoiceCode" />
+                        <p:inputText id="invoiceCode" value="#{invoiceController.selected.invoiceCode}" 
+                                     title="#{bundle_invoice.EditInvoiceTitle_invoiceCode}" />
+                        <p:outputLabel value="#{bundle_invoice.EditInvoiceLabel_date}" for="date" />
+                        <p:calendar id="date" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" value="#{invoiceController.selected.date}" 
+                                    title="#{bundle_invoice.EditInvoiceTitle_date}" required="true" 
+                                    requiredMessage="#{bundle_invoice.EditInvoiceRequiredMessage_date}" showOn="button"/>
+                        <p:outputLabel value="#{bundle_invoice.EditInvoiceLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{invoiceController.selected.total}" title="#{bundle_invoice.EditInvoiceTitle_total}" />
+                        <p:outputLabel value="#{bundle_invoice.EditInvoiceLabel_invoiceImg}" for="invoiceImg" />
+                        <p:inputText id="invoiceImg" value="#{invoiceController.selected.invoiceImg}" 
+                                     title="#{bundle_invoice.EditInvoiceTitle_invoiceImg}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{invoiceController.update}" value="#{bundle_invoice.Save}" 
+                                     update="display,:InvoiceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InvoiceEditDialog');"/>
+                    <p:commandButton value="#{bundle_invoice.Cancel}" onclick="PF('InvoiceEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
