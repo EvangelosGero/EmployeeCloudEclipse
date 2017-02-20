@@ -361,8 +361,10 @@ public class ItemsController  implements Serializable{
             if(initCart != null)
                 for(Cart c : initCart){
                     Items cItem = ejbFacade.find(c.getItemId());
-                    cItem.setQuantity(c.getQuantity());
-                    addToCart(cItem);
+                    if(cItem != null){      //Item might have been deleted
+                        cItem.setQuantity(c.getQuantity());
+                        addToCart(cItem);
+                    }
                 }
             }        
     }
