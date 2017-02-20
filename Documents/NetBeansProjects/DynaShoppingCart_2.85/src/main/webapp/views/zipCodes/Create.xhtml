@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ZipCodesCreateDlg" widgetVar="ZipCodesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_zipCodes.CreateZipCodesTitle}">
+            <h:form id="ZipCodesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{zipCodesController.selected != null}">                        
+                        <p:outputLabel value="#{bundle_zipCodes.CreateZipCodesLabel_zpCode}" for="zpCode" />
+                        <p:inputText id="zpCode" value="#{zipCodesController.selected.zpCode}" 
+                                     title="#{bundle_zipCodes.CreateZipCodesTitle_zpCode}" required="true" 
+                                     requiredMessage="#{bundle_zipCodes.CreateZipCodesRequiredMessage_zpCode}"/>
+                        <p:outputLabel value="#{bundle_zipCodes.CreateZipCodesLabel_zpDescr}" for="zpDescr" />
+                        <p:inputText id="zpDescr" value="#{zipCodesController.selected.zpDescr}" 
+                                     title="#{bundle_zipCodes.CreateZipCodesTitle_zpDescr}" />
+                        <p:outputLabel value="#{bundle_zipCodes.CreateZipCodesLabel_zpg}" for="zpg" />
+                        <p:inputText id="zpg" value="#{zipCodesController.selected.zpg}" 
+                                     title="#{bundle_zipCodes.CreateZipCodesTitle_zpg}" />
+                        <p:outputLabel value="#{bundle_zipCodes.CreateZipCodesLabel_zpgDescr}" for="zpgDescr" />
+                        <p:inputText id="zpgDescr" value="#{zipCodesController.selected.zpgDescr}" 
+                                     title="#{bundle_zipCodes.CreateZipCodesTitle_zpgDescr}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{zipCodesController.create}" value="#{bundle_zipCodes.Save}" 
+                                     update="display,:ZipCodesListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'ZipCodesCreateDialog');"/>
+                    <p:commandButton value="#{bundle_zipCodes.Cancel}" onclick="PF('ZipCodesCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

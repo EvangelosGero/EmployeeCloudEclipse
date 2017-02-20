@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body"> 
+            
+            <p:growl id="growlFFF"  sticky="true" />
+            <style>
+                .ui-growl{
+                    z-index: 9000;
+                    left: 30%;
+                }
+            </style>
+            <h:form id="paymentsForm">
+            <p:panel header="Payment">
+                <br></br>
+                <h:outputText value="Choose your payment method :"/>
+                <br></br>
+                <p:commandLink  id="item1" value="Bank Account"  
+                                action="#{orderItemsController.pickPaymentMethod()}" >
+                    <f:param id="param1" name="paymentMethod" value="0" />
+                </p:commandLink>
+                                
+                <p:spacer width="50"/>                   
+                <p:commandLink  id="item2" value="Credit Card"   
+                                action="#{orderItemsController.pickPaymentMethod()}" >
+                    <f:param id="param2" name="paymentMethod" value="1" />
+                </p:commandLink>  
+            </p:panel>
+            </h:form>
+            
+            
+            <p:overlayPanel for=":paymentsForm:item2" showCloseIcon="true" style="width: 300px; height: 200px;">
+                <h:form id="form34">
+                    <br></br>
+                    <h:outputText value="We are not ready yet! Choose another payment method, please."/>
+                </h:form>
+            </p:overlayPanel>
+                
+             <p:overlayPanel id="overlay1" for=":paymentsForm:item1" showCloseIcon="true" style="width: 400px; height: 200px;"  
+                             widgetVar="overlay1WV"    >
+                 <h:form id="form35">
+                    <br></br>
+                    <h:outputText id="out1" value="Choose this Method and we will contact you to make a deposit
+                                  in our Bank"/>                   
+                    <div id="button1" style="position: absolute !important; bottom: 10px !important; vertical-align: bottom !important;">
+                      
+                        <p:commandButton id="payBtn" value="Make Payment" actionListener="#{orderItemsController.orderItemsPersist()}"
+                                         widgetVar="payBtnWV" update=":formGreat:totalsOL :growlFFF"  
+                                         oncomplete="PF('payBtnWV').disable(); PF('cancelBtnWV').disable();" />
+                                          
+                    </div>
+                    <div id="button2" style="position: absolute !important; bottom: 10px !important;  right:100px !important; " > 
+                         
+                        <p:commandButton id="homeBtn" value="Home"  widgetVar="homeBtnWV"                                        
+                                        action="/index.xhtml?faces-redirect=true"/>
+                        
+                    </div> 
+                    <div id="button3" style="position: absolute !important; bottom: 10px !important;  right: 10px !important; "> 
+                         
+                        <p:commandButton id="cancelBtn" value="Cancel"  widgetVar="cancelBtnWV"
+                                        actionListener="#{itemsController.produceCartItems()}"
+                                        action="/views/items/welcome.xhtml?faces-redirect=true"/>
+                        
+                    </div> 
+                 </h:form>
+                    
+             </p:overlayPanel>
+        </ui:define>
+    </ui:composition>
+</html>
+

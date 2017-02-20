@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsReviewsEditDlg" widgetVar="ItemsReviewsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_itemsReviews.EditItemsReviewsTitle}">
+            <h:form id="ItemsReviewsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemsReviewsController.selected != null}">                        
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode"  readonly="true" value="#{itemsReviewsController.selected.itemCode}" 
+                                     title="#{bundle_itemsReviews.EditItemsReviewsTitle_itemCode}"  disabled="true"/>
+                        <p:outputLabel value="Γράψτε το σχόλιό σας :" for="reviews" />
+                        <p:inputTextarea id="reviews"
+                            value="#{itemsReviewsController.selected.reviews}" rows="5"
+                            cols="30" counter="counter" maxlength="150" 
+                            validatorMessage="Length should not be less than 5 characters"
+                            counterTemplate="{0} more characters remaining.">
+                            <f:validateLength minimum="5" />
+                            <p:clientValidator />
+                        </p:inputTextarea>
+                        <h:outputText></h:outputText>
+                        <h:outputText id="counter" style="color: #0000cc; font-weight: bold;"></h:outputText>
+                            
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_userName}" for="userName" />
+                        <p:inputText id="userName" readonly="true" value="#{itemsReviewsController.selected.userName}" 
+                                     title="#{bundle_itemsReviews.EditItemsReviewsTitle_userName}"  disabled="true"/>                                               
+                        <p:outputLabel value="#{bundle_itemsReviews.EditItemsReviewsLabel_dated}" for="dated" />
+                        <p:calendar id="dated" pattern="dd-MM-yyyy" value="#{itemsReviewsController.selected.dated}" 
+                                    title="#{bundle_itemsReviews.EditItemsReviewsTitle_dated}"  showOn="button">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+3"/>
+                        </p:calendar>
+                        <p:outputLabel value="Αρ. Παραγγελίας" for="orderId" />
+                        <p:inputText id="orderId" value="#{itemsReviewsController.selected.orderId}" 
+                                     title="#{bundle_itemsReviews.ViewItemsReviewsTitle_orderId}"  disabled="true"
+                                     required="true"
+                                     requiredMessage="#{bundle_itemsReviews.EditItemsReviewsRequiredMessage_orderId}"/> 
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemsReviewsController.update}" value="#{bundle_itemsReviews.Save}" 
+                                     update="display,:ItemsReviewsListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'ItemsReviewsEditDialog');"/>
+                    <p:commandButton value="#{bundle_itemsReviews.Cancel}" onclick="PF('ItemsReviewsEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
