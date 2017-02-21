@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsEditDlg" widgetVar="ItemsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditItemsTitle}">
+            <h:form id="ItemsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{itemsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditItemsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{itemsController.selected.itemId}" title="#{bundle.EditItemsTitle_id}" 
+                                     disabled="true" required="true" requiredMessage="#{bundle.EditItemsRequiredMessage_id}"/>
+                        <p:outputLabel value="Διαθεσιμότητα" for="availability" />
+                        <p:inputText id="availability" value="#{itemsController.selected.itemAvailability}" title="Διαθεσιμότητα" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode" value="#{itemsController.selected.itemCode}" title="#{bundle.EditItemsTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemShortDesc}" for="itemShortDesc" />
+                        <p:inputText id="itemShortDesc" value="#{itemsController.selected.itemShortDesc}" title="#{bundle.EditItemsTitle_itemShortDesc}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemLongDesc}" for="itemLongDesc" />
+                        <p:inputText id="itemLongDesc" value="#{itemsController.selected.itemLongDesc}" title="#{bundle.EditItemsTitle_itemLongDesc}" />
+                        <p:outputLabel value="Τιμή Χονδρικής" for="wholesales" />
+                        <p:inputText id="wholesales" value="#{itemsController.selected.itemWholesalesValue}" title="wholesales" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemColor}" for="itemColor" />
+                        <p:inputText id="itemColor" value="#{itemsController.selected.itemColor}" title="#{bundle.EditItemsTitle_itemColor}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemWarranty}" for="itemWarranty" />
+                        <p:inputText id="itemWarranty" value="#{itemsController.selected.itemWarranty}" title="#{bundle.EditItemsTitle_itemWarranty}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemSize}" for="itemSize" />
+                        <p:inputText id="itemSize" value="#{itemsController.selected.itemSize}" title="#{bundle.EditItemsTitle_itemSize}" />
+                        <p:outputLabel value="Τιμή Λιανικής" for="itemValue" />
+                        <p:inputText id="itemValue" value="#{itemsController.selected.itemRetailValue}" title="#{bundle.EditItemsTitle_itemValue}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_deliveryDays}" for="deliveryDays" />
+                        <p:inputText id="deliveryDays" value="#{itemsController.selected.deliveryDays}" title="#{bundle.EditItemsTitle_deliveryDays}" />
+                        <p:outputLabel value="Πωλητής" for="seller" />                        
+                        <p:inputText id="seller" value="#{itemsController.selected.usernmSellerId}"  
+                                     disabled="true" title="Πωλητής" />
+                        <p:outputLabel value="Εκπτωση" for="catgDetailsId" />
+                        <p:selectOneMenu id="catgDetailsId" value="#{itemsController.selected.catgDetailsId}"
+                                     converter="javax.faces.Integer"  style ="width: 90%">
+                            <f:selectItem itemLabel="Καμία" itemValue=""/>
+                            <f:selectItems  value="#{catgDetailsController.items}" var="ek"                                        
+                                        itemLabel="#{ek.discountsProviderName}" itemValue="#{ek.id}" >                                                                
+                            </f:selectItems>                      
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Μάρκες" for="makes" />
+                        <p:selectCheckboxMenu id="makes" value="#{itemsController.selected.categMakesList}"  label="Μάρκες"
+                                         required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_items}"
+                                         converter="entityConverter" style="width:90%"
+                                         valueChangeListener="#{categModelController.handleMakeChangeList}">                             
+                            <f:selectItems value="#{categMakeController.itemsAvailableSelectMany}"
+                                           var="make"
+                                           itemValue="#{make}" itemLabel="#{make.mkDescription}"/>
+                            <p:ajax update="models"/>
+                        </p:selectCheckboxMenu>
+                        <p:outputLabel value="Μοντέλα" for="models" />
+                        <p:selectCheckboxMenu id="models" value="#{itemsController.selected.categModelsList}"  label="Μοντέλα"                                         
+                                         converter="entityConverter" style="width:90%">                            
+                            <f:selectItems value="#{categModelController.matchedItemsList}"
+                                           var="model"
+                                           itemValue="#{model}" itemLabel="#{model.mlModelName} #{model.mlYearRange}"/>                            
+                        </p:selectCheckboxMenu>                  
+                    <p:outputLabel value="Κατηγορία 1" for="ctg1" />
+                        <p:selectOneMenu id="ctg1" value="#{itemsController.selected.itemCateg1Id}"
+                                     converter="javax.faces.Integer"  style ="width: 90%"
+                                     valueChangeListener="#{categ2Controller.handleMakeChangeWithId}">
+                        <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
+                        <f:selectItems  value="#{categ1Controller.items}" var="it"                                        
+                                        itemLabel="#{it.c1Descr}" itemValue="#{it.c1Id}" >                                                                
+                        </f:selectItems>                         
+                        <p:ajax event="change" update="ctg2 ctg3"/>
+                        </p:selectOneMenu>
+                    <p:outputLabel value="Κατηγορία 2" for="ctg2" />                    
+                    <p:selectOneMenu id="ctg2" value="#{itemsController.selected.itemCateg2Id}"
+                                     converter="javax.faces.Integer"  style ="width: 90%"
+                                     valueChangeListener="#{categ3Controller.handleMakeChangeWithId}">
+                        <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
+                        <f:selectItems  value="#{categ2Controller.matchedItems}" var="ite"                                        
+                                        itemLabel="#{ite.c2Descr}" itemValue="#{ite.c2Id}" >                                                                
+                        </f:selectItems>                         
+                        <p:ajax event="change" update="ctg3"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Κατηγορία 3" for="ctg3" />
+                    <p:selectOneMenu id="ctg3" value="#{itemsController.selected.itemCateg3Id}"
+                                     converter="javax.faces.Integer" style ="width: 90%" >
+                        <f:selectItem itemLabel="Επίλεξε Κατηγορία" itemValue=""/>
+                        <f:selectItems  value="#{categ3Controller.matchedItems}" var="itt"                                        
+                                        itemLabel="#{itt.c3Descr}" itemValue="#{itt.c3Id}" >                                                                
+                        </f:selectItems>                                                
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Φωτογραφίες" for="photos49" />
+                    <p:commandLink  id="photos49" value="Φωτογραφίες"
+                                            update=":ImagesForm1"
+                                            oncomplete="PF('opanel2').show()"
+                                            disabled="#{empty itemsController.selected}"  />
+                    <p:outputLabel value="Γνήσιοι Κωδικοί" for="orig49" />
+                    <p:commandLink  id="orig49" value="Γνήσιοι Κωδικοί"
+                                            update=":OriginalCodesListForm1"
+                                            oncomplete="PF('origpanel').show()"
+                                            disabled="#{empty itemsController.selected}"
+                                           />                    
+                    <p:outputLabel value="Enabled" for="bool1" />
+                    <p:selectBooleanCheckbox id="bool1" value="#{itemsController.selected.itemEnabled}" />                                                 
+                   
+                    </p:panelGrid> 
+                    <p:commandButton actionListener="#{itemsController.update}" value="#{bundle.Save}" update="display,:ItemsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ItemsEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

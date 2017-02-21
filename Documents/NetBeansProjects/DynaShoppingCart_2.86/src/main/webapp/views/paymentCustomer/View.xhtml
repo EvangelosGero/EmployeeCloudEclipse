@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaymentCustomerViewDlg" widgetVar="PaymentCustomerViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_invoice.ViewPaymentCustomerTitle}">
+            <h:form id="PaymentCustomerViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paymentCustomerController.selected != null}">
+                        <h:outputText value="#{bundle_invoice.ViewPaymentCustomerLabel_id}"/>
+                        <h:outputText value="#{paymentCustomerController.selected.id}" title="#{bundle_invoice.ViewPaymentCustomerTitle_id}"/>
+                        <h:outputText value="#{bundle_invoice.ViewPaymentCustomerLabel_usernmId}"/>
+                        <h:outputText value="#{usernmController.getUsernm(paymentCustomerController.selected.usernmId).userName}"/>
+                        <h:outputText value="#{bundle_invoice.ViewPaymentCustomerLabel_bank}"/>
+                        <h:outputText value="#{paymentCustomerController.selected.bank}" title="#{bundle_invoice.ViewPaymentCustomerTitle_bank}"/>
+                        <h:outputText value="#{bundle_invoice.ViewPaymentCustomerLabel_paymentCode}"/>
+                        <h:outputText value="#{paymentCustomerController.selected.paymentCode}" title="#{bundle_invoice.ViewPaymentCustomerTitle_paymentCode}"/>
+                        <h:outputText value="#{bundle_invoice.ViewPaymentCustomerLabel_paymentMethod}"/>
+                        <h:outputText value="#{paymentCustomerController.selected.paymentMethod}" title="#{bundle_invoice.ViewPaymentCustomerTitle_paymentMethod}"/>
+                        <h:outputText value="#{bundle_invoice.ViewPaymentCustomerLabel_date}"/>
+                        <h:outputText value="#{paymentCustomerController.selected.date}" title="#{bundle_invoice.ViewPaymentCustomerTitle_date}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle_invoice.ViewPaymentCustomerLabel_total}"/>
+                        <h:outputText value="#{paymentCustomerController.selected.total}" title="#{bundle_invoice.ViewPaymentCustomerTitle_total}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle_invoice.Close}" onclick="PF('PaymentCustomerViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

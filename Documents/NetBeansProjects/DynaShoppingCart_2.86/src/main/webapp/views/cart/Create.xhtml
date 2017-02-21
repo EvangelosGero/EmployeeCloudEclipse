@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="CartCreateDlg" widgetVar="CartCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCartTitle}">
+            <h:form id="CartCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cartController.selected != null}">                        
+                        <p:outputLabel value="#{bundle.CreateCartLabel_usercode}" for="usercode" />                        
+                        <p:selectOneMenu id="usercode" value="#{cartController.selected.usercode}" title="#{bundle.CreateCartTitle_usercode}"
+                                         required="true"  requiredMessage="#{bundle.CreateCartRequiredMessage_UserId}"
+                                         converter="javax.faces.Integer"  style ="width: 90%">                            
+                            <f:selectItems  value="#{usernmController.items}" var="ek"                                        
+                                            itemLabel="#{ek.userName}" itemValue="#{ek.id}" >                                                                
+                            </f:selectItems>                      
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCartLabel_shopper}" for="shopper" />
+                        <p:inputText id="shopper" value="#{cartController.selected.shopper}" title="#{bundle.CreateCartTitle_shopper}" />
+                        <p:outputLabel value="#{bundle.EditCartLabel_itemId}" for="itemId" />                        
+                        <p:selectOneMenu id="itemId" value="#{cartController.selected.itemId}" title="#{bundle.EditCartTitle_itemId}"
+                                         required="true"  requiredMessage="#{bundle.EditCartRequiredMessage_ItemId}"
+                                         converter="javax.faces.Integer"  style ="width: 90%" filter="true">                            
+                            <f:selectItems  value="#{itemsController.itemsAvailableSelectMany}" var="ek"                                        
+                                            itemLabel="#{ek.itemCode}" itemValue="#{ek.itemId}" >                                                                
+                            </f:selectItems>                      
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCartLabel_itemCode}" for="itemCode" />                        
+                        <p:inputText id="itemCode" value="#{cartController.selected.itemCode}" title="#{bundle.CreateCartTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.CreateCartLabel_itemValue}" for="itemValue" />
+                        <p:inputText id="itemValue" value="#{cartController.selected.itemValue}" title="#{bundle.CreateCartTitle_itemValue}" />
+                        <p:outputLabel value="#{bundle.CreateCartLabel_cartDate}" for="cartDate" />
+                        <p:calendar id="cartDate" pattern="dd-MM-yyyy" value="#{cartController.selected.cartDate}" 
+                                    title="#{bundle.CreateCartTitle_cartDate}"  showOn="button">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+3"/>
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.CreateCartLabel_quantity}" for="quantity" />
+                        <p:inputText id="quantity" value="#{cartController.selected.quantity}" title="#{bundle.CreateCartTitle_quantity}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cartController.create}" value="#{bundle.Save}" 
+                                     update="display,:CartListForm:datalist,:growl" oncomplete="handleSubmit(args,'CartCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CartCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>
