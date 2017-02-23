@@ -92,7 +92,10 @@ public class ItemsImagesController implements Serializable {
             Logger.getLogger(ItemsImagesController.class.getName()).log(Level.SEVERE, null, e);
         }
         Path destFile = Paths.get("C:", "ShoppingCart", "images1", uploadedFile.getFileName());
-        selected.setFilename(uploadedFile.getFileName());   //update create.xhtml and create_1.xhtml
+        
+        //update create.xhtml and create_1.xhtml only if filename doesn't start with L which is used for zoom        
+        if (uploadedFile.getFileName().trim().charAt(0) != 'L')selected.setFilename(uploadedFile.getFileName());
+        
         try {
             Files.copy(inputStr, destFile, StandardCopyOption.REPLACE_EXISTING);
             
