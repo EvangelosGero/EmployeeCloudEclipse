@@ -325,7 +325,7 @@ public class UsernmController implements Serializable {
                 LocalDate createDate = LocalDate.now();
                 this.newUsernm.setCreateDate(Date.valueOf(createDate));
                 ejbFacade.create(this.newUsernm);
-                msg1 = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                msg1 = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Δημιουργήθηκε νέος χρήστης στην Database","Εγγραφή ΟΚ");  
                                        
             }

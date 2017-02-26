@@ -30,10 +30,10 @@
             </script>       
         
        
-        <p:dialog id="UserRegistrationDlg" widgetVar="UserRegistrationDialog" modal="true" resizable="false" 
+        <p:dialog id="UserRegistrationDlg" widgetVar="UserRegistrationDialog" modal="true" resizable="true" 
                   appendTo="@(body)" header="#{bundle.UserRegistration}" onShow="$('.ui-growl').css('z-index',9000);"
-                  onHide="document.getElementById('thisform').reset();"
-                   >
+                  onHide="document.getElementById('thisform').reset();" draggable="true" closable="true" closeOnEscape="true"
+                    >
         <h:form  prependId="true" id="thisform">
             <p:fieldset id="fieldSet1" style="margin:auto;">
                 <p:panelGrid columns="3" columnClasses="label, value,label">
@@ -152,10 +152,13 @@
                     <h:outputText></h:outputText>
                     <h:outputText id="counter"></h:outputText>
                     <h:outputText></h:outputText>
-                    
-                    <div height="50px" width="130px">
-                        <p:captcha label="Captcha" rendered="true"  theme="white" /> 
-                    </div>
+                    <h:outputText></h:outputText>
+                    <p:captcha id="Captcha" label="Captcha" rendered="true"  theme="white"  required="true" 
+                               requiredMessage="Captcha required" 
+                               callback="document.getElementById('CaptchaMsg').rendered = 'false';"  >                                
+                    </p:captcha> 
+                    <p:message id="CaptchaMsg" for="Captcha" />   
+                   
 
                 </p:panelGrid>
                 <h:panelGrid columns="3" 
@@ -163,7 +166,7 @@
                     <p:commandButton value="Submit" ajax="true" update="thisform, :growl" 
                                  actionListener="#{usernmController.saveUsernmInfo()}"   
                                  validateClient="true"
-                                 oncomplete="PF('UserRegistrationDialog').hide()" >                                
+                                 oncomplete="handleSubmit(args, 'UserRegistrationDialog')" >                                
                                  <p:resetInput target="fieldSet1" />                                                       
                     </p:commandButton> 
                     <p:commandButton value="Reset"  update="thisform" process="@this">    
