@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategModelViewDlg" widgetVar="CategModelViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.ViewCategModelTitle}">
+            <h:form id="CategModelViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{categModelController.selected != null}">
+                        <h:outputText value="#{bundle_Categ.ViewCategModelLabel_id}"/>
+                        <h:outputText value="#{categModelController.selected.mlId}" title="#{bundle_Categ.ViewCategModelTitle_id}"/>
+                        <h:outputText value="#{bundle_Categ.ViewCategModelLabel_modelName}"/>
+                        <h:outputText value="#{categModelController.selected.mlModelName}" title="#{bundle_Categ.ViewCategModelTitle_modelName}"/>
+                        <h:outputText value="#{bundle_Categ.ViewCategModelLabel_yearRange}"/>
+                        <h:outputText value="#{categModelController.selected.mlYearRange}" title="#{bundle_Categ.ViewCategModelTitle_yearRange}"/>
+                        <h:outputText value="#{bundle_Categ.ViewCategModelLabel_frontImage}"/>
+                        <h:outputText value="#{categModelController.selected.mlFrontImage}" title="#{bundle_Categ.ViewCategModelTitle_frontImage}"/>
+                        <h:outputText value="#{bundle_Categ.ViewCategModelLabel_rearImage}"/>
+                        <h:outputText value="#{categModelController.selected.mlRearImage}" title="#{bundle_Categ.ViewCategModelTitle_rearImage}"/>
+                        <h:outputText value="#{bundle_Categ.ViewCategModelLabel_parentId}"/>
+                        <h:outputText value="#{not empty categMakeController.items.stream()
+                                              .filter(s -> s.mkId eq categModelController.selected.mlParentId)
+                                              .toList()? categMakeController.items.stream()
+                                              .filter(s -> s.mkId eq categModelController.selected.mlParentId)
+                                              .toList().get(0).mkDescription: null}" 
+                                      title="#{bundle_Categ.ViewCategModelTitle_parentId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle_Categ.Close}" onclick="PF('CategModelViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

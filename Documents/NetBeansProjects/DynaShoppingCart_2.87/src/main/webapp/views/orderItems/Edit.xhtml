@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrderItemsEditDlg" widgetVar="OrderItemsEditDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle_orders.EditOrderItemsTitle}">
+            <h:form id="OrderItemsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{orderItemsController.selected != null}">
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{orderItemsController.selected.id}" disabled="true" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_id}" 
+                                     required="true" requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode" value="#{orderItemsController.selected.itemCode}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemCode}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemCode}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemPriceOld}" for="itemPriceOld" />
+                        <p:inputText id="itemPriceOld" value="#{orderItemsController.selected.itemPriceOld}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemPriceOld}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceOld}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemLongDescr}" for="itemLongDescr" />
+                        <p:inputText id="itemLongDescr" value="#{orderItemsController.selected.itemLongDescr}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemLongDescr}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemLongDescr}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemPriceRetail}" for="itemPriceRetail" />
+                        <p:inputText id="itemPriceRetail" value="#{orderItemsController.selected.itemPriceRetail}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemPriceRetail}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceRetail}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemDiscount}" for="itemDiscount" />
+                        <p:inputText id="itemDiscount" value="#{orderItemsController.selected.itemDiscount}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemDiscount}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemDiscount}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemSize}" for="itemSize" />
+                        <p:inputText id="itemSize" value="#{orderItemsController.selected.itemSize}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemSize}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemSize}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemColor}" for="itemColor" />
+                        <p:inputText id="itemColor" value="#{orderItemsController.selected.itemColor}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemColor}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemColor}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_quantity}" for="quantity" />
+                        <p:inputText id="quantity" value="#{orderItemsController.selected.quantity}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_quantity}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_quantity}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_returnsCount}" for="returnsCount" />
+                        <p:inputText id="returnsCount" value="#{orderItemsController.selected.returnsCount}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_returnsCount}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_returnsCount}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemPriceWholesale}" for="itemPriceWholesale" />
+                        <p:inputText id="itemPriceWholesale" value="#{orderItemsController.selected.itemPriceWholesale}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemPriceWholesale}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceWholesale}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_userId}" for="userId" />
+                        <p:inputText id="userId" value="#{orderItemsController.selected.userId}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_userId}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_userId}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemId}" for="itemId" />
+                        <p:inputText id="itemId" value="#{orderItemsController.selected.itemId}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemId}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemId}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_orders}" for="orders" />
+                        <p:selectOneMenu id="orders" value="#{orderItemsController.selected.orders}" required="true" 
+                                         requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_orders}">
+                            <f:selectItem itemLabel="#{bundle_orders.SelectOneMessage}"/>
+                            <f:selectItems value="#{ordersController.itemsAvailableSelectOne}"
+                                           var="orders"
+                                           itemValue="#{orders}"
+                                           itemLabel="#{orders.orderid}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{orderItemsController.update}" value="#{bundle_orders.Save}" 
+                                     update="display,:OrderItemsListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'OrderItemsEditDialog');"/>
+                    <p:commandButton value="#{bundle_orders.Cancel}" onclick="PF('OrderItemsEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

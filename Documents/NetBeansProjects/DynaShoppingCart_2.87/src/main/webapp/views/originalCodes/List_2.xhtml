@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition >       
+       
+            <h:form id="OriginalCodesListForm1">
+                <p:panel header="#{bundle_OriginalCodes.ListOriginalCodesTitle}">
+                    <p:dataTable id="datalist9" value="#{originalCodesController.items.stream()
+                                                         .filter(s -> s.items.itemId 
+                                                         eq itemsController.selected.itemId).toList()}" 
+                                 var="item"
+                                 selectionMode="single" selection="#{originalCodesController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.ocId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton7 viewButton7 editButton7 deleteButton7"/>
+                        <p:ajax event="rowUnselect" update="createButton7 viewButton7 editButton7 deleteButton7"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_OriginalCodes.ListOriginalCodesTitle_ocId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ocId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_OriginalCodes.ListOriginalCodesTitle_ocVal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ocVal}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_OriginalCodes.ListOriginalCodesTitle_items}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.items.itemCode}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton7" icon="ui-icon-plus"   value="#{bundle_OriginalCodes.Create}" 
+                                             actionListener="#{originalCodesController.prepareCreate}" 
+                                             update=":OriginalCodesCreateForm1" process="@this :OriginalCodesCreateForm1" 
+                                             oncomplete="PF('OriginalCodesCreateDialog1').show()"/>
+                            <p:commandButton id="viewButton7"   icon="ui-icon-search" value="#{bundle_OriginalCodes.View}" 
+                                             update=":OriginalCodesViewForm1" oncomplete="PF('OriginalCodesViewDialog1').show()"
+                                             process=":OriginalCodesViewForm1"
+                                             disabled="#{empty originalCodesController.selected}"/>
+                            <p:commandButton id="editButton7"   icon="ui-icon-pencil" value="#{bundle_OriginalCodes.Edit}" 
+                                             update=":OriginalCodesEditForm1" process=":OriginalCodesEditForm1"
+                                             oncomplete="PF('OriginalCodesEditDialog1').show()" 
+                                             disabled="#{empty originalCodesController.selected}"/>
+                            <p:commandButton id="deleteButton7" icon="ui-icon-trash"  value="#{bundle_OriginalCodes.Delete}" 
+                                             actionListener="#{originalCodesController.destroy}" 
+                                             update=":growl,datalist9,:viewHelperForm:ItemsOriginalCodesList " 
+                                             disabled="#{empty originalCodesController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create_2.xhtml"/>
+            <ui:include src="Edit_2.xhtml"/>
+            <ui:include src="View_2.xhtml"/>        
+    </ui:composition>
+
+</html>
