@@ -155,9 +155,9 @@
                     <h:outputText></h:outputText>
                     <p:captcha id="Captcha" label="Captcha" rendered="true"  theme="white"  required="true" 
                                requiredMessage="Captcha required" 
-                               callback="document.getElementById('CaptchaMsg').rendered = 'false';"  >                                
+                               callback="$('.kookoo').hide();"  >                                
                     </p:captcha> 
-                    <p:message id="CaptchaMsg" for="Captcha" />   
+                    <p:message id="CaptchaMsg"  styleClass="kookoo" for="Captcha" />   
                    
 
                 </p:panelGrid>
