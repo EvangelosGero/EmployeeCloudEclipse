@@ -61,7 +61,10 @@
             <p:spacer height="40"/>
             <p:galleria value="#{['image3.jpg',  'image1.jpg']}" var="image"
                         panelWidth="600" panelHeight="200" style="margin-left: 25%">
-                <p:graphicImage styleClass="nulis" value="images1/#{image}" pt:data-zoom-image="images1/L#{image}" width="600"/>
+                <h:link  outcome="/views/items/welcome.xhtml">
+                    <p:graphicImage styleClass="nulis" value="images1/#{image}" 
+                                pt:data-zoom-image="images1/L#{image}" width="600"/>
+                </h:link>
             </p:galleria>
         </ui:define>
     </ui:composition>  
