@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="ItemsImagesCreateDlg" widgetVar="ItemsImagesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_itemsImages.CreateItemsImagesTitle}">
+        <p:dialog id="ItemsImagesCreateDlg" widgetVar="ItemsImagesCreateDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle_itemsImages.CreateItemsImagesTitle}" position="left">
             <h:form id="ItemsImagesCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{itemsImagesController.selected != null}">                        
