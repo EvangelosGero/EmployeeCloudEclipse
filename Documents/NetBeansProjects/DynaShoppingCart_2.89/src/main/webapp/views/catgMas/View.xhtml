@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CatgMasViewDlg" widgetVar="CatgMasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCatgMasTitle}">
+            <h:form id="CatgMasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{catgMasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCatgMasLabel_id}"/>
+                        <h:outputText value="#{catgMasController.selected.id}" title="#{bundle.ViewCatgMasTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCatgMasLabel_catgCode}"/>
+                        <h:outputText value="#{catgMasController.selected.catgCode}" title="#{bundle.ViewCatgMasTitle_catgCode}"/>
+                        <h:outputText value="#{bundle.ViewCatgMasLabel_catgDiscountScheme}"/>
+                        <h:outputText value="#{catgMasController.selected.catgDiscountScheme}" 
+                                      title="#{bundle.ViewCatgMasTitle_catgDiscountScheme}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('CatgMasViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
