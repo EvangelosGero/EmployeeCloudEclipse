@@ -357,6 +357,7 @@ public class UsernmController implements Serializable {
     
     public void prepareAddNewUser(){
         newUsernm = new Usernm();
+        items = null; //Trigger findAll;
     }
     
     public void updateUsernmLogged (){
