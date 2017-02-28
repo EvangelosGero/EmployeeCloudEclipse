@@ -8,25 +8,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <ui:composition template="/template.xhtml">  
-        <ui:define name="title">Dynamotors</ui:define>   
-        <ui:define name="head">      
-         
-        
-          <h:outputScript  library="js" name = "jquery.elevatezoom.js"/>      
-          <h:outputScript>
-              $(document).ready(function(){
-                $(".nulis").elevateZoom({
-			zoomType : "lens",
-                        lensShape : "round",
-                        lensSize    : 200,
-                        scrollZoom : true
-                });
-            });
-          </h:outputScript>
-        
-
-    </ui:define>
-   
+        <ui:define name="title">Dynamotors</ui:define>  
         <ui:define name="westPane">
             <ui:include src="/views/catgMas/categorySearch.xhtml" />
         </ui:define>
@@ -59,12 +41,17 @@
             <p:separator  />
              
             <p:spacer height="40"/>
-            <p:galleria value="#{['image3.jpg',  'image1.jpg']}" var="image"
+            <p:galleria value="#{itemsController.itemsAvailableSelectMany.stream()
+                                 .filter(s -> s.itemEnabled eq true).toList()}" var="item"
                         panelWidth="600" panelHeight="200" style="margin-left: 25%">
-                <h:link  outcome="/views/items/welcome.xhtml">
-                    <p:graphicImage styleClass="nulis" value="images1/#{image}" 
-                                pt:data-zoom-image="images1/L#{image}" width="600"/>
-                </h:link>
+                <p:commandLink actionListener="#{categModelController.searchString(item.getItemCode())}"
+                               action="#{categModelController.navigateAndSetCartForIndexPage()}">
+                    <p:graphicImage value="images1/#{not empty itemsImagesController.items.stream()
+                                      .filter(s -> s.items.itemId  eq item.itemId).toList() ?                                                         
+                                              itemsImagesController.items.stream()
+                                      .filter(s -> s.items.itemId eq item.itemId).toList().get(0).filename : ''}" 
+                                 width="600"/>
+                </p:commandLink>
             </p:galleria>
         </ui:define>
     </ui:composition>  

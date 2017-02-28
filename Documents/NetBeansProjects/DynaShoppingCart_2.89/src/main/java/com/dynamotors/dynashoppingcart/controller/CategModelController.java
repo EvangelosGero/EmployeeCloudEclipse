@@ -5,6 +5,7 @@ import com.dynamotors.dynashoppingcart.controller.util.JsfUtil;
 import com.dynamotors.dynashoppingcart.controller.util.JsfUtil.PersistAction;
 import com.dynamotors.dynashoppingcart.ejbs.CategModelFacade;
 import com.dynamotors.dynashoppingcart.entities.CategMake;
+import com.dynamotors.dynashoppingcart.entities.Items;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -196,6 +196,10 @@ public class CategModelController implements Serializable {
     public String navigateAndSetCart(){
         itemsController.produceCartItems();
         return "/views/items/welcome.xhtml?faces-redirect=true";
+    }
+    
+    public void searchString (String itemCode){
+        itemsController.setFilterItemCode(itemCode);
     }
     
     public String navigateAndSetCartForIndexPage(){
