@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MenuCreateDlg" widgetVar="MenuCreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.CreateMenuTitle}">
+            <h:form id="MenuCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{menuController.selected != null}">                        
+                        <p:outputLabel value="#{bundle.CreateMenuLabel_menucode}" for="menucode" />
+                        <p:inputText id="menucode" value="#{menuController.selected.menucode}" 
+                                     title="#{bundle.CreateMenuTitle_menucode}" />
+                        <p:outputLabel value="#{bundle.CreateMenuLabel_menuShortName}" for="menuShortName" />
+                        <p:inputText id="menuShortName" value="#{menuController.selected.menuShortName}" 
+                                     title="#{bundle.CreateMenuTitle_menuShortName}" />
+                        <p:outputLabel value="#{bundle.CreateMenuLabel_menuLongName}" for="menuLongName" />
+                        <p:inputText id="menuLongName" value="#{menuController.selected.menuLongName}" 
+                                     title="#{bundle.CreateMenuTitle_menuLongName}" />
+                        <p:outputLabel value="#{bundle.CreateMenuLabel_menuRunOption}" for="menuRunOption" />
+                        <p:inputText id="menuRunOption" value="#{menuController.selected.menuRunOption}" 
+                                     title="#{bundle.CreateMenuTitle_menuRunOption}" />
+                        <p:outputLabel value="#{bundle.CreateMenuLabel_menuOrder}" for="menuOrder" />
+                        <p:inputText id="menuOrder" value="#{menuController.selected.menuOrder}" 
+                                     title="#{bundle.CreateMenuTitle_menuOrder}" />
+                        <p:outputLabel value="#{bundle.CreateMenuLabel_roleuser}" for="roleuser" />
+                        <p:inputText id="roleuser" value="#{menuController.selected.roleuser}" 
+                                     title="#{bundle.CreateMenuTitle_roleuser}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{menuController.create}" value="#{bundle.Save}" 
+                                     update="display,:MenuListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'MenuCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('MenuCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

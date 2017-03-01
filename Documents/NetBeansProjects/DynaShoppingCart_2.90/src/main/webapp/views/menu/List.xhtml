@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMenuTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="MenuListForm">
+                <p:panel header="#{bundle.ListMenuTitle}">
+                    <p:dataTable id="datalist" value="#{menuController.items}" var="item"
+                                 selectionMode="single" selection="#{menuController.selected}" sortMode="multiple"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column filterBy="#{item.id}" sortBy="#{item.id}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMenuTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.menucode}" sortBy="#{item.menucode}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMenuTitle_menucode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.menucode}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.menuShortName}" sortBy="#{item.menuShortName}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMenuTitle_menuShortName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.menuShortName}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.menuLongName}" sortBy="#{item.menuLongName}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMenuTitle_menuLongName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.menuLongName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMenuTitle_menuRunOption}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.menuRunOption}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.menuOrder}" sortBy="#{item.menuOrder}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMenuTitle_menuOrder}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.menuOrder}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.roleuser}" sortBy="#{item.roleuser}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMenuTitle_roleuser}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.roleuser}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{menuController.prepareCreate}" update=":MenuCreateForm" oncomplete="PF('MenuCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MenuViewForm" oncomplete="PF('MenuViewDialog').show()" disabled="#{empty menuController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MenuEditForm" oncomplete="PF('MenuEditDialog').show()" disabled="#{empty menuController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{menuController.destroy}" update=":growl,datalist" disabled="#{empty menuController.selected}"/> 
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

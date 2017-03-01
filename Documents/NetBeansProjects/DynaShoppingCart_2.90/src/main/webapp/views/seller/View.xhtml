@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SellerViewDlg" widgetVar="SellerViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.ViewSellerTitle}">
+            <h:form id="SellerViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sellerController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSellerLabel_sellerCode}"/>
+                        <h:outputText value="#{not empty usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).userName : ''}" 
+                                      title="#{bundle.ViewSellerTitle_sellerCode}"/>
+                        <h:outputText value="#{bundle.ViewSellerLabel_sellerName}"/>
+                        <h:outputText  value="#{not empty usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).firstName : ''} #{not empty 
+                                    usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).lastName : ''}"                                       
+                                      title="#{bundle.ViewSellerTitle_sellerName}"/>
+                        <h:outputText value="#{bundle.ViewSellerLabel_sellerMob}"/>
+                        <h:outputText  value="#{not empty usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).mobile : ''}" 
+                                      title="#{bundle.ViewSellerTitle_sellerMob}"/>
+                        <h:outputText value="#{bundle.ViewSellerLabel_sellerAddress}" />
+                        <h:outputText  value="#{not empty usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList() ? usernmController.items.stream()
+                                    .filter(s -> s.id eq sellerController.selected.usernmId).toList().get(0).address : ''}" 
+                                      title="#{bundle.ViewSellerTitle_sellerAddress}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('SellerViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
