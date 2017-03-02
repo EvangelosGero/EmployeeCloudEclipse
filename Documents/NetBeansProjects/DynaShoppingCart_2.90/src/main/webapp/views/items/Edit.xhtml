@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="ItemsEditDlg" widgetVar="ItemsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditItemsTitle}">
+        <p:dialog id="ItemsEditDlg" widgetVar="ItemsEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.EditItemsTitle}">
             <h:form id="ItemsEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{itemsController.selected != null}">

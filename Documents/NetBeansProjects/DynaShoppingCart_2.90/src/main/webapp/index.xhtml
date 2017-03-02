@@ -39,14 +39,13 @@
               </p:scrollPanel> 
             </h:form>
             <p:separator  />
-             
-            <p:spacer height="40"/>
             <h:form id="galleriaForm">
-            <p:graphicImage library="images" name="offers.jpg" height="100" width="50%" 
-                            style="margin-left: 25%;"/>
-            <p:spacer height="40"/>            
+            <p:graphicImage library="images" name="offersVideo1.jpg" height="100" width="50%" 
+                            style="margin-left: 25%;"/>                     
               <p:carousel value="#{itemsController.itemsAvailableSelectMany.stream()
                                  .filter(s -> s.itemEnabled eq true).toList()}" var="item"
+                          circular="true" autoPlayInterval="2000"
+                          headerText="ΠΡΟΣΦΟΡΕΣ"
                          style="width:80%; margin-left: 10%">
                 <h:commandLink actionListener="#{categModelController.searchString(item.getItemCode())}"
                                action="#{categModelController.navigateAndSetCartForIndexPage()}">

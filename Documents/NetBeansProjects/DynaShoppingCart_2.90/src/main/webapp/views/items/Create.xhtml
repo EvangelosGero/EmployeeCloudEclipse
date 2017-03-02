@@ -105,7 +105,9 @@
                         <p:outputLabel value="Enabled" for="bool1" />
                         <p:selectBooleanCheckbox id="bool1" value="#{itemsController.selected.itemEnabled}" />    
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{itemsController.create}" value="#{bundle.Save}" update="display,:ItemsListForm:datalist,:growl" oncomplete="handleSubmit(args,'ItemsCreateDialog');"/>
+                    <p:commandButton actionListener="#{itemsController.create}" value="#{bundle.Save}" 
+                                     update="display,:ItemsListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'ItemsCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('ItemsCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
