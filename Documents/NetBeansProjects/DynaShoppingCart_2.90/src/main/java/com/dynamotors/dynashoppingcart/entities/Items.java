@@ -102,6 +102,11 @@ public class Items implements Serializable {
     private boolean itemEnabled;
     @Transient
     private Integer quantity;
+    @Transient
+    private double discountPrice;
+    @Transient
+    private double totalFinal;
+    
 
     public Items() {
     }
@@ -253,6 +258,22 @@ public class Items implements Serializable {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+    public double getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(double discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    public double getTotalFinal() {
+        return totalFinal;
+    }
+
+    public void setTotalFinal(double totalFinal) {
+        this.totalFinal = totalFinal;
+    }    
 
     public Integer getDeliveryAvailablePinId() {
         return deliveryAvailablePinId;

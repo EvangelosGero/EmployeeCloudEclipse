@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -50,6 +51,10 @@ public class Cart implements Serializable {
     private Integer itemId;
     @Column(name = "quantity")
     private Integer quantity;
+    @Transient
+    private double discountPrice;
+    @Transient
+    private double totalFinal;
 
     public Cart() {
     }
@@ -121,6 +126,23 @@ public class Cart implements Serializable {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+    public double getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(double discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    public double getTotalFinal() {
+        return totalFinal;
+    }
+
+    public void setTotalFinal(double totalFinal) {
+        this.totalFinal = totalFinal;
+    }
+    
 
     @Override
     public int hashCode() {

@@ -20,11 +20,7 @@
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemCode}" for="itemCode" />
                         <p:inputText id="itemCode" value="#{orderItemsController.selected.itemCode}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemCode}" required="true" 
-                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemCode}"/>
-                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemPriceOld}" for="itemPriceOld" />
-                        <p:inputText id="itemPriceOld" value="#{orderItemsController.selected.itemPriceOld}" 
-                                     title="#{bundle_orders.EditOrderItemsTitle_itemPriceOld}" required="true" 
-                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceOld}"/>
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemCode}"/>                        
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemLongDescr}" for="itemLongDescr" />
                         <p:inputText id="itemLongDescr" value="#{orderItemsController.selected.itemLongDescr}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemLongDescr}" required="true" 
@@ -37,6 +33,10 @@
                         <p:inputText id="itemDiscount" value="#{orderItemsController.selected.itemDiscount}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemDiscount}" required="true" 
                                      requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemDiscount}"/>
+                        <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemPriceFinal}" for="itemPriceFinal" />
+                        <p:inputText id="itemPriceFinal" value="#{orderItemsController.selected.itemPriceFinal}" 
+                                     title="#{bundle_orders.EditOrderItemsTitle_itemPriceFinal}" required="true" 
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceFinal}"/>
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemSize}" for="itemSize" />
                         <p:inputText id="itemSize" value="#{orderItemsController.selected.itemSize}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemSize}" required="true" 

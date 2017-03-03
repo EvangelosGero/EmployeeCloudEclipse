@@ -210,7 +210,7 @@ public class OrderItemsController implements Serializable {
             orderItemsRecord.setItemDiscount(0);            
             orderItemsRecord.setItemId(cartItem.getItemId());
             orderItemsRecord.setItemLongDescr(it.getItemLongDesc());
-            orderItemsRecord.setItemPriceOld(0);
+            orderItemsRecord.setItemPriceFinal(0);
             orderItemsRecord.setItemPriceRetail(it.getItemRetailValue());
             orderItemsRecord.setItemPriceWholesale(it.getItemWholesalesValue() != null ? it.getItemWholesalesValue() : 0);
             orderItemsRecord.setItemSize(it.getItemSize());

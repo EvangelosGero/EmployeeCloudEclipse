@@ -35,13 +35,7 @@
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemCode}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemCode}"/>
-                        </p:column>
-                        <p:column style="width: 70px">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceOld}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.itemPriceOld}"/>
-                        </p:column>
+                        </p:column>                        
                         <p:column style="width: 150px">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemLongDescr}"/>
@@ -59,6 +53,12 @@
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemDiscount}"/>
                             </f:facet>
                             <h:outputText value="#{item.itemDiscount}"/>
+                        </p:column>
+                        <p:column style="width: 70px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceFinal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemPriceFinal}"/>
                         </p:column>
                         <p:column style="width: 70px">
                             <f:facet name="header">

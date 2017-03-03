@@ -40,8 +40,8 @@ public class OrderItems implements Serializable {
     @Column(name = "item_code",  length = 30)
     private String itemCode;
     @Basic(optional = false)   
-    @Column(name = "item_price_old")
-    private double itemPriceOld;     
+    @Column(name = "item_price_final")
+    private double itemPriceFinal;     
     @Size(max = 80)
     @Column(name = "item_long_descr",  length = 80)
     private String itemLongDescr;    
@@ -82,10 +82,10 @@ public class OrderItems implements Serializable {
         this.id = id;
     }
 
-    public OrderItems(Integer id, String itemCode, double itemPriceOld, String itemLongDescr, double itemPriceRetail, int itemDiscount, String itemSize, String itemColor, int quantity, int returnsCount, double itemPriceWholesale, int userId, int itemId) {
+    public OrderItems(Integer id, String itemCode, double itemPriceFinal, String itemLongDescr, double itemPriceRetail, int itemDiscount, String itemSize, String itemColor, int quantity, int returnsCount, double itemPriceWholesale, int userId, int itemId) {
         this.id = id;
         this.itemCode = itemCode;
-        this.itemPriceOld = itemPriceOld;
+        this.itemPriceFinal = itemPriceFinal;
         this.itemLongDescr = itemLongDescr;
         this.itemPriceRetail = itemPriceRetail;
         this.itemDiscount = itemDiscount;
@@ -114,12 +114,12 @@ public class OrderItems implements Serializable {
         this.itemCode = itemCode;
     }
 
-    public double getItemPriceOld() {
-        return itemPriceOld;
+    public double getItemPriceFinal() {
+        return itemPriceFinal;
     }
 
-    public void setItemPriceOld(double itemPriceOld) {
-        this.itemPriceOld = itemPriceOld;
+    public void setItemPriceFinal(double itemPriceFinal) {
+        this.itemPriceFinal = itemPriceFinal;
     }
 
     public String getItemLongDescr() {
