@@ -54,7 +54,7 @@ public class Cart implements Serializable {
     @Transient
     private double discountPrice;
     @Transient
-    private double totalFinal;
+    private double priceFinal;
 
     public Cart() {
     }
@@ -135,12 +135,12 @@ public class Cart implements Serializable {
         this.discountPrice = discountPrice;
     }
 
-    public double getTotalFinal() {
-        return totalFinal;
+    public double getPriceFinal() {
+        return priceFinal;
     }
 
-    public void setTotalFinal(double totalFinal) {
-        this.totalFinal = totalFinal;
+    public void setPriceFinal(double priceFinal) {
+        this.priceFinal = priceFinal;
     }
     
 

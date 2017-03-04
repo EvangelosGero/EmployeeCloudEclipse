@@ -133,13 +133,19 @@
                     </p:column>
                     <p:column headerText="Ονομασία">
                         <h:outputText value="#{prod.itemShortDesc}"/>
-                    </p:column>                    
-                    <p:column headerText="Τιμή Λιανικής με ΦΠΑ">
-                        <h:outputText value="#{prod.itemRetailValue}"/>
                     </p:column>
                     <p:column headerText="Τιμή Χονδρικής με ΦΠΑ" rendered="#{usernmController.usernmLogged.roleuser eq 's'}">
                         <h:outputText value="#{prod.itemRetailValue}"/>
                     </p:column>
+                    <p:column headerText="Τιμή Λιανικής με ΦΠΑ">
+                        <h:outputText value="#{prod.itemRetailValue}"/>
+                    </p:column>
+                    <p:column headerText="Εκπτωση (€)">
+                        <h:outputText value="#{prod.discountPrice}"/>
+                    </p:column>
+                    <p:column headerText="Τελική τιμή (€)">
+                        <h:outputText value="#{prod.priceFinal}"/>
+                    </p:column>                    
                     <p:column headerText="Ποσότητα">
                         <h:outputText value="#{prod.quantity}"/>
                     </p:column>
@@ -159,7 +165,7 @@
                         <p:row>
                             <p:column colspan="#{usernmController.usernmLogged.roleuser eq 's' ? '3' : '4'}" footerText="Totals:"
                                       style="text-align:right"/>
-                            <p:column footerText="#{itemsController.stringTotal}$"/>
+                            <p:column footerText="#{itemsController.stringTotal}€"/>
                         </p:row>
                     </p:columnGroup>
                 </p:dataTable>

@@ -7,12 +7,14 @@ import com.dynamotors.dynashoppingcart.ejbs.CartFacade;
 import com.dynamotors.dynashoppingcart.ejbs.ItemsFacade;
 import com.dynamotors.dynashoppingcart.entities.Cart;
 import com.dynamotors.dynashoppingcart.entities.CategMake;
+import com.dynamotors.dynashoppingcart.entities.CatgDetails;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -363,6 +365,17 @@ public class ItemsController  implements Serializable{
                     Items cItem = ejbFacade.find(c.getItemId());
                     if(cItem != null){      //Item might have been deleted
                         cItem.setQuantity(c.getQuantity());
+                        //find the discount in €
+                        double discount = 0;
+                        if(cItem.getCatgDetailsId() != null){
+                          CatgDetails discountCatg =  catgDetailsController.getItemsAvailableSelectMany().stream()
+                                .filter(s -> Objects.equals(s.getId(), cItem.getCatgDetailsId())).findFirst().get();
+                          if (discountCatg.getDiscountsValue() != null)discount = discountCatg.getDiscountsValue();
+                          if (discountCatg.getDiscountsPers() != null)
+                              discount = discount + discountCatg.getDiscountsPers()*cItem.getItemRetailValue();
+                        }
+                        cItem.setDiscountPrice(discount);
+                        cItem.setPriceFinal(cItem.getItemRetailValue() - discount);
                         addToCart(cItem);
                     }
                 }

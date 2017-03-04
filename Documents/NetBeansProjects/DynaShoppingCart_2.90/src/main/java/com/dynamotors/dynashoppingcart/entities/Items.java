@@ -105,7 +105,7 @@ public class Items implements Serializable {
     @Transient
     private double discountPrice;
     @Transient
-    private double totalFinal;
+    private double priceFinal;
     
 
     public Items() {
@@ -267,12 +267,12 @@ public class Items implements Serializable {
         this.discountPrice = discountPrice;
     }
 
-    public double getTotalFinal() {
-        return totalFinal;
+    public double getPriceFinal() {
+        return priceFinal;
     }
 
-    public void setTotalFinal(double totalFinal) {
-        this.totalFinal = totalFinal;
+    public void setPriceFinal(double priceFinal) {
+        this.priceFinal = priceFinal;
     }    
 
     public Integer getDeliveryAvailablePinId() {
