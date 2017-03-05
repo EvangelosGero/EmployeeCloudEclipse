@@ -76,18 +76,24 @@
                     <p:column headerText="Ποσότητα">
                         <h:outputText value="#{prod.quantity}"/>
                     </p:column>
+                    <p:column headerText="Χονδρική με ΦΠΑ :" rendered="#{usernmController.usernmLogged.roleuser eq 'a' 
+                                                                         || usernmController.usernmLogged.roleuser eq 's'}"> 
+                            <h:outputText value="#{prod.itemWholesalesValue}"/>
+                    </p:column>   
                     <p:column headerText="Λιανική με ΦΠΑ :"> 
                             <h:outputText value="#{prod.itemRetailValue}"/>
                     </p:column>
-                    <p:column headerText="Κόστος με ΦΠΑ :" rendered="#{usernmController.usernmLogged.roleuser eq 'a' 
-                                                                         || usernmController.usernmLogged.roleuser eq 's'}"> 
-                            <h:outputText value="#{prod.itemWholesalesValue}"/>
-                    </p:column>         
+                    <p:column headerText="Έκπτωση :"> 
+                        <h:outputText value="#{prod.discountPrice}"/>
+                    </p:column>
+                    <p:column headerText="Τελική τιμή :"> 
+                        <h:outputText value="#{prod.priceFinal}"/>
+                    </p:column>
                     <p:columnGroup type="footer">
                         <p:row>
                             <p:column colspan="2" footerText="Totals:"
                                       style="text-align:right"/>
-                            <p:column footerText="#{itemsController.stringTotal}$"/>
+                            <p:column footerText="#{itemsController.stringTotal}€"/>
                         </p:row>
                     </p:columnGroup>
                 </p:dataTable>

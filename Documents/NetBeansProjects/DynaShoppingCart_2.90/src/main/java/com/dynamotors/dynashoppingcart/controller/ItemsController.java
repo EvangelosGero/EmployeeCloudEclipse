@@ -372,7 +372,7 @@ public class ItemsController  implements Serializable{
                                 .filter(s -> Objects.equals(s.getId(), cItem.getCatgDetailsId())).findFirst().get();
                           if (discountCatg.getDiscountsValue() != null)discount = discountCatg.getDiscountsValue();
                           if (discountCatg.getDiscountsPers() != null)
-                              discount = discount + discountCatg.getDiscountsPers()*cItem.getItemRetailValue();
+                              discount = discount + discountCatg.getDiscountsPers()*cItem.getItemRetailValue()/100;
                         }
                         cItem.setDiscountPrice(discount);
                         cItem.setPriceFinal(cItem.getItemRetailValue() - discount);
@@ -432,16 +432,16 @@ public class ItemsController  implements Serializable{
         cp.setQuantity(p.getQuantity());     //set explicitly the quantity because it is a transient field          
         cartProducts.add(cp);
         p.setQuantity(null);        //Neutralize again the Selection Area        
-        productTotal += (!usernmController.isLoggedIn() ? cp.getItemRetailValue() : 
+        productTotal += (!usernmController.isLoggedIn() ? cp.getPriceFinal() : 
                 usernmController.getUsernmLogged().getRoleuser().trim().equals("c") ? 
-                cp.getItemRetailValue(): cp.getItemWholesalesValue())*cp.getQuantity();     
+                cp.getPriceFinal(): cp.getItemWholesalesValue())*cp.getQuantity();     
     } 
     
     public void removeItemNow(int index ) {
        Items p = cartProducts.remove(index);    //use the Droptable rowIndexVar
-       productTotal -= (!usernmController.isLoggedIn() ? p.getItemRetailValue() : 
+       productTotal -= (!usernmController.isLoggedIn() ? p.getPriceFinal() : 
                usernmController.getUsernmLogged().getRoleuser().trim().equals("c") ? 
-                p.getItemRetailValue(): p.getItemWholesalesValue())*p.getQuantity();   
+                p.getPriceFinal(): p.getItemWholesalesValue())*p.getQuantity();   
     } 
     
     public String getStringTotal() {
