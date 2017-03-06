@@ -50,11 +50,7 @@ public class Cart implements Serializable {
     @Column(name = "item_id")
     private Integer itemId;
     @Column(name = "quantity")
-    private Integer quantity;
-    @Transient
-    private double discountPrice;
-    @Transient
-    private double priceFinal;
+    private Integer quantity;    
 
     public Cart() {
     }
@@ -126,23 +122,6 @@ public class Cart implements Serializable {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-
-    public double getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public void setDiscountPrice(double discountPrice) {
-        this.discountPrice = discountPrice;
-    }
-
-    public double getPriceFinal() {
-        return priceFinal;
-    }
-
-    public void setPriceFinal(double priceFinal) {
-        this.priceFinal = priceFinal;
-    }
-    
 
     @Override
     public int hashCode() {

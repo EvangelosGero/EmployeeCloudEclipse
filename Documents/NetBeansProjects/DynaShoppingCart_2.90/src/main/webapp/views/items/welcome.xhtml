@@ -150,20 +150,22 @@
                         <h:outputText value="#{prod.quantity}"/>
                     </p:column>
                     <p:column>                                                    
-                            <p:commandButton value="More" icon="ui-icon-search"
-                                    action="#{itemsController.setSelected(prod)}"                                    
-                                    update=":ItemsViewForm, :viewHelperForm:ItemsOriginalCodesList, :viewHelperForm:ItemsMakesList,
+                        <p:commandButton value="More" icon="ui-icon-search"
+                                action="#{itemsController.setSelected(prod)}"                                    
+                                update=":ItemsViewForm, :viewHelperForm:ItemsOriginalCodesList, :viewHelperForm:ItemsMakesList,
                                             :viewHelperForm:ItemsModelsList, :viewHelperForm:CatgDetailsList, 
                                             :viewHelperForm:PaymentOptions, :viewHelperForm:AvailablePins" 
-                                    oncomplete="PF('ItemsViewDialog').show()" />                    
-                            <p:commandButton value="Remove" 
-                                             actionListener="#{itemsController.removeItemNow(index)}"
-                                             update=":centerForm:dropArea :formGreat:totalsOL" />                       
+                                oncomplete="PF('ItemsViewDialog').show()" /> 
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Remove" 
+                                actionListener="#{itemsController.removeItemNow(index)}"
+                                update=":centerForm:dropArea :formGreat:totalsOL" />                       
                     </p:column>
 
                     <p:columnGroup type="footer">
                         <p:row>
-                            <p:column colspan="#{usernmController.usernmLogged.roleuser eq 's' ? '3' : '4'}" footerText="Totals:"
+                            <p:column colspan="#{usernmController.usernmLogged.roleuser eq 's' ? '3' : '7'}" footerText="Totals:"
                                       style="text-align:right"/>
                             <p:column footerText="#{itemsController.stringTotal}€"/>
                         </p:row>

@@ -46,6 +46,8 @@ public class ItemsController  implements Serializable{
     private String filterItemCode = "";
     @EJB
     private com.dynamotors.dynashoppingcart.ejbs.CartFacade cartFacade;
+    @EJB
+    private com.dynamotors.dynashoppingcart.ejbs.CatgDetailsFacade catgDetailsFacade;
     @Inject
     private UsernmController usernmController;
     @Inject
@@ -364,18 +366,8 @@ public class ItemsController  implements Serializable{
                 for(Cart c : initCart){
                     Items cItem = ejbFacade.find(c.getItemId());
                     if(cItem != null){      //Item might have been deleted
-                        cItem.setQuantity(c.getQuantity());
-                        //find the discount in €
-                        double discount = 0;
-                        if(cItem.getCatgDetailsId() != null){
-                          CatgDetails discountCatg =  catgDetailsController.getItemsAvailableSelectMany().stream()
-                                .filter(s -> Objects.equals(s.getId(), cItem.getCatgDetailsId())).findFirst().get();
-                          if (discountCatg.getDiscountsValue() != null)discount = discountCatg.getDiscountsValue();
-                          if (discountCatg.getDiscountsPers() != null)
-                              discount = discount + discountCatg.getDiscountsPers()*cItem.getItemRetailValue()/100;
-                        }
-                        cItem.setDiscountPrice(discount);
-                        cItem.setPriceFinal(cItem.getItemRetailValue() - discount);
+                        cItem.setQuantity(c.getQuantity());                        
+                        
                         addToCart(cItem);
                     }
                 }
@@ -429,7 +421,18 @@ public class ItemsController  implements Serializable{
 
     private void addItemNow(Items p) {       
         Items cp = ejbFacade.find(p.getItemId());     //populate the new object, the easy way
-        cp.setQuantity(p.getQuantity());     //set explicitly the quantity because it is a transient field          
+        cp.setQuantity(p.getQuantity());     //set explicitly the quantity because it is a transient field 
+        //find the discount in €
+        double discount = 0;
+        if(cp.getCatgDetailsId() != null){
+            CatgDetails discountCatg =  catgDetailsFacade.find(cp.getCatgDetailsId());
+            if (discountCatg.getDiscountsValue() != null)discount = discountCatg.getDiscountsValue();
+            if (discountCatg.getDiscountsPers() != null)
+                 discount = discount + discountCatg.getDiscountsPers()*cp.getItemRetailValue()/100;
+        }                        
+        cp.setDiscountPrice(discount); //same as above
+        cp.setPriceFinal(cp.getItemRetailValue() - discount);//same as above
+          
         cartProducts.add(cp);
         p.setQuantity(null);        //Neutralize again the Selection Area        
         productTotal += (!usernmController.isLoggedIn() ? cp.getPriceFinal() : 

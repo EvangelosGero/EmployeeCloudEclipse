@@ -20,6 +20,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -159,12 +160,11 @@ public class OrderItemsController implements Serializable {
     
     //public String orderItemsPersist(){
     public void orderItemsPersist(){
-        int usernmId = usernmController.getUsernmLogged().getId();
-        cartList = cartFacade.populateCartWithId(usernmId);
+        int usernmId = usernmController.getUsernmLogged().getId();        
         Usernm usernmLogged = usernmController.getUsernmLogged();
         
         // Create order first!!
-        if(!cartList.isEmpty()){    
+        if(!itemsController.getCartProducts().isEmpty()){    
             Orders ordersRecord = new Orders();
             ordersRecord.setAffiliate("Marousi");
             ordersRecord.setClientIp("0.0.0.0");
@@ -202,19 +202,18 @@ public class OrderItemsController implements Serializable {
             
         
         
-        for (Cart cartItem : cartList){
-            Items it = itemsFacade.find(cartItem.getItemId());
+        for (Items it : itemsController.getCartProducts()){       
             OrderItems orderItemsRecord = new OrderItems();
-            orderItemsRecord.setItemCode(cartItem.getItemCode());
+            orderItemsRecord.setItemCode(it.getItemCode());
             orderItemsRecord.setItemColor(it.getItemColor());
             orderItemsRecord.setItemDiscount(it.getDiscountPrice());            
-            orderItemsRecord.setItemId(cartItem.getItemId());
+            orderItemsRecord.setItemId(it.getItemId());
             orderItemsRecord.setItemLongDescr(it.getItemLongDesc());
             orderItemsRecord.setItemPriceFinal(it.getPriceFinal());
             orderItemsRecord.setItemPriceRetail(it.getItemRetailValue());
             orderItemsRecord.setItemPriceWholesale(it.getItemWholesalesValue() != null ? it.getItemWholesalesValue() : 0);
             orderItemsRecord.setItemSize(it.getItemSize());
-            orderItemsRecord.setQuantity(cartItem.getQuantity());
+            orderItemsRecord.setQuantity(it.getQuantity());
             orderItemsRecord.setReturnsCount(0);
             orderItemsRecord.setUserId(usernmId);
             orderItemsRecord.setOrders(ordersRecord);
@@ -224,15 +223,15 @@ public class OrderItemsController implements Serializable {
             
             ItemsReviews irRecord = new ItemsReviews();
             irRecord.setUserId(usernmId);
-            irRecord.setItemCode(cartItem.getItemCode());
+            irRecord.setItemCode(it.getItemCode());
             irRecord.setUserName(usernmController.getUsernmLogged().getUserName());
-            irRecord.setItemId(cartItem.getItemId());
+            irRecord.setItemId(it.getItemId());
             irRecord.setReviews(null);
             irRecord.setDated(null);
             irRecord.setOrderId(orderId);
             itemsReviewsFacade.edit(irRecord);
                     
-            cartFacade.remove(cartItem);    //remove cartItem from Cart table            
+            cartFacade.remove(cartFacade.findAll().stream().filter(s -> Objects.equals(s.getItemId(), it.getItemId())).findFirst().get());    //remove cartItem from Cart table            
         }
        }
         FacesContext facesContext = FacesContext.getCurrentInstance();

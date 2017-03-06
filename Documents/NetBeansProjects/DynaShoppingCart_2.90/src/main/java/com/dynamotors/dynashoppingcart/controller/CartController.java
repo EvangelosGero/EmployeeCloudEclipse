@@ -116,9 +116,7 @@ public class CartController implements Serializable {
                     item.getItemWholesalesValue(): item.getItemRetailValue());
             cartItem.setCartDate(Date.valueOf(LocalDate.now()));
             cartItem.setItemId(item.getItemId());
-            cartItem.setQuantity(item.getQuantity());
-            cartItem.setDiscountPrice(item.getDiscountPrice());
-            cartItem.setPriceFinal(item.getPriceFinal());
+            cartItem.setQuantity(item.getQuantity());            
             ejbFacade.edit(cartItem);
         }       
     }
