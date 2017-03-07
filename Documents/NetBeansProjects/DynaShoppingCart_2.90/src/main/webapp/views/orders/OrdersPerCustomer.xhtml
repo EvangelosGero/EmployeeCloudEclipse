@@ -81,31 +81,39 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_discountPercent}"/>
                             </f:facet>
-                            <h:outputText value="#{item.discountPercent}"/>
+                            <h:outputText value="#{item.discountPercent}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column style="width:100px">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_discountPrice}"/>
                             </f:facet>
-                            <h:outputText value="#{item.discountPrice}"/>
+                            <h:outputText value="#{item.discountPrice}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column style="width:70px">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_totalFinal}"/>
                             </f:facet>
-                            <h:outputText value="#{item.totalFinal}"/>
+                            <h:outputText value="#{item.totalFinal}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column style="width:100px">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_paymentMethodId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.paymentMethodId}"/>
+                            <h:outputText value="#{item.paymentMethodId eq 0 ? 'Bank Account' : 'Credit Card'}"/>
                         </p:column>                        
                         <p:column style="width:100px">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrdersTitle_shippingCost}"/>
                             </f:facet>
-                            <h:outputText value="#{item.shippingCost}"/>
+                            <h:outputText value="#{item.shippingCost}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column style="width:70px">
                             <f:facet name="header">
