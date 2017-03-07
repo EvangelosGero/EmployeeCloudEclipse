@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsCreateDlg" widgetVar="ItemsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateItemsTitle}">
+            <h:form id="ItemsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemId}" for="itemId" />
+                        <p:inputText id="itemId" value="#{itemsController.selected.itemId}" title="#{bundle.CreateItemsTitle_itemId}" required="true" requiredMessage="#{bundle.CreateItemsRequiredMessage_itemId}"/>
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemMakeId}" for="itemMakeId" />
+                        <p:inputText id="itemMakeId" value="#{itemsController.selected.itemMakeId}" title="#{bundle.CreateItemsTitle_itemMakeId}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode" value="#{itemsController.selected.itemCode}" title="#{bundle.CreateItemsTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemShortDesc}" for="itemShortDesc" />
+                        <p:inputText id="itemShortDesc" value="#{itemsController.selected.itemShortDesc}" title="#{bundle.CreateItemsTitle_itemShortDesc}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemLongDesc}" for="itemLongDesc" />
+                        <p:inputText id="itemLongDesc" value="#{itemsController.selected.itemLongDesc}" title="#{bundle.CreateItemsTitle_itemLongDesc}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemImages}" for="itemImages" />
+                        <p:inputText id="itemImages" value="#{itemsController.selected.itemImages}" title="#{bundle.CreateItemsTitle_itemImages}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemColor}" for="itemColor" />
+                        <p:inputText id="itemColor" value="#{itemsController.selected.itemColor}" title="#{bundle.CreateItemsTitle_itemColor}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemWarranty}" for="itemWarranty" />
+                        <p:inputText id="itemWarranty" value="#{itemsController.selected.itemWarranty}" title="#{bundle.CreateItemsTitle_itemWarranty}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemSize}" for="itemSize" />
+                        <p:inputText id="itemSize" value="#{itemsController.selected.itemSize}" title="#{bundle.CreateItemsTitle_itemSize}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemRetailValue}" for="itemRetailValue" />
+                        <p:inputText id="itemRetailValue" value="#{itemsController.selected.itemRetailValue}" title="#{bundle.CreateItemsTitle_itemRetailValue}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_deliveryDays}" for="deliveryDays" />
+                        <p:inputText id="deliveryDays" value="#{itemsController.selected.deliveryDays}" title="#{bundle.CreateItemsTitle_deliveryDays}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_usernmSellerId}" for="usernmSellerId" />
+                        <p:inputText id="usernmSellerId" value="#{itemsController.selected.usernmSellerId}" title="#{bundle.CreateItemsTitle_usernmSellerId}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_catgDetailsId}" for="catgDetailsId" />
+                        <p:inputText id="catgDetailsId" value="#{itemsController.selected.catgDetailsId}" title="#{bundle.CreateItemsTitle_catgDetailsId}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemModelId}" for="itemModelId" />
+                        <p:inputText id="itemModelId" value="#{itemsController.selected.itemModelId}" title="#{bundle.CreateItemsTitle_itemModelId}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemCateg1Id}" for="itemCateg1Id" />
+                        <p:inputText id="itemCateg1Id" value="#{itemsController.selected.itemCateg1Id}" title="#{bundle.CreateItemsTitle_itemCateg1Id}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemCateg2Id}" for="itemCateg2Id" />
+                        <p:inputText id="itemCateg2Id" value="#{itemsController.selected.itemCateg2Id}" title="#{bundle.CreateItemsTitle_itemCateg2Id}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemCateg3Id}" for="itemCateg3Id" />
+                        <p:inputText id="itemCateg3Id" value="#{itemsController.selected.itemCateg3Id}" title="#{bundle.CreateItemsTitle_itemCateg3Id}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemWholesalesValue}" for="itemWholesalesValue" />
+                        <p:inputText id="itemWholesalesValue" value="#{itemsController.selected.itemWholesalesValue}" title="#{bundle.CreateItemsTitle_itemWholesalesValue}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemAvailability}" for="itemAvailability" />
+                        <p:inputText id="itemAvailability" value="#{itemsController.selected.itemAvailability}" title="#{bundle.CreateItemsTitle_itemAvailability}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemOriginalCodes}" for="itemOriginalCodes" />
+                        <p:inputText id="itemOriginalCodes" value="#{itemsController.selected.itemOriginalCodes}" title="#{bundle.CreateItemsTitle_itemOriginalCodes}" />
+                        <p:outputLabel value="#{bundle.CreateItemsLabel_itemEnabled}" for="itemEnabled" />
+                        <p:inputText id="itemEnabled" value="#{itemsController.selected.itemEnabled}" title="#{bundle.CreateItemsTitle_itemEnabled}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemsController.create}" value="#{bundle.Save}" update="display,:ItemsListForm:datalist,:growl" oncomplete="handleSubmit(args,'ItemsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategModelCreateDlg" widgetVar="CategModelCreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle_Categ.CreateCategModelTitle}">
+            <h:form id="CategModelCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{categModelController.selected != null}">                        
+                        <p:outputLabel value="#{bundle_Categ.CreateCategModelLabel_modelName}" for="modelName" />
+                        <p:inputText id="modelName" value="#{categModelController.selected.mlModelName}" 
+                                     title="#{bundle_Categ.CreateCategModelTitle_modelName}" />
+                        <p:outputLabel value="#{bundle_Categ.CreateCategModelLabel_yearRange}" for="yearRange" />
+                        <p:inputText id="yearRange" value="#{categModelController.selected.mlYearRange}" 
+                                     title="#{bundle_Categ.CreateCategModelTitle_yearRange}" />
+                        <p:outputLabel value="#{bundle_Categ.CreateCategModelLabel_frontImage}" for="frontImage" />
+                        <p:inputText id="frontImage" value="#{categModelController.selected.mlFrontImage}" 
+                                     title="#{bundle_Categ.CreateCategModelTitle_frontImage}" />
+                        <p:outputLabel value="#{bundle_Categ.CreateCategModelLabel_rearImage}" for="rearImage" />
+                        <p:inputText id="rearImage" value="#{categModelController.selected.mlRearImage}" 
+                                     title="#{bundle_Categ.CreateCategModelTitle_rearImage}" />
+                        <p:outputLabel value="#{bundle_Categ.CreateCategModelLabel_parentId}" for="parentId" />                        
+                        <p:selectOneMenu id="parentId" value="#{categModelController.selected.mlParentId}"
+                                         converter="javax.faces.Integer"  style ="width: 90%" required="true" 
+                                         requiredMessage="Επιλογή Μάρκας υποχρεωτική">                                     
+                            <f:selectItem itemLabel="Επίλεξε Μάρκα" itemValue=""/>
+                            <f:selectItems  value="#{categMakeController.items}" var="make1"                                        
+                                        itemLabel="#{make1.mkDescription}" itemValue="#{make1.mkId}" >                                                                
+                        </f:selectItems>                      
+                        </p:selectOneMenu>  
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{categModelController.create}" value="#{bundle_Categ.Save}" 
+                                     update="display,:CategModelListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'CategModelCreateDialog');"/>
+                    <p:commandButton value="#{bundle_Categ.Cancel}" onclick="PF('CategModelCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

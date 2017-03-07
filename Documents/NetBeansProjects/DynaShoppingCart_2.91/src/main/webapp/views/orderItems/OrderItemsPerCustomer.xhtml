@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle_orders.ListOrderItemsTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="OrderItemsListForm">
+                <p:panel header="#{bundle_orders.ListOrderItemsTitle}">
+                    <p:dataTable id="datalist" 
+                                 value="#{usernmController.loggedIn ? orderItemsController.items.stream()
+                                          .filter(s -> s.userId eq usernmController.usernmLogged.id).toList()
+                                        : null}" 
+                                 var="item"                                 
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        <p:column style="width: 70px">
+                            <f:facet name="header">
+                                <h:outputText value="Φωτογραφία"/>
+                            </f:facet>
+                            <p:graphicImage value="../../images1/#{itemsImagesController.items.stream()
+                                                         .filter(s -> s.items.itemId 
+                                                         eq item.itemId).toList().get(0).filename}"
+                                            rendered="#{not empty itemsImagesController.items.stream()
+                                                         .filter(s -> s.items.itemId 
+                                                         eq item.itemId).toList()}" 
+                                            height="50px"
+                                            width="70px"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemCode}"/>
+                        </p:column>                        
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemLongDescr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemLongDescr}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceRetail}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemPriceRetail}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemDiscount}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemDiscount}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceFinal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemPriceFinal}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemSize}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemSize}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemColor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemColor}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_quantity}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quantity}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_returnsCount}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.returnsCount}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceWholesale}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemPriceWholesale}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_userId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userId}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemId}"/>
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrderItemsTitle_orders}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.orders.orderid}"/>
+                        </p:column>
+                        <p:column style="width:100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_orders.ListOrdersTitle_orderDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.orders.orderDate}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>            
+        </ui:define>
+    </ui:composition>
+
+</html>

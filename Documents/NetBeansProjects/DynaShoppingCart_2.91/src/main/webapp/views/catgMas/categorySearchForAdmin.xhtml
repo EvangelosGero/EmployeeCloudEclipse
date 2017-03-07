@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition >        
+        
+            <h:form id="CatgMasListFormAdmin">
+                <p:panelGrid  id="searchPanelGrid"  style="border: none;" columns="1">
+                    <f:facet name ="header" >
+                        <p:outputLabel value="#{bundle.SearchTitle}"/>
+                    </f:facet>
+                    <p:outputLabel value="ΜΟΝΤΕΛΑ" />
+                    <p:selectOneMenu id="make" value="#{categMakeController.selected}"
+                                      var="p" style="width:90%"
+                                     valueChangeListener="#{categModelController.handleMakeChange}">
+                        <f:selectItem itemLabel="Ολα" itemValue=""/>
+                        <f:selectItems  value="#{categMakeController.items}" var="item"                                        
+                                        itemLabel="#{item.mkDescription}" itemValue="#{item}" >                                                                
+                        </f:selectItems> 
+                        <p:column>
+                              <p:graphicImage library="images" name="#{p.mkLogo}" width="30" height="30"/>
+                        </p:column>
+                        <p:column>
+                            #{p.mkDescription}
+                        </p:column>
+                        <p:ajax event="change" update="model"/>
+                    </p:selectOneMenu>                    
+                    <p:selectOneMenu id="model" value="#{categModelController.selected}"
+                                      var="p" style="width:90%">
+                        <f:selectItem itemLabel="Ολα" itemValue=""/>
+                        <f:selectItems  value="#{categModelController.matchedItems}" var="item"                                        
+                                        itemLabel="#{item.mlModelName} #{item.mlYearRange}" itemValue="#{item}" >                                                                
+                        </f:selectItems> 
+                        <p:column>
+                            #{p.mlModelName}
+                        </p:column>
+                        <p:column>
+                            #{p.mlYearRange}
+                        </p:column>
+                    </p:selectOneMenu>    
+                    <p:outputLabel value="ΚΑΤΗΓΟΡΙΕΣ" />
+                    <p:selectOneMenu id="ctg1" value="#{categ1Controller.selected}"
+                                     converter="#{categ1Converter}" var="p" style="width:90%"
+                                     valueChangeListener="#{categ2Controller.handleMakeChange}"> 
+                        <f:selectItem itemLabel="Ολα" itemValue=""/>
+                        <f:selectItems  value="#{categ1Controller.items}" var="item"                                        
+                                        itemLabel="#{item.c1Descr}" itemValue="#{item}" >                                                                
+                        </f:selectItems> 
+                        <p:column>
+                            #{p.c1Descr}
+                        </p:column>
+                        <p:ajax event="change" update="ctg2 ctg3"/>
+                    </p:selectOneMenu>                    
+                    <p:selectOneMenu id="ctg2" value="#{categ2Controller.selected}"
+                                     converter="#{categ2Converter}" var="p" style="width:90%"
+                                     valueChangeListener="#{categ3Controller.handleMakeChange}">
+                        <f:selectItem itemLabel="Ολα" itemValue=""/>
+                        <f:selectItems  value="#{categ2Controller.matchedItems}" var="item"                                        
+                                        itemLabel="#{item.c2Descr}" itemValue="#{item}" >                                                                
+                        </f:selectItems> 
+                        <p:column>
+                            #{p.c2Descr}
+                        </p:column> 
+                        <p:ajax event="change" update="ctg3"/>
+                    </p:selectOneMenu>
+                    <p:selectOneMenu id="ctg3" value="#{categ3Controller.selected}"
+                                     converter="#{categ3Converter}" var="p" style="width:90%">
+                        <f:selectItem itemLabel="Ολα" itemValue=""/>
+                        <f:selectItems  value="#{categ3Controller.matchedItems}" var="item"                                        
+                                        itemLabel="#{item.c3Descr}" itemValue="#{item}" >                                                                
+                        </f:selectItems> 
+                        <p:column>
+                            #{p.c3Descr}
+                        </p:column>                       
+                    </p:selectOneMenu>                   
+                </p:panelGrid> 
+                <div id="button1" style="position: absolute !important;  right: 1px !important; ">                     
+                     <p:commandButton id="categorySearchBtn" value="Αναζήτηση Τώρα!"  
+                                      action="/views/items/List.xhtml?faces-redirect=true"/>                                      
+                </div>
+                <p:spacer height="60" width="100%"/>
+                <h:panelGrid  id="searchPanelGridAdmin"  style="border: none;" columns="1">
+                    <p:outputLabel for="SearchInputTextAdmin" value="Αναζητηση με Κωδικο: "/>                     
+                    <p:inputText id="SearchInputTextAdmin"  value="#{itemsController.filterItemCode}" />
+                    <p:commandButton id="FilterCommandButtonAdmin" value ="Αναζήτηση" title="Αναζήτηση" 
+                               icon="ui-icon-search" action="/views/items/List.xhtml?faces-redirect=true" >                                                                            
+                    </p:commandButton>
+                    <p:commandButton id="ResetFiltersCommandButtonAdmin" value ="Ολική Αναζήτηση"
+                                         actionListener="#{itemsController.resetFilters()}" style="background:#ff9933" 
+                                         title="Αναζήτηση σε ολόκληρη την αποθήκη"
+                               icon="ui-icon-search" action="/views/items/List.xhtml?faces-redirect=true" >                                                                           
+                    </p:commandButton>                   
+                </h:panelGrid>
+            </h:form>
+            
+        
+    </ui:composition>
+
+</html>

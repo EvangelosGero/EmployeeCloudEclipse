@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsernmEditDlg" widgetVar="UsernmEditDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle.EditUsernmTitle}">
+            <h:form id="UsernmEditForm">
+                <h:panelGroup id="display"> 
+                    <p:panelGrid columns="3" columnClasses="label, value,label" rendered="#{usernmController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUsernmLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{usernmController.selected.id}" title="#{bundle.EditUsernmTitle_id}"
+                                     disabled="true"
+                                     required="true" requiredMessage="#{bundle.EditUsernmRequiredMessage_id}"/>
+                        <p:outputLabel></p:outputLabel>
+                     <p:outputLabel for="firstName" value="First Name"/>
+                    <p:inputText id="firstName" value="#{usernmController.selected.firstName}"
+                                 required="true">
+                        <p:clientValidator event="change"/>
+                    </p:inputText>    
+                    <p:message for="firstName" />
+                    
+                    <p:outputLabel for="lastName" value="Last Name"/>
+                    <p:inputText id="lastName" value="#{usernmController.selected.lastName}"
+                                 required="true">
+                        <p:clientValidator event="change"/>
+                    </p:inputText>
+                    <p:message for="lastName" />
+                    
+                    <p:outputLabel for="txtName" value="Username"/>
+                    <p:inputText id="txtName" value="#{usernmController.selected.userName}"
+                                 required="true">
+                        <p:clientValidator event="change"/>
+                    </p:inputText>
+                    <p:message for="txtName" />                   
+                    
+                    <p:outputLabel for="txtemail" value="Email"/>
+                    <p:inputText id="txtemail" value="#{usernmController.selected.userEmail}"
+                                 required="true">
+                        <f:validator validatorId="custom.emailValidator" />
+                        <p:clientValidator event="change"/>
+                    </p:inputText>
+                    <p:message for="txtemail"/>
+                    
+                    <p:outputLabel for="txtpasswd" value="Password"/>
+                    <p:password id="txtpasswd" value="#{usernmController.selected.password}"
+                                required="true"  feedback="true" redisplay="true">
+                        <p:clientValidator event="change"/>
+                    </p:password>
+                    <p:message for="txtpasswd"/>
+                    
+                    <p:outputLabel for="hintAnswer" value="Password Hint"/>
+                    <p:selectOneMenu
+                        value="#{usernmController.selected.hint}">
+			<f:selectItem itemLabel="Dog Name" itemValue="DogName" />
+			<f:selectItem itemLabel="First School" itemValue="FirstSchool" />
+			<f:selectItem itemLabel="Hobby" itemValue="Hobby" />
+                    </p:selectOneMenu>
+                    <h:outputText></h:outputText>
+                    
+                    
+                    <p:outputLabel for="hintAnswer" value="Answer to Hint"/>
+                    <p:inputText id="hintAnswer" value="#{usernmController.selected.hintAns}"/>
+                    <h:outputText></h:outputText>
+                    
+                    <h:outputText value="Gender: " />
+                    <p:selectOneRadio id="gender"
+			value="#{usernmController.selected.gender}">
+			<f:selectItem itemLabel="Male" itemValue="M" />
+                        <f:selectItem itemLabel="Felmale" itemValue="F" />
+                    </p:selectOneRadio>
+                    <h:outputText></h:outputText>
+                    
+                    <p:outputLabel for="dob" value="Date of birth: " />
+                    <p:calendar id="dob" value="#{usernmController.selected.dob}"
+                            required="true"  pattern="dd-MM-yyyy" effect="slideDown"
+                            navigator="true" showButtonPanel="true" yearRange="c-1000:c"  >
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+3"/>
+                        <p:clientValidator event="dateSelect"/>
+                    </p:calendar>
+                    <p:message id="dobMessage" for="dob"/>
+
+                    <p:outputLabel for="txtPhoneNumber" value="Phone Number"/>
+                    <p:inputMask id="txtPhoneNumber" value="#{usernmController.selected.mobile}" mask="(999) 999-9999"/>
+                    <h:outputText></h:outputText>
+                    
+                    <p:outputLabel for="country" value="Country"/>
+                    <p:selectOneMenu id="country" value="#{usernmController.selected.country}"
+                                 required="true"   >
+                        <f:selectItem itemLabel="Greece"  itemValue="Greece"/>
+                        <f:selectItems  value="#{countriesController.items.stream()
+                                               .filter(c -> c.enabled eq 1)
+                                               .map(c -> c.name).toList()}" 
+                                        var="countries"
+                                        itemLabel="#{countries}" 
+                                         >
+                            
+                        </f:selectItems>
+                        <p:clientValidator event="change"/>
+                    </p:selectOneMenu>
+                    <p:message  for="country"/>
+                    
+                    <p:outputLabel for="city" value="City"/>
+                    <p:inputText id="city" value="#{usernmController.selected.city}"
+                                 required="true">
+                        <p:clientValidator event="change"/>
+                    </p:inputText>
+                    <p:message  for="city"/>
+                    
+                    <p:outputLabel for="postalCode" value="Postal Code"/>
+                    <p:inputText id="postalCode" value="#{usernmController.selected.postalCode}"
+                                 required="true">
+                        <p:clientValidator event="change"/>                        
+                    </p:inputText>
+                    <p:message  for="postalCode"/>
+                    
+                    <h:outputText value="Address: " />
+                    <p:inputTextarea id="textarea"
+			value="#{usernmController.selected.address}" rows="5"
+			cols="30" counter="counter" maxlength="150"
+			validatorMessage="Length should not be less than 5 characters"
+			counterTemplate="{0} more characters remaining.">
+                        <f:validateLength minimum="5" />
+			<p:clientValidator event="change"/>
+                    </p:inputTextarea>
+                    <p:message for="textarea" />
+                    
+                    <h:outputText></h:outputText>
+                    <h:outputText id="counter"></h:outputText>
+                    <h:outputText></h:outputText>
+
+                </p:panelGrid>
+                    
+                    <p:commandButton actionListener="#{usernmController.update}" value="#{bundle.Save}" 
+                                     update="display,:UsernmListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args, 'UsernmEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('UsernmEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

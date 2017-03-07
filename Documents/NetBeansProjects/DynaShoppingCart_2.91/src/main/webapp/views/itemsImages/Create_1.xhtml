@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsImagesCreateDlg1" widgetVar="ItemsImagesCreateDialog1"  resizable="false" 
+                  appendTo="@(body)" header="#{bundle_itemsImages.CreateItemsImagesTitle}" position="left">
+            <h:form id="Create_1Form">
+                <h:panelGroup id="display1">
+                    <p:panelGrid columns="2" rendered="#{itemsImagesController.selected != null}">                        
+                        <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_filename}" for="filename1" />
+                        <p:inputText id="filename1" value="#{itemsImagesController.selected.filename}" 
+                                     title="#{bundle_itemsImages.CreateItemsImagesTitle_filename}" required="true" 
+                                     requiredMessage="#{bundle_itemsImages.CreateItemsImagesRequiredMessage_filename}">
+                            <p:clientValidator event="change"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_isbasic}" for="isbasic1" />
+                        <p:selectOneMenu id="isbasic1" value="#{itemsImagesController.selected.isbasic}" 
+                                         title="#{bundle_itemsImages.EditItemsImagesTitle_isbasic}"                               
+                                         required="true" requiredMessage="#{bundle_itemsImages.EditItemsImagesRequiredMessage_isbasic}">
+                            <f:selectItems value="#{[0, 1]}" var="p"
+                                           itemLabel="#{p}" itemValue="#{p}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_items}" for="items1" />
+                        <p:outputLabel id="items1" value="#{itemsImagesController.selected.items.itemCode}"  />                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemsImagesController.create}" value="#{bundle_itemsImages.Save}"                                      
+                                     update="display1, :ImagesForm1:datalist1,  :ItemsViewForm, :growl"  
+                                     oncomplete="PF('ItemsImagesCreateDialog1').hide(); "/>
+                    <p:commandButton value="Upload Photos" ajax='true' update=":PhotoUploadForm" oncomplete="PF('PhotoUploadDialog').show()"
+                                     immediate="true"/>                                     
+                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesCreateDialog1').hide()"/>
+                </h:panelGroup>
+             </h:form>
+        </p:dialog>
+        <ui:include src="PhotoUpload_1.xhtml"/>
+    </ui:composition>
+</html>
