@@ -35,8 +35,11 @@
                                      update="display1, :ImagesForm1:datalist1,  :ItemsViewForm, :growl"  
                                      oncomplete="PF('ItemsImagesCreateDialog1').hide(); "/>
                     <p:commandButton value="Upload Photos" ajax='true' update=":PhotoUploadForm" oncomplete="PF('PhotoUploadDialog').show()"
-                                     immediate="true"/>                                     
-                    <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesCreateDialog1').hide()"/>
+                                     immediate="true"/>  
+                    <div id="origBtn3" style="position: absolute !important; bottom: 5px !important;  right: 10px !important; ">                                     
+                       <p:commandButton value="#{bundle_itemsImages.Cancel}" onclick="PF('ItemsImagesCreateDialog1').hide()"/>                            
+                    </div>   
+                   
                 </h:panelGroup>
              </h:form>
         </p:dialog>

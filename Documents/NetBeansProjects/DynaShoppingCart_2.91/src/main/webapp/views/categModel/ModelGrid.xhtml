@@ -46,8 +46,8 @@
                           <p:commandLink id="navToWelcome"
                                          actionListener="#{categModelController.setSelected(item)}"
                                          action="#{categModelController.navigateAndSetCart()}">
-                            <p:graphicImage   value="../../images1/#{item.mlFrontImage}" width="130" height="60"/> 
-                            <p:graphicImage   value="../../images1/#{item.mlRearImage}" width="130" height="60"/>
+                            <p:graphicImage   value="../../images1/models/#{item.mlFrontImage}" width="130" height="60"/> 
+                            <p:graphicImage   value="../../images1/models/#{item.mlRearImage}" width="130" height="60"/>
                           </p:commandLink>
                             <p:ajax event="mouseover" update="opanel13" oncomplete="PF('opanel13WV').show()"/>
                             <p:ajax event="mouseout"   oncomplete="PF('opanel13WV').hide()"/>
@@ -56,8 +56,8 @@
                 </p:column>
                 <p:dialog id="opanel13"  widgetVar="opanel13WV"  height="300"   width="300" position="left, middle"                                   
                               showHeader="true" header="#{item.mlModelName} #{item.mlYearRange}"  closable="true">                                                
-                            <p:graphicImage   value="../../images1/#{item.mlFrontImage}" width="270" height="140"/> 
-                            <p:graphicImage   value="../../images1/#{item.mlRearImage}" width="270" height="140"/>                       
+                            <p:graphicImage   value="../../images1/models/#{item.mlFrontImage}" width="270" height="140"/> 
+                            <p:graphicImage   value="../../images1/models/#{item.mlRearImage}" width="270" height="140"/>                       
                 </p:dialog>
             </p:dataGrid>
         </p:fieldset> 
