@@ -184,7 +184,8 @@
             <ui:include src="View.xhtml"/> 
             <p:commandLink  id="photos2" value="Φωτογραφίες"   rendered="false"/>
             <p:overlayPanel id = "opanel" widgetVar="opanel2" for="photos2" showCloseIcon="true"   dismissable="false" 
-                                        style="width: 500px; height: 400px; "  my="bottom right" at="top left" appendToBody="true">                     >                                      
+                            style="width: 500px; height: 400px; "  my="bottom right" at="top left" appendToBody="true" 
+                            onHide="PF('ItemsImagesEditDialog1').hide(); PF('ItemsImagesCreateDialog1').hide();">                     >                                      
                                 <ui:include src="/views/itemsImages/List_1.xhtml" />
                                 <div id="buttonPhotos3" style="position: absolute !important; 
                                      bottom: 10px !important;  right: 10px !important; ">                          
@@ -194,7 +195,8 @@
             </p:overlayPanel>
             <p:commandLink  id="orig2" value="Γνήσιοι Κωδικοί"   rendered="false"/>
             <p:overlayPanel id = "origpanel" widgetVar="origpanel" for="orig2" showCloseIcon="true"   dismissable="false" 
-                                        style="width: 500px; height: 400px; "  my="bottom right" at="top left" appendToBody="true">                     >                                      
+                            style="width: 500px; height: 400px; "  my="bottom right" at="top left" appendToBody="true"
+                            onHide="PF('OriginalCodesEditDialog1').hide(); PF('OriginalCodesCreateDialog1').hide();">                     >                                      
                                 <ui:include src="/views/originalCodes/List_2.xhtml" />
                                 <div id="origBtn3" style="position: absolute !important; 
                                      bottom: 10px !important;  right: 10px !important; ">                          

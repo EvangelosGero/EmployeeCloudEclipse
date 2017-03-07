@@ -11,7 +11,7 @@
         <p:dialog id="PhotoUploadDlg" widgetVar="PhotoUploadDialog" fitViewport="true" appendTo="@(body)" 
                   closeOnEscape="true" closable="true"  maximizable="true" minimizable="true" width="700" minHeight="500"
                   draggable="true" header="#{bundle_itemsImages.FileuploadTitle}"  resizable="true"   
-                  responsive="true" showHeader="true">                  
+                  responsive="true" showHeader="true" style="background-color:  lime;">                  
             <h:form id="PhotoUploadForm" enctype="multipart/form-data">
                 <h:panelGroup id="display">
                     <p:fileUpload fileUploadListener="#{itemsImagesController.handleFileUpload}"

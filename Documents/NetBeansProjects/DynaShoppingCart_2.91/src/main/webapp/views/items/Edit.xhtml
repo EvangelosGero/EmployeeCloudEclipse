@@ -9,7 +9,7 @@
     <ui:composition>
 
         <p:dialog id="ItemsEditDlg" widgetVar="ItemsEditDialog" modal="true" resizable="false" appendTo="@(body)" 
-                  header="#{bundle.EditItemsTitle}">
+                  header="#{bundle.EditItemsTitle}" onHide="PF('opanel2').hide(); PF('origpanel').hide();">
             <h:form id="ItemsEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{itemsController.selected != null}">

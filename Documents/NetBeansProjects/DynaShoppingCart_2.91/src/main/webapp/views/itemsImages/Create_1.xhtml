@@ -9,14 +9,16 @@
     <ui:composition>
 
         <p:dialog id="ItemsImagesCreateDlg1" widgetVar="ItemsImagesCreateDialog1"  resizable="false" 
-                  appendTo="@(body)" header="#{bundle_itemsImages.CreateItemsImagesTitle}" position="left">
+                  appendTo="@(body)" header="#{bundle_itemsImages.CreateItemsImagesTitle}" position="left"
+                  onHide="PF('PhotoUploadDialog').hide()" style="background-color:  burlywood ;">
             <h:form id="Create_1Form">
                 <h:panelGroup id="display1">
                     <p:panelGrid columns="2" rendered="#{itemsImagesController.selected != null}">                        
                         <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_filename}" for="filename1" />
                         <p:inputText id="filename1" value="#{itemsImagesController.selected.filename}" 
                                      title="#{bundle_itemsImages.CreateItemsImagesTitle_filename}" required="true" 
-                                     requiredMessage="#{bundle_itemsImages.CreateItemsImagesRequiredMessage_filename}">
+                                     requiredMessage="#{bundle_itemsImages.CreateItemsImagesRequiredMessage_filename}"
+                                     style="width: 250px;">
                             <p:clientValidator event="change"/>
                         </p:inputText>
                         <p:outputLabel value="#{bundle_itemsImages.CreateItemsImagesLabel_isbasic}" for="isbasic1" />
