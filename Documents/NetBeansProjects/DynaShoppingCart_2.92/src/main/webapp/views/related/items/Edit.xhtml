@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsEditDlg" widgetVar="ItemsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditItemsTitle}">
+            <h:form id="ItemsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemId}" for="itemId" />
+                        <p:inputText id="itemId" value="#{itemsController.selected.itemId}" title="#{bundle.EditItemsTitle_itemId}" required="true" requiredMessage="#{bundle.EditItemsRequiredMessage_itemId}"/>
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemMakeId}" for="itemMakeId" />
+                        <p:inputText id="itemMakeId" value="#{itemsController.selected.itemMakeId}" title="#{bundle.EditItemsTitle_itemMakeId}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemCode}" for="itemCode" />
+                        <p:inputText id="itemCode" value="#{itemsController.selected.itemCode}" title="#{bundle.EditItemsTitle_itemCode}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemShortDesc}" for="itemShortDesc" />
+                        <p:inputText id="itemShortDesc" value="#{itemsController.selected.itemShortDesc}" title="#{bundle.EditItemsTitle_itemShortDesc}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemLongDesc}" for="itemLongDesc" />
+                        <p:inputText id="itemLongDesc" value="#{itemsController.selected.itemLongDesc}" title="#{bundle.EditItemsTitle_itemLongDesc}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemImages}" for="itemImages" />
+                        <p:inputText id="itemImages" value="#{itemsController.selected.itemImages}" title="#{bundle.EditItemsTitle_itemImages}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemColor}" for="itemColor" />
+                        <p:inputText id="itemColor" value="#{itemsController.selected.itemColor}" title="#{bundle.EditItemsTitle_itemColor}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemWarranty}" for="itemWarranty" />
+                        <p:inputText id="itemWarranty" value="#{itemsController.selected.itemWarranty}" title="#{bundle.EditItemsTitle_itemWarranty}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemSize}" for="itemSize" />
+                        <p:inputText id="itemSize" value="#{itemsController.selected.itemSize}" title="#{bundle.EditItemsTitle_itemSize}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemRetailValue}" for="itemRetailValue" />
+                        <p:inputText id="itemRetailValue" value="#{itemsController.selected.itemRetailValue}" title="#{bundle.EditItemsTitle_itemRetailValue}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_deliveryDays}" for="deliveryDays" />
+                        <p:inputText id="deliveryDays" value="#{itemsController.selected.deliveryDays}" title="#{bundle.EditItemsTitle_deliveryDays}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_usernmSellerId}" for="usernmSellerId" />
+                        <p:inputText id="usernmSellerId" value="#{itemsController.selected.usernmSellerId}" title="#{bundle.EditItemsTitle_usernmSellerId}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_catgDetailsId}" for="catgDetailsId" />
+                        <p:inputText id="catgDetailsId" value="#{itemsController.selected.catgDetailsId}" title="#{bundle.EditItemsTitle_catgDetailsId}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemModelId}" for="itemModelId" />
+                        <p:inputText id="itemModelId" value="#{itemsController.selected.itemModelId}" title="#{bundle.EditItemsTitle_itemModelId}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemCateg1Id}" for="itemCateg1Id" />
+                        <p:inputText id="itemCateg1Id" value="#{itemsController.selected.itemCateg1Id}" title="#{bundle.EditItemsTitle_itemCateg1Id}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemCateg2Id}" for="itemCateg2Id" />
+                        <p:inputText id="itemCateg2Id" value="#{itemsController.selected.itemCateg2Id}" title="#{bundle.EditItemsTitle_itemCateg2Id}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemCateg3Id}" for="itemCateg3Id" />
+                        <p:inputText id="itemCateg3Id" value="#{itemsController.selected.itemCateg3Id}" title="#{bundle.EditItemsTitle_itemCateg3Id}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemWholesalesValue}" for="itemWholesalesValue" />
+                        <p:inputText id="itemWholesalesValue" value="#{itemsController.selected.itemWholesalesValue}" title="#{bundle.EditItemsTitle_itemWholesalesValue}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemAvailability}" for="itemAvailability" />
+                        <p:inputText id="itemAvailability" value="#{itemsController.selected.itemAvailability}" title="#{bundle.EditItemsTitle_itemAvailability}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemOriginalCodes}" for="itemOriginalCodes" />
+                        <p:inputText id="itemOriginalCodes" value="#{itemsController.selected.itemOriginalCodes}" title="#{bundle.EditItemsTitle_itemOriginalCodes}" />
+                        <p:outputLabel value="#{bundle.EditItemsLabel_itemEnabled}" for="itemEnabled" />
+                        <p:inputText id="itemEnabled" value="#{itemsController.selected.itemEnabled}" title="#{bundle.EditItemsTitle_itemEnabled}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemsController.update}" value="#{bundle.Save}" update="display,:ItemsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
