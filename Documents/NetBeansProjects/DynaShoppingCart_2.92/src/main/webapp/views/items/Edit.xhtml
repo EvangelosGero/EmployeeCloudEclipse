@@ -25,15 +25,19 @@
                         <p:outputLabel value="#{bundle.EditItemsLabel_itemLongDesc}" for="itemLongDesc" />
                         <p:inputText id="itemLongDesc" value="#{itemsController.selected.itemLongDesc}" title="#{bundle.EditItemsTitle_itemLongDesc}" />
                         <p:outputLabel value="Τιμή Χονδρικής με ΦΠΑ" for="wholesales" />
-                        <p:inputText id="wholesales" value="#{itemsController.selected.itemWholesalesValue}" title="wholesales" />
+                        <p:inputText id="wholesales" value="#{itemsController.selected.itemWholesalesValue}" title="wholesales">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditItemsLabel_itemColor}" for="itemColor" />
                         <p:inputText id="itemColor" value="#{itemsController.selected.itemColor}" title="#{bundle.EditItemsTitle_itemColor}" />
                         <p:outputLabel value="#{bundle.EditItemsLabel_itemWarranty}" for="itemWarranty" />
                         <p:inputText id="itemWarranty" value="#{itemsController.selected.itemWarranty}" title="#{bundle.EditItemsTitle_itemWarranty}" />
                         <p:outputLabel value="#{bundle.EditItemsLabel_itemSize}" for="itemSize" />
-                        <p:inputText id="itemSize" value="#{itemsController.selected.itemSize}" title="#{bundle.EditItemsTitle_itemSize}" />
+                        <p:inputText id="itemSize" value="#{itemsController.selected.itemSize}" title="#{bundle.EditItemsTitle_itemSize}"/>                            
                         <p:outputLabel value="Τιμή Λιανικής με ΦΠΑ" for="itemValue" />
-                        <p:inputText id="itemValue" value="#{itemsController.selected.itemRetailValue}" title="#{bundle.EditItemsTitle_itemValue}" />
+                        <p:inputText id="itemValue" value="#{itemsController.selected.itemRetailValue}" title="#{bundle.EditItemsTitle_itemValue}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditItemsLabel_deliveryDays}" for="deliveryDays" />
                         <p:inputText id="deliveryDays" value="#{itemsController.selected.deliveryDays}" title="#{bundle.EditItemsTitle_deliveryDays}" />
                         <p:outputLabel value="Πωλητής" for="sellerMenu" />                        

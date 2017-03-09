@@ -24,7 +24,9 @@
                         <h:outputText value="#{bundle.ViewCartLabel_itemCode}"/>
                         <h:outputText value="#{cartController.selected.itemCode}" title="#{bundle.ViewCartTitle_itemCode}"/>
                         <h:outputText value="#{bundle.ViewCartLabel_itemValue}"/>
-                        <h:outputText value="#{cartController.selected.itemValue}" title="#{bundle.ViewCartTitle_itemValue}"/>
+                        <h:outputText value="#{cartController.selected.itemValue}" title="#{bundle.ViewCartTitle_itemValue}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewCartLabel_cartDate}"/>
                         <h:outputText value="#{cartController.selected.cartDate}" title="#{bundle.ViewCartTitle_cartDate}">                        
                             <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>

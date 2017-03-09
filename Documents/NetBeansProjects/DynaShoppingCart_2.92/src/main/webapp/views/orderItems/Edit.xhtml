@@ -28,15 +28,21 @@
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemPriceRetail}" for="itemPriceRetail" />
                         <p:inputText id="itemPriceRetail" value="#{orderItemsController.selected.itemPriceRetail}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemPriceRetail}" required="true" 
-                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceRetail}"/>
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceRetail}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemDiscount}" for="itemDiscount" />
                         <p:inputText id="itemDiscount" value="#{orderItemsController.selected.itemDiscount}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemDiscount}" required="true" 
-                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemDiscount}"/>
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemDiscount}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemPriceFinal}" for="itemPriceFinal" />
                         <p:inputText id="itemPriceFinal" value="#{orderItemsController.selected.itemPriceFinal}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemPriceFinal}" required="true" 
-                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceFinal}"/>
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceFinal}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemSize}" for="itemSize" />
                         <p:inputText id="itemSize" value="#{orderItemsController.selected.itemSize}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemSize}" required="true" 
@@ -56,7 +62,9 @@
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_itemPriceWholesale}" for="itemPriceWholesale" />
                         <p:inputText id="itemPriceWholesale" value="#{orderItemsController.selected.itemPriceWholesale}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_itemPriceWholesale}" required="true" 
-                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceWholesale}"/>
+                                     requiredMessage="#{bundle_orders.EditOrderItemsRequiredMessage_itemPriceWholesale}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_orders.EditOrderItemsLabel_userId}" for="userId" />
                         <p:inputText id="userId" value="#{orderItemsController.selected.userId}" 
                                      title="#{bundle_orders.EditOrderItemsTitle_userId}" required="true" 

@@ -20,11 +20,17 @@
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemLongDescr}"/>
                         <h:outputText value="#{orderItemsController.selected.itemLongDescr}" title="#{bundle_orders.ViewOrderItemsTitle_itemLongDescr}"/>
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemPriceRetail}"/>
-                        <h:outputText value="#{orderItemsController.selected.itemPriceRetail}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceRetail}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemPriceRetail}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceRetail}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemDiscount}"/>
-                        <h:outputText value="#{orderItemsController.selected.itemDiscount}" title="#{bundle_orders.ViewOrderItemsTitle_itemDiscount}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemDiscount}" title="#{bundle_orders.ViewOrderItemsTitle_itemDiscount}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemPriceFinal}"/>
-                        <h:outputText value="#{orderItemsController.selected.itemPriceFinal}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceFinal}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemPriceFinal}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceFinal}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemSize}"/>
                         <h:outputText value="#{orderItemsController.selected.itemSize}" title="#{bundle_orders.ViewOrderItemsTitle_itemSize}"/>
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemColor}"/>
@@ -34,7 +40,9 @@
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_returnsCount}"/>
                         <h:outputText value="#{orderItemsController.selected.returnsCount}" title="#{bundle_orders.ViewOrderItemsTitle_returnsCount}"/>
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemPriceWholesale}"/>
-                        <h:outputText value="#{orderItemsController.selected.itemPriceWholesale}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceWholesale}"/>
+                        <h:outputText value="#{orderItemsController.selected.itemPriceWholesale}" title="#{bundle_orders.ViewOrderItemsTitle_itemPriceWholesale}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_userId}"/>
                         <h:outputText value="#{orderItemsController.selected.userId}" title="#{bundle_orders.ViewOrderItemsTitle_userId}"/>
                         <h:outputText value="#{bundle_orders.ViewOrderItemsLabel_itemId}"/>

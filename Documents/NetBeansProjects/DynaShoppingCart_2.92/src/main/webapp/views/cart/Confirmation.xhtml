@@ -78,16 +78,24 @@
                     </p:column>
                     <p:column headerText="Χονδρική με ΦΠΑ :" rendered="#{usernmController.usernmLogged.roleuser eq 'a' 
                                                                          || usernmController.usernmLogged.roleuser eq 's'}"> 
-                            <h:outputText value="#{prod.itemWholesalesValue}"/>
+                            <h:outputText value="#{prod.itemWholesalesValue}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                     </p:column>   
                     <p:column headerText="Λιανική με ΦΠΑ :"> 
-                            <h:outputText value="#{prod.itemRetailValue}"/>
+                            <h:outputText value="#{prod.itemRetailValue}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                     </p:column>
                     <p:column headerText="Έκπτωση :"> 
-                        <h:outputText value="#{prod.discountPrice}"/>
+                            <h:outputText value="#{prod.discountPrice}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                     </p:column>
                     <p:column headerText="Τελική τιμή :"> 
-                        <h:outputText value="#{prod.priceFinal}"/>
+                        <h:outputText value="#{prod.priceFinal}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
                     </p:column>
                     <p:columnGroup type="footer">
                         <p:row>

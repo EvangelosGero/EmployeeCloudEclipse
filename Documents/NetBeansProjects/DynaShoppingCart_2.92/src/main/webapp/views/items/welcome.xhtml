@@ -70,11 +70,15 @@
                         <h:panelGrid columns="2" style="width:100%; background-color: #ffffcc! important" 
                                      title="Σύρε από την επικεφαλίδα στο καλάθι" >
                             <h:outputText value="Λιανική με ΦΠΑ :"/> 
-                            <h:outputText value="#{item.itemRetailValue}"/>
+                            <h:outputText value="#{item.itemRetailValue}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                             <h:outputText value="Κόστος με ΦΠΑ :" rendered="#{usernmController.usernmLogged.roleuser eq 'a' 
                                                                          || usernmController.usernmLogged.roleuser eq 's'}"/> 
                             <h:outputText value="#{item.itemWholesalesValue}" rendered="#{usernmController.usernmLogged.roleuser eq 'a' 
-                                                                         || usernmController.usernmLogged.roleuser eq 's'}"/>
+                                                                         || usernmController.usernmLogged.roleuser eq 's'}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                             <p:ajax event="mouseover"  async="true"  update="opanel12" 
                                     oncomplete="$('.smallDialogs').hide(); PF('opanel12WV').show()"/>
                             <p:ajax event="mouseout"   async="true"    

@@ -46,10 +46,14 @@
                             rendered="#{usernmController.usernmLogged.roleuser eq 'a'|| usernmController.usernmLogged.roleuser eq 's'}"/>
                         <h:outputText value="#{itemsController.selected.itemWholesalesValue}" title="wholesales"  
                                       style="font-weight: bold; font-size: 14"                                      
-                         rendered="#{usernmController.usernmLogged.roleuser eq 'a'|| usernmController.usernmLogged.roleuser eq 's'}"/>
+                         rendered="#{usernmController.usernmLogged.roleuser eq 'a'|| usernmController.usernmLogged.roleuser eq 's'}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewItemsLabel_itemValue}" style="font-weight: bold; font-size: 14" />
                         <h:outputText value="#{itemsController.selected.itemRetailValue}" style="font-weight: bold; font-size: 14"
-                                      title="#{bundle.ViewItemsTitle_itemValue}"/>
+                                      title="#{bundle.ViewItemsTitle_itemValue}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewItemsLabel_itemColor}"/>
                         <h:outputText value="#{itemsController.selected.itemColor}" title="#{bundle.ViewItemsTitle_itemColor}"/>
                         <h:outputText value="#{bundle.ViewItemsLabel_itemWarranty}"/>

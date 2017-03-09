@@ -76,13 +76,17 @@
                             <f:facet name="header">
                                 <h:outputText value="Τιμή Χονδρικής"/>
                             </f:facet>
-                            <h:outputText value="#{item.itemWholesalesValue}"/>
+                            <h:outputText value="#{item.itemWholesalesValue}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Τιμή Λιανικής"/>
                             </f:facet>
-                            <h:outputText value="#{item.itemRetailValue}"/>
+                            <h:outputText value="#{item.itemRetailValue}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column style="width: 100px">
                             <f:facet name="header">

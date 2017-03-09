@@ -61,7 +61,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCartTitle_itemValue}"/>
                             </f:facet>
-                            <h:outputText value="#{item.itemValue}"/>
+                            <h:outputText value="#{item.itemValue}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column sortBy="#{item.cartDate}">
                             <f:facet name="header">

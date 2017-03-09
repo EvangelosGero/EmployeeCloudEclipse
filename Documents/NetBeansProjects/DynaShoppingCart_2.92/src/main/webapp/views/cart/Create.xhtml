@@ -33,7 +33,10 @@
                         <p:outputLabel value="#{bundle.CreateCartLabel_itemCode}" for="itemCode" />                        
                         <p:inputText id="itemCode" value="#{cartController.selected.itemCode}" title="#{bundle.CreateCartTitle_itemCode}" />
                         <p:outputLabel value="#{bundle.CreateCartLabel_itemValue}" for="itemValue" />
-                        <p:inputText id="itemValue" value="#{cartController.selected.itemValue}" title="#{bundle.CreateCartTitle_itemValue}" />
+                        <p:inputText id="itemValue" value="#{cartController.selected.itemValue}" 
+                                     title="#{bundle.CreateCartTitle_itemValue}" >
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.CreateCartLabel_cartDate}" for="cartDate" />
                         <p:calendar id="cartDate" pattern="dd-MM-yyyy" value="#{cartController.selected.cartDate}" 
                                     title="#{bundle.CreateCartTitle_cartDate}"  showOn="button">

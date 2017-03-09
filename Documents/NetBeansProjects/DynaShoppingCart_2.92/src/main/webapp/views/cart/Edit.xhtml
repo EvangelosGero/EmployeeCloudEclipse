@@ -37,7 +37,9 @@
                         <p:outputLabel value="#{bundle.EditCartLabel_itemCode}" for="itemCode" />                        
                         <p:inputText id="itemCode" value="#{cartController.selected.itemCode}" title="#{bundle.EditCartTitle_itemCode}" />
                         <p:outputLabel value="#{bundle.EditCartLabel_itemValue}" for="itemValue" />
-                        <p:inputText id="itemValue" value="#{cartController.selected.itemValue}" title="#{bundle.EditCartTitle_itemValue}" />
+                        <p:inputText id="itemValue" value="#{cartController.selected.itemValue}" title="#{bundle.EditCartTitle_itemValue}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditCartLabel_cartDate}" for="cartDate" />
                         <p:calendar id="cartDate" pattern="dd-MM-yyyy" value="#{cartController.selected.cartDate}" 
                                     title="#{bundle.EditCartTitle_cartDate}"  showOn="button">

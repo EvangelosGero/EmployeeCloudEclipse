@@ -24,15 +24,21 @@
                         <p:outputLabel value="#{bundle_orders.CreateOrderItemsLabel_itemPriceRetail}" for="itemPriceRetail" />
                         <p:inputText id="itemPriceRetail" value="#{orderItemsController.selected.itemPriceRetail}" 
                                      title="#{bundle_orders.CreateOrderItemsTitle_itemPriceRetail}" required="true" 
-                                     requiredMessage="#{bundle_orders.CreateOrderItemsRequiredMessage_itemPriceRetail}"/>
+                                     requiredMessage="#{bundle_orders.CreateOrderItemsRequiredMessage_itemPriceRetail}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_orders.CreateOrderItemsLabel_itemDiscount}" for="itemDiscount" />
                         <p:inputText id="itemDiscount" value="#{orderItemsController.selected.itemDiscount}" 
                                      title="#{bundle_orders.CreateOrderItemsTitle_itemDiscount}" required="true" 
-                                     requiredMessage="#{bundle_orders.CreateOrderItemsRequiredMessage_itemDiscount}"/>
+                                     requiredMessage="#{bundle_orders.CreateOrderItemsRequiredMessage_itemDiscount}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_orders.CreateOrderItemsLabel_itemPriceFinal}" for="itemPriceFinal" />
                         <p:inputText id="itemPriceFinal" value="#{orderItemsController.selected.itemPriceFinal}" 
                                      title="#{bundle_orders.CreateOrderItemsTitle_itemPriceFinal}" required="true" 
-                                     requiredMessage="#{bundle_orders.CreateOrderItemsRequiredMessage_itemPriceFinal}"/>
+                                     requiredMessage="#{bundle_orders.CreateOrderItemsRequiredMessage_itemPriceFinal}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_orders.CreateOrderItemsLabel_itemSize}" for="itemSize" />
                         <p:inputText id="itemSize" value="#{orderItemsController.selected.itemSize}" 
                                      title="#{bundle_orders.CreateOrderItemsTitle_itemSize}" required="true" 
@@ -52,7 +58,9 @@
                         <p:outputLabel value="#{bundle_orders.CreateOrderItemsLabel_itemPriceWholesale}" for="itemPriceWholesale" />
                         <p:inputText id="itemPriceWholesale" value="#{orderItemsController.selected.itemPriceWholesale}" 
                                      title="#{bundle_orders.CreateOrderItemsTitle_itemPriceWholesale}" required="true" 
-                                     requiredMessage="#{bundle_orders.CreateOrderItemsRequiredMessage_itemPriceWholesale}"/>
+                                     requiredMessage="#{bundle_orders.CreateOrderItemsRequiredMessage_itemPriceWholesale}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle_orders.CreateOrderItemsLabel_userId}" for="userId" />
                         <p:inputText id="userId" value="#{orderItemsController.selected.userId}" 
                                      title="#{bundle_orders.CreateOrderItemsTitle_userId}" required="true" 
@@ -70,7 +78,8 @@
                                            itemLabel="#{orders.orderid}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{orderItemsController.create}" value="#{bundle_orders.Save}" update="display,:OrderItemsListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrderItemsCreateDialog');"/>
+                    <p:commandButton actionListener="#{orderItemsController.create}" value="#{bundle_orders.Save}" 
+                                     update="display,:OrderItemsListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrderItemsCreateDialog');"/>
                     <p:commandButton value="#{bundle_orders.Cancel}" onclick="PF('OrderItemsCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>

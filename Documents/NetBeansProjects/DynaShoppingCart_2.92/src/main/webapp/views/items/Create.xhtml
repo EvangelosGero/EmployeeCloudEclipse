@@ -30,7 +30,9 @@
                         <p:outputLabel value="#{bundle.CreateItemsLabel_itemSize}" for="itemSize" />
                         <p:inputText id="itemSize" value="#{itemsController.selected.itemSize}" title="#{bundle.CreateItemsTitle_itemSize}" />                                      
                         <p:outputLabel value="#{bundle.CreateItemsLabel_itemValue}" for="itemValue" />
-                        <p:inputText id="itemValue" value="#{itemsController.selected.itemRetailValue}" title="#{bundle.CreateItemsTitle_itemValue}" />
+                        <p:inputText id="itemValue" value="#{itemsController.selected.itemRetailValue}" title="#{bundle.CreateItemsTitle_itemValue}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.CreateItemsLabel_deliveryDays}" for="deliveryDays" />
                         <p:inputText id="deliveryDays" value="#{itemsController.selected.deliveryDays}" title="#{bundle.CreateItemsTitle_deliveryDays}" />
                         <p:outputLabel value="Πωλητής" for="sellerMenu" />                        

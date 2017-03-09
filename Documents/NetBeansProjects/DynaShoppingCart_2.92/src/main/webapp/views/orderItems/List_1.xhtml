@@ -48,19 +48,25 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceRetail}"/>
                             </f:facet>
-                            <h:outputText value="#{item.itemPriceRetail}"/>
+                            <h:outputText value="#{item.itemPriceRetail}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column filterBy="#{item.itemDiscount}" sortBy="#{item.itemDiscount}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemDiscount}"/>
                             </f:facet>
-                            <h:outputText value="#{item.itemDiscount}"/>
+                            <h:outputText value="#{item.itemDiscount}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column filterBy="#{item.itemPriceFinal}" sortBy="#{item.itemPriceFinal}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceFinal}"/>
                             </f:facet>
-                            <h:outputText value="#{item.itemPriceFinal}"/>
+                            <h:outputText value="#{item.itemPriceFinal}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column filterBy="#{item.itemSize}" sortBy="#{item.itemSize}">
                             <f:facet name="header">
@@ -90,7 +96,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_orders.ListOrderItemsTitle_itemPriceWholesale}"/>
                             </f:facet>
-                            <h:outputText value="#{item.itemPriceWholesale}"/>
+                            <h:outputText value="#{item.itemPriceWholesale}">
+                                <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                            </h:outputText>
                         </p:column>
                         <p:column filterBy="#{item.userId}" sortBy="#{item.userId}">
                             <f:facet name="header">
