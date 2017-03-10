@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:composition>
+
+        <p:dialog id="ItemsViewDlg" widgetVar="ItemsViewDialog"  position="bottom"  fitViewport="true"  
+                  closeOnEscape="true" closable="true"  onShow="zoomaki(); hideTitle();"  maximizable="true" minimizable="true"
+                  draggable="true" onHide="stopZoom(); restoreTitle();" header="ΣΤΟΙΧΕΙΑ ΠΡΟΪΟΝΤΟΣ"  resizable="true"   responsive="true"
+                  showHeader="true"  style="background-color: palegreen;"  >                        
+            
+                       
+                <h:panelGroup id="display">                                        
+                    <p:panelGrid id="viewPG"   columns="1" style="width: 1000px;">
+                      <h:form id="ItemsViewForm">
+                          <p:carousel id="ViewCarousel" value="#{itemsImagesController.items.stream()
+                                                         .filter(s -> s.items.itemId 
+                                                         eq itemsController.selected.itemId).toList()}" var="picture" 
+                                    vertical="true" itemStyle="width:400px" numVisible="3" style="width:1000px;"
+                                    rendered="#{not empty itemsImagesController.items.stream()
+                                                         .filter(s -> s.items.itemId 
+                                                         eq itemsController.selected.itemId).toList()}"
+                                    headerText="#{itemsController.selected.itemLongDesc} #{itemsController.selected.itemCode}" 
+                                     transient="false">                       
+                            <p:graphicImage  value="../../images1/#{picture.filename}" styleClass="nuli"
+                                             pt:data-zoom-image="../../images1/L#{picture.filename}"                                             
+                                             style="border:solid 1px; width:400px; height: 200px;" />  
+                        </p:carousel>
+                       
+                      <h:panelGrid columns="8" rendered="#{itemsController.selected != null}"
+                                    style="width:100%; background-color: #ffffcc! important">
+                         <h:outputText value="#{bundle.ViewItemsLabel_itemCode}"/>
+                        <h:outputText value="#{itemsController.selected.itemCode}" title="#{bundle.ViewItemsTitle_itemCode}"/>
+                        <h:outputText value="Διαθεσιμότητα"/>
+                        <h:outputText value="#{itemsController.selected.itemAvailability}" title="#{bundle.ViewItemsTitle_itemCategoryCode}"/>                        
+                        <h:outputText value="#{bundle.ViewItemsLabel_itemShortDesc}"/>
+                        <h:outputText value="#{itemsController.selected.itemShortDesc}" title="#{bundle.ViewItemsTitle_itemShortDesc}"/>
+                        <h:outputText value="#{bundle.ViewItemsLabel_itemLongDesc}"/>
+                        <h:outputText value="#{itemsController.selected.itemLongDesc}" title="#{bundle.ViewItemsTitle_itemLongDesc}"/>
+                        <h:outputText value="Τιμή Χονδρικής"  style="font-weight: bold; font-size: 14" 
+                            rendered="#{usernmController.usernmLogged.roleuser eq 'a'|| usernmController.usernmLogged.roleuser eq 's'}"/>
+                        <h:outputText value="#{itemsController.selected.itemWholesalesValue}" title="wholesales"  
+                                      style="font-weight: bold; font-size: 14"                                      
+                         rendered="#{usernmController.usernmLogged.roleuser eq 'a'|| usernmController.usernmLogged.roleuser eq 's'}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewItemsLabel_itemValue}" style="font-weight: bold; font-size: 14" />
+                        <h:outputText value="#{itemsController.selected.itemRetailValue}" style="font-weight: bold; font-size: 14"
+                                      title="#{bundle.ViewItemsTitle_itemValue}">
+                            <f:convertNumber pattern="#0.00" locale="de_DE"/>
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewItemsLabel_itemColor}"/>
+                        <h:outputText value="#{itemsController.selected.itemColor}" title="#{bundle.ViewItemsTitle_itemColor}"/>
+                        <h:outputText value="#{bundle.ViewItemsLabel_itemWarranty}"/>
+                        <h:outputText value="#{itemsController.selected.itemWarranty}" title="#{bundle.ViewItemsTitle_itemWarranty}"/>
+                        <h:outputText value="#{bundle.ViewItemsLabel_itemSize}"/>
+                        <h:outputText value="#{itemsController.selected.itemSize}" title="#{bundle.ViewItemsTitle_itemSize}"/>                        
+                        <h:outputText value="#{bundle.ViewItemsLabel_deliveryDays}"/>
+                        <h:outputText value="#{itemsController.selected.deliveryDays}" title="#{bundle.ViewItemsTitle_deliveryDays}"/>
+                        <h:outputText value="#{bundle.ViewItemsLabel_usernmSellerId}"/>
+                        <h:outputText value="#{not empty usernmController.items.stream().filter(
+                                    s -> s.id eq itemsController.selected.usernmSellerId).toList() ? usernmController.items.stream().filter(
+                                    s -> s.id eq itemsController.selected.usernmSellerId).toList().get(0).userName : ''}" 
+                                      title="#{bundle.ViewItemsTitle_usernmSellerId}"/> 
+                        <h:outputText/>
+                        <h:outputText/>
+                        <h:outputText value="Κατηγορία 1:"/>
+                        <h:outputText value="#{not empty categ1Controller.items.stream().filter(
+                                    s -> s.c1Id eq itemsController.selected.itemCateg1Id).toList() ? categ1Controller.items.stream().filter(
+                                    s -> s.c1Id eq itemsController.selected.itemCateg1Id).toList().get(0).c1Descr : ''}"/>
+                        <h:outputText value="Κατηγορία 2:"/>
+                        <h:outputText value="#{not empty categ2Controller.items.stream().filter(
+                                    s -> s.c2Id eq itemsController.selected.itemCateg2Id).toList() ? categ2Controller.items.stream().filter(
+                                    s -> s.c2Id eq itemsController.selected.itemCateg2Id).toList().get(0).c2Descr : ''}"/>
+                        <h:outputText value="Κατηγορία 3:"/>
+                        <h:outputText value="#{not empty  categ3Controller.items.stream().filter(
+                                    s -> s.c3Id eq itemsController.selected.itemCateg3Id).toList() ? categ3Controller.items.stream().filter(
+                                    s -> s.c3Id eq itemsController.selected.itemCateg3Id).toList().get(0).c3Descr : ''}"/>                        
+                      </h:panelGrid>
+                    </h:form>     
+                      <h:form id='viewHelperForm'>            
+                        <p:panelGrid columns="6" style="width: 100%">                             
+                                <ui:include src="/views/items/makesPerItem.xhtml" />
+                                <ui:include src="/views/items/modelsPerItem.xhtml" />
+                                <ui:include src="/views/items/originalCodesPerItem.xhtml" />
+                                <ui:include src="/views/catgDetails/offersPerItem.xhtml" />                                  
+                                <ui:include src="/views/itemsPaymentOptions/PaymentOptions.xhtml" />
+                                <ui:include src="/views/itemsDeliveryAvailablePin/AvailablePins.xhtml" />                          
+                        </p:panelGrid>  
+                      </h:form>                    
+                   </p:panelGrid>                  
+                
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('ItemsViewDialog').hide()"/> 
+               </h:panelGroup>              
+            
+        </p:dialog>
+
+    </ui:composition>
+</html>

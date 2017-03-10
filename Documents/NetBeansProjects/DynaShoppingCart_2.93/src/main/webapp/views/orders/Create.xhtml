@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdersCreateDlg" widgetVar="OrdersCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_orders.CreateOrdersTitle}">
+            <h:form id="OrdersCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{ordersController.selected != null}">                        
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_orderDate}" for="orderDate" />
+                        <p:calendar id="orderDate" pattern="MM/dd/yyyy HH:mm:ss" timeZone="GMT+3" 
+                                    value="#{ordersController.selected.orderDate}" 
+                                    title="#{bundle_orders.EditOrdersTitle_orderDate}" required="true" 
+                                    requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_orderDate}" 
+                                    showOn="button"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_customerId}" for="customerId" />
+                        <p:inputText id="customerId" value="#{ordersController.selected.userId}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_customerId}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_customerId}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{ordersController.selected.total}" title="#{bundle_orders.CreateOrdersTitle_total}" 
+                                     required="true" requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_total}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_discountCoupon}" for="discountCoupon" />
+                        <p:inputText id="discountCoupon" value="#{ordersController.selected.discountCoupon}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_discountCoupon}" />
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_discountPercent}" for="discountPercent" />
+                        <p:inputText id="discountPercent" value="#{ordersController.selected.discountPercent}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_discountPercent}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_discountPercent}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_discountPrice}" for="discountPrice" />
+                        <p:inputText id="discountPrice" value="#{ordersController.selected.discountPrice}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_discountPrice}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_discountPrice}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_totalFinal}" for="totalFinal" />
+                        <p:inputText id="totalFinal" value="#{ordersController.selected.totalFinal}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_totalFinal}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_totalFinal}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_paymentMethodId}" for="paymentMethodId" />
+                        <p:inputText id="paymentMethodId" value="#{ordersController.selected.paymentMethodId}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_paymentMethodId}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_paymentMethodId}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_deltapayId}" for="deltapayId" />
+                        <p:inputText id="deltapayId" value="#{ordersController.selected.deltapayId}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_deltapayId}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_deltapayId}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_shippingCost}" for="shippingCost" />
+                        <p:inputText id="shippingCost" value="#{ordersController.selected.shippingCost}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_shippingCost}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_shippingCost}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_shippingCostId}" for="shippingCostId" />
+                        <p:selectBooleanCheckbox id="shippingCostId" value="#{ordersController.selected.shippingCostId}" 
+                                     required="true" requiredMessage="#{bundle_orders.EditOrdersRequiredMessage_shippingCostId}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_affiliate}" for="affiliate" />
+                        <p:inputText id="affiliate" value="#{ordersController.selected.affiliate}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_affiliate}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_affiliate}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_orderState}" for="orderState" />                        
+                        <p:selectOneMenu id="orderState" value="#{ordersController.selected.orderState}"
+                                     converter="javax.faces.Integer"  style ="width: 100%">                                     
+                            <f:selectItem itemLabel="Επίλεξε Στάδιο Παραγγελίας" itemValue=""/>
+                            <f:selectItems  value="#{scheduleMasController.items}" var="se"                                        
+                                        itemLabel="#{se.scheduleType}" itemValue="#{se.id}" >                                                                
+                            </f:selectItems>                      
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_custName}" for="custName" />
+                        <p:inputText id="custName" value="#{ordersController.selected.custName}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_custName}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_custName}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_custEmail}" for="custEmail" />
+                        <p:inputText id="custEmail" value="#{ordersController.selected.custEmail}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_custEmail}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_custEmail}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_custPhone}" for="custPhone" />
+                        <p:inputText id="custPhone" value="#{ordersController.selected.custPhone}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_custPhone}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_custPhone}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_shippingAddress}" for="shippingAddress" />
+                        <p:inputText id="shippingAddress" value="#{ordersController.selected.shippingAddress}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_shippingAddress}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_shippingAddress}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_shippingZip}" for="shippingZip" />
+                        <p:inputText id="shippingZip" value="#{ordersController.selected.shippingZip}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_shippingZip}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_shippingZip}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_shippingCity}" for="shippingCity" />
+                        <p:inputText id="shippingCity" value="#{ordersController.selected.shippingCity}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_shippingCity}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_shippingCity}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_shippingCountry}" for="shippingCountry" />
+                        <p:inputText id="shippingCountry" value="#{ordersController.selected.shippingCountry}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_shippingCountry}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_shippingCountry}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_requestedInvoice}" for="requestedInvoice" />
+                        <p:inputText id="requestedInvoice" value="#{ordersController.selected.requestedInvoice}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_requestedInvoice}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_requestedInvoice}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_exported}" for="exported" />
+                        <p:inputText id="exported" value="#{ordersController.selected.exported}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_exported}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_exported}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_shippingCountryCode}" for="shippingCountryCode" />
+                        <p:inputText id="shippingCountryCode" value="#{ordersController.selected.shippingCountryCode}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_shippingCountryCode}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_shippingCountryCode}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_countryCodeSession}" for="countryCodeSession" />
+                        <p:inputText id="countryCodeSession" value="#{ordersController.selected.countryCodeSession}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_countryCodeSession}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_countryCodeSession}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_clientIp}" for="clientIp" />
+                        <p:inputText id="clientIp" value="#{ordersController.selected.clientIp}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_clientIp}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_clientIp}"/>
+                        <p:outputLabel value="#{bundle_orders.CreateOrdersLabel_userId}" for="userId" />
+                        <p:inputText id="userId" value="#{ordersController.selected.userId}" 
+                                     title="#{bundle_orders.CreateOrdersTitle_userId}" required="true" 
+                                     requiredMessage="#{bundle_orders.CreateOrdersRequiredMessage_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordersController.create}" value="#{bundle_orders.Save}" 
+                                     update="display,:OrdersListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrdersCreateDialog');"/>
+                    <p:commandButton value="#{bundle_orders.Cancel}" onclick="PF('OrdersCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

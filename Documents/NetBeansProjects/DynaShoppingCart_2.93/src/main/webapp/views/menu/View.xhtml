@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MenuViewDlg" widgetVar="MenuViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.ViewMenuTitle}">
+            <h:form id="MenuViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{menuController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMenuLabel_id}"/>
+                        <h:outputText value="#{menuController.selected.id}" title="#{bundle.ViewMenuTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewMenuLabel_menucode}"/>
+                        <h:outputText value="#{menuController.selected.menucode}" title="#{bundle.ViewMenuTitle_menucode}"/>
+                        <h:outputText value="#{bundle.ViewMenuLabel_menuShortName}"/>
+                        <h:outputText value="#{menuController.selected.menuShortName}" title="#{bundle.ViewMenuTitle_menuShortName}"/>
+                        <h:outputText value="#{bundle.ViewMenuLabel_menuLongName}"/>
+                        <h:outputText value="#{menuController.selected.menuLongName}" title="#{bundle.ViewMenuTitle_menuLongName}"/>
+                        <h:outputText value="#{bundle.ViewMenuLabel_menuRunOption}"/>
+                        <h:outputText value="#{menuController.selected.menuRunOption}" title="#{bundle.ViewMenuTitle_menuRunOption}"/>
+                        <h:outputText value="#{bundle.ViewMenuLabel_menuOrder}"/>
+                        <h:outputText value="#{menuController.selected.menuOrder}" title="#{bundle.ViewMenuTitle_menuOrder}"/>
+                        <h:outputText value="#{bundle.ViewMenuLabel_roleuser}"/>
+                        <h:outputText value="#{menuController.selected.roleuser}" title="#{bundle.ViewMenuTitle_roleuser}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('MenuViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

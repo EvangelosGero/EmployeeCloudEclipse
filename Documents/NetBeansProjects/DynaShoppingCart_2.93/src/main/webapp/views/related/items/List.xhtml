@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListItemsTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ItemsListForm">
+                <p:panel header="#{bundle.ListItemsTitle}">
+                    <p:dataTable id="datalist" value="#{itemsController.items}" var="item"
+                                 selectionMode="single" selection="#{itemsController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.itemId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemMakeId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemMakeId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemCode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemShortDesc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemShortDesc}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemLongDesc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemLongDesc}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemImages}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemImages}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemColor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemColor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemWarranty}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemWarranty}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemSize}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemSize}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemRetailValue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemRetailValue}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_deliveryDays}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.deliveryDays}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_usernmSellerId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usernmSellerId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_catgDetailsId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.catgDetailsId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemModelId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemModelId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemCateg1Id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemCateg1Id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemCateg2Id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemCateg2Id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemCateg3Id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemCateg3Id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemWholesalesValue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemWholesalesValue}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemAvailability}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemAvailability}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemOriginalCodes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemOriginalCodes}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemsTitle_itemEnabled}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemEnabled}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{itemsController.prepareCreate}" update=":ItemsCreateForm" oncomplete="PF('ItemsCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ItemsViewForm" oncomplete="PF('ItemsViewDialog').show()" disabled="#{empty itemsController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ItemsEditForm" oncomplete="PF('ItemsEditDialog').show()" disabled="#{empty itemsController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{itemsController.destroy}" update=":growl,datalist" disabled="#{empty itemsController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
