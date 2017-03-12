@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmplAdminsCreateDlg" widgetVar="EmplAdminsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEmplAdminsTitle}">
+            <h:form id="EmplAdminsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{emplAdminsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEmplAdminsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{emplAdminsController.selected.id}" title="#{bundle.CreateEmplAdminsTitle_id}" required="true" requiredMessage="#{bundle.CreateEmplAdminsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateEmplAdminsLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{emplAdminsController.selected.username}" title="#{bundle.CreateEmplAdminsTitle_username}" />
+                        <p:outputLabel value="#{bundle.CreateEmplAdminsLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{emplAdminsController.selected.password}" title="#{bundle.CreateEmplAdminsTitle_password}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{emplAdminsController.create}" value="#{bundle.Save}" update="display,:EmplAdminsListForm:datalist,:growl" oncomplete="handleSubmit(args,'EmplAdminsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EmplAdminsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="WorkersViewDlg" widgetVar="WorkersViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewWorkersTitle}">
+            <h:form id="WorkersViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{workersController.selected != null}">
+                        <h:outputText value="#{bundle.ViewWorkersLabel_id}"/>
+                        <h:outputText value="#{workersController.selected.id}" title="#{bundle.ViewWorkersTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_firstName}"/>
+                        <h:outputText value="#{workersController.selected.firstName}" title="#{bundle.ViewWorkersTitle_firstName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_lastName}"/>
+                        <h:outputText value="#{workersController.selected.lastName}" title="#{bundle.ViewWorkersTitle_lastName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_jobTitle}"/>
+                        <h:outputText value="#{workersController.selected.jobTitle}" title="#{bundle.ViewWorkersTitle_jobTitle}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_hireDate}"/>
+                        <h:outputText value="#{workersController.selected.hireDate}" title="#{bundle.ViewWorkersTitle_hireDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_salary}"/>
+                        <h:outputText value="#{workersController.selected.salary}" title="#{bundle.ViewWorkersTitle_salary}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_code}"/>
+                        <h:outputText value="#{workersController.selected.code}" title="#{bundle.ViewWorkersTitle_code}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_phone1}"/>
+                        <h:outputText value="#{workersController.selected.phone1}" title="#{bundle.ViewWorkersTitle_phone1}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_phone2}"/>
+                        <h:outputText value="#{workersController.selected.phone2}" title="#{bundle.ViewWorkersTitle_phone2}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_adt}"/>
+                        <h:outputText value="#{workersController.selected.adt}" title="#{bundle.ViewWorkersTitle_adt}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_amka}"/>
+                        <h:outputText value="#{workersController.selected.amka}" title="#{bundle.ViewWorkersTitle_amka}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_afm}"/>
+                        <h:outputText value="#{workersController.selected.afm}" title="#{bundle.ViewWorkersTitle_afm}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_street}"/>
+                        <h:outputText value="#{workersController.selected.street}" title="#{bundle.ViewWorkersTitle_street}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_streetNumber}"/>
+                        <h:outputText value="#{workersController.selected.streetNumber}" title="#{bundle.ViewWorkersTitle_streetNumber}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_demos}"/>
+                        <h:outputText value="#{workersController.selected.demos}" title="#{bundle.ViewWorkersTitle_demos}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_tk}"/>
+                        <h:outputText value="#{workersController.selected.tk}" title="#{bundle.ViewWorkersTitle_tk}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_yearsBefore}"/>
+                        <h:outputText value="#{workersController.selected.yearsBefore}" title="#{bundle.ViewWorkersTitle_yearsBefore}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_education}"/>
+                        <h:outputText value="#{workersController.selected.education}" title="#{bundle.ViewWorkersTitle_education}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_marriage}"/>
+                        <h:outputText value="#{workersController.selected.marriage}" title="#{bundle.ViewWorkersTitle_marriage}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_children}"/>
+                        <h:outputText value="#{workersController.selected.children}" title="#{bundle.ViewWorkersTitle_children}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_entitledDays}"/>
+                        <h:outputText value="#{workersController.selected.entitledDays}" title="#{bundle.ViewWorkersTitle_entitledDays}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_amIka}"/>
+                        <h:outputText value="#{workersController.selected.amIka}" title="#{bundle.ViewWorkersTitle_amIka}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_birthdate}"/>
+                        <h:outputText value="#{workersController.selected.birthdate}" title="#{bundle.ViewWorkersTitle_birthdate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_firstHireDate}"/>
+                        <h:outputText value="#{workersController.selected.firstHireDate}" title="#{bundle.ViewWorkersTitle_firstHireDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_fatherName}"/>
+                        <h:outputText value="#{workersController.selected.fatherName}" title="#{bundle.ViewWorkersTitle_fatherName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_reasonIsfores}"/>
+                        <h:outputText value="#{workersController.selected.reasonIsfores}" title="#{bundle.ViewWorkersTitle_reasonIsfores}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_subsidiary}"/>
+                        <h:outputText value="#{workersController.selected.subsidiary}" title="#{bundle.ViewWorkersTitle_subsidiary}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_company}"/>
+                        <h:outputText value="#{workersController.selected.company}" title="#{bundle.ViewWorkersTitle_company}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_katAsfalisis}"/>
+                        <h:outputText value="#{workersController.selected.katAsfalisis}" title="#{bundle.ViewWorkersTitle_katAsfalisis}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_tapit}"/>
+                        <h:outputText value="#{workersController.selected.tapit}" title="#{bundle.ViewWorkersTitle_tapit}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_relation}"/>
+                        <h:outputText value="#{workersController.selected.relation}" title="#{bundle.ViewWorkersTitle_relation}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_kentroKostous}"/>
+                        <h:outputText value="#{workersController.selected.kentroKostous}" title="#{bundle.ViewWorkersTitle_kentroKostous}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_amEpikourikou}"/>
+                        <h:outputText value="#{workersController.selected.amEpikourikou}" title="#{bundle.ViewWorkersTitle_amEpikourikou}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_motherName}"/>
+                        <h:outputText value="#{workersController.selected.motherName}" title="#{bundle.ViewWorkersTitle_motherName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_arParartimatos}"/>
+                        <h:outputText value="#{workersController.selected.arParartimatos}" title="#{bundle.ViewWorkersTitle_arParartimatos}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_kad}"/>
+                        <h:outputText value="#{workersController.selected.kad}" title="#{bundle.ViewWorkersTitle_kad}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_kodikosIdikotitas}"/>
+                        <h:outputText value="#{workersController.selected.kodikosIdikotitas}" title="#{bundle.ViewWorkersTitle_kodikosIdikotitas}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_idikiPerAsfalisis}"/>
+                        <h:outputText value="#{workersController.selected.idikiPerAsfalisis}" title="#{bundle.ViewWorkersTitle_idikiPerAsfalisis}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_apolisi}"/>
+                        <h:outputText value="#{workersController.selected.apolisi}" title="#{bundle.ViewWorkersTitle_apolisi}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_diakopi}"/>
+                        <h:outputText value="#{workersController.selected.diakopi}" title="#{bundle.ViewWorkersTitle_diakopi}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_email}"/>
+                        <h:outputText value="#{workersController.selected.email}" title="#{bundle.ViewWorkersTitle_email}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="WorkersViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

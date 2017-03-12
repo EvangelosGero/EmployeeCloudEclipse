@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="WorkersCreateDlg" widgetVar="WorkersCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateWorkersTitle}">
+            <h:form id="WorkersCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{workersController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{workersController.selected.id}" title="#{bundle.CreateWorkersTitle_id}" required="true" requiredMessage="#{bundle.CreateWorkersRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_firstName}" for="firstName" />
+                        <p:inputText id="firstName" value="#{workersController.selected.firstName}" title="#{bundle.CreateWorkersTitle_firstName}" required="true" requiredMessage="#{bundle.CreateWorkersRequiredMessage_firstName}"/>
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_lastName}" for="lastName" />
+                        <p:inputText id="lastName" value="#{workersController.selected.lastName}" title="#{bundle.CreateWorkersTitle_lastName}" required="true" requiredMessage="#{bundle.CreateWorkersRequiredMessage_lastName}"/>
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_jobTitle}" for="jobTitle" />
+                        <p:inputText id="jobTitle" value="#{workersController.selected.jobTitle}" title="#{bundle.CreateWorkersTitle_jobTitle}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_hireDate}" for="hireDate" />
+                        <p:calendar id="hireDate" pattern="MM/dd/yyyy" value="#{workersController.selected.hireDate}" title="#{bundle.EditWorkersTitle_hireDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_salary}" for="salary" />
+                        <p:inputText id="salary" value="#{workersController.selected.salary}" title="#{bundle.CreateWorkersTitle_salary}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{workersController.selected.code}" title="#{bundle.CreateWorkersTitle_code}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_phone1}" for="phone1" />
+                        <p:inputText id="phone1" value="#{workersController.selected.phone1}" title="#{bundle.CreateWorkersTitle_phone1}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_phone2}" for="phone2" />
+                        <p:inputText id="phone2" value="#{workersController.selected.phone2}" title="#{bundle.CreateWorkersTitle_phone2}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_adt}" for="adt" />
+                        <p:inputText id="adt" value="#{workersController.selected.adt}" title="#{bundle.CreateWorkersTitle_adt}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_amka}" for="amka" />
+                        <p:inputText id="amka" value="#{workersController.selected.amka}" title="#{bundle.CreateWorkersTitle_amka}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_afm}" for="afm" />
+                        <p:inputText id="afm" value="#{workersController.selected.afm}" title="#{bundle.CreateWorkersTitle_afm}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_street}" for="street" />
+                        <p:inputText id="street" value="#{workersController.selected.street}" title="#{bundle.CreateWorkersTitle_street}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_streetNumber}" for="streetNumber" />
+                        <p:inputText id="streetNumber" value="#{workersController.selected.streetNumber}" title="#{bundle.CreateWorkersTitle_streetNumber}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_demos}" for="demos" />
+                        <p:inputText id="demos" value="#{workersController.selected.demos}" title="#{bundle.CreateWorkersTitle_demos}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_tk}" for="tk" />
+                        <p:inputText id="tk" value="#{workersController.selected.tk}" title="#{bundle.CreateWorkersTitle_tk}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_yearsBefore}" for="yearsBefore" />
+                        <p:inputText id="yearsBefore" value="#{workersController.selected.yearsBefore}" title="#{bundle.CreateWorkersTitle_yearsBefore}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_education}" for="education" />
+                        <p:inputText id="education" value="#{workersController.selected.education}" title="#{bundle.CreateWorkersTitle_education}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_marriage}" for="marriage" />
+                        <p:inputText id="marriage" value="#{workersController.selected.marriage}" title="#{bundle.CreateWorkersTitle_marriage}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_children}" for="children" />
+                        <p:inputText id="children" value="#{workersController.selected.children}" title="#{bundle.CreateWorkersTitle_children}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_entitledDays}" for="entitledDays" />
+                        <p:inputText id="entitledDays" value="#{workersController.selected.entitledDays}" title="#{bundle.CreateWorkersTitle_entitledDays}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_amIka}" for="amIka" />
+                        <p:inputText id="amIka" value="#{workersController.selected.amIka}" title="#{bundle.CreateWorkersTitle_amIka}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_birthdate}" for="birthdate" />
+                        <p:calendar id="birthdate" pattern="MM/dd/yyyy" value="#{workersController.selected.birthdate}" title="#{bundle.EditWorkersTitle_birthdate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_firstHireDate}" for="firstHireDate" />
+                        <p:calendar id="firstHireDate" pattern="MM/dd/yyyy" value="#{workersController.selected.firstHireDate}" title="#{bundle.EditWorkersTitle_firstHireDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_fatherName}" for="fatherName" />
+                        <p:inputText id="fatherName" value="#{workersController.selected.fatherName}" title="#{bundle.CreateWorkersTitle_fatherName}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_reasonIsfores}" for="reasonIsfores" />
+                        <p:inputText id="reasonIsfores" value="#{workersController.selected.reasonIsfores}" title="#{bundle.CreateWorkersTitle_reasonIsfores}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_subsidiary}" for="subsidiary" />
+                        <p:inputText id="subsidiary" value="#{workersController.selected.subsidiary}" title="#{bundle.CreateWorkersTitle_subsidiary}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_company}" for="company" />
+                        <p:inputText id="company" value="#{workersController.selected.company}" title="#{bundle.CreateWorkersTitle_company}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_katAsfalisis}" for="katAsfalisis" />
+                        <p:inputText id="katAsfalisis" value="#{workersController.selected.katAsfalisis}" title="#{bundle.CreateWorkersTitle_katAsfalisis}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_tapit}" for="tapit" />
+                        <p:inputText id="tapit" value="#{workersController.selected.tapit}" title="#{bundle.CreateWorkersTitle_tapit}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_relation}" for="relation" />
+                        <p:inputText id="relation" value="#{workersController.selected.relation}" title="#{bundle.CreateWorkersTitle_relation}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_kentroKostous}" for="kentroKostous" />
+                        <p:inputText id="kentroKostous" value="#{workersController.selected.kentroKostous}" title="#{bundle.CreateWorkersTitle_kentroKostous}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_amEpikourikou}" for="amEpikourikou" />
+                        <p:inputText id="amEpikourikou" value="#{workersController.selected.amEpikourikou}" title="#{bundle.CreateWorkersTitle_amEpikourikou}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_motherName}" for="motherName" />
+                        <p:inputText id="motherName" value="#{workersController.selected.motherName}" title="#{bundle.CreateWorkersTitle_motherName}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_arParartimatos}" for="arParartimatos" />
+                        <p:inputText id="arParartimatos" value="#{workersController.selected.arParartimatos}" title="#{bundle.CreateWorkersTitle_arParartimatos}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_kad}" for="kad" />
+                        <p:inputText id="kad" value="#{workersController.selected.kad}" title="#{bundle.CreateWorkersTitle_kad}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_kodikosIdikotitas}" for="kodikosIdikotitas" />
+                        <p:inputText id="kodikosIdikotitas" value="#{workersController.selected.kodikosIdikotitas}" title="#{bundle.CreateWorkersTitle_kodikosIdikotitas}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_idikiPerAsfalisis}" for="idikiPerAsfalisis" />
+                        <p:inputText id="idikiPerAsfalisis" value="#{workersController.selected.idikiPerAsfalisis}" title="#{bundle.CreateWorkersTitle_idikiPerAsfalisis}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_apolisi}" for="apolisi" />
+                        <p:inputText id="apolisi" value="#{workersController.selected.apolisi}" title="#{bundle.CreateWorkersTitle_apolisi}" />
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_diakopi}" for="diakopi" />
+                        <p:calendar id="diakopi" pattern="MM/dd/yyyy" value="#{workersController.selected.diakopi}" title="#{bundle.EditWorkersTitle_diakopi}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateWorkersLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{workersController.selected.email}" title="#{bundle.CreateWorkersTitle_email}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{workersController.create}" value="#{bundle.Save}" update="display,:WorkersListForm:datalist,:growl" oncomplete="handleSubmit(args,'WorkersCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="WorkersCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
