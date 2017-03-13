@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TimerCreateDlg" widgetVar="TimerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTimerTitle}">
+            <h:form id="TimerCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{timerController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{timerController.selected.code}" title="#{bundle.CreateTimerTitle_code}" required="true" requiredMessage="#{bundle.CreateTimerRequiredMessage_code}"/>
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_starttime}" for="starttime" />
+                        <p:calendar id="starttime" pattern="MM/dd/yyyy HH:mm:ss" value="#{timerController.selected.starttime}" title="#{bundle.EditTimerTitle_starttime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_endtime}" for="endtime" />
+                        <p:calendar id="endtime" pattern="MM/dd/yyyy HH:mm:ss" value="#{timerController.selected.endtime}" title="#{bundle.EditTimerTitle_endtime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_intervalTime}" for="intervalTime" />
+                        <p:inputText id="intervalTime" value="#{timerController.selected.intervalTime}" title="#{bundle.CreateTimerTitle_intervalTime}" />
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{timerController.selected.id}" title="#{bundle.CreateTimerTitle_id}" required="true" requiredMessage="#{bundle.CreateTimerRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_pcNameIn}" for="pcNameIn" />
+                        <p:inputText id="pcNameIn" value="#{timerController.selected.pcNameIn}" title="#{bundle.CreateTimerTitle_pcNameIn}" />
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_pcIpIn}" for="pcIpIn" />
+                        <p:inputText id="pcIpIn" value="#{timerController.selected.pcIpIn}" title="#{bundle.CreateTimerTitle_pcIpIn}" />
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_pcNameOut}" for="pcNameOut" />
+                        <p:inputText id="pcNameOut" value="#{timerController.selected.pcNameOut}" title="#{bundle.CreateTimerTitle_pcNameOut}" />
+                        <p:outputLabel value="#{bundle.CreateTimerLabel_pcIpOut}" for="pcIpOut" />
+                        <p:inputText id="pcIpOut" value="#{timerController.selected.pcIpOut}" title="#{bundle.CreateTimerTitle_pcIpOut}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{timerController.create}" value="#{bundle.Save}" update="display,:TimerListForm:datalist,:growl" oncomplete="handleSubmit(args,'TimerCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TimerCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

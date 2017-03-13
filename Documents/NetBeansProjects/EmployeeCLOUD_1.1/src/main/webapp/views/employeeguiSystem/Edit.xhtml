@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmployeeguiSystemEditDlg" widgetVar="EmployeeguiSystemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEmployeeguiSystemTitle}">
+            <h:form id="EmployeeguiSystemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{employeeguiSystemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEmployeeguiSystemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{employeeguiSystemController.selected.id}" title="#{bundle.EditEmployeeguiSystemTitle_id}" required="true" requiredMessage="#{bundle.EditEmployeeguiSystemRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditEmployeeguiSystemLabel_version}" for="version" />
+                        <p:inputText id="version" value="#{employeeguiSystemController.selected.version}" title="#{bundle.EditEmployeeguiSystemTitle_version}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{employeeguiSystemController.update}" value="#{bundle.Save}" update="display,:EmployeeguiSystemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmployeeguiSystemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EmployeeguiSystemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
