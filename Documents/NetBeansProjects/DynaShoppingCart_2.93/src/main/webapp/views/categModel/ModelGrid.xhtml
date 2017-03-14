@@ -18,9 +18,8 @@
             <p:dataGrid id="availableProducts" var="item" 
                         value="#{categModelController.items.stream()
                                  .filter(s -> s.mlParentId eq categMakeController.selected.mkId).toList()}" columns="6"
-                          paginator="true" paginatorPosition="bottom"
-                        rowsPerPageTemplate="3,6,9,12,15,18"
-                        rows="9" widgetVar="itemContainerDataGrid"
+                        paginator="false" 
+                        widgetVar="itemContainerDataGrid"
                          >
                 <f:facet name="header" >
                     <p:outputLabel for="SearchInputText" value="Αναζητηση με Κωδικο: "/> 
