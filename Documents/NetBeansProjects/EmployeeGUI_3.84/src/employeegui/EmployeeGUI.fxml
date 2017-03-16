@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="employeegui.EmployeeGUIController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Εργαζόμενοι">
+            <items>
+                  <MenuItem fx:id="showTable" mnemonicParsing="false" onAction="#handleShowTable" text="Πίνακας Εργαζομένων" />
+                  <MenuItem fx:id="enterData" mnemonicParsing="false" onAction="#handleEnterData" text="Εισαγωγή στοιχείων Εργαζομένων" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleEmployeesReport" text="Λίστα Εργαζομένων" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleActiveEmployees" text="Λίστα Ενεργών Εργαζομένων" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Timer">
+              <items>
+                <MenuItem fx:id="opentimer" mnemonicParsing="false" onAction="#handleOpenTimer" text="Άνοιγμα Timer" />
+                  <MenuItem fx:id="monthlyReport" mnemonicParsing="false" onAction="#createMonthlyReport" text="Δημιουργία Μηνιαίου Report" />
+                  <MenuItem fx:id="showMonthlyreport" mnemonicParsing="false" onAction="#handleShowMonthlyReport" text="Εμφάνιση Μηνιαίου Report" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Άδειες ">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleHolidays" text="Επίσημες Αργίες" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleVacationRequest" text="Αίτηση Αδείας" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleVacationCard" text="Καρτελα Αδειών Εργαζομένου" />
+                  <MenuItem fx:id="createVacationReport" mnemonicParsing="false" onAction="#handleCreateVacationReport" text="Δημιουργία Report Αδειών" />
+                <MenuItem fx:id="vacationReport" mnemonicParsing="false" onAction="#handleVacationReport" text="Εμφάνιση Report Αδειών" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ασθένειες">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleSickLess3" text="Καταχώριση ασθένειας εως 3 ημέρες" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSickLess3Card" text="Καρτέλα ασθένειας &lt;3 ημ. Εργαζομένου" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSickMore3" text="Καταχώριση ασθένειας μεγαλύτερης των 3 ημερών" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSickMore3Card" text="Καρτέλα ασθένειας &gt;3 ημ. Εργαζομενου" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Απουσίες - Διορθώσεις Timer">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#createTimerInterval" text="Καταγραφές Εισόδου/Εξόδου Εργαζομένου" />
+                  <MenuItem mnemonicParsing="false" onAction="#createAbsentReport" text="Απουσίες" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleMazikiDiorthosi" text="Μαζική Διόρθωση Ρολογιών" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Μισθοδοσία">
+              <items>
+                  <Menu mnemonicParsing="false" text="Δημιουργία REPORT Μισθοδοσίας">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleSalaryReport" text="Μήνα" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleDoroPashaReport" text="Δώρο Πάσχα" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleEpidomaAdeiasReport" text="Επίδομα Αδείας" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleDoroXmasReport" text="Δώρο Χριστουγεννων" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Εμφανιση Report Μισθοδοσίας">
+                    <items>
+                        <Menu mnemonicParsing="false" text="Εμφανιση Μισθοδοτικής Καταστασης">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowMisthodotiki" text="Μήνα" />
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowMisthodotikiDoroPasha" text="Δώρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowMisthodotikiEpidomaAdeias" text="Επίδομα Αδείας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowMisthodotikiDoroXmas" text="Δώρο Χριστουγέννων" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Εμφανιση Λογιστικού Άρθρου">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowArthro" text="Μήνα" />
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowArthroDoroPasha" text="Δώρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowArthroEpidomaAdeias" text="Επίδομα Αδείας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowArthroDoroXmas" text="Δώρο Χριστουγέννων" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Εμφανιση Καταστασης ΙΚΑ">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowIKA" text="Μήνα" />
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowIkaDoroPasha" text="Δώρο Πάσχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowIkaEpidomaAdeias" text="Επίδομα Αδείας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowIkaDoroXmas" text="Δώρο Χριστουγεννων" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Πληρωμή">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowPliromi" text="Μήνα" />
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowPliromiDoroPasha" text="Δώρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowPliromiEpidomaAdeias" text="Επίδομα Αδείας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowPliromiDoroXmas" text="Δωρο Χριστουγέννων" />
+                          </items>
+                        </Menu>
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="ΑΠΔ">
+                    <items>
+                        <Menu mnemonicParsing="false" text="PDF Αναλυτικής ΑΠΔ">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowAnalitikiAPD" text="Μήνας" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Δημιουργία CSL01">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleCSL01" text="Μήνας" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Αποδείξεις Πληρωμής">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleApodixis" text="Μήνα" />
+                            <MenuItem mnemonicParsing="false" onAction="#handleApodixisDoroPasha" text="Δωρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleApodixisEpidomaAdeias" text="Επίδομα Αδείας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleApodixisDoroXmas" text="Δωρο Χριστουγεννων" />
+                          </items>
+                        </Menu>
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Διακοπή Εργασιακής Σχεσης">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#handleParaitisi" text="Παραίτηση" />
+                      <MenuItem mnemonicParsing="false" onAction="#handleApolisi" text="Απόλυση" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleSintaxiodotisi" text="Συνταξιοδότηση" />
+                    </items>
+                  </Menu>
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Εργαλεία">
+            <items>
+                <MenuItem fx:id="OpenBrowser" mnemonicParsing="false" onAction="#openBrowser" text="Άνοιγμα Browser" />
+                  <MenuItem fx:id="openPDFMenu" mnemonicParsing="false" onAction="#handleOpenPDF" text="Άνοιγμα αρχείων PDF" />
+                  <MenuItem fx:id="openExcelMenu" mnemonicParsing="false" onAction="#handleOpenExcel" text="Άνοιγμα αρχείων Excel" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Ιστορικό">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleOldTimerReports" text="Εμφάνιση Παλαιών Timer Reports" />
+                  <Menu mnemonicParsing="false" text="Εμφάνιση Παλαιών Reports Μισθοδοσίας">
+                     <items>
+                        <Menu mnemonicParsing="false" text="Εμφανιση Μισθοδοτικής Καταστασης">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowMisthodotikiHistory" text="Μηνα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowMisthodotikiDoroPashaHistory" text="Δωρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowMisthodotikiEpidomaAdeiasHistory" text="Επιδομα Αδειας" />
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowMisthodotikiDoroXmasHistory" text="Δωρο Χριστουγεννων" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Εμφανιση Λογιστικου Αρθρου">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowArthroHistory" text="Μηνα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowArthroDoroPashaHistory" text="Δωρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowArthroEpidomaAdeiasHistory" text="Επιδομα Αδειας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowArthroDoroXmasHistory" text="Δωρο Χριστουγεννων" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Εμφανιση Καταστασης ΙΚΑ">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowIKAHistory" text="Μηνα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowIkaDoroPashaHistory" text="Δωρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowIkaEpidomaAdeiasHistory" text="Επιδομα Αδειας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowIkaDoroXmasHistory" text="Δωρο Χριστουγεννων" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Πληρωμη">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleShowPliromiHistory" text="Μηνα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowPliromiDoroPashaHistory" text="Δωρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowPliromiEpidomaAdeiasHistory" text="Επιδομα Αδειας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowPliromiDoroXmasHistory" text="Δωρο Χριστουγεννων" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Αποδείξεις">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowApodixisHistory" text="Μηνα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowApodixisDoroPashaHistory" text="Δωρο Πασχα" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowApodixisEpidomaAdeiasHistory" text="Επιδομα Αδειας" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowApodixisDoroXmasHistory" text="Δωρο Χριστουγεννων" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="ΑΠΔ">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowAPDHistory" text="Μηνα" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="CSL01">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleShowCLSHistory" text="Μηνα" />
+                           </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#handleOldVacationReports" text="Παλαιά Reports αδειων" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCreateOldTimerReports" text="Δημιουργία παλαιών Timer Reports " />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCreateOldVacationReport" text="Δημιουργία παλαιού Report Αδειών" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCreateOldSalaryReports" text="Δημιουργία παλαιών report μισθοδοσίας" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCreateOldDPReport" text="Δημιουργία παλαιού report Δώρου Πάσχα" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCreateOldEAReport" text="Δημιουργία παλαιού report Επιδόματος Αδείας" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCreateOldDXReport" text="Δημιουργία παλαιού report Δώρου Χριστουγέννων" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Παράμετροι">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleStoixeiaEpihirisis" text="Στοιχεία Επιχείρησης" />
+                <MenuItem mnemonicParsing="false" onAction="#handleSubsidiaries" text="Υποκαταστήματα" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleProkatavoles" text="Προκαταβολές" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleLoans" text="Δάνεια" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Βοήθεια">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Βοήθεια" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleGetUpdates" text="Get Updates" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="Σχετικά" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Έξοδος">
+              <items>
+              <MenuItem fx:id="closeMenu" mnemonicParsing="false" onAction="#handleCloseMenu" text="Κλείσιμο Εφαρμογής" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <StackPane fx:id="centerStack" prefHeight="200.0" prefWidth="200.0" styleClass="workArea" BorderPane.alignment="CENTER">
+      </StackPane>
+   </center>   
+</BorderPane>

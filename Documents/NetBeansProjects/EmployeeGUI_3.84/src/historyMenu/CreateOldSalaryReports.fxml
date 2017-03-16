@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="historyMenu.CreateOldSalaryReportsController">
+   <children>
+      <Label layoutX="114.0" layoutY="32.0" prefHeight="20.0" prefWidth="372.0" text="ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ REPORT ΜΙΣΘΟΔΟΣΙΑΣ ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="157.0" prefHeight="17.0" prefWidth="202.0" text="Παρακαλώ επιλέξτε μήνα και έτος :" />
+      <DatePicker fx:id="monthYearDatePicker" layoutX="284.0" layoutY="153.0" />
+      <Button layoutX="29.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="25.0" prefWidth="111.0" text="Κλείσιμο" />
+      <Button layoutX="441.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="25.0" prefWidth="124.0" text="Δημιουργία Report" />
+   </children>
+</AnchorPane>
