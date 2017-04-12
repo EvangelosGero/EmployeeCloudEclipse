@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompanyInformationCreateDlg" widgetVar="CompanyInformationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCompanyInformationTitle}">
+            <h:form id="CompanyInformationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{companyInformationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{companyInformationController.selected.id}" title="#{bundle.CreateCompanyInformationTitle_id}" required="true" requiredMessage="#{bundle.CreateCompanyInformationRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{companyInformationController.selected.name}" title="#{bundle.CreateCompanyInformationTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_idosEpihirisis}" for="idosEpihirisis" />
+                        <p:inputText id="idosEpihirisis" value="#{companyInformationController.selected.idosEpihirisis}" title="#{bundle.CreateCompanyInformationTitle_idosEpihirisis}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_phoneNumber}" for="phoneNumber" />
+                        <p:inputText id="phoneNumber" value="#{companyInformationController.selected.phoneNumber}" title="#{bundle.CreateCompanyInformationTitle_phoneNumber}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_arMitrErg}" for="arMitrErg" />
+                        <p:inputText id="arMitrErg" value="#{companyInformationController.selected.arMitrErg}" title="#{bundle.CreateCompanyInformationTitle_arMitrErg}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_ipefthinos}" for="ipefthinos" />
+                        <p:inputText id="ipefthinos" value="#{companyInformationController.selected.ipefthinos}" title="#{bundle.CreateCompanyInformationTitle_ipefthinos}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_address}" for="address" />
+                        <p:inputText id="address" value="#{companyInformationController.selected.address}" title="#{bundle.CreateCompanyInformationTitle_address}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_town}" for="town" />
+                        <p:inputText id="town" value="#{companyInformationController.selected.town}" title="#{bundle.CreateCompanyInformationTitle_town}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_edra}" for="edra" />
+                        <p:inputText id="edra" value="#{companyInformationController.selected.edra}" title="#{bundle.CreateCompanyInformationTitle_edra}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_afm}" for="afm" />
+                        <p:inputText id="afm" value="#{companyInformationController.selected.afm}" title="#{bundle.CreateCompanyInformationTitle_afm}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_ipokatastimaIka}" for="ipokatastimaIka" />
+                        <p:inputText id="ipokatastimaIka" value="#{companyInformationController.selected.ipokatastimaIka}" title="#{bundle.CreateCompanyInformationTitle_ipokatastimaIka}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_patronymo}" for="patronymo" />
+                        <p:inputText id="patronymo" value="#{companyInformationController.selected.patronymo}" title="#{bundle.CreateCompanyInformationTitle_patronymo}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_arithmosOdou}" for="arithmosOdou" />
+                        <p:inputText id="arithmosOdou" value="#{companyInformationController.selected.arithmosOdou}" title="#{bundle.CreateCompanyInformationTitle_arithmosOdou}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_tk}" for="tk" />
+                        <p:inputText id="tk" value="#{companyInformationController.selected.tk}" title="#{bundle.CreateCompanyInformationTitle_tk}" />
+                        <p:outputLabel value="#{bundle.CreateCompanyInformationLabel_kodikosIpokIka}" for="kodikosIpokIka" />
+                        <p:inputText id="kodikosIpokIka" value="#{companyInformationController.selected.kodikosIpokIka}" title="#{bundle.CreateCompanyInformationTitle_kodikosIpokIka}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{companyInformationController.create}" value="#{bundle.Save}" update="display,:CompanyInformationListForm:datalist,:growl" oncomplete="handleSubmit(args,'CompanyInformationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CompanyInformationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

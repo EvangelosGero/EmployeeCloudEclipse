@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompanyInformationViewDlg" widgetVar="CompanyInformationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCompanyInformationTitle}">
+            <h:form id="CompanyInformationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{companyInformationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_id}"/>
+                        <h:outputText value="#{companyInformationController.selected.id}" title="#{bundle.ViewCompanyInformationTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_name}"/>
+                        <h:outputText value="#{companyInformationController.selected.name}" title="#{bundle.ViewCompanyInformationTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_idosEpihirisis}"/>
+                        <h:outputText value="#{companyInformationController.selected.idosEpihirisis}" title="#{bundle.ViewCompanyInformationTitle_idosEpihirisis}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_phoneNumber}"/>
+                        <h:outputText value="#{companyInformationController.selected.phoneNumber}" title="#{bundle.ViewCompanyInformationTitle_phoneNumber}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_arMitrErg}"/>
+                        <h:outputText value="#{companyInformationController.selected.arMitrErg}" title="#{bundle.ViewCompanyInformationTitle_arMitrErg}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_ipefthinos}"/>
+                        <h:outputText value="#{companyInformationController.selected.ipefthinos}" title="#{bundle.ViewCompanyInformationTitle_ipefthinos}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_address}"/>
+                        <h:outputText value="#{companyInformationController.selected.address}" title="#{bundle.ViewCompanyInformationTitle_address}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_town}"/>
+                        <h:outputText value="#{companyInformationController.selected.town}" title="#{bundle.ViewCompanyInformationTitle_town}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_edra}"/>
+                        <h:outputText value="#{companyInformationController.selected.edra}" title="#{bundle.ViewCompanyInformationTitle_edra}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_afm}"/>
+                        <h:outputText value="#{companyInformationController.selected.afm}" title="#{bundle.ViewCompanyInformationTitle_afm}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_ipokatastimaIka}"/>
+                        <h:outputText value="#{companyInformationController.selected.ipokatastimaIka}" title="#{bundle.ViewCompanyInformationTitle_ipokatastimaIka}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_patronymo}"/>
+                        <h:outputText value="#{companyInformationController.selected.patronymo}" title="#{bundle.ViewCompanyInformationTitle_patronymo}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_arithmosOdou}"/>
+                        <h:outputText value="#{companyInformationController.selected.arithmosOdou}" title="#{bundle.ViewCompanyInformationTitle_arithmosOdou}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_tk}"/>
+                        <h:outputText value="#{companyInformationController.selected.tk}" title="#{bundle.ViewCompanyInformationTitle_tk}"/>
+                        <h:outputText value="#{bundle.ViewCompanyInformationLabel_kodikosIpokIka}"/>
+                        <h:outputText value="#{companyInformationController.selected.kodikosIpokIka}" title="#{bundle.ViewCompanyInformationTitle_kodikosIpokIka}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CompanyInformationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

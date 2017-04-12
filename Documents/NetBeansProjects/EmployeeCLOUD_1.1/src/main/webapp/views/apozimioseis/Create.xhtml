@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApozimioseisCreateDlg" widgetVar="ApozimioseisCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateApozimioseisTitle}">
+            <h:form id="ApozimioseisCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apozimioseisController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateApozimioseisLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{apozimioseisController.selected.id}" title="#{bundle.CreateApozimioseisTitle_id}" required="true" requiredMessage="#{bundle.CreateApozimioseisRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateApozimioseisLabel_apozimiosi}" for="apozimiosi" />
+                        <p:inputText id="apozimiosi" value="#{apozimioseisController.selected.apozimiosi}" title="#{bundle.CreateApozimioseisTitle_apozimiosi}" />
+                        <p:outputLabel value="#{bundle.CreateApozimioseisLabel_miLifthisesAdeies}" for="miLifthisesAdeies" />
+                        <p:inputText id="miLifthisesAdeies" value="#{apozimioseisController.selected.miLifthisesAdeies}" title="#{bundle.CreateApozimioseisTitle_miLifthisesAdeies}" />
+                        <p:outputLabel value="#{bundle.CreateApozimioseisLabel_imeresAdeias}" for="imeresAdeias" />
+                        <p:inputText id="imeresAdeias" value="#{apozimioseisController.selected.imeresAdeias}" title="#{bundle.CreateApozimioseisTitle_imeresAdeias}" />
+                        <p:outputLabel value="#{bundle.CreateApozimioseisLabel_imeresApozimiosis}" for="imeresApozimiosis" />
+                        <p:inputText id="imeresApozimiosis" value="#{apozimioseisController.selected.imeresApozimiosis}" title="#{bundle.CreateApozimioseisTitle_imeresApozimiosis}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{apozimioseisController.create}" value="#{bundle.Save}" update="display,:ApozimioseisListForm:datalist,:growl" oncomplete="handleSubmit(args,'ApozimioseisCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ApozimioseisCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

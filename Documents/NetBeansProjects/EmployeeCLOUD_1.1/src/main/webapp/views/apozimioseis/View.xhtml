@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApozimioseisViewDlg" widgetVar="ApozimioseisViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewApozimioseisTitle}">
+            <h:form id="ApozimioseisViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apozimioseisController.selected != null}">
+                        <h:outputText value="#{bundle.ViewApozimioseisLabel_id}"/>
+                        <h:outputText value="#{apozimioseisController.selected.id}" title="#{bundle.ViewApozimioseisTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewApozimioseisLabel_apozimiosi}"/>
+                        <h:outputText value="#{apozimioseisController.selected.apozimiosi}" title="#{bundle.ViewApozimioseisTitle_apozimiosi}"/>
+                        <h:outputText value="#{bundle.ViewApozimioseisLabel_miLifthisesAdeies}"/>
+                        <h:outputText value="#{apozimioseisController.selected.miLifthisesAdeies}" title="#{bundle.ViewApozimioseisTitle_miLifthisesAdeies}"/>
+                        <h:outputText value="#{bundle.ViewApozimioseisLabel_imeresAdeias}"/>
+                        <h:outputText value="#{apozimioseisController.selected.imeresAdeias}" title="#{bundle.ViewApozimioseisTitle_imeresAdeias}"/>
+                        <h:outputText value="#{bundle.ViewApozimioseisLabel_imeresApozimiosis}"/>
+                        <h:outputText value="#{apozimioseisController.selected.imeresApozimiosis}" title="#{bundle.ViewApozimioseisTitle_imeresApozimiosis}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ApozimioseisViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

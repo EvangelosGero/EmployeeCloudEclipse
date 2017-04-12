@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApozimioseisEditDlg" widgetVar="ApozimioseisEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditApozimioseisTitle}">
+            <h:form id="ApozimioseisEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apozimioseisController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditApozimioseisLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{apozimioseisController.selected.id}" title="#{bundle.EditApozimioseisTitle_id}" required="true" requiredMessage="#{bundle.EditApozimioseisRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditApozimioseisLabel_apozimiosi}" for="apozimiosi" />
+                        <p:inputText id="apozimiosi" value="#{apozimioseisController.selected.apozimiosi}" title="#{bundle.EditApozimioseisTitle_apozimiosi}" />
+                        <p:outputLabel value="#{bundle.EditApozimioseisLabel_miLifthisesAdeies}" for="miLifthisesAdeies" />
+                        <p:inputText id="miLifthisesAdeies" value="#{apozimioseisController.selected.miLifthisesAdeies}" title="#{bundle.EditApozimioseisTitle_miLifthisesAdeies}" />
+                        <p:outputLabel value="#{bundle.EditApozimioseisLabel_imeresAdeias}" for="imeresAdeias" />
+                        <p:inputText id="imeresAdeias" value="#{apozimioseisController.selected.imeresAdeias}" title="#{bundle.EditApozimioseisTitle_imeresAdeias}" />
+                        <p:outputLabel value="#{bundle.EditApozimioseisLabel_imeresApozimiosis}" for="imeresApozimiosis" />
+                        <p:inputText id="imeresApozimiosis" value="#{apozimioseisController.selected.imeresApozimiosis}" title="#{bundle.EditApozimioseisTitle_imeresApozimiosis}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{apozimioseisController.update}" value="#{bundle.Save}" update="display,:ApozimioseisListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ApozimioseisEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ApozimioseisEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
