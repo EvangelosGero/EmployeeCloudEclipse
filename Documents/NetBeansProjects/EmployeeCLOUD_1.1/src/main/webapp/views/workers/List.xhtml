@@ -14,282 +14,282 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="WorkersListForm">
-                <p:panel header="#{bundle.ListWorkersTitle}">
-                    <p:dataTable id="datalist" value="#{workersController.items}" var="item"
-                                 selectionMode="single" selection="#{workersController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+                <h:form id="WorkersListForm">
+                    <p:panel header="#{bundle.ListWorkersTitle}">
+                        <p:dataTable id="datalist" value="#{workersController.items}" var="item"
+                            selectionMode="single" selection="#{workersController.selected}"
+                            paginator="true"
+                            rowKey="#{item.id}"
+                            rows="10"
+                            rowsPerPageTemplate="10,20,30,40,50"
+                            >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_id}"/>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_id}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.firstName}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.lastName}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_jobTitle}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.jobTitle}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_hireDate}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.hireDate}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_salary}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.salary}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_code}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.code}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_phone1}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.phone1}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_phone2}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.phone2}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_adt}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.adt}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_amka}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.amka}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_afm}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.afm}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_street}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.street}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_streetNumber}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.streetNumber}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_demos}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.demos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_tk}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tk}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_yearsBefore}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.yearsBefore}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_education}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.education}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_marriage}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.marriage}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_children}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.children}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_entitledDays}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.entitledDays}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_amIka}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.amIka}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_birthdate}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.birthdate}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_firstHireDate}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.firstHireDate}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_fatherName}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fatherName}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_reasonIsfores}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.reasonIsfores}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_subsidiary}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.subsidiary}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_company}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.company}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_katAsfalisis}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.katAsfalisis}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_tapit}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tapit}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_relation}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.relation}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_kentroKostous}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.kentroKostous}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_amEpikourikou}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.amEpikourikou}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_motherName}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.motherName}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_arParartimatos}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.arParartimatos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_kad}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.kad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_kodikosIdikotitas}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.kodikosIdikotitas}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_idikiPerAsfalisis}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idikiPerAsfalisis}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_apolisi}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.apolisi}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_diakopi}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.diakopi}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListWorkersTitle_email}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.email}"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{workersController.prepareCreate}" update=":WorkersCreateForm" oncomplete="PF('WorkersCreateDialog').show()"/>
+                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":WorkersViewForm" oncomplete="PF('WorkersViewDialog').show()" disabled="#{empty workersController.selected}"/>
+                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":WorkersEditForm" oncomplete="PF('WorkersEditDialog').show()" disabled="#{empty workersController.selected}"/>
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{workersController.destroy}" update=":growl,datalist" disabled="#{empty workersController.selected}"/>
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.firstName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.lastName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_jobTitle}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.jobTitle}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_hireDate}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.hireDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_salary}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.salary}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_code}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.code}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_phone1}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.phone1}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_phone2}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.phone2}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_adt}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.adt}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_amka}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.amka}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_afm}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.afm}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_street}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.street}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_streetNumber}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.streetNumber}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_demos}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.demos}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_tk}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tk}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_yearsBefore}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.yearsBefore}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_education}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.education}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_marriage}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.marriage}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_children}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.children}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_entitledDays}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.entitledDays}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_amIka}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.amIka}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_birthdate}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.birthdate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_firstHireDate}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.firstHireDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_fatherName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fatherName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_reasonIsfores}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.reasonIsfores}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_subsidiary}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.subsidiary}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_company}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.company}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_katAsfalisis}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.katAsfalisis}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_tapit}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tapit}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_relation}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.relation}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_kentroKostous}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.kentroKostous}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_amEpikourikou}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.amEpikourikou}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_motherName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.motherName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_arParartimatos}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.arParartimatos}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_kad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.kad}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_kodikosIdikotitas}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.kodikosIdikotitas}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_idikiPerAsfalisis}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idikiPerAsfalisis}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_apolisi}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.apolisi}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_diakopi}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.diakopi}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_email}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.email}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{workersController.prepareCreate}" update=":WorkersCreateForm" oncomplete="PF('WorkersCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":WorkersViewForm" oncomplete="PF('WorkersViewDialog').show()" disabled="#{empty workersController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":WorkersEditForm" oncomplete="PF('WorkersEditDialog').show()" disabled="#{empty workersController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{workersController.destroy}" update=":growl,datalist" disabled="#{empty workersController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
 
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>

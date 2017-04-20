@@ -23,7 +23,7 @@ import javax.faces.convert.FacesConverter;
 @SessionScoped
 public class WorkersController implements Serializable {
 
-    @EJB
+    @EJB 
     private EJBs.WorkersFacade ejbFacade;
     private List<Workers> items = null;
     private Workers selected;
@@ -121,7 +121,7 @@ public class WorkersController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Workers.class)
+    @FacesConverter(forClass=Workers.class)
     public static class WorkersControllerConverter implements Converter {
 
         @Override
@@ -129,7 +129,7 @@ public class WorkersController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            WorkersController controller = (WorkersController) facesContext.getApplication().getELResolver().
+            WorkersController controller = (WorkersController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "workersController");
             return controller.getWorkers(getKey(value));
         }
