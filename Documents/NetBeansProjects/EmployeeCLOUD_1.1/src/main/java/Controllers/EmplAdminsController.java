@@ -4,8 +4,11 @@ import Entities.EmplAdmins;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
 import EJBs.EmplAdminsFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,10 +17,14 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 @Named("emplAdminsController")
 @SessionScoped
@@ -26,7 +33,13 @@ public class EmplAdminsController implements Serializable {
     @EJB
     private EJBs.EmplAdminsFacade ejbFacade;
     private List<EmplAdmins> items = null;
-    private EmplAdmins selected;
+    private EmplAdmins selected;   
+    private EmplAdmins emplAdmin, emplAdminLogged;   
+    private EmplAdmins newEmplAdmin = new EmplAdmins();
+    private String emplAdminemail;    
+    private String password; 
+    private String newPassword;
+    private boolean loggedIn = false;
 
     public EmplAdminsController() {
     }
@@ -39,6 +52,62 @@ public class EmplAdminsController implements Serializable {
         this.selected = selected;
     }
 
+    public EmplAdmins getEmplAdmin() {
+        return emplAdmin;
+    }
+
+    public void setEmplAdmin(EmplAdmins emplAdmin) {
+        this.emplAdmin = emplAdmin;
+    }
+
+    public EmplAdmins getEmplAdminLogged() {
+        return emplAdminLogged;
+    }
+
+    public void setEmplAdminLogged(EmplAdmins emplAdminLogged) {
+        this.emplAdminLogged = emplAdminLogged;
+    }
+
+    public EmplAdmins getNewEmplAdmin() {
+        return newEmplAdmin;
+    }
+
+    public void setNewEmplAdmin(EmplAdmins newEmplAdmin) {
+        this.newEmplAdmin = newEmplAdmin;
+    }
+
+    public String getEmplAdminemail() {
+        return emplAdminemail;
+    }
+
+    public void setEmplAdminemail(String emplAdminemail) {
+        this.emplAdminemail = emplAdminemail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+    
     protected void setEmbeddableKeys() {
     }
 
@@ -47,6 +116,55 @@ public class EmplAdminsController implements Serializable {
 
     private EmplAdminsFacade getFacade() {
         return ejbFacade;
+    }
+    
+    public String loginMeIn() throws IOException  {
+        FacesMessage msg = null;
+        try{
+        this.setEmplAdminLogged(ejbFacade.validateUser(emplAdminemail, password)); 
+        }
+        catch (EJBException ejbExc){
+            emplAdminLogged = null;
+        }
+        this.loggedIn = emplAdminLogged != null;
+        if (this.loggedIn){
+            return "/index.xhtml?faces-redirect=true";            
+        }else{            
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "InvalidCredentials");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            //return "/views/items/welcome.xhtml";
+            return null;
+        }     
+        
+    }
+    
+    public String loginMeOut() throws ServletException {        
+        this.loggedIn = false;
+        emplAdminLogged = null;
+        Object request = FacesContext.getCurrentInstance().getExternalContext().getRequest(); 
+    //    newUsernm = null;
+        if (request instanceof HttpServletRequest) {
+           HttpServletRequest rq = (HttpServletRequest) request;
+            rq.logout();
+        }
+        //menuController.init();
+        return "/index.xhtml?faces-redirect=true";
+    }
+    
+    public void changepassword() throws SQLException {
+	
+        boolean confirm = false;
+        confirm = ejbFacade.changepassword(emplAdminemail, password, newPassword);
+
+        if (confirm) {
+            FacesMessage msg = new FacesMessage("change password is successful");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+	} else {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+		"Change of password is unsuccessful. Please try with valid data","");
+		
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
     public EmplAdmins prepareCreate() {

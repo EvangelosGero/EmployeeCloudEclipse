@@ -67,21 +67,25 @@
         <p:layout fullPage="true" widgetVar="layoutit">
             <p:layoutUnit position="north" size="80" header="#{bundle.AppName}">
                 <h:form id="menuForm">
-                   <p:panelGrid columns="2" style="width: 100%" styleClass="outerpanelgrid">
-                       <p:graphicImage  library="images" name="panther_logo.png" height="35px;" 
-                                        style="margin-left:10%;" />                                             
-                    <p:menubar style="height: 30px; width: 1400px;">
+                   <p:panelGrid columns="3" style="width: 100%" styleClass="outerpanelgrid">
+                      <p:graphicImage  library="images" name="panther_logo.png" height="35px;" 
+                                        style="margin-left:10%;" /> 
+                      <p:menubar style="height: 30px; width: 1200px;">
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"  style="font-size: 16px !important;"/>
-                        <p:submenu label="#{bundle.Maintenance}" style="font-size: 16px !important;">
-                            <p:menuitem value="EisforesInfo" outcome="/views/eisforesInfo/List.xhtml" />
-                            <p:menuitem value="EmplAdmins" outcome="/views/emplAdmins/List.xhtml" />
-                            <p:menuitem value="EmployeeguiSystem" outcome="/views/employeeguiSystem/List.xhtml" />
-                            <p:menuitem value="TaInfo" outcome="/views/taInfo/List.xhtml" />
-                            <p:menuitem value="TapitInfo" outcome="/views/tapitInfo/List.xhtml" />
-                            <p:menuitem value="Timer" outcome="/views/timer/List.xhtml" />
-                            <p:menuitem value="Workers" outcome="/views/workers/List.xhtml" />
-                        </p:submenu>
-                    </p:menubar>
+                            <p:submenu label="#{bundle.Maintenance}" style="font-size: 16px !important;">
+                                <p:menuitem value="EisforesInfo" outcome="/views/eisforesInfo/List.xhtml" />
+                                <p:menuitem value="EmplAdmins" outcome="/views/emplAdmins/List.xhtml" />
+                                <p:menuitem value="EmployeeguiSystem" outcome="/views/employeeguiSystem/List.xhtml" />
+                                <p:menuitem value="TaInfo" outcome="/views/taInfo/List.xhtml" />
+                                <p:menuitem value="TapitInfo" outcome="/views/tapitInfo/List.xhtml" />
+                                <p:menuitem value="Timer" outcome="/views/timer/List.xhtml" />
+                                <p:menuitem value="Workers" outcome="/views/workers/List.xhtml" />
+                            </p:submenu>
+                      </p:menubar>
+                      <p:commandButton icon="ui-icon-locked" value="Login" rendered="#{!emplAdminsController.loggedIn}"
+                                     onclick="PF('loginDialog').show();"/>
+                      <p:commandButton icon="ui-icon-unlocked" value="Logout" rendered="#{emplAdminsController.loggedIn}"                                                 
+                                     action="#{emplAdminsController.loginMeOut}"/>
                    </p:panelGrid>
                 </h:form>
                 <ui:insert name="north"/>
@@ -99,10 +103,45 @@
                     </p:commandLink>
                 </div>
                 <ui:insert name="body"/>
-            </p:layoutUnit>
-
+            </p:layoutUnit> 
         </p:layout>
-
+        <p:dialog header="User Login"
+                      id="dialog1"
+                      modal="true"
+                      closable="true"
+                      position="center"
+                      widgetVar="loginDialog"
+                      showEffect="slide"
+                      draggable="true"
+                      resizable="false"
+                      visible="false">   
+            
+            <h:form id="loginForm">
+                <h:panelGrid id="loginBox" columns="2" cellpadding="3" 
+                             style="margin: 0 auto; border: 0px; padding-top: 20px;"  >                    
+                    <h:outputLabel for="j_username" value="Username "/>
+                    <h:outputLabel for="j_password" value="Password "/>
+                    <p:keyboard id="j_username" required="true" widgetVar="usernameKeyBoard"
+                                value="#{emplAdminsController.emplAdminemail}" label="Username" showMode="button">                   
+                        <p:clientValidator/>       
+                    </p:keyboard>
+                                  
+                    <p:keyboard id="j_password" required="true" password="true"
+                                value="#{emplAdminsController.password}" label="Password" showMode="button">                                
+                        <p:clientValidator/>
+                    </p:keyboard>
+                    <p:commandButton id="loginBtn" value="Login" ajax="true" immediate="false"
+                                     update=":growl"  action="#{emplAdminsController.loginMeIn()}">                        
+                    </p:commandButton>                   
+                    <p:commandButton value="Cancel" onclick="PF('loginDialog').hide()"/>
+                    <p:defaultCommand target="loginBtn"/>
+                    <p:commandLink value="Change Password"
+                        onstart="PF('loginDialog').hide()" oncomplete="PF('WVchangepwd').show();">                            
+                    </p:commandLink> 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <ui:include src="/ChangePassword.xhtml"/>
     </h:body>
 
 </html>
