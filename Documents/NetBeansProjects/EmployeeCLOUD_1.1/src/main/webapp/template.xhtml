@@ -26,7 +26,13 @@
                 border: none !important;
                 padding-top: none !important;                
             }
-        </style>        
+        </style>
+        <script type="text/javascript">
+            function findFile(){
+                var link = 'file:///C:/tmp/test.htm';
+                window.location.replace(link);                
+            }
+        </script>       
 
         <p:growl id="growl" life="10000" />
 
@@ -49,7 +55,7 @@
                                 <p:menuitem value="Λίστα Ενεργών Εργαζομένων" outcome="/views/workers/List.xhtml" />
                             </p:submenu>
                              <p:submenu label="Timer" style="font-size: 16px !important;">
-                                 <p:menuitem value="Ανοιγμα Timer"  action="#{timerController.openNativeTimer}" />
+                                 <p:menuitem value="Ανοιγμα Timer"  onclick="findFile()" />
                                 <p:menuitem value="Δημιουργία μηνιαίου report"/>
                                 <p:menuitem value="Εμφάνιση μηνιαίου report"/>
                             </p:submenu>
@@ -59,6 +65,11 @@
                                 <p:menuitem value="Καρτέλα Αδειών Εργαζομένου"/>
                                 <p:menuitem value="Δημιουργία Report Αδειών"/>
                                 <p:menuitem value="Εμφάνιση Report Αδειών"/>                                
+                            </p:submenu>
+                            <p:submenu label="Απουσίες-Διορθώσεις Timer" style="font-size: 16px !important;">
+                                <p:menuitem value="Καταγραφές Εισόδου/Εξόδου Εργαζομένου" />
+                                <p:menuitem value="Απουσίες"/>
+                                <p:menuitem value="Μαζική Διόρθωση Ρολογιών"/>                                                               
                             </p:submenu>
                       </p:menubar>
                       <p:commandButton icon="ui-icon-locked" value="Login" rendered="#{!emplAdminsController.loggedIn}"
