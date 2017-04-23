@@ -42,9 +42,9 @@
                    <p:panelGrid columns="3" style="width: 100%" styleClass="outerpanelgrid">
                       <p:graphicImage  library="images" name="panther_logo.png" height="35px;" 
                                         style="margin-left:10%;" /> 
-                      <p:menubar style="height: 30px; width: 1200px;">
-                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"  style="font-size: 16px !important;"/>
-                            <p:submenu label="Εργαζόμενοι" style="font-size: 16px !important;">
+                      <p:menubar style="height: 30px; ">
+                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home" />
+                            <p:submenu label="Εργαζόμενοι" >
                                 <p:menuitem value="EisforesInfo" outcome="/views/eisforesInfo/List.xhtml"/>
                                 <p:menuitem value="EmplAdmins" outcome="/views/emplAdmins/List.xhtml" />
                                 <p:menuitem value="EmployeeguiSystem" outcome="/views/employeeguiSystem/List.xhtml" />
@@ -54,22 +54,142 @@
                                 <p:menuitem value="Λίστα Εργαζομένων" outcome="/views/workers/List.xhtml" />
                                 <p:menuitem value="Λίστα Ενεργών Εργαζομένων" outcome="/views/workers/List.xhtml" />
                             </p:submenu>
-                             <p:submenu label="Timer" style="font-size: 16px !important;">
+                             <p:submenu label="Timer" >
                                  <p:menuitem value="Ανοιγμα Timer"  onclick="findFile()" />
                                 <p:menuitem value="Δημιουργία μηνιαίου report"/>
                                 <p:menuitem value="Εμφάνιση μηνιαίου report"/>
                             </p:submenu>
-                            <p:submenu label="Άδειες" style="font-size: 16px !important;">
+                            <p:submenu label="Άδειες" >
                                 <p:menuitem value="Επίσημες Αργίες" />
                                 <p:menuitem value="Αίτηση Αδείας"/>
                                 <p:menuitem value="Καρτέλα Αδειών Εργαζομένου"/>
                                 <p:menuitem value="Δημιουργία Report Αδειών"/>
                                 <p:menuitem value="Εμφάνιση Report Αδειών"/>                                
                             </p:submenu>
-                            <p:submenu label="Απουσίες-Διορθώσεις Timer" style="font-size: 16px !important;">
+                            <p:submenu label="Απουσίες-Διορθώσεις Timer" >
                                 <p:menuitem value="Καταγραφές Εισόδου/Εξόδου Εργαζομένου" />
                                 <p:menuitem value="Απουσίες"/>
                                 <p:menuitem value="Μαζική Διόρθωση Ρολογιών"/>                                                               
+                            </p:submenu>
+                            <p:submenu label="Μισθοδοσία" >
+                                <p:submenu label="Δημιουργία Report Μισθοδοσίας" >
+                                    <p:menuitem value="Μήνα" />
+                                    <p:menuitem value="Δώρο Πάσχα"/>
+                                    <p:menuitem value="Επίδομα Αδείας"/>
+                                    <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                </p:submenu>
+                                <p:submenu label="Εμφάνιση Report Μισθοδοσίας" >
+                                    <p:submenu label="Εμφάνιση Μισθοδοτικής Κατάστασης" >
+                                        <p:menuitem value="Μήνα" />
+                                        <p:menuitem value="Δώρο Πάσχα"/>
+                                        <p:menuitem value="Επίδομα Αδείας"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                    </p:submenu>
+                                    <p:submenu label="Εμφάνιση Λογιστικού Άρθρου" >
+                                        <p:menuitem value="Μήνα" />
+                                        <p:menuitem value="Δώρο Πάσχα"/>
+                                        <p:menuitem value="Επίδομα Αδείας"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                    </p:submenu>
+                                    <p:submenu label="Εμφάνιση Κατάστασης ΙΚΑ" >
+                                        <p:menuitem value="Μήνα" />
+                                        <p:menuitem value="Δώρο Πάσχα"/>
+                                        <p:menuitem value="Επίδομα Αδείας"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                    </p:submenu>
+                                    <p:submenu label="Πληρωμή" >
+                                        <p:menuitem value="Μήνα" />
+                                        <p:menuitem value="Δώρο Πάσχα"/>
+                                        <p:menuitem value="Επίδομα Αδείας"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                    </p:submenu>
+                                </p:submenu>
+                                <p:submenu label="ΑΠΔ" >
+                                    <p:submenu label="PDF Αναλυτικής ΑΠΔ">
+                                        <p:menuitem value="Μήνας" />                                        
+                                    </p:submenu>
+                                    <p:submenu label="Δημιουργία CSL01" >
+                                        <p:menuitem value="Μήνας" />                                        
+                                    </p:submenu>
+                                    <p:submenu label="Αποδείξεις Πληρωμής" >
+                                        <p:menuitem value="Μήνας" />
+                                        <p:menuitem value="Δώρο Πάσχα"/>
+                                        <p:menuitem value="Επίδομα Αδείας"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                    </p:submenu>                                    
+                                </p:submenu>
+                                <p:submenu label="Διακοπή Εργασιακής Σχέσης" >
+                                        <p:menuitem value="Παραίτηση" />
+                                        <p:menuitem value="Απόλυση"/>
+                                        <p:menuitem value="Συνταξιοδότηση"/>                                        
+                                </p:submenu>                            
+                            </p:submenu>
+                            <p:submenu label="Εργαλεία" >
+                                        <p:menuitem value="Άνοιγμα Browser" />
+                                        <p:menuitem value='Ανοιγμα αρχείων PDF'/>
+                                        <p:menuitem value="Ανοιγμα αρχείων EXCEL"/>                                        
+                            </p:submenu>
+                            <p:submenu label="Ιστορικό" >
+                                        <p:menuitem value="Εμφάνιση Παλαιών Timer Reports" />
+                                        <p:submenu label="Εμφάνιση ΠΑλαιών Reports Μισθοδοσίας" >
+                                            <p:submenu label="Εμφάνιση Μισθοδοτικής Κατάστασης" >
+                                                <p:menuitem value="Μήνα" />
+                                                <p:menuitem value="Δώρο Πάσχα"/>
+                                                <p:menuitem value="Επίδομα Αδείας"/>
+                                                <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                            </p:submenu>
+                                            <p:submenu label="Εμφάνιση Λογιστικού Άρθρου" >
+                                                <p:menuitem value="Μήνα" />
+                                                <p:menuitem value="Δώρο Πάσχα"/>
+                                                <p:menuitem value="Επίδομα Αδείας"/>
+                                                <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                            </p:submenu>
+                                            <p:submenu label="Εμφάνιση Κατάστασης ΙΚΑ" >
+                                                <p:menuitem value="Μήνα" />
+                                                <p:menuitem value="Δώρο Πάσχα"/>
+                                                <p:menuitem value="Επίδομα Αδείας"/>
+                                                <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                            </p:submenu>
+                                            <p:submenu label="Πληρωμή" >
+                                                <p:menuitem value="Μήνα" />
+                                                <p:menuitem value="Δώρο Πάσχα"/>
+                                                <p:menuitem value="Επίδομα Αδείας"/>
+                                                <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                            </p:submenu>
+                                            <p:submenu label="Αποδείξεις Πληρωμής" >
+                                                <p:menuitem value="Μήνας" />
+                                                <p:menuitem value="Δώρο Πάσχα"/>
+                                                <p:menuitem value="Επίδομα Αδείας"/>
+                                                <p:menuitem value="Δώρο Χριστουγέννων"/>
+                                            </p:submenu>
+                                            <p:submenu label="ΑΠΔ" >
+                                                <p:menuitem value="Μήνας" />
+                                            </p:submenu>
+                                            <p:submenu label="CSL01" >
+                                                <p:menuitem value="Μήνας" />
+                                            </p:submenu>
+                                        </p:submenu>
+                                        <p:menuitem value="Παλαιά Reports Αδειών"/>
+                                        <p:menuitem value="Δημιουργία Παλαιών Timer Reports"/>
+                                        <p:menuitem value="Δημιουργία Παλαιού Report Αδειών"/>
+                                        <p:menuitem value="Δημιουργία Παλαιών Report Μισθοδοσίας"/>
+                                        <p:menuitem value="Δημιουργία Παλαιού Report Δώρου Πάσχα"/>
+                                        <p:menuitem value="Δημιουργία Παλαιού Report Επιδόματος Αδείας"/>
+                                        <p:menuitem value="Δημιουργία Παλαιού Report Δώρου Χριστουγέννων"/>
+                            </p:submenu>
+                            <p:submenu label="Παράμετροι" >
+                                        <p:menuitem value="Στοιχεία Επιχείρησης" />
+                                        <p:menuitem value='Υποκαταστήματα'/>
+                                        <p:menuitem value="Προκαταβολές"/>
+                                        <p:menuitem value="Δάνεια"/>
+                            </p:submenu>
+                            <p:submenu label="Βοήθεια" >
+                                        <p:menuitem value="Βοήθεια" />
+                                        <p:menuitem value="Get Updates"/>
+                                        <p:menuitem value="Σχετικά"/>                                        
+                            </p:submenu>
+                            <p:submenu label="Έξοδος" >
+                                        <p:menuitem value="Κλείσιμο Εφαρμογής" />                                                                                
                             </p:submenu>
                       </p:menubar>
                       <p:commandButton icon="ui-icon-locked" value="Login" rendered="#{!emplAdminsController.loggedIn}"
