@@ -63,9 +63,28 @@
                     </p:selectOneMenu>
                     <h:outputText></h:outputText>
                     
+                    <p:outputLabel for="crDate" value="Date Created: " />
+                    <h:outputText id="crDate" value="#{usernmController.selected.createDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT+3"/>
+                    </h:outputText>
+                    <h:outputText></h:outputText>
                     
                     <p:outputLabel for="hintAnswer" value="Answer to Hint"/>
                     <p:inputText id="hintAnswer" value="#{usernmController.selected.hintAns}"/>
+                    <h:outputText></h:outputText>
+                    
+                    <p:outputLabel for="userType" value="User Type"/>
+                    <p:inputText id="userType" value="#{usernmController.selected.usertype}"
+                                  required="true">
+                        <p:clientValidator event="change"/>
+                    </p:inputText>
+                    <h:outputText></h:outputText>
+                    
+                    <p:outputLabel for="userRole" value="User Role"/>
+                    <p:inputText id="userRole" value="#{usernmController.selected.roleuser}"
+                                 required="true">
+                        <p:clientValidator event="change"/>
+                    </p:inputText>
                     <h:outputText></h:outputText>
                     
                     <h:outputText value="Gender: " />

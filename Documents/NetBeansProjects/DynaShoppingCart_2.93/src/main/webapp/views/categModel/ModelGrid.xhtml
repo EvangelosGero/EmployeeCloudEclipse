@@ -48,8 +48,8 @@
                             <p:graphicImage   value="../../images1/models/#{item.mlFrontImage}" width="130" height="60"/> 
                             <p:graphicImage   value="../../images1/models/#{item.mlRearImage}" width="130" height="60"/>
                           </p:commandLink>
-                            <p:ajax event="mouseover" update="opanel13" oncomplete="PF('opanel13WV').show()"/>
-                            <p:ajax event="mouseout"   oncomplete="PF('opanel13WV').hide()"/>
+                            <p:ajax event="mouseover" async="true" update="opanel13" oncomplete="PF('opanel13WV').show()"/>
+                            <p:ajax event="mouseout"  async="true"  oncomplete="PF('opanel13WV').hide()"/>
                         </h:panelGrid>                         
                                                   
                 </p:column>

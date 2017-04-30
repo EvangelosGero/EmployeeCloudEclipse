@@ -385,6 +385,12 @@ public class UsernmController implements Serializable {
         return selected;
     }
 
+    public void createWithDate(){
+        LocalDate createDate = LocalDate.now();
+        this.selected.setCreateDate(Date.valueOf(createDate));
+        create();
+    }
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsernmCreated"));
         if (!JsfUtil.isValidationFailed()) {

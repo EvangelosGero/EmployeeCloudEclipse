@@ -62,6 +62,20 @@
                     <p:inputText id="hintAnswer" value="#{usernmController.selected.hintAns}"/>
                     <h:outputText></h:outputText>
                     
+                    <p:outputLabel for="userType" value="User Type"/>
+                    <p:inputText id="userType" value="#{usernmController.selected.usertype}"
+                                 required="true">
+                        <p:clientValidator event="change"/>
+                    </p:inputText>
+                    <h:outputText></h:outputText>
+                    
+                    <p:outputLabel for="userRole" value="User Role"/>
+                    <p:inputText id="userRole" value="#{usernmController.selected.roleuser}"
+                                 required="true">
+                        <p:clientValidator event="change"/>
+                    </p:inputText>
+                    <h:outputText></h:outputText>
+                    
                     <h:outputText value="Gender: " />
                     <p:selectOneRadio id="gender"
 			value="#{usernmController.selected.gender}">
@@ -129,7 +143,7 @@
                     <h:outputText></h:outputText>
 
                 </p:panelGrid>
-                    <p:commandButton actionListener="#{usernmController.create}" value="#{bundle.Save}" 
+                    <p:commandButton actionListener="#{usernmController.createWithDate}" value="#{bundle.Save}" 
                                      update="display,:UsernmListForm:datalist,:growl" 
                                      oncomplete="handleSubmit(args,'UsernmCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('UsernmCreateDialog').hide()"/>
