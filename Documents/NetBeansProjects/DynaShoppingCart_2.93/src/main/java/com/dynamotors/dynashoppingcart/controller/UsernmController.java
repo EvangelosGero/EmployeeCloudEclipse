@@ -304,14 +304,10 @@ public class UsernmController implements Serializable {
         categ2Controller.setSelected(null);
         categ2Controller.setMatchedItems(null);
         categ3Controller.setSelected(null);
-        categ3Controller.setMatchedItems(null);
+        categ3Controller.setMatchedItems(null);        
         
-        
-    //    newUsernm = null;
-        if (request instanceof HttpServletRequest) {
-           HttpServletRequest rq = (HttpServletRequest) request;
-            rq.logout();
-        }
+    
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();        
         menuController.init();
         return "/index.xhtml?faces-redirect=true";
     }
