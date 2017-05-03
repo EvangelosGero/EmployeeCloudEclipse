@@ -2,7 +2,6 @@ package SalaryReport;
 
 import employeegui.Alerts;
 import static employeegui.Alerts.showDialogYES_NO;
-import employeegui.EmployeeGUI;
 import employeegui.ErrorStage;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
