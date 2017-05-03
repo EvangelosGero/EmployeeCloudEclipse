@@ -282,7 +282,8 @@
                                 <h:outputText value="#{item.email}"/>
                             </p:column>
                             <f:facet name="footer">
-                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{workersController.prepareCreate}" update=":WorkersCreateForm" oncomplete="PF('WorkersCreateDialog').show()"/>
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{workersController.prepareCreate}" 
+                                                 update=":WorkersCreateForm" oncomplete="PF('WorkersCreateDialog').show()"/>
                                 <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":WorkersViewForm" oncomplete="PF('WorkersViewDialog').show()" disabled="#{empty workersController.selected}"/>
                                 <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":WorkersEditForm" oncomplete="PF('WorkersEditDialog').show()" disabled="#{empty workersController.selected}"/>
                                 <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{workersController.destroy}" update=":growl,datalist" disabled="#{empty workersController.selected}"/>

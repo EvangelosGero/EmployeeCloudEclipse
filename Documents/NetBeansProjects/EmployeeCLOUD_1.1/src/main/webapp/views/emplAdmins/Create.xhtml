@@ -8,19 +8,18 @@
 
     <ui:composition>
 
-        <p:dialog id="EmplAdminsCreateDlg" widgetVar="EmplAdminsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEmplAdminsTitle}">
+        <p:dialog id="EmplAdminsCreateDlg" widgetVar="EmplAdminsCreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.CreateEmplAdminsTitle}">
             <h:form id="EmplAdminsCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{emplAdminsController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEmplAdminsLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{emplAdminsController.selected.id}" title="#{bundle.CreateEmplAdminsTitle_id}" required="true" requiredMessage="#{bundle.CreateEmplAdminsRequiredMessage_id}"/>
+                    <p:panelGrid columns="2" rendered="#{emplAdminsController.selected != null}">                        
                         <p:outputLabel value="#{bundle.CreateEmplAdminsLabel_username}" for="username" />
                         <p:inputText id="username" value="#{emplAdminsController.selected.username}" title="#{bundle.CreateEmplAdminsTitle_username}" />
                         <p:outputLabel value="#{bundle.CreateEmplAdminsLabel_password}" for="password" />
                         <p:inputText id="password" value="#{emplAdminsController.selected.password}" title="#{bundle.CreateEmplAdminsTitle_password}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{emplAdminsController.create}" value="#{bundle.Save}" update="display,:EmplAdminsListForm:datalist,:growl" oncomplete="handleSubmit(args,'EmplAdminsCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="EmplAdminsCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('EmplAdminsCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

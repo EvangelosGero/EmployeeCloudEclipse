@@ -19,7 +19,7 @@
                         <h:outputText value="#{bundle.ViewEmplAdminsLabel_password}"/>
                         <h:outputText value="#{emplAdminsController.selected.password}" title="#{bundle.ViewEmplAdminsTitle_password}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="EmplAdminsViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('EmplAdminsViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

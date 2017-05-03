@@ -8,19 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="EmplAdminsEditDlg" widgetVar="EmplAdminsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEmplAdminsTitle}">
+        <p:dialog id="EmplAdminsEditDlg" widgetVar="EmplAdminsEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.EditEmplAdminsTitle}">
             <h:form id="EmplAdminsEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{emplAdminsController.selected != null}">
                         <p:outputLabel value="#{bundle.EditEmplAdminsLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{emplAdminsController.selected.id}" title="#{bundle.EditEmplAdminsTitle_id}" required="true" requiredMessage="#{bundle.EditEmplAdminsRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{emplAdminsController.selected.id}" title="#{bundle.EditEmplAdminsTitle_id}" 
+                                     required="true" requiredMessage="#{bundle.EditEmplAdminsRequiredMessage_id}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditEmplAdminsLabel_username}" for="username" />
                         <p:inputText id="username" value="#{emplAdminsController.selected.username}" title="#{bundle.EditEmplAdminsTitle_username}" />
                         <p:outputLabel value="#{bundle.EditEmplAdminsLabel_password}" for="password" />
                         <p:inputText id="password" value="#{emplAdminsController.selected.password}" title="#{bundle.EditEmplAdminsTitle_password}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{emplAdminsController.update}" value="#{bundle.Save}" update="display,:EmplAdminsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmplAdminsEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="EmplAdminsEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('EmplAdminsEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

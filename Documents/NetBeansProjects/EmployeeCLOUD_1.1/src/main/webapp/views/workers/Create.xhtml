@@ -11,9 +11,7 @@
         <p:dialog id="WorkersCreateDlg" widgetVar="WorkersCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateWorkersTitle}">
             <h:form id="WorkersCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{workersController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateWorkersLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{workersController.selected.id}" title="#{bundle.CreateWorkersTitle_id}" required="true" requiredMessage="#{bundle.CreateWorkersRequiredMessage_id}"/>
+                    <p:panelGrid columns="6" rendered="#{workersController.selected != null}">                        
                         <p:outputLabel value="#{bundle.CreateWorkersLabel_firstName}" for="firstName" />
                         <p:inputText id="firstName" value="#{workersController.selected.firstName}" title="#{bundle.CreateWorkersTitle_firstName}" required="true" requiredMessage="#{bundle.CreateWorkersRequiredMessage_firstName}"/>
                         <p:outputLabel value="#{bundle.CreateWorkersLabel_lastName}" for="lastName" />
@@ -96,7 +94,7 @@
                         <p:inputText id="email" value="#{workersController.selected.email}" title="#{bundle.CreateWorkersTitle_email}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{workersController.create}" value="#{bundle.Save}" update="display,:WorkersListForm:datalist,:growl" oncomplete="handleSubmit(args,'WorkersCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="WorkersCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('WorkersCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

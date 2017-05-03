@@ -11,7 +11,7 @@
         <p:dialog id="WorkersViewDlg" widgetVar="WorkersViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewWorkersTitle}">
             <h:form id="WorkersViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{workersController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{workersController.selected != null}">
                         <h:outputText value="#{bundle.ViewWorkersLabel_id}"/>
                         <h:outputText value="#{workersController.selected.id}" title="#{bundle.ViewWorkersTitle_id}"/>
                         <h:outputText value="#{bundle.ViewWorkersLabel_firstName}"/>
@@ -103,7 +103,7 @@
                         <h:outputText value="#{bundle.ViewWorkersLabel_email}"/>
                         <h:outputText value="#{workersController.selected.email}" title="#{bundle.ViewWorkersTitle_email}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="WorkersViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('WorkersViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

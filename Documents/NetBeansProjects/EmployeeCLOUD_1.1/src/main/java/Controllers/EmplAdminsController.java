@@ -141,13 +141,9 @@ public class EmplAdminsController implements Serializable {
     public String loginMeOut() throws ServletException {        
         this.loggedIn = false;
         emplAdminLogged = null;
-        Object request = FacesContext.getCurrentInstance().getExternalContext().getRequest(); 
-    //    newUsernm = null;
-        if (request instanceof HttpServletRequest) {
-           HttpServletRequest rq = (HttpServletRequest) request;
-            rq.logout();
-        }
+        Object request = FacesContext.getCurrentInstance().getExternalContext().getRequest();          
         //menuController.init();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index.xhtml?faces-redirect=true";
     }
     

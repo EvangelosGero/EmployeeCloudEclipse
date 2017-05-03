@@ -8,12 +8,14 @@
 
     <ui:composition>
 
-        <p:dialog id="WorkersEditDlg" widgetVar="WorkersEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditWorkersTitle}">
+        <p:dialog id="WorkersEditDlg" widgetVar="WorkersEditDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle.EditWorkersTitle}">
             <h:form id="WorkersEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{workersController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{workersController.selected != null}">
                         <p:outputLabel value="#{bundle.EditWorkersLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{workersController.selected.id}" title="#{bundle.EditWorkersTitle_id}" required="true" requiredMessage="#{bundle.EditWorkersRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{workersController.selected.id}" title="#{bundle.EditWorkersTitle_id}" 
+                                     disabled="true" required="true" requiredMessage="#{bundle.EditWorkersRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditWorkersLabel_firstName}" for="firstName" />
                         <p:inputText id="firstName" value="#{workersController.selected.firstName}" title="#{bundle.EditWorkersTitle_firstName}" required="true" requiredMessage="#{bundle.EditWorkersRequiredMessage_firstName}"/>
                         <p:outputLabel value="#{bundle.EditWorkersLabel_lastName}" for="lastName" />
