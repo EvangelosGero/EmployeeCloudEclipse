@@ -35,7 +35,7 @@
                         <h:outputText value="#{bundle.ViewTimerLabel_pcIpOut}"/>
                         <h:outputText value="#{timerController.selected.pcIpOut}" title="#{bundle.ViewTimerTitle_pcIpOut}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="TimerViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('TimerViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

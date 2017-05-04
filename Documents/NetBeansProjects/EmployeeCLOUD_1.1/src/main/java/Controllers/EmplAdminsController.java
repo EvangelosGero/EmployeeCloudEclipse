@@ -1,5 +1,7 @@
 package Controllers;
 
+import Controllers.Logic.ComputeEntitledDays;
+import Controllers.Logic.EstablishConnection;
 import Entities.EmplAdmins;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
@@ -7,8 +9,8 @@ import EJBs.EmplAdminsFacade;
 import java.io.IOException;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,12 +21,11 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 
 @Named("emplAdminsController")
 @SessionScoped
@@ -40,10 +41,19 @@ public class EmplAdminsController implements Serializable {
     private String password; 
     private String newPassword;
     private boolean loggedIn = false;
-
+    private Connection con = null;    
+    
     public EmplAdminsController() {
     }
 
+    public Connection getCon() {
+        return con;
+    }
+
+    public void setCon(Connection con) {
+        this.con = con;
+    }
+    
     public EmplAdmins getSelected() {
         return selected;
     }
@@ -128,6 +138,8 @@ public class EmplAdminsController implements Serializable {
         }
         this.loggedIn = emplAdminLogged != null;
         if (this.loggedIn){
+            this.con = new EstablishConnection().EstablishDBConnection();
+            new ComputeEntitledDays().EntitledDays(this.con);
             return "/index.xhtml?faces-redirect=true";            
         }else{            
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "InvalidCredentials");

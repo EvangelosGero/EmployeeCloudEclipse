@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{timerController.selected != null}">
                         <p:outputLabel value="#{bundle.EditTimerLabel_code}" for="code" />
-                        <p:inputText id="code" value="#{timerController.selected.code}" title="#{bundle.EditTimerTitle_code}" required="true" requiredMessage="#{bundle.EditTimerRequiredMessage_code}"/>
+                        <p:inputText id="code" value="#{timerController.selected.code}" title="#{bundle.EditTimerTitle_code}" 
+                                     required="true" requiredMessage="#{bundle.EditTimerRequiredMessage_code}"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_starttime}" for="starttime" />
                         <p:calendar id="starttime" pattern="MM/dd/yyyy HH:mm:ss" value="#{timerController.selected.starttime}" title="#{bundle.EditTimerTitle_starttime}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_endtime}" for="endtime" />
@@ -21,7 +22,8 @@
                         <p:outputLabel value="#{bundle.EditTimerLabel_intervalTime}" for="intervalTime" />
                         <p:inputText id="intervalTime" value="#{timerController.selected.intervalTime}" title="#{bundle.EditTimerTitle_intervalTime}" />
                         <p:outputLabel value="#{bundle.EditTimerLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{timerController.selected.id}" title="#{bundle.EditTimerTitle_id}" required="true" requiredMessage="#{bundle.EditTimerRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{timerController.selected.id}" title="#{bundle.EditTimerTitle_id}" 
+                                     disabled="true" required="true" requiredMessage="#{bundle.EditTimerRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_pcNameIn}" for="pcNameIn" />
                         <p:inputText id="pcNameIn" value="#{timerController.selected.pcNameIn}" title="#{bundle.EditTimerTitle_pcNameIn}" />
                         <p:outputLabel value="#{bundle.EditTimerLabel_pcIpIn}" for="pcIpIn" />
@@ -32,7 +34,7 @@
                         <p:inputText id="pcIpOut" value="#{timerController.selected.pcIpOut}" title="#{bundle.EditTimerTitle_pcIpOut}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{timerController.update}" value="#{bundle.Save}" update="display,:TimerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TimerEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="TimerEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('TimerEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

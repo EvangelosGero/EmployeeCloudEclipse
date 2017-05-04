@@ -26,13 +26,7 @@
                 border: none !important;
                 padding-top: none !important;                
             }
-        </style>
-        <script type="text/javascript">
-            function findFile(){
-                var link = 'file:///C:/tmp/test.htm';
-                window.location.replace(link);                
-            }
-        </script>       
+        </style>               
 
         <p:growl id="growl" life="10000" />
 
@@ -48,15 +42,14 @@
                                 <p:menuitem value="EisforesInfo" outcome="/views/eisforesInfo/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>                                
                                 <p:menuitem value="EmployeeguiSystem" outcome="/views/employeeguiSystem/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="TaInfo" outcome="/views/taInfo/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="TapitInfo" outcome="/views/tapitInfo/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="Timer" outcome="/views/timer/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="TapitInfo" outcome="/views/tapitInfo/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>                                
                                 <p:menuitem value="Λίστα Εργαζομένων" outcome="/views/workers/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Λίστα Ενεργών Εργαζομένων" outcome="/views/workers/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>
-                             <p:submenu label="Timer" >
-                                 <p:menuitem value="Ανοιγμα Timer"  onclick="findFile()" />
+                             <p:submenu label="Timer" >                                 
                                 <p:menuitem value="Δημιουργία μηνιαίου report" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Εμφάνιση μηνιαίου report" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Λίστα Timer" outcome="/views/timer/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>
                             <p:submenu label="Άδειες" >
                                 <p:menuitem value="Επίσημες Αργίες" disabled="#{not emplAdminsController.loggedIn}"/>
@@ -188,7 +181,7 @@
                                         <p:menuitem value="Σχετικά" disabled="#{not emplAdminsController.loggedIn}"/>                                        
                             </p:submenu>
                             <p:submenu label="Έξοδος" >
-                                        <p:menuitem value="Κλείσιμο Εφαρμογής" disabled="#{not emplAdminsController.loggedIn}"/>                                                                                
+                                <p:menuitem value="Κλείσιμο Εφαρμογής"  outcome="http://www.google.com" />                                                                                
                             </p:submenu>
                       </p:menubar>
                       <p:commandButton icon="ui-icon-locked" value="Login" rendered="#{!emplAdminsController.loggedIn}"
