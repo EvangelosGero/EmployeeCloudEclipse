@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SystemtableViewDlg" widgetVar="SystemtableViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_SystemTable.ViewSystemtableTitle}">
+            <h:form id="SystemtableViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{systemtableController.selected != null}">
+                        <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_id}"/>
+                        <h:outputText value="#{systemtableController.selected.id}" title="#{bundle_SystemTable.ViewSystemtableTitle_id}"/>
+                        <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_companyName}"/>
+                        <h:outputText value="#{systemtableController.selected.companyName}" title="#{bundle_SystemTable.ViewSystemtableTitle_companyName}"/>
+                        <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_add1}"/>
+                        <h:outputText value="#{systemtableController.selected.add1}" title="#{bundle_SystemTable.ViewSystemtableTitle_add1}"/>
+                        <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_add3}"/>
+                        <h:outputText value="#{systemtableController.selected.add3}" title="#{bundle_SystemTable.ViewSystemtableTitle_add3}"/>
+                        <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_bottomMessage}"/>
+                        <h:outputText value="#{systemtableController.selected.bottomMessage}" title="#{bundle_SystemTable.ViewSystemtableTitle_bottomMessage}"/>
+                        <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_aboutUs}"/>
+                        <h:outputText value="#{systemtableController.selected.aboutUs}" title="#{bundle_SystemTable.ViewSystemtableTitle_aboutUs}"/>
+                        <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_contactUs}"/>
+                        <h:outputText value="#{systemtableController.selected.contactUs}" title="#{bundle_SystemTable.ViewSystemtableTitle_contactUs}"/>
+                        <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_faq}"/>
+                        <h:outputText value="#{systemtableController.selected.faq}" title="#{bundle_SystemTable.ViewSystemtableTitle_faq}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle_SystemTable.Close}" onclick="PF('SystemtableViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

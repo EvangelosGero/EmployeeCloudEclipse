@@ -40,7 +40,7 @@ public class EmplAdminsController implements Serializable {
     private String emplAdminemail;    
     private String password; 
     private String newPassword;
-    private boolean loggedIn = false;
+    private boolean loggedIn, webixLoggedIn = false;
     private Connection con = null;    
     
     public EmplAdminsController() {
@@ -53,7 +53,15 @@ public class EmplAdminsController implements Serializable {
     public void setCon(Connection con) {
         this.con = con;
     }
-    
+
+    public boolean isWebixLoggedIn() {
+        return webixLoggedIn;
+    }
+
+    public void setWebixLoggedIn(boolean webixLoggedIn) {
+        this.webixLoggedIn = webixLoggedIn;
+    }
+           
     public EmplAdmins getSelected() {
         return selected;
     }
@@ -140,6 +148,7 @@ public class EmplAdminsController implements Serializable {
         if (this.loggedIn){
             this.con = new EstablishConnection().EstablishDBConnection();
             new ComputeEntitledDays().EntitledDays(this.con);
+            if(emplAdminLogged.getUsername().equals("WebixAdmin@online.com"))webixLoggedIn = true;
             return "/index.xhtml?faces-redirect=true";            
         }else{            
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "InvalidCredentials");
@@ -152,6 +161,7 @@ public class EmplAdminsController implements Serializable {
     
     public String loginMeOut() throws ServletException {        
         this.loggedIn = false;
+        this.webixLoggedIn = false;
         emplAdminLogged = null;
         Object request = FacesContext.getCurrentInstance().getExternalContext().getRequest();          
         //menuController.init();

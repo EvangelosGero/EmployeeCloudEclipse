@@ -172,12 +172,13 @@
                             <p:submenu label="Παράμετροι" >
                                         <p:menuitem value="Στοιχεία Επιχείρησης" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value='Υποκαταστήματα' disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value='Διαχείρηση Administrators' outcome="/views/emplAdmins/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value='Διαχείριση Administrators' outcome="/views/emplAdmins/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Προκαταβολές" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Δάνεια" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>
                             <p:submenu label="Βοήθεια" >
-                                        <p:menuitem value="Βοήθεια" disabled="#{not emplAdminsController.loggedIn}"/>                                        
+                                <p:menuitem value="SystemTable" outcome="/views/systemtable/List.xhtml" disabled="#{not emplAdminsController.webixLoggedIn}"/>
+                                <p:menuitem value="Βοήθεια"  onclick="PF('AboutUsWV').show()" disabled="#{not emplAdminsController.loggedIn}"/>                                        
                                         <p:menuitem value="Σχετικά" disabled="#{not emplAdminsController.loggedIn}"/>                                        
                             </p:submenu>
                             <p:submenu label="Έξοδος" >
@@ -194,7 +195,13 @@
             </p:layoutUnit>
 
             <p:layoutUnit position="south" size="60">
-                <ui:insert name="footer"/>
+                <h:form id="southForm">
+                <h:panelGrid id="FooterGrid" columns="3" style="border:0px;">
+                    <p:commandButton id="btn1" value="About us" oncomplete="PF('AboutUsWV').show()"/> 
+                    <p:commandButton id="btn2" value="Contact us" oncomplete="PF('$ContactUs').show()"/>                      
+                    <p:commandButton id="btn4" value="FAQ" oncomplete="PF('$FAQ').show()"/> 
+                </h:panelGrid>
+                </h:form>
             </p:layoutUnit>
 
             <p:layoutUnit position="center">
@@ -207,6 +214,7 @@
                 <ui:insert name="body"/>
             </p:layoutUnit> 
         </p:layout>
+        <ui:include src="/partoffooter.xhtml"/>
         <p:dialog header="User Login"
                       id="dialog1"
                       modal="true"

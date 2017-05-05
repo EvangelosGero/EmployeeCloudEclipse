@@ -12,5 +12,9 @@
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle_SystemTable</base-name>
+            <var>bundle_SystemTable</var>
+        </resource-bundle>
     </application>
 </faces-config>

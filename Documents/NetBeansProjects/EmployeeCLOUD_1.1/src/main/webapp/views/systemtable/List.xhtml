@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="SystemtableListForm">
+                <p:panel header="#{bundle_SystemTable.ListSystemtableTitle}">
+                    <p:dataTable id="datalist" value="#{systemtableController.items}" var="item"
+                                 selectionMode="single" selection="#{systemtableController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle_companyName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.companyName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle_add1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.add1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle_add3}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.add3}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle_bottomMessage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bottomMessage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle_aboutUs}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.aboutUs}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle_contactUs}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.contactUs}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle_SystemTable.ListSystemtableTitle_faq}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.faq}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_SystemTable.Create}" actionListener="#{systemtableController.prepareCreate}" update=":SystemtableCreateForm" oncomplete="PF('SystemtableCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_SystemTable.View}" update=":SystemtableViewForm" oncomplete="PF('SystemtableViewDialog').show()" disabled="#{empty systemtableController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_SystemTable.Edit}" update=":SystemtableEditForm" oncomplete="PF('SystemtableEditDialog').show()" disabled="#{empty systemtableController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_SystemTable.Delete}" actionListener="#{systemtableController.destroy}" update=":growl,datalist" disabled="#{empty systemtableController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
