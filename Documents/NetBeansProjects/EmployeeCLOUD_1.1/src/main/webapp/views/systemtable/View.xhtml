@@ -21,13 +21,17 @@
                         <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_add3}"/>
                         <h:outputText value="#{systemtableController.selected.add3}" title="#{bundle_SystemTable.ViewSystemtableTitle_add3}"/>
                         <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_bottomMessage}"/>
-                        <h:outputText value="#{systemtableController.selected.bottomMessage}" title="#{bundle_SystemTable.ViewSystemtableTitle_bottomMessage}"/>
+                        <h:inputTextarea readonly="true"  cols="60" value="#{systemtableController.selected.bottomMessage}" 
+                                         title="#{bundle_SystemTable.ViewSystemtableTitle_bottomMessage}"/>
                         <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_aboutUs}"/>
-                        <h:outputText value="#{systemtableController.selected.aboutUs}" title="#{bundle_SystemTable.ViewSystemtableTitle_aboutUs}"/>
+                        <h:inputTextarea readonly="true"  cols="60" value="#{systemtableController.selected.aboutUs}" 
+                                         title="#{bundle_SystemTable.ViewSystemtableTitle_aboutUs}"/>
                         <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_contactUs}"/>
-                        <h:outputText value="#{systemtableController.selected.contactUs}" title="#{bundle_SystemTable.ViewSystemtableTitle_contactUs}"/>
+                        <h:inputTextarea readonly="true"  cols="60" value="#{systemtableController.selected.contactUs}" 
+                                         title="#{bundle_SystemTable.ViewSystemtableTitle_contactUs}"/>
                         <h:outputText value="#{bundle_SystemTable.ViewSystemtableLabel_faq}"/>
-                        <h:outputText value="#{systemtableController.selected.faq}" title="#{bundle_SystemTable.ViewSystemtableTitle_faq}"/>
+                        <h:inputTextarea readonly="true"  cols="60" value="#{systemtableController.selected.faq}" 
+                                         title="#{bundle_SystemTable.ViewSystemtableTitle_faq}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle_SystemTable.Close}" onclick="PF('SystemtableViewDialog').hide()"/>
                 </h:panelGroup>

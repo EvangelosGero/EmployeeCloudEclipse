@@ -35,7 +35,7 @@ public class EmplAdmins implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 20)
+    @Size(max = 60)
     @Column(name = "USERNAME")
     private String username;
     @Size(max = 20)
