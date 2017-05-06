@@ -1,5 +1,6 @@
 package Controllers;
 
+import Controllers.Logic.CreateReport;
 import com.dynamotors.timer1._rest.Timer;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
@@ -18,7 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.servlet.http.HttpServletRequest;
+import javax.inject.Inject;
 
 @Named("timerController")
 @SessionScoped
@@ -28,6 +29,8 @@ public class TimerController implements Serializable {
     private EJBs.TimerFacade ejbFacade;
     private List<Timer> items = null;
     private Timer selected;
+    @Inject
+    private EmplAdminsController emplAdminsController;
 
     public TimerController() {
     }
@@ -39,26 +42,11 @@ public class TimerController implements Serializable {
     public void setSelected(Timer selected) {
         this.selected = selected;
     }
-    
-    public String openNativeTimer(){ 
-        String ip = null;
-        try {
-            HttpServletRequest origRequest = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            ip = origRequest.getRemoteAddr();
-            //request.getRemoteAddr();
-            //InetAddress thisIp = InetAddress.getLocalHost();
-            //ip = thisIp.getHostAddress();
-            
-        } catch (Exception e) {
-        e.printStackTrace();
-        }
-        ip = "194.219.181.234/192.168.1.71";
-        System.out.println(ip+"/file:///C:/tmp/test.bat");
-        return ip.trim()+"/file:///C:/tmp/test.bat";
+       
+    public void createTimerReport(){
+        new CreateReport().CreateMonthlyDBTable(emplAdminsController.getCon(), null);
     }
- 
     
-
     protected void setEmbeddableKeys() {
     }
 

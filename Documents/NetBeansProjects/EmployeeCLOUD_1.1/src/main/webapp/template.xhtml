@@ -28,7 +28,7 @@
             }
         </style>               
 
-        <p:growl id="growl" life="10000" />
+            <p:growl id="growl" life="10000" showDetail="true" />
 
         <p:layout fullPage="true" widgetVar="layoutit">
             <p:layoutUnit position="north" size="80" header="#{bundle.AppName}">
@@ -44,10 +44,11 @@
                                 <p:menuitem value="TaInfo" outcome="/views/taInfo/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="TapitInfo" outcome="/views/tapitInfo/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>                                
                                 <p:menuitem value="Λίστα Εργαζομένων" outcome="/views/workers/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="Λίστα Ενεργών Εργαζομένων" outcome="/views/workers/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Λίστα Ενεργών Εργαζομένων" outcome="/views/workers/List1.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>
                              <p:submenu label="Timer" >                                 
-                                <p:menuitem value="Δημιουργία μηνιαίου report" disabled="#{not emplAdminsController.loggedIn}"/>
+                                 <p:menuitem value="Δημιουργία μηνιαίου report"  actionListener="#{timerController.createTimerReport()}"  
+                                     update=":growl" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Εμφάνιση μηνιαίου report" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Λίστα Timer" outcome="/views/timer/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>
