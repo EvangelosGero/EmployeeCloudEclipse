@@ -1,12 +1,15 @@
 package Controllers;
 
 import Controllers.Logic.CreateReport;
+import Controllers.Logic.PersonTimer;
+import Controllers.Logic.ShowReport;
 import com.dynamotors.timer1._rest.Timer;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
 import EJBs.TimerFacade;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -31,10 +34,29 @@ public class TimerController implements Serializable {
     private Timer selected;
     @Inject
     private EmplAdminsController emplAdminsController;
+    @Inject
+    private ShowReport showReport;
 
     public TimerController() {
     }
+    
+    public EmplAdminsController getEmplAdminsController() {
+        return emplAdminsController;
+    }
 
+    public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
+        this.emplAdminsController = emplAdminsController;
+    }
+
+    public ShowReport getShowReport() {
+        return showReport;
+    }
+
+    public void setShowReport(ShowReport showReport) {
+        this.showReport = showReport;
+    }
+
+                
     public Timer getSelected() {
         return selected;
     }
@@ -45,6 +67,17 @@ public class TimerController implements Serializable {
        
     public void createTimerReport(){
         new CreateReport().CreateMonthlyDBTable(emplAdminsController.getCon(), null);
+    }
+    
+    public String showReportNow(){
+        try {
+            showReport.ProduceReportTable(emplAdminsController.getCon(), null);
+            return "/views/timer/ShowReport.xhtml?faces-redirect=true";
+        } catch (SQLException ex) {
+            Logger.getLogger(TimerController.class.getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }       
     }
     
     protected void setEmbeddableKeys() {

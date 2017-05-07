@@ -5,6 +5,7 @@
  */
 package Controllers.Logic;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,6 @@ import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -32,23 +32,33 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
 /**
  *
  * @author Home
  */
-public class ShowReport {
+@Named("showReport")
+@SessionScoped
+public class ShowReport implements Serializable {
     
-    private TableView<PersonTimer> table = new TableView<>();
     private List<PersonTimer> list = new ArrayList();     
     private String tableStr;
     private Statement stm = null ;
     private ResultSet rs = null ;
     private final FacesContext facesContext = FacesContext.getCurrentInstance();
-      
-               
+
+    public String getTableStr() {
+        return tableStr;
+    }
+
+    public List<PersonTimer> getList() {
+        return list;
+    }
+           
     public void ProduceReportTable(Connection con, String tableString) throws SQLException {
       try{  
             this.tableStr = tableString;
@@ -75,10 +85,10 @@ public class ShowReport {
        }  finally{
        if (rs != null){rs.close();}
        if (stm != null){stm.close();}
-      }             
+      }      
     } 
     
-    public void createExcel(){
+    public void createCopy(){
             final ClipboardContent content = new ClipboardContent();
             
             StringBuilder clipboardString = new StringBuilder();
@@ -167,20 +177,7 @@ public class ShowReport {
                         @Override
                         public void handle (ActionEvent e) {                    
                     PageLayout pageLayout = printer.createPageLayout(Paper.A4,PageOrientation.LANDSCAPE,
-                                Printer.MarginType.HARDWARE_MINIMUM);                                   
-                        table.setScaleX(Double.parseDouble(scaleXTextField.getText()));
-                        table.setScaleY(Double.parseDouble(scaleYTextField.getText()));
-                        table.setTranslateX(Double.parseDouble(translateXTextField.getText()));
-                        table.setTranslateY(Double.parseDouble(translateYTextField.getText()));
-                    boolean success = job.printPage(pageLayout,table);
-                        if (success) {
-                             job.endJob(); 
-                        } 
-                        table.setTranslateX(0);
-                        table.setTranslateY(0);               
-                        table.setScaleX(1.0);
-                        table.setScaleY(1.0); 
-                        dialogStage.close();
+                                Printer.MarginType.HARDWARE_MINIMUM); 
                                 }
                      
                         });
