@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HolidaysCreateDlg" widgetVar="HolidaysCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_holidays.CreateHolidaysTitle}">
+            <h:form id="HolidaysCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{holidaysController.selected != null}">
+                        <p:outputLabel value="#{bundle_holidays.CreateHolidaysLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{holidaysController.selected.id}" title="#{bundle_holidays.CreateHolidaysTitle_id}" required="true" requiredMessage="#{bundle_holidays.CreateHolidaysRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle_holidays.CreateHolidaysLabel_holidaysColumn}" for="holidaysColumn" />
+                        <p:calendar id="holidaysColumn" pattern="MM/dd/yyyy" value="#{holidaysController.selected.holidaysColumn}" title="#{bundle_holidays.EditHolidaysTitle_holidaysColumn}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{holidaysController.create}" value="#{bundle_holidays.Save}" update="display,:HolidaysListForm:datalist,:growl" oncomplete="handleSubmit(args,'HolidaysCreateDialog');"/>
+                    <p:commandButton value="#{bundle_holidays.Cancel}" onclick="HolidaysCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

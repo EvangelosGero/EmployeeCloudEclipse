@@ -54,7 +54,7 @@
                                 <p:menuitem value="Λίστα Timer" outcome="/views/timer/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>
                             <p:submenu label="Άδειες" >
-                                <p:menuitem value="Επίσημες Αργίες" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Επίσημες Αργίες" outcome="/views/holidays/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Αίτηση Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Καρτέλα Αδειών Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Δημιουργία Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"/>

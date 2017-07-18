@@ -16,5 +16,9 @@
             <base-name>/Bundle_SystemTable</base-name>
             <var>bundle_SystemTable</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle_holidays</base-name>
+            <var>bundle_holidays</var>
+        </resource-bundle>
     </application>
 </faces-config>
