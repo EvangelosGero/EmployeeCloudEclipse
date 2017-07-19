@@ -54,11 +54,16 @@
                                 <p:menuitem value="Λίστα Timer" outcome="/views/timer/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>
                             <p:submenu label="Άδειες" >
-                                <p:menuitem value="Επίσημες Αργίες" outcome="/views/holidays/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="Αίτηση Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="Καρτέλα Αδειών Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Επίσημες Αργίες" outcome="/views/holidays/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>                                
+                                <p:menuitem value="Καταχώρηση/Καρτέλες Αδειών Εργαζομένων" outcome="/views/vacationDays/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Δημιουργία Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Εμφάνιση Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"/>                                
+                            </p:submenu>
+                            <p:submenu label="Ασθένειες" >
+                                <p:menuitem value="Καταχώρηση ασθένειας έως τρεις ημέρες"  disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Καρτέλα ασθενείας μικρότρης 3 ημερών Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Καταχώρηση ασθένειας μεγαλύτερης των τριών ημερών" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Καρτέλα ασθενείας μεγαλύτερης 3 ημερών Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>                                                       
                             </p:submenu>
                             <p:submenu label="Απουσίες-Διορθώσεις Timer" >
                                 <p:menuitem value="Καταγραφές Εισόδου/Εξόδου Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>

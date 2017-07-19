@@ -20,5 +20,9 @@
             <base-name>/Bundle_holidays</base-name>
             <var>bundle_holidays</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle_vacation_days</base-name>
+            <var>bundle_vacation_days</var>
+        </resource-bundle>
     </application>
 </faces-config>

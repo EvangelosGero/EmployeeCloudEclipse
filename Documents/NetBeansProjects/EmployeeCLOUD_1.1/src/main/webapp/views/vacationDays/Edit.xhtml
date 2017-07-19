@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VacationDaysEditDlg" widgetVar="VacationDaysEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_vacation_days.EditVacationDaysTitle}">
+            <h:form id="VacationDaysEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vacationDaysController.selected != null}">
+                        <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{vacationDaysController.selected.id}" title="#{bundle_vacation_days.EditVacationDaysTitle_id}" />
+                        <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_exitDay}" for="exitDay" />
+                        <p:calendar id="exitDay" pattern="MM/dd/yyyy" value="#{vacationDaysController.selected.exitDay}" title="#{bundle_vacation_days.EditVacationDaysTitle_exitDay}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_backDay}" for="backDay" />
+                        <p:calendar id="backDay" pattern="MM/dd/yyyy" value="#{vacationDaysController.selected.backDay}" title="#{bundle_vacation_days.EditVacationDaysTitle_backDay}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_pk}" for="pk" />
+                        <p:inputText id="pk" value="#{vacationDaysController.selected.pk}" title="#{bundle_vacation_days.EditVacationDaysTitle_pk}" required="true" requiredMessage="#{bundle_vacation_days.EditVacationDaysRequiredMessage_pk}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vacationDaysController.update}" value="#{bundle_vacation_days.Save}" update="display,:VacationDaysListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>
+                    <p:commandButton value="#{bundle_vacation_days.Cancel}" onclick="VacationDaysEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

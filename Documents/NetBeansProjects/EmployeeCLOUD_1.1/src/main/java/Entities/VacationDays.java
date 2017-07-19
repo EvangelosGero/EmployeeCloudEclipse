@@ -22,59 +22,80 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author evgero
  */
-@Entity(name="Holidays")
-@Table(name = "HOLIDAYS", catalog = "", schema = "APP")
+@Entity
+@Table(name = "VACATION_DAYS", catalog = "", schema = "APP")
 @XmlRootElement
-public class Holidays implements Serializable {
+public class VacationDays implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Column(name = "ID")
+    private Short id;
+    @Column(name = "EXIT_DAY")
+    @Temporal(TemporalType.DATE)
+    private Date exitDay;
+    @Column(name = "BACK_DAY")
+    @Temporal(TemporalType.DATE)
+    private Date backDay;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID", nullable = false)
-    private Integer id;
-    @Column(name = "HOLIDAYS_COLUMN")
-    @Temporal(TemporalType.DATE)
-    private Date holidaysColumn;
+    @Column(name = "PK", nullable = false)
+    private Integer pk;
 
-    public Holidays() {
+    public VacationDays() {
     }
 
-    public Holidays(Integer id) {
-        this.id = id;
+    public VacationDays(Integer pk) {
+        this.pk = pk;
     }
 
-    public Integer getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Short id) {
         this.id = id;
     }
 
-    public Date getHolidaysColumn() {
-        return holidaysColumn;
+    public Date getExitDay() {
+        return exitDay;
     }
 
-    public void setHolidaysColumn(Date holidaysColumn) {
-        this.holidaysColumn = holidaysColumn;
+    public void setExitDay(Date exitDay) {
+        this.exitDay = exitDay;
+    }
+
+    public Date getBackDay() {
+        return backDay;
+    }
+
+    public void setBackDay(Date backDay) {
+        this.backDay = backDay;
+    }
+
+    public Integer getPk() {
+        return pk;
+    }
+
+    public void setPk(Integer pk) {
+        this.pk = pk;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (pk != null ? pk.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Holidays)) {
+        if (!(object instanceof VacationDays)) {
             return false;
         }
-        Holidays other = (Holidays) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        VacationDays other = (VacationDays) object;
+        if ((this.pk == null && other.pk != null) || (this.pk != null && !this.pk.equals(other.pk))) {
             return false;
         }
         return true;
@@ -82,7 +103,7 @@ public class Holidays implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Holidays[ id=" + id + " ]";
+        return "Entities.VacationDays[ pk=" + pk + " ]";
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package EJBs;
 
-import Entities.Holidays;
+import Entities.VacationDays;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,8 +14,8 @@ import javax.persistence.PersistenceContext;
  *
  * @author evgero
  */
-@Stateless(name="HolidaysFacade")
-public class HolidaysFacade extends AbstractFacade<Holidays> {
+@Stateless
+public class VacationDaysFacade extends AbstractFacade<VacationDays> {
 
     @PersistenceContext(unitName = "com.dynamotors_Timer1.5_REST_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class HolidaysFacade extends AbstractFacade<Holidays> {
         return em;
     }
 
-    public HolidaysFacade() {
-        super(Holidays.class);
+    public VacationDaysFacade() {
+        super(VacationDays.class);
     }
     
 }
