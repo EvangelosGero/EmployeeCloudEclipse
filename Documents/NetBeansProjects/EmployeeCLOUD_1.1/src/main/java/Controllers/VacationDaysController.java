@@ -6,6 +6,7 @@ import Controllers.util.JsfUtil.PersistAction;
 import EJBs.VacationDaysFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("vacationDaysController")
 @SessionScoped
@@ -26,7 +28,9 @@ public class VacationDaysController implements Serializable {
     @EJB
     private EJBs.VacationDaysFacade ejbFacade;
     private List<VacationDays> items = null;
-    private VacationDays selected;
+    private VacationDays selected;       
+    @Inject
+    private WorkersController workersController;
 
     public VacationDaysController() {
     }
@@ -49,6 +53,14 @@ public class VacationDaysController implements Serializable {
         return ejbFacade;
     }
 
+    public WorkersController getWorkersController() {
+        return workersController;
+    }
+
+    public void setWorkersController(WorkersController workersController) {
+        this.workersController = workersController;
+    }
+        
     public VacationDays prepareCreate() {
         selected = new VacationDays();
         initializeEmbeddableKey();
@@ -77,6 +89,22 @@ public class VacationDaysController implements Serializable {
     public List<VacationDays> getItems() {
         if (items == null) {
             items = getFacade().findAll();
+            //Initialize employeesIds too
+            //List<Short> employeesIdsALL = (List<Short>)items.stream().map(VacationDays::getId).collect(Collectors.toList());
+            //this.setEmployeesIds((List<Short>)employeesIdsALL.stream().distinct().collect(Collectors.toList()));
+            //this.emplIdsArray = (Short[])this.getEmployeesIds().toArray();
+            items.forEach(s -> {
+                if(this.workersController.getWorkers((int)s.getId()) != null){
+                    s.setLastName(this.workersController.getWorkers((int)s.getId()).getLastName());
+                    s.setFirstName(this.workersController.getWorkers((int)s.getId()).getFirstName());
+                    s.setFatherName(this.workersController.getWorkers((int)s.getId()).getFatherName());
+                }
+                else {
+                    s.setLastName("");
+                    s.setFirstName("");
+                    s.setFatherName("");
+                }
+                    });            
         }
         return items;
     }

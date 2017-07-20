@@ -25,7 +25,7 @@
                         <h:outputText value="#{bundle_vacation_days.ViewVacationDaysLabel_pk}"/>
                         <h:outputText value="#{vacationDaysController.selected.pk}" title="#{bundle_vacation_days.ViewVacationDaysTitle_pk}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_vacation_days.Close}" onclick="VacationDaysViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_vacation_days.Close}" onclick="PF('VacationDaysViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

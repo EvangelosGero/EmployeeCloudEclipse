@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -41,6 +42,12 @@ public class VacationDays implements Serializable {
     @Basic(optional = false)
     @Column(name = "PK", nullable = false)
     private Integer pk;
+    @Transient
+    private String firstName;
+    @Transient
+    private String lastName;
+    @Transient
+    private String fatherName;
 
     public VacationDays() {
     }
@@ -81,6 +88,32 @@ public class VacationDays implements Serializable {
         this.pk = pk;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;       
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

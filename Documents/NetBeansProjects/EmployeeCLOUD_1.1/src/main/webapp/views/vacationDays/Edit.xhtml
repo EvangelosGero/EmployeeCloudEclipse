@@ -22,7 +22,7 @@
                         <p:inputText id="pk" value="#{vacationDaysController.selected.pk}" title="#{bundle_vacation_days.EditVacationDaysTitle_pk}" required="true" requiredMessage="#{bundle_vacation_days.EditVacationDaysRequiredMessage_pk}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{vacationDaysController.update}" value="#{bundle_vacation_days.Save}" update="display,:VacationDaysListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>
-                    <p:commandButton value="#{bundle_vacation_days.Cancel}" onclick="VacationDaysEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle_vacation_days.Cancel}" onclick="PF('VacationDaysEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -21,8 +21,10 @@
                         <p:outputLabel value="#{bundle_vacation_days.CreateVacationDaysLabel_pk}" for="pk" />
                         <p:inputText id="pk" value="#{vacationDaysController.selected.pk}" title="#{bundle_vacation_days.CreateVacationDaysTitle_pk}" required="true" requiredMessage="#{bundle_vacation_days.CreateVacationDaysRequiredMessage_pk}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{vacationDaysController.create}" value="#{bundle_vacation_days.Save}" update="display,:VacationDaysListForm:datalist,:growl" oncomplete="handleSubmit(args,'VacationDaysCreateDialog');"/>
-                    <p:commandButton value="#{bundle_vacation_days.Cancel}" onclick="VacationDaysCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{vacationDaysController.create}" value="#{bundle_vacation_days.Save}" 
+                                     update="display,:VacationDaysListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'VacationDaysCreateDialog');"/>
+                    <p:commandButton value="#{bundle_vacation_days.Cancel}" onclick="PF('VacationDaysCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
