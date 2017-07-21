@@ -9,23 +9,76 @@
     <ui:composition>
 
         <p:dialog id="VacationDaysCreateDlg" widgetVar="VacationDaysCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_vacation_days.CreateVacationDaysTitle}">
-            <h:form id="VacationDaysCreateForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{vacationDaysController.selected != null}">
+            <h:form id="VacationDaysCreateForm">                
+                <h:panelGrid  columns="2" id="display">
+                    <p:panel header="#{bundle_vacation_days.ListVacationDaysTitle}">
+                    <p:dataTable id="datalist1" value="#{workersController.items}" var="worker"
+                                 selectionMode="single" selection="#{vacationDaysController.selectedWorker}"
+                                 sortMode="multiple" 
+                                 paginator="true"
+                                 rowKey="#{worker.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 widgetVar="createVacDaysTable"
+                                 >
+                        <p:ajax event="rowSelect" listener="#{vacationDaysController.selectListener()}"   update="VacationDaysCreateForm:id 
+                                VacationDaysCreateForm:firstName VacationDaysCreateForm:lastName VacationDaysCreateForm:fatherName"/>
+                        <p:ajax event="rowUnselect" listener="#{vacationDaysController.unSelectListener()}" update="VacationDaysCreateForm:id 
+                                VacationDaysCreateForm:firstName VacationDaysCreateForm:lastName VacationDaysCreateForm:fatherName"/>
+                        
+
+                        <p:column filterBy="#{worker.id}" sortBy="#{worker.id}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.lastName}" sortBy="#{worker.lastName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.lastName}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.firstName}" sortBy="#{worker.firstName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.firstName}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.fatherName}" sortBy="#{worker.fatherName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_fatherName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.fatherName}"/>
+                        </p:column>
+                       </p:dataTable>
+                    </p:panel>
+                    <p:panelGrid id="createPanel" columns="4" rendered="#{vacationDaysController.selected != null}">
                         <p:outputLabel value="#{bundle_vacation_days.CreateVacationDaysLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{vacationDaysController.selected.id}" title="#{bundle_vacation_days.CreateVacationDaysTitle_id}" />
+                        <p:inputText id="id" value="#{vacationDaysController.selected.id}" disabled="true"
+                                     title="#{bundle_vacation_days.CreateVacationDaysTitle_id}" />                        
+                        <p:outputLabel value="#{bundle.ViewWorkersLabel_firstName}" for="firstName"/>
+                        <p:inputText id="firstName" value="#{vacationDaysController.selected.firstName}" disabled="true"
+                                      title="#{bundle.ViewWorkersTitle_firstName}"/>
+                        <p:outputLabel value="#{bundle.ViewWorkersLabel_lastName}" for="lastName"/>
+                        <p:inputText id="lastName" value="#{vacationDaysController.selected.lastName}" disabled="true"
+                                      title="#{bundle.ViewWorkersTitle_lastName}"/>
+                        <p:outputLabel value="#{bundle.ViewWorkersLabel_fatherName}" for="fatherName"/>
+                        <p:inputText id="fatherName" value="#{vacationDaysController.selected.fatherName}" disabled="true" 
+                                      title="#{bundle.ViewWorkersTitle_fatherName}"/>
                         <p:outputLabel value="#{bundle_vacation_days.CreateVacationDaysLabel_exitDay}" for="exitDay" />
-                        <p:calendar id="exitDay" pattern="MM/dd/yyyy" value="#{vacationDaysController.selected.exitDay}" title="#{bundle_vacation_days.EditVacationDaysTitle_exitDay}"  showOn="button"/>
+                        <p:calendar id="exitDay" pattern="MM/dd/yyyy" value="#{vacationDaysController.selected.exitDay}" 
+                                    title="#{bundle_vacation_days.EditVacationDaysTitle_exitDay}"  showOn="button" required="true"/>
                         <p:outputLabel value="#{bundle_vacation_days.CreateVacationDaysLabel_backDay}" for="backDay" />
-                        <p:calendar id="backDay" pattern="MM/dd/yyyy" value="#{vacationDaysController.selected.backDay}" title="#{bundle_vacation_days.EditVacationDaysTitle_backDay}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle_vacation_days.CreateVacationDaysLabel_pk}" for="pk" />
-                        <p:inputText id="pk" value="#{vacationDaysController.selected.pk}" title="#{bundle_vacation_days.CreateVacationDaysTitle_pk}" required="true" requiredMessage="#{bundle_vacation_days.CreateVacationDaysRequiredMessage_pk}"/>
+                        <p:calendar id="backDay" pattern="MM/dd/yyyy" value="#{vacationDaysController.selected.backDay}" 
+                                    title="#{bundle_vacation_days.EditVacationDaysTitle_backDay}"  showOn="button" required="true"/>
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{vacationDaysController.create}" value="#{bundle_vacation_days.Save}" 
                                      update="display,:VacationDaysListForm:datalist,:growl" 
                                      oncomplete="handleSubmit(args,'VacationDaysCreateDialog');"/>
                     <p:commandButton value="#{bundle_vacation_days.Cancel}" onclick="PF('VacationDaysCreateDialog').hide()"/>
-                </h:panelGroup>
+                </h:panelGrid>
             </h:form>
         </p:dialog>
 

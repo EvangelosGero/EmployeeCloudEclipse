@@ -4,13 +4,14 @@ import Entities.VacationDays;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
 import EJBs.VacationDaysFacade;
+import com.dynamotors.timer1._rest.Workers;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -28,7 +29,8 @@ public class VacationDaysController implements Serializable {
     @EJB
     private EJBs.VacationDaysFacade ejbFacade;
     private List<VacationDays> items = null;
-    private VacationDays selected;       
+    private VacationDays selected;
+    private Workers selectedWorker;
     @Inject
     private WorkersController workersController;
 
@@ -42,6 +44,15 @@ public class VacationDaysController implements Serializable {
     public void setSelected(VacationDays selected) {
         this.selected = selected;
     }
+
+    public Workers getSelectedWorker() {
+        return selectedWorker;
+    }
+
+    public void setSelectedWorker(Workers selectedWorker) {
+        this.selectedWorker = selectedWorker;
+    }
+    
 
     protected void setEmbeddableKeys() {
     }
@@ -65,6 +76,17 @@ public class VacationDaysController implements Serializable {
         selected = new VacationDays();
         initializeEmbeddableKey();
         return selected;
+    }
+    
+    public void selectListener(){
+        this.selected.setId(this.selectedWorker.getId().shortValue());
+        this.selected.setFirstName(this.selectedWorker.getFirstName());
+        this.selected.setLastName(this.selectedWorker.getLastName());
+        this.selected.setFatherName(this.selectedWorker.getFatherName());
+    }
+    
+    public void unSelectListener(){
+        
     }
 
     public void create() {

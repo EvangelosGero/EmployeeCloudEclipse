@@ -91,7 +91,8 @@
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_vacation_days.Edit}" 
                                              update=":VacationDaysEditForm" oncomplete="PF('VacationDaysEditDialog').show()" disabled="#{empty vacationDaysController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_vacation_days.Delete}" 
-                                             actionListener="#{vacationDaysController.destroy}" update=":growl,datalist" disabled="#{empty vacationDaysController.selected}"/>
+                                             actionListener="#{vacationDaysController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty vacationDaysController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
