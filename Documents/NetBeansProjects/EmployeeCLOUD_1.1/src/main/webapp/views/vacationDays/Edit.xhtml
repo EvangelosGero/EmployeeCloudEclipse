@@ -13,13 +13,23 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vacationDaysController.selected != null}">
                         <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{vacationDaysController.selected.id}" title="#{bundle_vacation_days.EditVacationDaysTitle_id}" />
+                        <p:inputText id="id" value="#{vacationDaysController.selected.id}" 
+                                     title="#{bundle_vacation_days.EditVacationDaysTitle_id}"  disabled="true"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_firstName}"/>
+                        <h:outputText value="#{vacationDaysController.selected.firstName}" 
+                                      title="#{bundle.ViewWorkersTitle_firstName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_lastName}"/>
+                        <h:outputText value="#{vacationDaysController.selected.lastName}" 
+                                      title="#{bundle.ViewWorkersTitle_lastName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_fatherName}"/>
+                        <h:outputText value="#{vacationDaysController.selected.fatherName}" 
+                                      title="#{bundle.ViewWorkersTitle_fatherName}"/>
                         <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_exitDay}" for="exitDay" />
-                        <p:calendar id="exitDay" pattern="MM/dd/yyyy" value="#{vacationDaysController.selected.exitDay}" title="#{bundle_vacation_days.EditVacationDaysTitle_exitDay}"  showOn="button"/>
+                        <p:calendar id="exitDay" pattern="dd/MM/yyyy" value="#{vacationDaysController.selected.exitDay}" 
+                                    title="#{bundle_vacation_days.EditVacationDaysTitle_exitDay}"  showOn="button"/>
                         <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_backDay}" for="backDay" />
-                        <p:calendar id="backDay" pattern="MM/dd/yyyy" value="#{vacationDaysController.selected.backDay}" title="#{bundle_vacation_days.EditVacationDaysTitle_backDay}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_pk}" for="pk" />
-                        <p:inputText id="pk" value="#{vacationDaysController.selected.pk}" title="#{bundle_vacation_days.EditVacationDaysTitle_pk}" required="true" requiredMessage="#{bundle_vacation_days.EditVacationDaysRequiredMessage_pk}"/>
+                        <p:calendar id="backDay" pattern="dd/MM/yyyy" value="#{vacationDaysController.selected.backDay}" 
+                                    title="#{bundle_vacation_days.EditVacationDaysTitle_backDay}"  showOn="button"/>                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{vacationDaysController.update}" value="#{bundle_vacation_days.Save}" update="display,:VacationDaysListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>
                     <p:commandButton value="#{bundle_vacation_days.Cancel}" onclick="PF('VacationDaysEditDialog').hide()"/>

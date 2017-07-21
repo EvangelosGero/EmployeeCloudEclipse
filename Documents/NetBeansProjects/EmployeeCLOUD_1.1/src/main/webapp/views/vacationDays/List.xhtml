@@ -53,28 +53,36 @@
                             </f:facet>
                             <h:outputText value="#{item.fatherName}"/>
                         </p:column>
-                        <p:column   filterBy="#{item.exitDay}" sortBy="#{item.exitDay}">
+                        <p:column id="exitColumn"  filterBy="#{item.exitDay}" sortBy="#{item.exitDay}" 
+                                  filterMatchMode="gte" styleClass="watermark1">
+                            <f:facet name="filter" id="exitFilter">
+                                <p:calendar  pattern="dd/MM/yyyy">
+                                    <p:ajax event="dateSelect"  oncomplete="PF('vacationDaysTable').filter()"/>
+                                </p:calendar>
+                            </f:facet>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_exitDay}"/>
                             </f:facet>
                             <h:outputText value="#{item.exitDay}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
+                            <p:watermark  for="@(.watermark1)" value="Search From Date"/>
                         </p:column>
-                        <p:column filterBy="#{item.backDay}" sortBy="#{item.backDay}">
+                        <p:column id="backColumn" filterBy="#{item.backDay}" sortBy="#{item.backDay}" 
+                                  filterMatchMode="lte" styleClass="watermark2">
+                            <f:facet name="filter">
+                                <p:calendar  pattern="dd/MM/yyyy">
+                                    <p:ajax event="dateSelect"  oncomplete="PF('vacationDaysTable').filter()"/>
+                                </p:calendar>
+                            </f:facet>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_backDay}"/>
                             </f:facet>
                             <h:outputText value="#{item.backDay}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_pk}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.pk}"/>
-                        </p:column>
+                            <p:watermark  for="@(.watermark2)" value="Search up to Date"/>
+                        </p:column>                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_vacation_days.Create}" actionListener="#{vacationDaysController.prepareCreate}" 
                                              update=":VacationDaysCreateForm" oncomplete="PF('VacationDaysCreateDialog').show()"/>
