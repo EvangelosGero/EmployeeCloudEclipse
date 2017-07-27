@@ -1,5 +1,6 @@
 package Controllers;
 
+import Controllers.Logic.CreateVacationReport;
 import Entities.VacationDays;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
@@ -7,6 +8,7 @@ import EJBs.VacationDaysFacade;
 import com.dynamotors.timer1._rest.Workers;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -33,6 +35,8 @@ public class VacationDaysController implements Serializable {
     private Workers selectedWorker;
     @Inject
     private WorkersController workersController;
+    @Inject
+    private EmplAdminsController emplAdminsController;
 
     public VacationDaysController() {
     }
@@ -87,6 +91,10 @@ public class VacationDaysController implements Serializable {
     
     public void unSelectListener(){
         
+    }
+    
+    public void createVacationReport() throws SQLException{
+        new CreateVacationReport().CreateVacationDBTable(emplAdminsController.getCon());
     }
 
     public void create() {

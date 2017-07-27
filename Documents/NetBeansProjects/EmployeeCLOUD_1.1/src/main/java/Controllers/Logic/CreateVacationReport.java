@@ -52,7 +52,7 @@ public class CreateVacationReport {
     int previousMonth, currentYear, update;
     private Map<Integer, Integer> consumedMap = new HashMap<>();
     private List<LocalDate> holidaysList  = new ArrayList<>();
-    private final FacesContext facesContext = FacesContext.getCurrentInstance();
+    private final FacesContext facesContext = FacesContext.getCurrentInstance();    
     
     //Default Constructor
     public CreateVacationReport(){      
