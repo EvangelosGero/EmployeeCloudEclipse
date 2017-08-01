@@ -449,12 +449,12 @@ public class CreateVacationReport {
             resul = databaseMetaData.getTables(null, null, "VACATION_REPORT_" +Integer.toString(refYear-1) , null);
             if (resul.next()) query = "SELECT ID, REMAINING_DAYS FROM VACATION_REPORT_" +Integer.toString(refYear-1);
             else {
-                if(resul != null)resul.close();
-                ButtonType ok = Alerts.showDialogOK_CANCEL("Δεν υπάρχουν ασφαλή στοιχεία για υπόλοιπα αδειών έτους "+Integer.toString(refYear-1)
-                        +". Να συνεχίσω?", "", "");
-                if (ok == ButtonType.OK)
-                        query = "SELECT ID, LASTYEAR_DAYS FROM EMPLOYEE_VACATION";
-                else stage.close();
+             //   if(resul != null)resul.close();
+             //   ButtonType ok = Alerts.showDialogOK_CANCEL("Δεν υπάρχουν ασφαλή στοιχεία για υπόλοιπα αδειών έτους "+Integer.toString(refYear-1)
+             //           +". Να συνεχίσω?", "", "");
+             //   if (ok == ButtonType.OK)
+             //           query = "SELECT ID, LASTYEAR_DAYS FROM EMPLOYEE_VACATION";
+             //   else stage.close();
             }
             if(resul != null)resul.close();
             

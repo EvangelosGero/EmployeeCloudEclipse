@@ -58,7 +58,8 @@
                                 <p:menuitem value="Καταχώρηση/Καρτέλες Αδειών Εργαζομένων" outcome="/views/vacationDays/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Δημιουργία Report Αδειών"  actionListener="#{vacationDaysController.createVacationReport()}"  
                                      update=":growl" disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="Εμφάνιση Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"/>                                
+                                <p:menuitem value="Εμφάνιση Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"
+                                            action="#{vacationDaysController.showReportNow()}"/>                                
                             </p:submenu>
                             <p:submenu label="Ασθένειες" >
                                 <p:menuitem value="Καταχώρηση ασθένειας έως τρεις ημέρες"  disabled="#{not emplAdminsController.loggedIn}"/>

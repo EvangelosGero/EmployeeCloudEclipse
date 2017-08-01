@@ -79,8 +79,7 @@ public class ShowReport implements Serializable {
                rs.getInt(9), rs.getDouble(10), rs.getInt(11), rs.getInt(12)));                      
            }
     }
-      catch (SQLException err){
-        System.out.println(err.getMessage());
+      catch (SQLException err){        
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQLException", err.getMessage()));
        }  finally{
        if (rs != null){rs.close();}

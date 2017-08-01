@@ -1,6 +1,7 @@
 package Controllers;
 
 import Controllers.Logic.CreateVacationReport;
+import Controllers.Logic.showVacationReport;
 import Entities.VacationDays;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
@@ -37,6 +38,8 @@ public class VacationDaysController implements Serializable {
     private WorkersController workersController;
     @Inject
     private EmplAdminsController emplAdminsController;
+    @Inject
+    private showVacationReport showVR;
 
     public VacationDaysController() {
     }
@@ -48,6 +51,24 @@ public class VacationDaysController implements Serializable {
     public void setSelected(VacationDays selected) {
         this.selected = selected;
     }
+
+    public EmplAdminsController getEmplAdminsController() {
+        return emplAdminsController;
+    }
+
+    public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
+        this.emplAdminsController = emplAdminsController;
+    }
+
+    public showVacationReport getShowVR() {
+        return showVR;
+    }
+
+    public void setShowVR(showVacationReport showVR) {
+        this.showVR = showVR;
+    }
+    
+    
 
     public Workers getSelectedWorker() {
         return selectedWorker;
@@ -95,6 +116,17 @@ public class VacationDaysController implements Serializable {
     
     public void createVacationReport() throws SQLException{
         new CreateVacationReport().CreateVacationDBTable(emplAdminsController.getCon());
+    }
+    
+    public String showReportNow(){
+        try {
+            showVR.ProduceReportTable(emplAdminsController.getCon(), "EMPLOYEE_VACATION");
+            return "/views/vacationDays/ShowVacationReport.xhtml?faces-redirect=true";
+        } catch (SQLException ex) {
+            Logger.getLogger(TimerController.class.getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }       
     }
 
     public void create() {
