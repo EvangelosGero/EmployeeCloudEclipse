@@ -8,22 +8,82 @@
 
     <ui:composition>
 
-        <p:dialog id="SickDaysLessThanThreeCreateDlg" widgetVar="SickDaysLessThanThreeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle}">
+        <p:dialog id="SickDaysLessThanThreeCreateDlg" widgetVar="SickDaysLessThanThreeCreateDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle}">
             <h:form id="SickDaysLessThanThreeCreateForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{sickDaysLessThanThreeController.selected != null}">
+                <h:panelGrid  columns="2" id="display">
+                    <p:panel header="#{bundle_Sick_Days.ListSickDaysLessThanThreeTitle}">
+                    <p:dataTable id="datalist1" value="#{workersController.items}" var="worker"
+                                 selectionMode="single" selection="#{sickDaysLessThanThreeController.selectedWorker}"
+                                 sortMode="multiple" 
+                                 paginator="true"
+                                 rowKey="#{worker.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 widgetVar="createLessTable"
+                                 >
+                        <p:ajax event="rowSelect" listener="#{sickDaysLessThanThreeController.selectListener()}"   
+                                update="SickDaysLessThanThreeCreateForm:id 
+                                SickDaysLessThanThreeCreateForm:firstName SickDaysLessThanThreeCreateForm:lastName 
+                                SickDaysLessThanThreeCreateForm:fatherName"/>
+                        <p:ajax event="rowUnselect" listener="#{sickDaysLessThanThreeController.unSelectListener()}" 
+                                update="SickDaysLessThanThreeCreateForm:id 
+                                SickDaysLessThanThreeCreateForm:firstName SickDaysLessThanThreeCreateForm:lastName 
+                                SickDaysLessThanThreeCreateForm:fatherName"/>
+                        
+
+                        <p:column filterBy="#{worker.id}" sortBy="#{worker.id}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle_Sick_Days.CreateSickDaysMoreThanThreeLabel_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.lastName}" sortBy="#{worker.lastName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.lastName}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.firstName}" sortBy="#{worker.firstName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.firstName}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.fatherName}" sortBy="#{worker.fatherName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_fatherName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.fatherName}"/>
+                        </p:column>
+                       </p:dataTable>
+                    </p:panel>
+                    <p:panelGrid id="createPanel" columns="4" rendered="#{sickDaysLessThanThreeController.selected != null}">
                         <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{sickDaysLessThanThreeController.selected.id}" title="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle_id}" />
+                        <p:inputText id="id" value="#{sickDaysLessThanThreeController.selected.id}" disabled="true"
+                                     title="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle_id}" />                        
+                        <p:outputLabel value="#{bundle.ViewWorkersLabel_firstName}" for="firstName"/>
+                        <p:inputText id="firstName" value="#{sickDaysLessThanThreeController.selected.firstName}" disabled="true"
+                                      title="#{bundle.ViewWorkersTitle_firstName}"/>
+                        <p:outputLabel value="#{bundle.ViewWorkersLabel_lastName}" for="lastName"/>
+                        <p:inputText id="lastName" value="#{sickDaysLessThanThreeController.selected.lastName}" disabled="true"
+                                      title="#{bundle.ViewWorkersTitle_lastName}"/>
+                        <p:outputLabel value="#{bundle.ViewWorkersLabel_fatherName}" for="fatherName"/>
+                        <p:inputText id="fatherName" value="#{sickDaysLessThanThreeController.selected.fatherName}" disabled="true" 
+                                      title="#{bundle.ViewWorkersTitle_fatherName}"/>
                         <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_exitDay}" for="exitDay" />
-                        <p:calendar id="exitDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sickDaysLessThanThreeController.selected.exitDay}" title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_exitDay}"  showOn="button"/>
+                        <p:calendar id="exitDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sickDaysLessThanThreeController.selected.exitDay}" 
+                                    title="#{bundle_vacation_days.EditVacationDaysTitle_exitDay}"  showOn="button" required="true"/>
                         <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_backDay}" for="backDay" />
-                        <p:calendar id="backDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sickDaysLessThanThreeController.selected.backDay}" title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_backDay}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_pk}" for="pk" />
-                        <p:inputText id="pk" value="#{sickDaysLessThanThreeController.selected.pk}" title="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle_pk}" required="true" requiredMessage="#{bundle_Sick_Days.CreateSickDaysLessThanThreeRequiredMessage_pk}"/>
+                        <p:calendar id="backDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sickDaysLessThanThreeController.selected.backDay}" 
+                                    title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_backDay}"  showOn="button" required="true"/>
+                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{sickDaysLessThanThreeController.create}" value="#{bundle_Sick_Days.Save}" update="display,:SickDaysLessThanThreeListForm:datalist,:growl" oncomplete="handleSubmit(args,'SickDaysLessThanThreeCreateDialog');"/>
-                    <p:commandButton value="#{bundle_Sick_Days.Cancel}" onclick="SickDaysLessThanThreeCreateDialog.hide()"/>
-                </h:panelGroup>
+                    <p:commandButton actionListener="#{sickDaysLessThanThreeController.create}" value="#{bundle_Sick_Days.Save}" 
+                                     update="display,:SickDaysLessThanThreeListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'SickDaysLessThanThreeCreateDialog');"/>
+                    <p:commandButton value="#{bundle_Sick_Days.Cancel}" onclick="PF('SickDaysLessThanThreeCreateDialog').hide()"/>
+                </h:panelGrid>
             </h:form>
         </p:dialog>
 
