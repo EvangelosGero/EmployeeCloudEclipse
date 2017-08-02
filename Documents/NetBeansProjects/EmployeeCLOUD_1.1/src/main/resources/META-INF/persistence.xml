@@ -13,6 +13,8 @@
     <class>Entities.TaInfo</class>
     <class>Entities.TapitInfo</class>
     <class>Entities.VacationDays</class>
+    <class>Entities.SickDaysLessThanThree</class>
+    <class>Entities.SickDaysMoreThanThree</class>
     <class>com.dynamotors.timer1._rest.Workers</class>
      <class>com.dynamotors.timer1._rest.Timer</class>    
     <exclude-unlisted-classes>true</exclude-unlisted-classes>

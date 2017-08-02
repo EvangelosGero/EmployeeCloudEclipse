@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SickDaysLessThanThreeCreateDlg" widgetVar="SickDaysLessThanThreeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle}">
+            <h:form id="SickDaysLessThanThreeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sickDaysLessThanThreeController.selected != null}">
+                        <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{sickDaysLessThanThreeController.selected.id}" title="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle_id}" />
+                        <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_exitDay}" for="exitDay" />
+                        <p:calendar id="exitDay" pattern="MM/dd/yyyy" value="#{sickDaysLessThanThreeController.selected.exitDay}" title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_exitDay}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_backDay}" for="backDay" />
+                        <p:calendar id="backDay" pattern="MM/dd/yyyy" value="#{sickDaysLessThanThreeController.selected.backDay}" title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_backDay}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_pk}" for="pk" />
+                        <p:inputText id="pk" value="#{sickDaysLessThanThreeController.selected.pk}" title="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle_pk}" required="true" requiredMessage="#{bundle_Sick_Days.CreateSickDaysLessThanThreeRequiredMessage_pk}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sickDaysLessThanThreeController.create}" value="#{bundle_Sick_Days.Save}" update="display,:SickDaysLessThanThreeListForm:datalist,:growl" oncomplete="handleSubmit(args,'SickDaysLessThanThreeCreateDialog');"/>
+                    <p:commandButton value="#{bundle_Sick_Days.Cancel}" onclick="SickDaysLessThanThreeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
