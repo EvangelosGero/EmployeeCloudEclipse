@@ -62,10 +62,12 @@
                                             action="#{vacationDaysController.showReportNow()}"/>                                
                             </p:submenu>
                             <p:submenu label="Ασθένειες" >
-                                <p:menuitem value="Καταχώρηση ασθένειας έως τρεις ημέρες"  disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="Καρτέλα ασθενείας μικρότρης 3 ημερών Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="Καταχώρηση ασθένειας μεγαλύτερης των τριών ημερών" disabled="#{not emplAdminsController.loggedIn}"/>
-                                <p:menuitem value="Καρτέλα ασθενείας μεγαλύτερης 3 ημερών Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>                                                       
+                                <p:menuitem value="Καταχώρηση/Καρτέλες ασθένειας έως τρεις ημέρες" 
+                                            outcome="/views/sickDaysLessThanThree/List.xhtml"
+                                            disabled="#{not emplAdminsController.loggedIn}"/>                                
+                                <p:menuitem value="Καταχώρηση/Καρτέλες ασθένειας μεγαλύτερης των τριών ημερών" 
+                                            outcome="/views/sickDaysMoreThanThree/List.xhtml"
+                                            disabled="#{not emplAdminsController.loggedIn}"/>                                                                                       
                             </p:submenu>
                             <p:submenu label="Απουσίες-Διορθώσεις Timer" >
                                 <p:menuitem value="Καταγραφές Εισόδου/Εξόδου Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>

@@ -35,33 +35,69 @@
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.lastName}" sortBy="#{item.lastName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lastName}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.firstName}" sortBy="#{item.firstName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.firstName}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.fatherName}" sortBy="#{item.fatherName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_fatherName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fatherName}"/>
+                        </p:column>
+                        <p:column id="exitColumn"  filterBy="#{item.exitDay}" sortBy="#{item.exitDay}" 
+                                  filterMatchMode="gte" styleClass="watermark3">
+                            <f:facet name="filter" id="exitFilter">
+                                <p:calendar  pattern="dd/MM/yyyy">
+                                    <p:ajax event="dateSelect"  oncomplete="PF('sickMoreTable').filter()"/>
+                                </p:calendar>
+                            </f:facet>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle_Sick_Days.ListSickDaysMoreThanThreeTitle_exitDay}"/>
+                                <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_exitDay}"/>
                             </f:facet>
                             <h:outputText value="#{item.exitDay}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
+                            <p:watermark  for="@(.watermark3)" value="Search From Date"/>
                         </p:column>
-                        <p:column>
+                        <p:column id="backColumn" filterBy="#{item.backDay}" sortBy="#{item.backDay}" 
+                                  filterMatchMode="lte" styleClass="watermark4">
+                            <f:facet name="filter">
+                                <p:calendar  pattern="dd/MM/yyyy">
+                                    <p:ajax event="dateSelect"  oncomplete="PF('sickMoreTable').filter()"/>
+                                </p:calendar>
+                            </f:facet>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle_Sick_Days.ListSickDaysMoreThanThreeTitle_backDay}"/>
+                                <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_backDay}"/>
                             </f:facet>
                             <h:outputText value="#{item.backDay}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle_Sick_Days.ListSickDaysMoreThanThreeTitle_pk}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.pk}"/>
+                            <p:watermark  for="@(.watermark4)" value="Search up to Date"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_Sick_Days.Create}" actionListener="#{sickDaysMoreThanThreeController.prepareCreate}" update=":SickDaysMoreThanThreeCreateForm" oncomplete="PF('SickDaysMoreThanThreeCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_Sick_Days.View}" update=":SickDaysMoreThanThreeViewForm" oncomplete="PF('SickDaysMoreThanThreeViewDialog').show()" disabled="#{empty sickDaysMoreThanThreeController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_Sick_Days.Edit}" update=":SickDaysMoreThanThreeEditForm" oncomplete="PF('SickDaysMoreThanThreeEditDialog').show()" disabled="#{empty sickDaysMoreThanThreeController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_Sick_Days.Delete}" actionListener="#{sickDaysMoreThanThreeController.destroy}" update=":growl,datalist" disabled="#{empty sickDaysMoreThanThreeController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle_Sick_Days.Create}" 
+                                             actionListener="#{sickDaysMoreThanThreeController.prepareCreate}" 
+                                             update=":SickDaysMoreThanThreeCreateForm" 
+                                             oncomplete="PF('SickDaysMoreThanThreeCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle_Sick_Days.View}" 
+                                             update=":SickDaysMoreThanThreeViewForm" 
+                                             oncomplete="PF('SickDaysMoreThanThreeViewDialog').show()" disabled="#{empty sickDaysMoreThanThreeController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle_Sick_Days.Edit}" 
+                                             update=":SickDaysMoreThanThreeEditForm" 
+                                             oncomplete="PF('SickDaysMoreThanThreeEditDialog').show()" 
+                                             disabled="#{empty sickDaysMoreThanThreeController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle_Sick_Days.Delete}" 
+                                             actionListener="#{sickDaysMoreThanThreeController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty sickDaysMoreThanThreeController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

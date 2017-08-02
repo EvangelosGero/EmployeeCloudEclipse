@@ -8,24 +8,35 @@
 
     <ui:composition>
 
-        <p:dialog id="SickDaysLessThanThreeViewDlg" widgetVar="SickDaysLessThanThreeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle}">
+        <p:dialog id="SickDaysLessThanThreeViewDlg" widgetVar="SickDaysLessThanThreeViewDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle}">
             <h:form id="SickDaysLessThanThreeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sickDaysLessThanThreeController.selected != null}">
                         <h:outputText value="#{bundle_Sick_Days.ViewSickDaysLessThanThreeLabel_id}"/>
-                        <h:outputText value="#{sickDaysLessThanThreeController.selected.id}" title="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle_id}"/>
+                        <h:outputText value="#{sickDaysLessThanThreeController.selected.id}" 
+                                      title="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_firstName}"/>
+                        <h:outputText value="#{sickDaysLessThanThreeController.selected.firstName}" 
+                                      title="#{bundle.ViewWorkersTitle_firstName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_lastName}"/>
+                        <h:outputText value="#{sickDaysLessThanThreeController.selected.lastName}" 
+                                      title="#{bundle.ViewWorkersTitle_lastName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_fatherName}"/>
+                        <h:outputText value="#{sickDaysLessThanThreeController.selected.fatherName}" 
+                                      title="#{bundle.ViewWorkersTitle_fatherName}"/>
                         <h:outputText value="#{bundle_Sick_Days.ViewSickDaysLessThanThreeLabel_exitDay}"/>
-                        <h:outputText value="#{sickDaysLessThanThreeController.selected.exitDay}" title="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle_exitDay}">
+                        <h:outputText value="#{sickDaysLessThanThreeController.selected.exitDay}" 
+                                      title="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle_exitDay}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle_Sick_Days.ViewSickDaysLessThanThreeLabel_backDay}"/>
-                        <h:outputText value="#{sickDaysLessThanThreeController.selected.backDay}" title="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle_backDay}">
+                        <h:outputText value="#{sickDaysLessThanThreeController.selected.backDay}" 
+                                      title="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle_backDay}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle_Sick_Days.ViewSickDaysLessThanThreeLabel_pk}"/>
-                        <h:outputText value="#{sickDaysLessThanThreeController.selected.pk}" title="#{bundle_Sick_Days.ViewSickDaysLessThanThreeTitle_pk}"/>
+                        </h:outputText>                        
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle_Sick_Days.Close}" onclick="SickDaysLessThanThreeViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle_Sick_Days.Close}" onclick="PF('SickDaysLessThanThreeViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
