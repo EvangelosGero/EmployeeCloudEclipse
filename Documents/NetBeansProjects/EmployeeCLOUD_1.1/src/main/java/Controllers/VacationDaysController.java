@@ -166,7 +166,7 @@ public class VacationDaysController implements Serializable {
                     s.setFirstName("");
                     s.setFatherName("");
                 }
-                    });            
+            });            
         }
         return items;
     }

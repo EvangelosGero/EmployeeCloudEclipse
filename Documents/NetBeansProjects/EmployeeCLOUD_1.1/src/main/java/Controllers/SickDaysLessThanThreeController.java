@@ -59,9 +59,7 @@ public class SickDaysLessThanThreeController implements Serializable {
     public void setWorkersController(WorkersController workersController) {
         this.workersController = workersController;
     }
-    
-    
-
+      
     protected void setEmbeddableKeys() {
     }
 
@@ -70,6 +68,13 @@ public class SickDaysLessThanThreeController implements Serializable {
 
     private SickDaysLessThanThreeFacade getFacade() {
         return ejbFacade;
+    }
+    
+    public void selectListener(){
+        this.selected.setId(this.selectedWorker.getId().shortValue());
+        this.selected.setFirstName(this.selectedWorker.getFirstName());
+        this.selected.setLastName(this.selectedWorker.getLastName());
+        this.selected.setFatherName(this.selectedWorker.getFatherName());
     }
 
     public SickDaysLessThanThree prepareCreate() {
@@ -100,6 +105,18 @@ public class SickDaysLessThanThreeController implements Serializable {
     public List<SickDaysLessThanThree> getItems() {
         if (items == null) {
             items = getFacade().findAll();
+            items.forEach(s -> {
+                if(this.workersController.getWorkers((int)s.getId()) != null){
+                    s.setLastName(this.workersController.getWorkers((int)s.getId()).getLastName());
+                    s.setFirstName(this.workersController.getWorkers((int)s.getId()).getFirstName());
+                    s.setFatherName(this.workersController.getWorkers((int)s.getId()).getFatherName());
+                }
+                else {
+                    s.setLastName("");
+                    s.setFirstName("");
+                    s.setFatherName("");
+                }
+            });
         }
         return items;
     }
