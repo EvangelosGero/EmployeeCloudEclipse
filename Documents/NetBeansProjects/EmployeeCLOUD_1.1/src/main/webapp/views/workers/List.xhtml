@@ -56,7 +56,7 @@
                                     <h:outputText value="#{bundle.ListWorkersTitle_hireDate}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.hireDate}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                                 </h:outputText>
                             </p:column>
                             <p:column style="width: 100px">
@@ -166,7 +166,7 @@
                                     <h:outputText value="#{bundle.ListWorkersTitle_birthdate}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.birthdate}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                                 </h:outputText>
                             </p:column>
                             <p:column style="width: 100px">
@@ -174,7 +174,7 @@
                                     <h:outputText value="#{bundle.ListWorkersTitle_firstHireDate}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.firstHireDate}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                                 </h:outputText>
                             </p:column>
                             <p:column style="width: 100px">
@@ -272,7 +272,7 @@
                                     <h:outputText value="#{bundle.ListWorkersTitle_diakopi}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.diakopi}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                                 </h:outputText>
                             </p:column>
                             <p:column style="width: 100px">

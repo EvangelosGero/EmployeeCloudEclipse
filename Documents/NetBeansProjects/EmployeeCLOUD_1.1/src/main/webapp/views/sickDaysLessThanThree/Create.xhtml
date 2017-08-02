@@ -15,9 +15,9 @@
                         <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_id}" for="id" />
                         <p:inputText id="id" value="#{sickDaysLessThanThreeController.selected.id}" title="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle_id}" />
                         <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_exitDay}" for="exitDay" />
-                        <p:calendar id="exitDay" pattern="MM/dd/yyyy" value="#{sickDaysLessThanThreeController.selected.exitDay}" title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_exitDay}"  showOn="button"/>
+                        <p:calendar id="exitDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sickDaysLessThanThreeController.selected.exitDay}" title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_exitDay}"  showOn="button"/>
                         <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_backDay}" for="backDay" />
-                        <p:calendar id="backDay" pattern="MM/dd/yyyy" value="#{sickDaysLessThanThreeController.selected.backDay}" title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_backDay}"  showOn="button"/>
+                        <p:calendar id="backDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sickDaysLessThanThreeController.selected.backDay}" title="#{bundle_Sick_Days.EditSickDaysLessThanThreeTitle_backDay}"  showOn="button"/>
                         <p:outputLabel value="#{bundle_Sick_Days.CreateSickDaysLessThanThreeLabel_pk}" for="pk" />
                         <p:inputText id="pk" value="#{sickDaysLessThanThreeController.selected.pk}" title="#{bundle_Sick_Days.CreateSickDaysLessThanThreeTitle_pk}" required="true" requiredMessage="#{bundle_Sick_Days.CreateSickDaysLessThanThreeRequiredMessage_pk}"/>
                     </p:panelGrid>

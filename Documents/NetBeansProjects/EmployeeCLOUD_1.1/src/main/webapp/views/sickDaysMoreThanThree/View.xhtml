@@ -28,12 +28,12 @@
                         <h:outputText value="#{bundle_Sick_Days.ViewSickDaysMoreThanThreeLabel_exitDay}"/>
                         <h:outputText value="#{sickDaysMoreThanThreeController.selected.exitDay}" 
                                       title="#{bundle_Sick_Days.ViewSickDaysMoreThanThreeTitle_exitDay}">
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle_Sick_Days.ViewSickDaysMoreThanThreeLabel_backDay}"/>
                         <h:outputText value="#{sickDaysMoreThanThreeController.selected.backDay}" 
                                       title="#{bundle_Sick_Days.ViewSickDaysMoreThanThreeTitle_backDay}">
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                         </h:outputText>                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle_Sick_Days.Close}" onclick="PF('SickDaysMoreThanThreeViewDialog').hide()"/>

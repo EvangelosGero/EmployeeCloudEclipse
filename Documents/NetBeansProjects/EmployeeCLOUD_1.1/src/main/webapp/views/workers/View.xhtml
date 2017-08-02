@@ -22,7 +22,7 @@
                         <h:outputText value="#{workersController.selected.jobTitle}" title="#{bundle.ViewWorkersTitle_jobTitle}"/>
                         <h:outputText value="#{bundle.ViewWorkersLabel_hireDate}"/>
                         <h:outputText value="#{workersController.selected.hireDate}" title="#{bundle.ViewWorkersTitle_hireDate}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewWorkersLabel_salary}"/>
                         <h:outputText value="#{workersController.selected.salary}" title="#{bundle.ViewWorkersTitle_salary}"/>
@@ -60,11 +60,11 @@
                         <h:outputText value="#{workersController.selected.amIka}" title="#{bundle.ViewWorkersTitle_amIka}"/>
                         <h:outputText value="#{bundle.ViewWorkersLabel_birthdate}"/>
                         <h:outputText value="#{workersController.selected.birthdate}" title="#{bundle.ViewWorkersTitle_birthdate}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewWorkersLabel_firstHireDate}"/>
                         <h:outputText value="#{workersController.selected.firstHireDate}" title="#{bundle.ViewWorkersTitle_firstHireDate}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewWorkersLabel_fatherName}"/>
                         <h:outputText value="#{workersController.selected.fatherName}" title="#{bundle.ViewWorkersTitle_fatherName}"/>
@@ -98,7 +98,7 @@
                         <h:outputText value="#{workersController.selected.apolisi}" title="#{bundle.ViewWorkersTitle_apolisi}"/>
                         <h:outputText value="#{bundle.ViewWorkersLabel_diakopi}"/>
                         <h:outputText value="#{workersController.selected.diakopi}" title="#{bundle.ViewWorkersTitle_diakopi}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewWorkersLabel_email}"/>
                         <h:outputText value="#{workersController.selected.email}" title="#{bundle.ViewWorkersTitle_email}"/>

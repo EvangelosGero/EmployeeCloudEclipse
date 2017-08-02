@@ -26,10 +26,10 @@
                         <h:outputText value="#{vacationDaysController.selected.fatherName}" 
                                       title="#{bundle.ViewWorkersTitle_fatherName}"/>
                         <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_exitDay}" for="exitDay" />
-                        <p:calendar id="exitDay" pattern="dd/MM/yyyy" value="#{vacationDaysController.selected.exitDay}" 
+                        <p:calendar id="exitDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{vacationDaysController.selected.exitDay}" 
                                     title="#{bundle_vacation_days.EditVacationDaysTitle_exitDay}"  showOn="button"/>
                         <p:outputLabel value="#{bundle_vacation_days.EditVacationDaysLabel_backDay}" for="backDay" />
-                        <p:calendar id="backDay" pattern="dd/MM/yyyy" value="#{vacationDaysController.selected.backDay}" 
+                        <p:calendar id="backDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{vacationDaysController.selected.backDay}" 
                                     title="#{bundle_vacation_days.EditVacationDaysTitle_backDay}"  showOn="button"/>                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{vacationDaysController.update}" value="#{bundle_vacation_days.Save}" update="display,:VacationDaysListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>

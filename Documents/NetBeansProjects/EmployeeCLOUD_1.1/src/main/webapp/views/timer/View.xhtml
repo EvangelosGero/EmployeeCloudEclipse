@@ -16,11 +16,11 @@
                         <h:outputText value="#{timerController.selected.code}" title="#{bundle.ViewTimerTitle_code}"/>
                         <h:outputText value="#{bundle.ViewTimerLabel_starttime}"/>
                         <h:outputText value="#{timerController.selected.starttime}" title="#{bundle.ViewTimerTitle_starttime}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewTimerLabel_endtime}"/>
                         <h:outputText value="#{timerController.selected.endtime}" title="#{bundle.ViewTimerTitle_endtime}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3"/>
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewTimerLabel_intervalTime}"/>
                         <h:outputText value="#{timerController.selected.intervalTime}" title="#{bundle.ViewTimerTitle_intervalTime}"/>

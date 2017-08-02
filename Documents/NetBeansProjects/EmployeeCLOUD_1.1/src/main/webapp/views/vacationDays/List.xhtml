@@ -56,7 +56,7 @@
                         <p:column id="exitColumn"  filterBy="#{item.exitDay}" sortBy="#{item.exitDay}" 
                                   filterMatchMode="gte" styleClass="watermark1">
                             <f:facet name="filter" id="exitFilter">
-                                <p:calendar  pattern="dd/MM/yyyy">
+                                <p:calendar  pattern="dd/MM/yyyy" timeZone="GMT+3">
                                     <p:ajax event="dateSelect"  oncomplete="PF('vacationDaysTable').filter()"/>
                                 </p:calendar>
                             </f:facet>
@@ -64,14 +64,14 @@
                                 <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_exitDay}"/>
                             </f:facet>
                             <h:outputText value="#{item.exitDay}">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                             </h:outputText>
                             <p:watermark  for="@(.watermark1)" value="Search From Date"/>
                         </p:column>
                         <p:column id="backColumn" filterBy="#{item.backDay}" sortBy="#{item.backDay}" 
                                   filterMatchMode="lte" styleClass="watermark2">
                             <f:facet name="filter">
-                                <p:calendar  pattern="dd/MM/yyyy">
+                                <p:calendar  pattern="dd/MM/yyyy" timeZone="GMT+3">
                                     <p:ajax event="dateSelect"  oncomplete="PF('vacationDaysTable').filter()"/>
                                 </p:calendar>
                             </f:facet>
@@ -79,7 +79,7 @@
                                 <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_backDay}"/>
                             </f:facet>
                             <h:outputText value="#{item.backDay}">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
                             </h:outputText>
                             <p:watermark  for="@(.watermark2)" value="Search up to Date"/>
                         </p:column>                        

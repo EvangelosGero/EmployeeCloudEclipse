@@ -16,7 +16,7 @@
                         <h:outputText value="#{holidaysController.selected.id}" title="#{bundle_holidays.ViewHolidaysTitle_id}"/>
                         <h:outputText value="#{bundle_holidays.ViewHolidaysLabel_holidaysColumn}"/>
                         <h:outputText value="#{holidaysController.selected.holidaysColumn}" title="#{bundle_holidays.ViewHolidaysTitle_holidaysColumn}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3" />
                         </h:outputText>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle_holidays.Close}" onclick="HolidaysViewDialog.hide()"/>

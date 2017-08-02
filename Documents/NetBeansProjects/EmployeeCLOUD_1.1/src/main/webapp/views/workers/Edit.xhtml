@@ -23,7 +23,7 @@
                         <p:outputLabel value="#{bundle.EditWorkersLabel_jobTitle}" for="jobTitle" />
                         <p:inputText id="jobTitle" value="#{workersController.selected.jobTitle}" title="#{bundle.EditWorkersTitle_jobTitle}" />
                         <p:outputLabel value="#{bundle.EditWorkersLabel_hireDate}" for="hireDate" />
-                        <p:calendar id="hireDate" pattern="MM/dd/yyyy" value="#{workersController.selected.hireDate}" title="#{bundle.EditWorkersTitle_hireDate}"  showOn="button"/>
+                        <p:calendar id="hireDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{workersController.selected.hireDate}" title="#{bundle.EditWorkersTitle_hireDate}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditWorkersLabel_salary}" for="salary" />
                         <p:inputText id="salary" value="#{workersController.selected.salary}" title="#{bundle.EditWorkersTitle_salary}" />
                         <p:outputLabel value="#{bundle.EditWorkersLabel_code}" for="code" />
@@ -59,9 +59,9 @@
                         <p:outputLabel value="#{bundle.EditWorkersLabel_amIka}" for="amIka" />
                         <p:inputText id="amIka" value="#{workersController.selected.amIka}" title="#{bundle.EditWorkersTitle_amIka}" />
                         <p:outputLabel value="#{bundle.EditWorkersLabel_birthdate}" for="birthdate" />
-                        <p:calendar id="birthdate" pattern="MM/dd/yyyy" value="#{workersController.selected.birthdate}" title="#{bundle.EditWorkersTitle_birthdate}"  showOn="button"/>
+                        <p:calendar id="birthdate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{workersController.selected.birthdate}" title="#{bundle.EditWorkersTitle_birthdate}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditWorkersLabel_firstHireDate}" for="firstHireDate" />
-                        <p:calendar id="firstHireDate" pattern="MM/dd/yyyy" value="#{workersController.selected.firstHireDate}" title="#{bundle.EditWorkersTitle_firstHireDate}"  showOn="button"/>
+                        <p:calendar id="firstHireDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{workersController.selected.firstHireDate}" title="#{bundle.EditWorkersTitle_firstHireDate}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditWorkersLabel_fatherName}" for="fatherName" />
                         <p:inputText id="fatherName" value="#{workersController.selected.fatherName}" title="#{bundle.EditWorkersTitle_fatherName}" />
                         <p:outputLabel value="#{bundle.EditWorkersLabel_reasonIsfores}" for="reasonIsfores" />
@@ -93,7 +93,7 @@
                         <p:outputLabel value="#{bundle.EditWorkersLabel_apolisi}" for="apolisi" />
                         <p:inputText id="apolisi" value="#{workersController.selected.apolisi}" title="#{bundle.EditWorkersTitle_apolisi}" />
                         <p:outputLabel value="#{bundle.EditWorkersLabel_diakopi}" for="diakopi" />
-                        <p:calendar id="diakopi" pattern="MM/dd/yyyy" value="#{workersController.selected.diakopi}" title="#{bundle.EditWorkersTitle_diakopi}"  showOn="button"/>
+                        <p:calendar id="diakopi" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{workersController.selected.diakopi}" title="#{bundle.EditWorkersTitle_diakopi}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditWorkersLabel_email}" for="email" />
                         <p:inputText id="email" value="#{workersController.selected.email}" title="#{bundle.EditWorkersTitle_email}" />
                     </p:panelGrid>

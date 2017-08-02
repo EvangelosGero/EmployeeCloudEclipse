@@ -15,10 +15,10 @@
                         <p:outputLabel value="#{bundle_holidays.EditHolidaysLabel_id}" for="id" />
                         <p:inputText id="id" value="#{holidaysController.selected.id}" title="#{bundle_holidays.EditHolidaysTitle_id}" required="true" requiredMessage="#{bundle_holidays.EditHolidaysRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle_holidays.EditHolidaysLabel_holidaysColumn}" for="holidaysColumn" />
-                        <p:calendar id="holidaysColumn" pattern="MM/dd/yyyy" value="#{holidaysController.selected.holidaysColumn}" title="#{bundle_holidays.EditHolidaysTitle_holidaysColumn}"  showOn="button"/>
+                        <p:calendar id="holidaysColumn" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{holidaysController.selected.holidaysColumn}" title="#{bundle_holidays.EditHolidaysTitle_holidaysColumn}"  showOn="button"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{holidaysController.update}" value="#{bundle_holidays.Save}" update="display,:HolidaysListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HolidaysEditDialog');"/>
-                    <p:commandButton value="#{bundle_holidays.Cancel}" onclick="HolidaysEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle_holidays.Cancel}" onclick="PF('HolidaysEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
