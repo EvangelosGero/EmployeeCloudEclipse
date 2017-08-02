@@ -8,7 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="VacationDaysEditDlg" widgetVar="VacationDaysEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle_vacation_days.EditVacationDaysTitle}">
+        <p:dialog id="VacationDaysEditDlg" widgetVar="VacationDaysEditDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle_vacation_days.EditVacationDaysTitle}">
             <h:form id="VacationDaysEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vacationDaysController.selected != null}">
