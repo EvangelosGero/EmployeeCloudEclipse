@@ -29,8 +29,8 @@ public class AbsentReportController implements Serializable{
     private PreparedStatement prStm;
     private Statement workersStm ;
     private ResultSet workersRs, rs; 
-    LocalDate startDate;
-    LocalDate endDate;
+    LocalDate startDate = null;
+    LocalDate endDate = null;
     LocalDate hireDate, apolisiDate;
     String justify = "ΑΔΙΚΑΙΟΛΟΓΗΤΗ";
 
