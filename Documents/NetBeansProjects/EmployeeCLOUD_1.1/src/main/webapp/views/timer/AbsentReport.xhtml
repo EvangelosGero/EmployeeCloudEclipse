@@ -78,7 +78,7 @@
                         <f:facet name="footer">                            
                             <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.View}"
                                              actionListener="#{absentReportController.handleShowCard()}"
-                                             update="datalist"  
+                                             update="datalist, :growl"  
                                              disabled="#{absentReportController.startDate eq null || absentReportController.endDate eq null}"/>                            
                         </f:facet>
                     </p:dataTable>
