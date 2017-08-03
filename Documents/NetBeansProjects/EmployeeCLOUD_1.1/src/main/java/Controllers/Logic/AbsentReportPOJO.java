@@ -5,10 +5,8 @@
  */
 package Controllers.Logic;
 
+import java.time.LocalDate;
 import java.util.Date;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 
 /**
  *

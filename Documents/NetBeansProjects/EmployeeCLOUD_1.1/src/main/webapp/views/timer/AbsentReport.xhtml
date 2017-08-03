@@ -19,10 +19,14 @@
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.AbsentReportFrom}" for="startDate" />
                     <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{absentReportController.startDate}" 
-                                    title="#{bundle.AbsentReportFromTitle}"  showOn="button" required="true"/>
+                                title="#{bundle.AbsentReportFromTitle}"  showOn="button" required="true" >
+                        <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
+                    </p:calendar>
                     <p:outputLabel value="#{bundle.AbsentReportTo}" for="endDate" />
                     <p:calendar id="endDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{absentReportController.endDate}" 
-                                    title="#{bundle.AbsentReportToTitle}"  showOn="button" required="true"/>
+                                title="#{bundle.AbsentReportToTitle}"  showOn="button" required="true">
+                        <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
+                    </p:calendar>
                 </h:panelGrid>                
                 
                 <p:dataTable id="datalist" value="#{absentReportController.data}" var="item"
@@ -69,11 +73,12 @@
                             <f:facet name="header" >
                                 <h:outputText value="#{bundle.AbsentReportJustify}"/>
                             </f:facet>
-                            <h:outputText value="#{item.lastName}"/>
+                        <h:outputText value="#{item.justify}"/>
                         </p:column>
                         <f:facet name="footer">                            
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
-                                             update="@form"  
+                            <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.View}"
+                                             actionListener="#{absentReportController.handleShowCard()}"
+                                             update="datalist"  
                                              disabled="#{absentReportController.startDate eq null || absentReportController.endDate eq null}"/>                            
                         </f:facet>
                     </p:dataTable>
