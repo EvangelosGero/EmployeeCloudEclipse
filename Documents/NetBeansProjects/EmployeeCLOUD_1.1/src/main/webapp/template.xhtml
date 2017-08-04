@@ -70,7 +70,9 @@
                                             disabled="#{not emplAdminsController.loggedIn}"/>                                                                                       
                             </p:submenu>
                             <p:submenu label="Απουσίες-Διορθώσεις Timer" >
-                                <p:menuitem value="Καταγραφές Εισόδου/Εξόδου Εργαζομένου" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Καταγραφές Εισόδου/Εξόδου Εργαζομένου" 
+                                            disabled="#{not emplAdminsController.loggedIn}"
+                                            outcome="/views/timer/TimerInterval.xhtml"/>
                                 <p:menuitem value="Απουσίες" 
                                             disabled="#{not emplAdminsController.loggedIn}"
                                             outcome="/views/timer/AbsentReport.xhtml"/>

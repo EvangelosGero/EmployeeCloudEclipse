@@ -61,4 +61,7 @@ public class TimerIntervalController implements Serializable {
         this.selected = selected;
     }
        
+    public void handleShowTable(){
+        
+    }
 }
