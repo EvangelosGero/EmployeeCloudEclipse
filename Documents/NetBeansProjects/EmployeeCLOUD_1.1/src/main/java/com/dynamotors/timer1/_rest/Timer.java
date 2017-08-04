@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -65,6 +66,12 @@ public class Timer implements Serializable {
     @Size(max = 20)
     @Column(name = "PC_IP_OUT")
     private String pcIpOut;
+    @Transient
+    private String firstName;
+    @Transient
+    private String lastName;
+    @Transient
+    private String fatherName;
 
     public Timer() {
     }
@@ -149,6 +156,32 @@ public class Timer implements Serializable {
     public void setPcIpOut(String pcIpOut) {
         this.pcIpOut = pcIpOut;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+    
+    
 
     @Override
     public int hashCode() {

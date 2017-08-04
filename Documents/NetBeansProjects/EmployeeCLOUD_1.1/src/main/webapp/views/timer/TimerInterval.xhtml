@@ -69,8 +69,12 @@
                             </f:facet>
                             <h:outputText value="#{worker.fatherName}"/>
                         </p:column>                        
-                        <f:facet name="footer">                            
-                            <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.MazikiDiorthodiExec}"
+                        <f:facet name="footer">
+                            <p:selectOneRadio id="customRadio" value="#{timerIntervalController.option}">
+                                <f:selectItem itemLabel="Να εμφανιστούν μόνο οι ασυμφωνίες ως προς τις ημερομηνίες" itemValue="1" />
+                                <f:selectItem itemLabel="Να εμφανιστούν μόνο οι διπλές εγγραφές μέσα στην ίδια ημερομηνία" itemValue="2" />
+                            </p:selectOneRadio>
+                            <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.TimerIntervalExec}"
                                              actionListener="#{timerIntervalController.handleShowTable()}"
                                              update="datalist, :growl"  
                                              disabled="#{timerIntervalController.startDate eq null 
@@ -80,8 +84,8 @@
                     </p:dataTable>
                 </p:panel>
                 <p:panel header="#{bundle.TimerIntervalTODO}">
-                    <p:dataTable id="datalist" value="#{timerController.items}" var="item"
-                                 selectionMode="single" selection="#{timerController.selected}"
+                    <p:dataTable id="datalistTimer" value="#{timerIntervalController.data}" var="item"
+                                 selectionMode="single" selection="#{timerIntervalController.selectedTimer}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="20"
@@ -95,13 +99,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
                             </f:facet>
-                            <h:outputText value="#{item.code}"/>
+                            <h:outputText value="#{item.lastName}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
                             </f:facet>
-                            <h:outputText value="#{item.code}"/>
+                            <h:outputText value="#{item.firstName}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -134,13 +138,13 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
                                              actionListener="#{timerController.prepareCreate}" 
-                                             update=":TimerCreateForm" oncomplete="PF('TimerCreateDialog').show()"/>                            
+                                             update=":TimerIntervalCreateForm" oncomplete="PF('TimerIntervalCreateDialog').show()"/>                            
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
-                                             update=":TimerEditForm" oncomplete="PF('TimerEditDialog').show()" 
-                                             disabled="#{empty timerController.selected}"/>
+                                             update=":TimerIntervalEditForm" oncomplete="PF('TimerIntervalEditDialog').show()" 
+                                             disabled="#{empty timerIntervalController.selectedTimer}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
                                              actionListener="#{timerController.destroy}" update=":growl,datalist" 
-                                             disabled="#{empty timerController.selected}"/>
+                                             disabled="#{empty timerIntervalController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
