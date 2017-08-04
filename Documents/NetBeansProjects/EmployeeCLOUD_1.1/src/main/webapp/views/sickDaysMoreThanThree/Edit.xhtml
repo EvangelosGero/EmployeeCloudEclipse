@@ -29,7 +29,7 @@
                         <p:calendar id="exitDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sickDaysMoreThanThreeController.selected.exitDay}" 
                                     title="#{bundle_Sick_Days.EditSickDaysMoreThanThreeTitle_exitDay}"  showOn="button"/>
                         <p:outputLabel value="#{bundle_Sick_Days.EditSickDaysMoreThanThreeLabel_backDay}" for="backDay" />
-                        <p:calendar id="backDay" pattern="dd/MM/yyyy" timeZone="GMT+3" timeZone="GMT+3" value="#{sickDaysMoreThanThreeController.selected.backDay}" 
+                        <p:calendar id="backDay" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sickDaysMoreThanThreeController.selected.backDay}" 
                                     title="#{bundle_Sick_Days.EditSickDaysMoreThanThreeTitle_backDay}"  showOn="button"/>                       
                     </p:panelGrid>
                     <p:commandButton actionListener="#{sickDaysMoreThanThreeController.update}" value="#{bundle_Sick_Days.Save}" 

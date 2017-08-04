@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Controllers.util.JsfUtil;
 import com.dynamotors.timer1._rest.Workers;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -22,12 +23,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -53,7 +53,7 @@ public class MazikiDiorthosiController implements Serializable {
     private Map<Integer, List<List<LocalDate>>> vacationDaysMap = new HashMap<>();
     private Map<Integer, List<List<LocalDate>>> sickLess3DaysMap = new HashMap<>();
     private Map<Integer, List<List<LocalDate>>> sickMore3DaysMap = new HashMap<>();
-    private final FacesContext facesContext = FacesContext.getCurrentInstance();
+    
     
     public MazikiDiorthosiController(){      
        
@@ -127,8 +127,7 @@ public class MazikiDiorthosiController implements Serializable {
             counterDate = counterDate.plusDays(1); 
             }
         }
-       this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Η μαζική διόρθωση ολοκληρώθηκε!", null));
-        
+        JsfUtil.addSuccessMessage("Η μαζική διόρθωση ολοκληρώθηκε!"); 
     }
     
     public void insertOrUpdate(int id, LocalDate date){
@@ -189,8 +188,8 @@ public class MazikiDiorthosiController implements Serializable {
             int ok2 = stm.executeUpdate();
             
         }catch (SQLException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);                
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            
                    
         }finally{
             try {
@@ -198,8 +197,8 @@ public class MazikiDiorthosiController implements Serializable {
                 if (stm != null)stm.close();
                 if (stm1 != null)stm1.close();
             } catch (SQLException ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);                
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }        
     }
@@ -219,15 +218,15 @@ public class MazikiDiorthosiController implements Serializable {
                 holidaysList.add(rs1.getDate(1).toLocalDate());
             }
         }catch (SQLException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);                
-            this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally {
             try {
                 if (stm != null)stm.close();
                 if (rs1 != null )rs1.close();
             } catch (SQLException ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);                
-                this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
     }
@@ -256,15 +255,15 @@ public class MazikiDiorthosiController implements Serializable {
                 }
             }            
             }catch (SQLException ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);                
-                this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex); 
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally {
             try {
                 if (stm != null)stm.close();
                 if (rs1 != null )rs1.close();
             } catch (SQLException ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);                
-                this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }       
         return map;

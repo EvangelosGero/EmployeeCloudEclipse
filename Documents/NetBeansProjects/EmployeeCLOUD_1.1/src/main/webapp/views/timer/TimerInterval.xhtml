@@ -14,33 +14,34 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="MazikiDiorthosiForm">
-              <p:panel header="#{bundle.MazikiDiorthosiTitle}">
+            <h:form id="TimerIntervalForm">
+              <p:panel header="#{bundle.TimerIntervalTitle}">
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.AbsentReportFrom}" for="startDate" />
-                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{mazikiDiorthosiController.startDate}" 
+                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{timerIntervalController.startDate}" 
                                 title="#{bundle.AbsentReportFromTitle}"  showOn="button" required="true" >
                         <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
                     </p:calendar>
                     <p:outputLabel value="#{bundle.AbsentReportTo}" for="endDate" />
-                    <p:calendar id="endDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{mazikiDiorthosiController.endDate}" 
+                    <p:calendar id="endDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{timerIntervalController.endDate}" 
                                 title="#{bundle.AbsentReportToTitle}"  showOn="button" required="true">
                         <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
                     </p:calendar>
                 </h:panelGrid>                
                 
                 <p:dataTable id="datalist" value="#{workersController.items}" var="worker"
-                                selection="#{mazikiDiorthosiController.selectedList}"
+                                selection="#{timerIntervalController.selected}"
                                 rowSelectMode="checkbox"
                                 sortMode="multiple" 
+                                selectionMode="single"
                                 paginator="true"
                                 rowKey="#{worker.id}"
                                 rows="10"
                                 rowsPerPageTemplate="10,20,30,40,50"                                
                                  >
-                        <p:ajax event="rowSelectCheckbox"  
+                        <p:ajax event="rowSelect"  
                                 update="datalist:viewButton1"/>
-                        <p:ajax event="rowUnselectCheckbox" 
+                        <p:ajax event="rowUnselect" 
                                 update="datalist:viewButton1"/>                        
 
                         <p:column filterBy="#{worker.id}" sortBy="#{worker.id}"  >                                                            
@@ -66,15 +67,14 @@
                                 <h:outputText value="#{bundle.ListWorkersTitle_fatherName}"/>
                             </f:facet>
                             <h:outputText value="#{worker.fatherName}"/>
-                        </p:column>
-                        <p:column selectionMode="multiple"/>
+                        </p:column>                        
                         <f:facet name="footer">                            
                             <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.MazikiDiorthodiExec}"
                                              actionListener="#{mazikiDiorthosiController.handleDiorthoseBtn()}"
                                              update="datalist, :growl"  
-                                             disabled="#{mazikiDiorthosiController.startDate eq null 
-                                                         || mazikiDiorthosiController.endDate eq null
-                                                         || empty mazikiDiorthosiController.selectedList}"/>                            
+                                             disabled="#{timerIntervalController.startDate eq null 
+                                                         || timerIntervalController.endDate eq null
+                                                         || empty timerIntervalController.selected}"/>                            
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
