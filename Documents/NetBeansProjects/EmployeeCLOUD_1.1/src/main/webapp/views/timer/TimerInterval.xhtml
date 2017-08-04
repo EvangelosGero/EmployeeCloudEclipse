@@ -138,6 +138,7 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
                                              actionListener="#{timerController.prepareCreate}" 
+                                             disabled="#{empty timerIntervalController.data}"
                                              update=":TimerIntervalCreateForm" oncomplete="PF('TimerIntervalCreateDialog').show()"/>                            
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
                                              update=":TimerIntervalEditForm" oncomplete="PF('TimerIntervalEditDialog').show()" 

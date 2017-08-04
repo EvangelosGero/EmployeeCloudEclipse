@@ -189,7 +189,7 @@ public class MazikiDiorthosiController implements Serializable {
             
         }catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
                    
         }finally{
             try {

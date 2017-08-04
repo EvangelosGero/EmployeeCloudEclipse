@@ -85,6 +85,23 @@ public class Timer implements Serializable {
         this.code = code;
     }
 
+    public Timer(String code, Date starttime, Date endtime, BigInteger intervalTime, Long id, String pcNameIn, String pcIpIn, String pcNameOut, String pcIpOut, String firstName, String lastName, String fatherName) {
+        this.code = code;
+        this.starttime = starttime;
+        this.endtime = endtime;
+        this.intervalTime = intervalTime;
+        this.id = id;
+        this.pcNameIn = pcNameIn;
+        this.pcIpIn = pcIpIn;
+        this.pcNameOut = pcNameOut;
+        this.pcIpOut = pcIpOut;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fatherName = fatherName;
+    }
+    
+    
+
     public String getCode() {
         return code;
     }
