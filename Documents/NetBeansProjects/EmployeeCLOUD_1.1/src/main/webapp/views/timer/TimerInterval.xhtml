@@ -19,19 +19,19 @@
               <p:panel header="#{bundle.TimerIntervalTitle}">
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.AbsentReportFrom}" for="startDate" />
-                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{timerIntervalController.startDate}" 
+                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{goyaController1.startDate}" 
                                 title="#{bundle.AbsentReportFromTitle}"  showOn="button" required="true" >
                         <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
                     </p:calendar>
                     <p:outputLabel value="#{bundle.AbsentReportTo}" for="endDate" />
-                    <p:calendar id="endDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{timerIntervalController.endDate}" 
+                    <p:calendar id="endDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{goyaController1.endDate}" 
                                 title="#{bundle.AbsentReportToTitle}"  showOn="button" required="true">
                         <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
                     </p:calendar>
                 </h:panelGrid>                
                 
                 <p:dataTable id="datalist" value="#{workersController.items}" var="worker"
-                                selection="#{timerIntervalController.selected}"
+                                selection="#{goyaController1.selected}"
                                 rowSelectMode="checkbox"
                                 sortMode="multiple" 
                                 selectionMode="single"
@@ -70,22 +70,22 @@
                             <h:outputText value="#{worker.fatherName}"/>
                         </p:column>                        
                         <f:facet name="footer">
-                            <p:selectOneRadio id="customRadio" value="#{timerIntervalController.option}">
+                            <p:selectOneRadio id="customRadio" value="#{goyaController1.option}">
                                 <f:selectItem itemLabel="Να εμφανιστούν μόνο οι ασυμφωνίες ως προς τις ημερομηνίες" itemValue="1" />
                                 <f:selectItem itemLabel="Να εμφανιστούν μόνο οι διπλές εγγραφές μέσα στην ίδια ημερομηνία" itemValue="2" />
                             </p:selectOneRadio>
                             <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.TimerIntervalExec}"
-                                             actionListener="#{timerIntervalController.handleShowTable()}"
+                                             actionListener="#{goyaController1.handleShowTable()}"
                                              update="datalist, :growl"  
-                                             disabled="#{timerIntervalController.startDate eq null 
-                                                         || timerIntervalController.endDate eq null
-                                                         || empty timerIntervalController.selected}"/>                            
+                                             disabled="#{goyaController1.startDate eq null 
+                                                         || goyaController1.endDate eq null
+                                                         || empty goyaController1.selected}"/>                            
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
                 <p:panel header="#{bundle.TimerIntervalTODO}">
-                    <p:dataTable id="datalistTimer" value="#{timerIntervalController.data}" var="item"
-                                 selectionMode="single" selection="#{timerIntervalController.selectedTimer}"
+                    <p:dataTable id="datalistTimer" value="#{goyaController1.data}" var="item"
+                                 selectionMode="single" selection="#{goyaController1.selectedTimer}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="20"
@@ -138,14 +138,14 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
                                              actionListener="#{timerController.prepareCreate}" 
-                                             disabled="#{empty timerIntervalController.data}"
+                                             disabled="#{empty goyaController1.data}"
                                              update=":TimerIntervalCreateForm" oncomplete="PF('TimerIntervalCreateDialog').show()"/>                            
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
                                              update=":TimerIntervalEditForm" oncomplete="PF('TimerIntervalEditDialog').show()" 
-                                             disabled="#{empty timerIntervalController.selectedTimer}"/>
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
-                                             actionListener="#{timerController.destroy}" update=":growl,datalist" 
-                                             disabled="#{empty timerIntervalController.selected}"/>
+                                              update=":growl, datalistTimer" 
+                                             disabled="#{empty goyaController1.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

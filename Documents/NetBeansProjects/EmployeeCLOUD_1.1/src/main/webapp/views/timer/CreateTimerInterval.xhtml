@@ -12,33 +12,33 @@
                   appendTo="@(body)" header="#{bundle.CreateTimerTitle}">
             <h:form id="TimerIntervalCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{timerIntervalController.selectedTimer != null}">                        
+                    <p:panelGrid columns="2" rendered="#{goyaController1.selectedTimer != null}">                        
                         <p:outputLabel value="#{bundle.CreateTimerLabel_code}" for="code" />
-                        <p:inputText id="code" value="#{timerIntervalController.selectedTimer.code}" 
+                        <p:inputText id="code" value="#{goyaController1.selectedTimer.code}" 
                                      title="#{bundle.CreateTimerTitle_code}" required="true" 
                                      requiredMessage="#{bundle.CreateTimerRequiredMessage_code}"/>
                         <p:outputLabel value="#{bundle.CreateTimerLabel_starttime}" for="starttime" />
                         <p:calendar id="starttime" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" 
-                                    value="#{timerIntervalController.selectedTimer.starttime}" title="#{bundle.EditTimerTitle_starttime}"  
+                                    value="#{goyaController1.selectedTimer.starttime}" title="#{bundle.EditTimerTitle_starttime}"  
                                     showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateTimerLabel_endtime}" for="endtime" />
                         <p:calendar id="endtime" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" 
-                                    value="#{timerIntervalController.selectedTimer.endtime}" title="#{bundle.EditTimerTitle_endtime}"  
+                                    value="#{goyaController1.selectedTimer.endtime}" title="#{bundle.EditTimerTitle_endtime}"  
                                     showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateTimerLabel_intervalTime}" for="intervalTime" />
-                        <p:inputText id="intervalTime" value="#{timerIntervalController.selectedTimer.intervalTime}" 
+                        <p:inputText id="intervalTime" value="#{goyaController1.selectedTimer.intervalTime}" 
                                      title="#{bundle.CreateTimerTitle_intervalTime}" />                        
                         <p:outputLabel value="#{bundle.CreateTimerLabel_pcNameIn}" for="pcNameIn" />
-                        <p:inputText id="pcNameIn" value="#{timerIntervalController.selectedTimer.pcNameIn}" 
+                        <p:inputText id="pcNameIn" value="#{goyaController1.selectedTimer.pcNameIn}" 
                                      title="#{bundle.CreateTimerTitle_pcNameIn}" />
                         <p:outputLabel value="#{bundle.CreateTimerLabel_pcIpIn}" for="pcIpIn" />
-                        <p:inputText id="pcIpIn" value="#{timerIntervalController.selectedTimer.pcIpIn}" 
+                        <p:inputText id="pcIpIn" value="#{goyaController1.selectedTimer.pcIpIn}" 
                                      title="#{bundle.CreateTimerTitle_pcIpIn}" />
                         <p:outputLabel value="#{bundle.CreateTimerLabel_pcNameOut}" for="pcNameOut" />
-                        <p:inputText id="pcNameOut" value="#{timerIntervalController.selectedTimer.pcNameOut}" 
+                        <p:inputText id="pcNameOut" value="#{goyaController1.selectedTimer.pcNameOut}" 
                                      title="#{bundle.CreateTimerTitle_pcNameOut}" />
                         <p:outputLabel value="#{bundle.CreateTimerLabel_pcIpOut}" for="pcIpOut" />
-                        <p:inputText id="pcIpOut" value="#{timerIntervalController.selectedTimer.pcIpOut}" 
+                        <p:inputText id="pcIpOut" value="#{goyaController1.selectedTimer.pcIpOut}" 
                                      title="#{bundle.CreateTimerTitle_pcIpOut}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{timerController.create}" value="#{bundle.Save}" 

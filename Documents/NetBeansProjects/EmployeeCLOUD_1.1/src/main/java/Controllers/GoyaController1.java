@@ -5,6 +5,16 @@
  */
 package Controllers;
 
+/**
+ *
+ * @author evgero
+ 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 import static Controllers.Logic.TimerComparator.DATE_ORDER;
 import Controllers.util.JsfUtil;
 import com.dynamotors.timer1._rest.Timer;
@@ -21,7 +31,6 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -34,9 +43,9 @@ import javax.inject.Named;
  *
  * @author evgero
  */
-@Named("timerIntervalController")
+@Named("goyaController1")
 @SessionScoped
-public class TimerIntervalController implements Serializable {
+public class GoyaController1 implements Serializable {
     
     @Inject
     private EmplAdminsController emplAdminsController;
@@ -49,15 +58,14 @@ public class TimerIntervalController implements Serializable {
     private LocalTime morning;
     private LocalTime evening;
     private LocalDateTime morningStart;
-    private LocalDateTime eveningEnd;
-    //private int timerid;
-    int id;
+    private LocalDateTime eveningEnd;    
+    private int id;
     private Statement stm1;
     private ResultSet rs1;
     private List<Timer> data = new ArrayList<>();
     private Timer selectedTimer;
 
-    public TimerIntervalController() {
+    public GoyaController1() {
     }
 
     public EmplAdminsController getEmplAdminsController() {
@@ -68,19 +76,19 @@ public class TimerIntervalController implements Serializable {
         this.emplAdminsController = emplAdminsController;
     }
 
-    public Date getStartDate() {
+    public java.util.Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(java.util.Date startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public java.util.Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(java.util.Date endDate) {
         this.endDate = endDate;
     }
 
@@ -126,7 +134,7 @@ public class TimerIntervalController implements Serializable {
         
         if (data!=null)data.clear();
         try {
-        if(beginLocalDate != null)beginSQLDate =  java.sql.Date.valueOf(beginLocalDate); /*Convert LocalDate to java.sql.Date*/            
+        if(beginLocalDate != null)beginSQLDate =  java.sql.Date.valueOf(beginLocalDate); //Convert LocalDate to java.sql.Date            
         if(endLocalDate != null)endSQLDate = java.sql.Date.valueOf(endLocalDate);
         id = this.selected.getId();
         
@@ -153,7 +161,7 @@ public class TimerIntervalController implements Serializable {
             stm.setInt(3, id);
             rs = stm.executeQuery();
              
-        /* render the TableView rs.getInt(5)/60000)-480,*/            
+        //render the TableView rs.getInt(5)/60000)-480,           
                        //  String code, Date starttime, Date endtime, BigInteger intervalTime, 
        // Long id, String pcNameIn, String pcIpIn, String pcNameOut, String pcIpOut, String firstName, String lastName, String fatherName
         while(rs.next()){
@@ -176,3 +184,4 @@ public class TimerIntervalController implements Serializable {
         }
     }
 }
+
