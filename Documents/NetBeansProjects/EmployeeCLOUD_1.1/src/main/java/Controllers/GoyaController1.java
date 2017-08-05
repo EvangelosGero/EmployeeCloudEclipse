@@ -140,14 +140,14 @@ public class GoyaController1 implements Serializable {
         
         String str = "SELECT  timer.code, timer.starttime, timer.endtime, timer.interval_time, timer.id as timer_id ,"+
                     "timer.pc_name_in, timer.pc_ip_in, timer.pc_name_out, timer.pc_ip_out, "+
-                    " workers.first_name, workers.last_name, workers.father_name"+
+                    " workers.first_name, workers.last_name, workers.father_name "+
                     "FROM  timer JOIN workers on timer.code = workers.code "+                    
-                    "WHERE (DATE(timer.starttime) BETWEEN ? AND ?) AND (workers.id = ?)";        
+                    "WHERE (DATE(timer.starttime) BETWEEN ? AND ?) AND (workers.id = ?) ";        
             if (this.option == 1) 
-                str = str + "and date(starttime) <> date(endtime)";      
+                str = str + "and date(starttime) <> date(endtime) ";      
             if (this.option == 2) 
                 str = str + "and date(starttime) in "+
-                "(select sdate from"+
+                "(select sdate from "+
                 "(select a.code,a.sdate,count(a.sdate) as cnt from "+
                 "(select timer.code,date(starttime) as sdate from timer join workers on timer.code = workers.code "+
                 "where date(starttime) between '"+beginSQLDate+"' and '"+endSQLDate+"' and workers.id="+Integer.toString(id)+" "+
@@ -169,6 +169,10 @@ public class GoyaController1 implements Serializable {
              rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12)));
                         }
         Collections.sort(data, DATE_ORDER);
+        if(data.isEmpty()){
+            JsfUtil.addSuccessMessage("Δεν βρέθηκαν στοιχεία !");
+            return;
+        }
             } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
