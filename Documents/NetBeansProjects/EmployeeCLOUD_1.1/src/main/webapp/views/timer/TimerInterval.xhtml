@@ -73,6 +73,7 @@
                             <p:selectOneRadio id="customRadio" value="#{goyaController1.option}">
                                 <f:selectItem itemLabel="Να εμφανιστούν μόνο οι ασυμφωνίες ως προς τις ημερομηνίες" itemValue="1" />
                                 <f:selectItem itemLabel="Να εμφανιστούν μόνο οι διπλές εγγραφές μέσα στην ίδια ημερομηνία" itemValue="2" />
+                                <f:selectItem itemLabel="Να εμφανιστούν όλες οι εγγραφές" itemValue="3" />
                             </p:selectOneRadio>
                             <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.TimerIntervalExec}"
                                              actionListener="#{goyaController1.handleShowTable()}"
@@ -88,12 +89,15 @@
                                  selectionMode="single" selection="#{goyaController1.selectedTimer}"
                                  paginator="true"
                                  rowKey="#{item.id}"
+                                 rowIndexVar="myRow"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton  editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton  editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   
+                                update="createButton  editButton deleteButton rb1Button rb2Button rb3Button rb4Button"/>
+                        <p:ajax event="rowUnselect" 
+                                update="createButton  editButton deleteButton rb1Button rb2Button rb3Button rb4Button"/>
 
                         <p:column>
                             <f:facet name="header">
@@ -135,7 +139,19 @@
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>                       
-                        <f:facet name="footer">
+                        <f:facet name="footer">                           
+                            <p:commandButton id="rb1Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursEntryBased}" 
+                                             actionListener="#{goyaController1.eightEntry()}" update="datalistTimer" 
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                            <p:commandButton id="rb2Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursExitBased}" 
+                                             actionListener="#{goyaController1.eightExit()}" update="datalistTimer" 
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                            <p:commandButton id="rb3Button"   icon="ui-icon-pencil" value="#{bundle.EightHours}" 
+                                             actionListener="#{goyaController1.eight()}" update="datalistTimer"  
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                            <p:commandButton id="rb4Button"   icon="ui-icon-pencil" value="#{bundle.Recalculation}" 
+                                             actionListener="#{goyaController1.recalculation()}" update="datalistTimer" 
+                                             disabled="#{empty goyaController1.selectedTimer}"/>                            
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
                                              actionListener="#{timerController.prepareCreate}" 
                                              disabled="#{empty goyaController1.data}"

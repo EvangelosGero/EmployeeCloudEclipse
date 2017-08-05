@@ -25,10 +25,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,8 +58,8 @@ public class GoyaController1 implements Serializable {
     private short option;
     private PreparedStatement stm;
     private ResultSet rs;
-    private LocalTime morning;
-    private LocalTime evening;
+    private LocalTime morning = LocalTime.of(8, 0);;
+    private LocalTime evening = LocalTime.of(16, 0);
     private LocalDateTime morningStart;
     private LocalDateTime eveningEnd;    
     private int id;
@@ -64,8 +67,12 @@ public class GoyaController1 implements Serializable {
     private ResultSet rs1;
     private List<Timer> data = new ArrayList<>();
     private Timer selectedTimer;
+    private int selectedRow;
 
     public GoyaController1() {
+        
+        //    morningStart = LocalDateTime.of(date, morning);
+       //     eveningEnd = LocalDateTime.of(date, evening); 
     }
 
     public EmplAdminsController getEmplAdminsController() {
@@ -123,6 +130,15 @@ public class GoyaController1 implements Serializable {
     public void setSelectedTimer(Timer selectedTimer) {
         this.selectedTimer = selectedTimer;
     }
+
+    public void setSelectedRow(int selectedRow) {
+        this.selectedRow = selectedRow;
+    }
+        
+    public int getSelectedRow() {        
+        return selectedRow;
+    }
+    
     
                
     public void handleShowTable(){        
@@ -186,6 +202,92 @@ public class GoyaController1 implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
+    }
+    
+    public void eightEntry(){   /*Διόρθωσε σε 8ωρο βάσει ώρας Εισόδου*/        
+        try {
+            String str ="update timer set ENDTIME= {fn TIMESTAMPADD(SQL_TSI_HOUR,8,STARTTIME)},"+
+                    "INTERVAL_TIME = {fn TIMESTAMPDIFF(SQL_TSI_FRAC_SECOND,STARTTIME,{fn TIMESTAMPADD(SQL_TSI_HOUR,8,STARTTIME)})}*0.000001"+
+                    "where timer.id="+this.selectedTimer.getId().toString();
+            stm = this.emplAdminsController.getCon().prepareStatement(str);
+            int ok2 = stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }finally{
+            try {                            
+                if (stm != null)stm.close();                            
+            } catch (SQLException ex) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+        }  
+        
+    }
+    
+    public void eightExit(){        /*Διόρθωσε σε 8ωρο βάσει ώρας Εξόδου*/
+        try {
+            String str ="update timer set STARTTIME= {fn TIMESTAMPADD(SQL_TSI_HOUR,-8,ENDTIME)},"+
+                    "INTERVAL_TIME = {fn TIMESTAMPDIFF(SQL_TSI_FRAC_SECOND,{fn TIMESTAMPADD(SQL_TSI_HOUR,-8,ENDTIME)},ENDTIME)}*0.000001"+
+                    "where timer.id="+this.selectedTimer.getId().toString();
+            stm = this.emplAdminsController.getCon().prepareStatement(str);
+            int ok2 = stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }finally{
+            try {                            
+                if (stm != null)stm.close();                            
+            } catch (SQLException ex) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+        }  
+        
+    }
+    
+    public void eight(){
+        System.out.println("this.getSelectedRow()"+this.getSelectedRow());
+        LocalDate date = LocalDate.parse(this.getSelectedTimer().
+                        getStarttime().toString().substring(0, 10));
+        morningStart = LocalDateTime.of(date, morning);
+        eveningEnd = LocalDateTime.of(date, evening);
+        System.out.println(morningStart);
+        try{                                //Διόρθωσε σε 8ωρο 08:00-16:00
+                    String str = "UPDATE timer SET starttime = ?, endtime = ?, "
+                      + "interval_time = 28800000 WHERE code = (SELECT DISTINCT (timer.code)" +
+                        " FROM timer, workers WHERE timer.code = workers.code AND" +
+                        " workers.id = ?) AND starttime = ?  ";                                              
+                    stm = this.emplAdminsController.getCon().prepareStatement(str);                    
+                    stm.setTimestamp(1, Timestamp.valueOf(morningStart));                            ;
+                    stm.setTimestamp(2, Timestamp.valueOf(eveningEnd));
+                    stm.setInt(3, id); 
+                    stm.setTimestamp(4, new Timestamp(this.selectedTimer.getStarttime().getTime()));
+                   
+                    int ok2 = stm.executeUpdate(); 
+                    // show in table automatically
+                    
+                    this.setSelectedRow(data.indexOf(this.selectedTimer));
+                    data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(morningStart.toInstant(ZoneOffset.ofHours(3))));
+                    data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(eveningEnd.toInstant(ZoneOffset.ofHours(3))));
+                    data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(28800000)); 
+                    
+                    } catch (SQLException ex) {
+                        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                        JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                    }
+                    finally{
+                        try {                            
+                            if (stm != null)stm.close();                            
+                        } catch (SQLException ex) {
+                            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                        }
+                    } 
+    }
+    
+    public void recalculation(){
+        
     }
 }
 
