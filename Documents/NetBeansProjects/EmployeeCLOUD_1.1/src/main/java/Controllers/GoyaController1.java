@@ -26,7 +26,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -181,10 +180,10 @@ public class GoyaController1 implements Serializable {
                        //  String code, Date starttime, Date endtime, BigInteger intervalTime, 
        // Long id, String pcNameIn, String pcIpIn, String pcNameOut, String pcIpOut, String firstName, String lastName, String fatherName
         while(rs.next()){
-            data.add(new Timer(rs.getString(1), rs.getDate(2), rs.getDate(3), BigInteger.valueOf(rs.getLong(4)), rs.getLong(5),
+            data.add(new Timer(rs.getString(1), java.util.Date.from(rs.getTimestamp(2).toInstant()), java.util.Date.from(rs.getTimestamp(3).toInstant()), BigInteger.valueOf(rs.getLong(4)), rs.getLong(5),
              rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12)));
                         }
-        Collections.sort(data, DATE_ORDER);
+        //Collections.sort(data, DATE_ORDER);
         if(data.isEmpty()){
             JsfUtil.addSuccessMessage("Δεν βρέθηκαν στοιχεία !");
             return;
@@ -248,8 +247,8 @@ public class GoyaController1 implements Serializable {
     
     public void eight(){
         System.out.println("this.getSelectedRow()"+this.getSelectedRow());
-        LocalDate date = LocalDate.parse(this.getSelectedTimer().
-                        getStarttime().toString().substring(0, 10));
+        LocalDate date = LocalDateTime.ofInstant(this.getSelectedTimer().
+                        getStarttime().toInstant(), ZoneOffset.ofHours(3)).toLocalDate();
         morningStart = LocalDateTime.of(date, morning);
         eveningEnd = LocalDateTime.of(date, evening);
         System.out.println(morningStart);
