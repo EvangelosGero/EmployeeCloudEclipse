@@ -51,6 +51,8 @@ public class GoyaController1 implements Serializable {
     
     @Inject
     private EmplAdminsController emplAdminsController;
+    @Inject
+    private TimerController timerController;
     private java.util.Date startDate = null;
     private java.util.Date endDate = null;
     private Workers selected;
@@ -136,6 +138,14 @@ public class GoyaController1 implements Serializable {
         
     public int getSelectedRow() {        
         return selectedRow;
+    }
+
+    public TimerController getTimerController() {
+        return timerController;
+    }
+
+    public void setTimerController(TimerController timerController) {
+        this.timerController = timerController;
     }
     
     
@@ -226,7 +236,7 @@ public class GoyaController1 implements Serializable {
             data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(rs1.getTimestamp(1).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(rs1.getTimestamp(2).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(rs1.getLong(3))); 
-            
+            JsfUtil.addSuccessMessage("Επιτυχής Διόρθωση");
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -264,7 +274,7 @@ public class GoyaController1 implements Serializable {
             data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(rs1.getTimestamp(1).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(rs1.getTimestamp(2).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(rs1.getLong(3))); 
-            
+            JsfUtil.addSuccessMessage("Επιτυχής Διόρθωση");
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -281,14 +291,12 @@ public class GoyaController1 implements Serializable {
         
     }
     
-    public void eight(){
+    public void eight(){        
         
-        System.out.println("this.getSelectedRow()"+this.getSelectedRow());
         LocalDate date = LocalDateTime.ofInstant(this.getSelectedTimer().
                         getStarttime().toInstant(), ZoneOffset.ofHours(3)).toLocalDate();
         morningStart = LocalDateTime.of(date, morning);
-        eveningEnd = LocalDateTime.of(date, evening);
-        System.out.println(morningStart);
+        eveningEnd = LocalDateTime.of(date, evening);        
         try{                                //Διόρθωσε σε 8ωρο 08:00-16:00
             if (rs1 != null)rs1.close();
             if (stm != null)stm.close();
@@ -307,7 +315,7 @@ public class GoyaController1 implements Serializable {
             data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(morningStart.toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(eveningEnd.toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(28800000)); 
-                    
+            JsfUtil.addSuccessMessage("Επιτυχής Διόρθωση");       
             } catch (SQLException ex) {
                         Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                         JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -343,7 +351,7 @@ public class GoyaController1 implements Serializable {
             data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(rs1.getTimestamp("STARTTIME").toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(rs1.getTimestamp("ENDTIME").toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(rs1.getLong("INTERVAL_TIME"))); 
-            
+            JsfUtil.addSuccessMessage("Επιτυχής Διόρθωση");
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -359,5 +367,50 @@ public class GoyaController1 implements Serializable {
         }  
         
     }
+    
+    public void destroy(){
+        this.timerController.setSelected(this.selectedTimer);
+        this.timerController.destroy();
+        //update view
+        data.remove(this.selectedTimer);
+    }
+    
+    public void update(){
+        LocalDateTime startLocalDateTime = LocalDateTime.ofInstant(this.getSelectedTimer().
+                        getStarttime().toInstant(), ZoneOffset.ofHours(3));
+        LocalDateTime endLocalDateTime = LocalDateTime.ofInstant(this.getSelectedTimer().
+                        getEndtime().toInstant(), ZoneOffset.ofHours(3));               
+        try{                                
+            if (rs1 != null)rs1.close();
+            if (stm != null)stm.close();
+            if (stm1 != null)stm1.close();  
+            String str = "UPDATE timer SET starttime = ?, endtime = ?, "
+                      + "interval_time = ? WHERE id = ? ";                                              
+            stm = this.emplAdminsController.getCon().prepareStatement(str);                    
+            stm.setTimestamp(1, Timestamp.valueOf(startLocalDateTime));                            ;
+            stm.setTimestamp(2, Timestamp.valueOf(endLocalDateTime));
+            Long intervalTime = Timestamp.valueOf(startLocalDateTime).getTime() - Timestamp.valueOf(endLocalDateTime).getTime();
+            stm.setLong(3, intervalTime);
+            stm.setLong(4, this.selectedTimer.getId());
+                   
+            int ok2 = stm.executeUpdate();                     
+                    //update view
+            this.selectedTimer.setIntervalTime(BigInteger.valueOf(intervalTime));
+            data.set(data.indexOf(this.selectedTimer), this.selectedTimer);            
+            JsfUtil.addSuccessMessage("Επιτυχής Διόρθωση");       
+            } catch (SQLException ex) {
+                        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                        JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            } finally{
+                try {                            
+                    if (stm != null)stm.close();                            
+                } catch (SQLException ex) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                 }
+            } 
+        
+    }
+    
 }
 

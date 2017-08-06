@@ -143,24 +143,24 @@
                             <p:toolbar>
                                 <f:facet name="left">
                                     <p:commandButton id="rb1Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursEntryBased}" 
-                                             actionListener="#{goyaController1.eightEntry()}" update="datalistTimer" 
+                                             actionListener="#{goyaController1.eightEntry()}" update="datalistTimer, :growl" 
                                              disabled="#{empty goyaController1.selectedTimer}"/>
                                 </f:facet>
                                 <f:facet name="right">
                                     <p:commandButton id="rb2Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursExitBased}" 
-                                             actionListener="#{goyaController1.eightExit()}" update="datalistTimer" 
+                                             actionListener="#{goyaController1.eightExit()}" update="datalistTimer, :growl" 
                                              disabled="#{empty goyaController1.selectedTimer}"/>
                                 </f:facet>
                             </p:toolbar>
                             <p:toolbar>
                                 <f:facet name="left">
                                     <p:commandButton id="rb3Button"   icon="ui-icon-pencil" value="#{bundle.EightHours}" 
-                                             actionListener="#{goyaController1.eight()}" update="datalistTimer"  
+                                             actionListener="#{goyaController1.eight()}" update="datalistTimer, :growl"  
                                              disabled="#{empty goyaController1.selectedTimer}"/>
                                 </f:facet>
                                 <f:facet name="right">   
                                     <p:commandButton id="rb4Button"   icon="ui-icon-pencil" value="#{bundle.Recalculation}" 
-                                             actionListener="#{goyaController1.recalculation()}" update="datalistTimer" 
+                                             actionListener="#{goyaController1.recalculation()}" update="datalistTimer, :growl" 
                                              disabled="#{empty goyaController1.selectedTimer}"/>
                                 </f:facet> 
                             </p:toolbar>
@@ -171,9 +171,10 @@
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
                                              update=":TimerIntervalEditForm" oncomplete="PF('TimerIntervalEditDialog').show()" 
                                              disabled="#{empty goyaController1.selectedTimer}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
-                                              update=":growl, datalistTimer" 
-                                              disabled="#{empty goyaController1.selected || empty goyaController1.data}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}"
+                                             actionListener="#{goyaController1.destroy}"
+                                             update=":growl, datalistTimer" 
+                                             disabled="#{empty goyaController1.selected || empty goyaController1.data}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

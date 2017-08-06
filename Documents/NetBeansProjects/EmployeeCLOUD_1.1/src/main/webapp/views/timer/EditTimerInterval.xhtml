@@ -13,20 +13,29 @@
             <h:form id="TimerIntervalEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{goyaController1.selectedTimer != null}">
+                        <h:outputText value="#{bundle.ViewWorkersLabel_firstName}"/>
+                        <h:outputText value="#{goyaController1.selectedTimer.firstName}" 
+                                      title="#{bundle.ViewWorkersTitle_firstName}" />
+                        <h:outputText value="#{bundle.ViewWorkersLabel_lastName}"/>
+                        <h:outputText value="#{goyaController1.selectedTimer.lastName}" 
+                                      title="#{bundle.ViewWorkersTitle_lastName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_fatherName}"/>
+                        <h:outputText value="#{goyaController1.selectedTimer.fatherName}" 
+                                      title="#{bundle.ViewWorkersTitle_fatherName}"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_code}" for="code" />
                         <p:inputText id="code" value="#{goyaController1.selectedTimer.code}" title="#{bundle.EditTimerTitle_code}" 
-                                     required="true" requiredMessage="#{bundle.EditTimerRequiredMessage_code}"/>
+                                     required="true" requiredMessage="#{bundle.EditTimerRequiredMessage_code}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_starttime}" for="starttime" />
                         <p:calendar id="starttime" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" 
                                     value="#{goyaController1.selectedTimer.starttime}" title="#{bundle.EditTimerTitle_starttime}"  
-                                    showOn="button"/>
+                                    showOn="button" timeControlType="slider" timeInput="true"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_endtime}" for="endtime" />
                         <p:calendar id="endtime" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" 
-                                    value="#{goyaController1.selectedTimer.endtime}" 
+                                    value="#{goyaController1.selectedTimer.endtime}"  timeControlType="slider" timeInput="true" 
                                     title="#{bundle.EditTimerTitle_endtime}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_intervalTime}" for="intervalTime" />
                         <p:inputText id="intervalTime" value="#{goyaController1.selectedTimer.intervalTime}" 
-                                     title="#{bundle.EditTimerTitle_intervalTime}" />
+                                     title="#{bundle.EditTimerTitle_intervalTime}"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_id}" for="id" />
                         <p:inputText id="id" value="#{goyaController1.selectedTimer.id}" title="#{bundle.EditTimerTitle_id}" 
                                      disabled="true" required="true" requiredMessage="#{bundle.EditTimerRequiredMessage_id}"/>
@@ -43,8 +52,8 @@
                         <p:inputText id="pcIpOut" value="#{goyaController1.selectedTimer.pcIpOut}" 
                                      title="#{bundle.EditTimerTitle_pcIpOut}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{timerController.update}" value="#{bundle.Save}" 
-                                     update="display,:TimerIntervalForm:datalistTimer,:growl" 
+                    <p:commandButton actionListener="#{goyaController1.update}" value="#{bundle.Save}" 
+                                     update=":TimerIntervalForm:datalistTimer,:growl" 
                                      oncomplete="handleSubmit(args, 'TimerIntervalEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('TimerIntervalEditDialog').hide()"/>
                 </h:panelGroup>
