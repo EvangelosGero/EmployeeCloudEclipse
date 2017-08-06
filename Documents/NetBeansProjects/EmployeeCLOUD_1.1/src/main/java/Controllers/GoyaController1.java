@@ -180,7 +180,8 @@ public class GoyaController1 implements Serializable {
                        //  String code, Date starttime, Date endtime, BigInteger intervalTime, 
        // Long id, String pcNameIn, String pcIpIn, String pcNameOut, String pcIpOut, String firstName, String lastName, String fatherName
         while(rs.next()){
-            data.add(new Timer(rs.getString(1), java.util.Date.from(rs.getTimestamp(2).toInstant()), java.util.Date.from(rs.getTimestamp(3).toInstant()), BigInteger.valueOf(rs.getLong(4)), rs.getLong(5),
+            data.add(new Timer(rs.getString(1), java.util.Date.from(rs.getTimestamp(2).toLocalDateTime().toInstant(ZoneOffset.ofHours(3)))
+                    , java.util.Date.from(rs.getTimestamp(3).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))), BigInteger.valueOf(rs.getLong(4)), rs.getLong(5),
              rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12)));
                         }
         //Collections.sort(data, DATE_ORDER);
@@ -254,14 +255,11 @@ public class GoyaController1 implements Serializable {
         System.out.println(morningStart);
         try{                                //Διόρθωσε σε 8ωρο 08:00-16:00
                     String str = "UPDATE timer SET starttime = ?, endtime = ?, "
-                      + "interval_time = 28800000 WHERE code = (SELECT DISTINCT (timer.code)" +
-                        " FROM timer, workers WHERE timer.code = workers.code AND" +
-                        " workers.id = ?) AND starttime = ?  ";                                              
+                      + "interval_time = 28800000 WHERE id = ? ";                                              
                     stm = this.emplAdminsController.getCon().prepareStatement(str);                    
                     stm.setTimestamp(1, Timestamp.valueOf(morningStart));                            ;
                     stm.setTimestamp(2, Timestamp.valueOf(eveningEnd));
-                    stm.setInt(3, id); 
-                    stm.setTimestamp(4, new Timestamp(this.selectedTimer.getStarttime().getTime()));
+                    stm.setLong(3, this.selectedTimer.getId());
                    
                     int ok2 = stm.executeUpdate(); 
                     // show in table automatically
