@@ -206,6 +206,9 @@ public class GoyaController1 implements Serializable {
     
     public void eightEntry(){   /*Διόρθωσε σε 8ωρο βάσει ώρας Εισόδου*/        
         try {
+            if (rs1 != null)rs1.close();
+            if (stm != null)stm.close();
+            if (stm1 != null)stm1.close();  
             String str ="update timer set ENDTIME= {fn TIMESTAMPADD(SQL_TSI_HOUR,8,STARTTIME)},"+
                     "INTERVAL_TIME = {fn TIMESTAMPDIFF(SQL_TSI_FRAC_SECOND,STARTTIME,{fn TIMESTAMPADD(SQL_TSI_HOUR,8,STARTTIME)})}*0.000001"+
                     "where timer.id="+this.selectedTimer.getId().toString();
@@ -218,6 +221,7 @@ public class GoyaController1 implements Serializable {
             String query1 = "SELECT STARTTIME,ENDTIME,INTERVAL_TIME from timer where timer.id="+this.selectedTimer.getId().toString();
             stm1 = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs1 = stm1.executeQuery(query1);
+            rs1.first();
             this.setSelectedRow(data.indexOf(this.selectedTimer));
             data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(rs1.getTimestamp(1).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(rs1.getTimestamp(2).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
@@ -241,6 +245,9 @@ public class GoyaController1 implements Serializable {
     
     public void eightExit(){        /*Διόρθωσε σε 8ωρο βάσει ώρας Εξόδου*/
         try {
+            if (rs1 != null)rs1.close();
+            if (stm != null)stm.close();
+            if (stm1 != null)stm1.close();  
             String str ="update timer set STARTTIME= {fn TIMESTAMPADD(SQL_TSI_HOUR,-8,ENDTIME)},"+
                     "INTERVAL_TIME = {fn TIMESTAMPDIFF(SQL_TSI_FRAC_SECOND,{fn TIMESTAMPADD(SQL_TSI_HOUR,-8,ENDTIME)},ENDTIME)}*0.000001"+
                     "where timer.id="+this.selectedTimer.getId().toString();
@@ -252,6 +259,7 @@ public class GoyaController1 implements Serializable {
             String query1 = "SELECT STARTTIME,ENDTIME,INTERVAL_TIME from timer where timer.id="+this.selectedTimer.getId().toString();
             stm1 = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs1 = stm1.executeQuery(query1);
+            rs1.first();
             this.setSelectedRow(data.indexOf(this.selectedTimer));
             data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(rs1.getTimestamp(1).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
             data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(rs1.getTimestamp(2).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
@@ -274,6 +282,7 @@ public class GoyaController1 implements Serializable {
     }
     
     public void eight(){
+        
         System.out.println("this.getSelectedRow()"+this.getSelectedRow());
         LocalDate date = LocalDateTime.ofInstant(this.getSelectedTimer().
                         getStarttime().toInstant(), ZoneOffset.ofHours(3)).toLocalDate();
@@ -281,38 +290,43 @@ public class GoyaController1 implements Serializable {
         eveningEnd = LocalDateTime.of(date, evening);
         System.out.println(morningStart);
         try{                                //Διόρθωσε σε 8ωρο 08:00-16:00
-                    String str = "UPDATE timer SET starttime = ?, endtime = ?, "
+            if (rs1 != null)rs1.close();
+            if (stm != null)stm.close();
+            if (stm1 != null)stm1.close();  
+            String str = "UPDATE timer SET starttime = ?, endtime = ?, "
                       + "interval_time = 28800000 WHERE id = ? ";                                              
-                    stm = this.emplAdminsController.getCon().prepareStatement(str);                    
-                    stm.setTimestamp(1, Timestamp.valueOf(morningStart));                            ;
-                    stm.setTimestamp(2, Timestamp.valueOf(eveningEnd));
-                    stm.setLong(3, this.selectedTimer.getId());
+            stm = this.emplAdminsController.getCon().prepareStatement(str);                    
+            stm.setTimestamp(1, Timestamp.valueOf(morningStart));                            ;
+            stm.setTimestamp(2, Timestamp.valueOf(eveningEnd));
+            stm.setLong(3, this.selectedTimer.getId());
                    
-                    int ok2 = stm.executeUpdate(); 
+            int ok2 = stm.executeUpdate(); 
                     // show in table automatically
                     
-                    this.setSelectedRow(data.indexOf(this.selectedTimer));
-                    data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(morningStart.toInstant(ZoneOffset.ofHours(3))));
-                    data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(eveningEnd.toInstant(ZoneOffset.ofHours(3))));
-                    data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(28800000)); 
+            this.setSelectedRow(data.indexOf(this.selectedTimer));
+            data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(morningStart.toInstant(ZoneOffset.ofHours(3))));
+            data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(eveningEnd.toInstant(ZoneOffset.ofHours(3))));
+            data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(28800000)); 
                     
-                    } catch (SQLException ex) {
+            } catch (SQLException ex) {
                         Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                         JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-                    }
-                    finally{
-                        try {                            
-                            if (stm != null)stm.close();                            
-                        } catch (SQLException ex) {
+            } finally{
+                try {                            
+                    if (stm != null)stm.close();                            
+                } catch (SQLException ex) {
                             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-                        }
-                    } 
+                 }
+            } 
     }
     
     public void recalculation(){
         
         try{  
+            if (rs1 != null)rs1.close();
+            if (stm != null)stm.close();
+            if (stm1 != null)stm1.close();  
             String str ="update timer set INTERVAL_TIME = {fn TIMESTAMPDIFF(SQL_TSI_FRAC_SECOND,STARTTIME,ENDTIME)}*.000001 "+
                         "where timer.id="+this.selectedTimer.getId().toString();                           
                         stm = this.emplAdminsController.getCon().prepareStatement(str);                                      
@@ -324,10 +338,11 @@ public class GoyaController1 implements Serializable {
             String query1 = "SELECT STARTTIME,ENDTIME,INTERVAL_TIME from timer where timer.id="+this.selectedTimer.getId().toString();
             stm1 = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs1 = stm1.executeQuery(query1);
+            rs1.first();
             this.setSelectedRow(data.indexOf(this.selectedTimer));
-            data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(rs1.getTimestamp(1).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
-            data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(rs1.getTimestamp(2).toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
-            data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(rs1.getLong(3))); 
+            data.get(this.getSelectedRow()).setStarttime(java.util.Date.from(rs1.getTimestamp("STARTTIME").toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
+            data.get(this.getSelectedRow()).setEndtime(java.util.Date.from(rs1.getTimestamp("ENDTIME").toLocalDateTime().toInstant(ZoneOffset.ofHours(3))));
+            data.get(this.getSelectedRow()).setIntervalTime(BigInteger.valueOf(rs1.getLong("INTERVAL_TIME"))); 
             
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
