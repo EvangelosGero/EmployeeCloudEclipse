@@ -28,11 +28,13 @@
                         <p:outputLabel value="#{bundle.EditTimerLabel_starttime}" for="starttime" />
                         <p:calendar id="starttime" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" 
                                     value="#{goyaController1.selectedTimer.starttime}" title="#{bundle.EditTimerTitle_starttime}"  
-                                    showOn="button" timeControlType="slider" timeInput="true"/>
+                                    showOn="button" timeControlType="slider" timeInput="true" showHour="true"
+                                    showMinute="true" showSecond="true"  showButtonPanel="true"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_endtime}" for="endtime" />
                         <p:calendar id="endtime" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" 
                                     value="#{goyaController1.selectedTimer.endtime}"  timeControlType="slider" timeInput="true" 
-                                    title="#{bundle.EditTimerTitle_endtime}"  showOn="button"/>
+                                    title="#{bundle.EditTimerTitle_endtime}"  showOn="button" showHour="true"
+                                    showMinute="true" showSecond="true" showButtonPanel="true"/>
                         <p:outputLabel value="#{bundle.EditTimerLabel_intervalTime}" for="intervalTime" />
                         <p:inputText id="intervalTime" value="#{goyaController1.selectedTimer.intervalTime}" 
                                      title="#{bundle.EditTimerTitle_intervalTime}"/>

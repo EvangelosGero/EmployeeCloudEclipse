@@ -12,22 +12,33 @@
                   appendTo="@(body)" header="#{bundle.CreateTimerTitle}">
             <h:form id="TimerIntervalCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{goyaController1.selectedTimer != null}">                        
+                    <p:panelGrid columns="2" rendered="#{goyaController1.selectedTimer != null}">
+                        <h:outputText value="#{bundle.ViewWorkersLabel_firstName}"/>
+                        <h:outputText value="#{goyaController1.selected.firstName}" 
+                                      title="#{bundle.ViewWorkersTitle_firstName}" />
+                        <h:outputText value="#{bundle.ViewWorkersLabel_lastName}"/>
+                        <h:outputText value="#{goyaController1.selected.lastName}" 
+                                      title="#{bundle.ViewWorkersTitle_lastName}"/>
+                        <h:outputText value="#{bundle.ViewWorkersLabel_fatherName}"/>
+                        <h:outputText value="#{goyaController1.selected.fatherName}" 
+                                      title="#{bundle.ViewWorkersTitle_fatherName}"/>
                         <p:outputLabel value="#{bundle.CreateTimerLabel_code}" for="code" />
-                        <p:inputText id="code" value="#{goyaController1.selectedTimer.code}" 
-                                     title="#{bundle.CreateTimerTitle_code}" required="true" 
+                        <p:inputText id="code" value="#{goyaController1.selected.code}" 
+                                     title="#{bundle.CreateTimerTitle_code}" disabled="true" 
                                      requiredMessage="#{bundle.CreateTimerRequiredMessage_code}"/>
                         <p:outputLabel value="#{bundle.CreateTimerLabel_starttime}" for="starttime" />
-                        <p:calendar id="starttime" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" 
+                        <p:calendar id="starttime" pattern="dd/MM/yyyy HH:mm" timeZone="GMT+3" 
                                     value="#{goyaController1.selectedTimer.starttime}" title="#{bundle.EditTimerTitle_starttime}"  
-                                    showOn="button"/>
+                                    showOn="button" showHour="true" showButtonPanel="true"
+                                    showMinute="true" showSecond="true"/>
                         <p:outputLabel value="#{bundle.CreateTimerLabel_endtime}" for="endtime" />
-                        <p:calendar id="endtime" pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3" 
+                        <p:calendar id="endtime" pattern="dd/MM/yyyy HH:mm" timeZone="GMT+3" 
                                     value="#{goyaController1.selectedTimer.endtime}" title="#{bundle.EditTimerTitle_endtime}"  
-                                    showOn="button"/>
+                                    showOn="button" showHour="true" showButtonPanel="true"
+                                    showMinute="true" showSecond="true"/>
                         <p:outputLabel value="#{bundle.CreateTimerLabel_intervalTime}" for="intervalTime" />
                         <p:inputText id="intervalTime" value="#{goyaController1.selectedTimer.intervalTime}" 
-                                     title="#{bundle.CreateTimerTitle_intervalTime}" />                        
+                                     title="#{bundle.CreateTimerTitle_intervalTime}" disabled="true"/>                        
                         <p:outputLabel value="#{bundle.CreateTimerLabel_pcNameIn}" for="pcNameIn" />
                         <p:inputText id="pcNameIn" value="#{goyaController1.selectedTimer.pcNameIn}" 
                                      title="#{bundle.CreateTimerTitle_pcNameIn}" />
@@ -42,7 +53,7 @@
                                      title="#{bundle.CreateTimerTitle_pcIpOut}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{timerController.create}" value="#{bundle.Save}" 
-                                     update="display,:TimerIntervalForm:datalistTimer,:growl" 
+                                     update=":TimerIntervalForm:datalistTimer,:growl" 
                                      oncomplete="handleSubmit(args,'TimerIntervalCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('TimerIntervalCreateDialog').hide()"/>
                 </h:panelGroup>

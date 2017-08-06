@@ -86,9 +86,12 @@
                             <h:outputText value="#{item.pcIpOut}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{timerController.prepareCreate}" update=":TimerCreateForm" oncomplete="PF('TimerCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                             actionListener="#{timerController.prepareCreate}"  disabled="true"
+                                             update=":TimerCreateForm" oncomplete="PF('TimerCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TimerViewForm" oncomplete="PF('TimerViewDialog').show()" disabled="#{empty timerController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TimerEditForm" oncomplete="PF('TimerEditDialog').show()" disabled="#{empty timerController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TimerEditForm" 
+                                             oncomplete="PF('TimerEditDialog').show()" disabled="true"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{timerController.destroy}" update=":growl,datalist" disabled="#{empty timerController.selected}"/>
                         </f:facet>
                     </p:dataTable>

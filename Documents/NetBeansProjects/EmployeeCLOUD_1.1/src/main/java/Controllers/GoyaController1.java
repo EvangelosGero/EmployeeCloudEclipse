@@ -26,6 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -410,6 +411,52 @@ public class GoyaController1 implements Serializable {
                  }
             } 
         
+    }
+    
+    public Timer prepareCreate() {
+        this.selectedTimer = new Timer();        
+        return selectedTimer;
+    }
+    
+    public void create(){
+        try{                              /*Νέα εγγραφή */
+            
+            if (stm != null)stm.close();
+            LocalDateTime startLocalDateTime = LocalDateTime.ofInstant(this.getSelectedTimer().
+                        getStarttime().toInstant(), ZoneOffset.ofHours(3));
+            LocalDateTime endLocalDateTime = LocalDateTime.ofInstant(this.getSelectedTimer().
+                        getEndtime().toInstant(), ZoneOffset.ofHours(3));
+            String str = "INSERT INTO timer(code, starttime, endtime, interval_time, "
+                            + "pc_name_in, pc_ip_in, pc_name_out, pc_ip_out) "
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";                                          
+            stm = this.emplAdminsController.getCon().prepareStatement(str);
+            stm.setString(1, this.selected.getCode());  //selected is a Worker
+            stm.setTimestamp(2, Timestamp.valueOf(startLocalDateTime));                            ;
+            stm.setTimestamp(3, Timestamp.valueOf(endLocalDateTime));
+            long timeBetween = Duration.between(morningStart, eveningEnd).toMillis();
+            stm.setLong(4, timeBetween);
+            stm.setString(5, this.selectedTimer.getPcNameIn());
+            stm.setString(6, this.selectedTimer.getPcIpIn());
+            stm.setString(7, this.selectedTimer.getPcNameOut());
+            stm.setString(8, this.selectedTimer.getPcIpOut());
+            int ok1 = stm.executeUpdate();
+            //Update the View
+            this.selectedTimer.setIntervalTime(BigInteger.valueOf(timeBetween));
+            data.add(this.selectedTimer);
+            Collections.sort(data, DATE_ORDER);
+                    
+            JsfUtil.addSuccessMessage("Επιτυχής Διόρθωση");       
+            } catch (SQLException ex) {
+                        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                        JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            } finally{
+                try {                            
+                    if (stm != null)stm.close();                            
+                } catch (SQLException ex) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                 }
+            } 
     }
     
 }

@@ -165,7 +165,7 @@
                                 </f:facet> 
                             </p:toolbar>
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
-                                             actionListener="#{timerController.prepareCreate}" 
+                                             actionListener="#{goyaController1.prepareCreate}" 
                                              disabled="#{empty goyaController1.data}"
                                              update=":TimerIntervalCreateForm" oncomplete="PF('TimerIntervalCreateDialog').show()"/>                            
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
@@ -174,7 +174,7 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}"
                                              actionListener="#{goyaController1.destroy}"
                                              update=":growl, datalistTimer" 
-                                             disabled="#{empty goyaController1.selected || empty goyaController1.data}"/>
+                                             disabled="#{empty goyaController1.selectedTimer || empty goyaController1.data}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
