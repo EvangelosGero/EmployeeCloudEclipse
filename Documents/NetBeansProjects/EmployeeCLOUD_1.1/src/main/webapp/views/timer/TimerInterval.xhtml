@@ -139,19 +139,31 @@
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>                       
-                        <f:facet name="footer">                           
-                            <p:commandButton id="rb1Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursEntryBased}" 
+                        <f:facet name="footer">  
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton id="rb1Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursEntryBased}" 
                                              actionListener="#{goyaController1.eightEntry()}" update="datalistTimer" 
                                              disabled="#{empty goyaController1.selectedTimer}"/>
-                            <p:commandButton id="rb2Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursExitBased}" 
+                                </f:facet>
+                                <f:facet name="right">
+                                    <p:commandButton id="rb2Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursExitBased}" 
                                              actionListener="#{goyaController1.eightExit()}" update="datalistTimer" 
                                              disabled="#{empty goyaController1.selectedTimer}"/>
-                            <p:commandButton id="rb3Button"   icon="ui-icon-pencil" value="#{bundle.EightHours}" 
+                                </f:facet>
+                            </p:toolbar>
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton id="rb3Button"   icon="ui-icon-pencil" value="#{bundle.EightHours}" 
                                              actionListener="#{goyaController1.eight()}" update="datalistTimer"  
                                              disabled="#{empty goyaController1.selectedTimer}"/>
-                            <p:commandButton id="rb4Button"   icon="ui-icon-pencil" value="#{bundle.Recalculation}" 
+                                </f:facet>
+                                <f:facet name="right">   
+                                    <p:commandButton id="rb4Button"   icon="ui-icon-pencil" value="#{bundle.Recalculation}" 
                                              actionListener="#{goyaController1.recalculation()}" update="datalistTimer" 
-                                             disabled="#{empty goyaController1.selectedTimer}"/>                            
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                                </f:facet> 
+                            </p:toolbar>
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
                                              actionListener="#{timerController.prepareCreate}" 
                                              disabled="#{empty goyaController1.data}"
