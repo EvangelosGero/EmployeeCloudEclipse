@@ -82,7 +82,8 @@
                             </p:submenu>
                             <p:submenu label="Μισθοδοσία" >
                                 <p:submenu label="Δημιουργία Report Μισθοδοσίας" >
-                                    <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
+                                    <p:menuitem value="Μήνα" actionListener="#{misthodosiaController.createMisthodosiaReport()}" 
+                                                disabled="#{not emplAdminsController.loggedIn}"/>
                                     <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
                                     <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
                                     <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
@@ -269,6 +270,7 @@
             </h:form>
         </p:dialog>
         <ui:include src="/ChangePassword.xhtml"/>
+        <ui:include src="/views/misthodosia.xhtml"/>
     </h:body>
 
 </html>

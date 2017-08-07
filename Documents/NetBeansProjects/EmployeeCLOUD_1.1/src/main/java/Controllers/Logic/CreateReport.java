@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.print.attribute.standard.Severity;
 import Controllers.util.DropIfExists;
 
 /**
