@@ -70,11 +70,10 @@ public class GoyaController1 implements Serializable {
     private List<Timer> data = new ArrayList<>();
     private Timer selectedTimer;
     private int selectedRow;
+    private LocalDateTime test;
 
-    public GoyaController1() {
-        
-        //    morningStart = LocalDateTime.of(date, morning);
-       //     eveningEnd = LocalDateTime.of(date, evening); 
+    public GoyaController1() {        
+       
     }
 
     public EmplAdminsController getEmplAdminsController() {
@@ -84,6 +83,12 @@ public class GoyaController1 implements Serializable {
     public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
         this.emplAdminsController = emplAdminsController;
     }
+
+    public LocalDateTime getTest() {
+        return test;
+    }
+    
+    
 
     public java.util.Date getStartDate() {
         return startDate;
