@@ -1,7 +1,9 @@
 package Controllers.Logic.Misthodosia;
 
+import Controllers.MisthodosiaController;
 import Controllers.util.DropIfExists;
 import Controllers.util.JsfUtil;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -9,19 +11,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
+
 
 /**
  *
  * @author evgero
  */
-public class CreateSalaryReport { 
+public class CreateSalaryReport {   
     
+    private MisthodosiaController misthodosiaController;
     private Connection con = null, con1 = null;
     private ResultSet rs = null, rs1 = null, rs2 = null, rs3 = null, rs4 = null, rschldrn = null, rs5 = null, rs6 = null;
     private Statement stm = null , stm1 = null, stm2 = null, stm3 = null, stm4 = null,stm5 = null, stm6 = null, stmchldrn = null;                      
@@ -32,14 +41,34 @@ public class CreateSalaryReport {
     private double metalCoef; 
     private String reportTableStr, salaryTableStr;
     public double isforaAlilegiis;    
-    private Map<Integer, Integer> generatedSickMore3UnpaidMap;
+    private Map<Integer, Integer> generatedSickMore3UnpaidMap; 
+    private Map<Integer, List<Double>> epidotisiMap = new HashMap<>(); 
+    private boolean firstRun;
 
-    public String CreateDBSalaryReport(Connection con, LocalDate paretisiDate) throws SQLException {        
-       
+    public Map<Integer, List<Double>> getEpidotisiMap() {
+        return epidotisiMap;
+    }
+
+    public void setEpidotisiMap(Map<Integer, List<Double>> epidotisiMap) {
+        this.epidotisiMap = epidotisiMap;
+    }
+
+    
+
+    public boolean isFirstRun() {
+        return firstRun;
+    }
+
+    public void setFirstRun(boolean firstRun) {
+        this.firstRun = firstRun;
+    }
+    
+    
+           
+    public String CreateDBSalaryReport(Connection con, LocalDate paretisiDate) throws SQLException, InterruptedException {        
+        
         this.con = con;                      
-        boolean reportTableExists = true;       
-
-               
+        boolean reportTableExists = true;  
         
         /* find which is the previous month */
          
@@ -546,39 +575,31 @@ public class CreateSalaryReport {
       //  Check for sick > 3
       
       int ensimaTotalMore3 = 0;      
-        if((rs.getInt("sick_days_more_3")!=0) ){
+        if((rs.getInt("sick_days_more_3")!=0)){
             
             
-            
+         if(this.isFirstRun()){  
             query = "SELECT * FROM generated_more_three WHERE worker_id = "+Integer.toString(rs.getInt("id"))
                     +"  AND (MONTH(start_day) = "+Integer.toString(previousMonth)
                     + ") AND (YEAR(start_day) = "+Integer.toString(tableYear)+")";
           stm5 = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);                            
           rs5 = stm5.executeQuery(query);
-          while(rs5.next()){
-          
-            double epidotisi = 0;
-            
-            
-            
-               
-                 //   TextInputDialog dialog = new TextInputDialog("Επιδότηση ΙΚΑ");
-                //    dialog.setTitle("Επιδότηση ΙΚΑ Ασθένειας μεγαλύτερης των 3 ημερών");
-                //    dialog.setHeaderText("Εργαζόμενος : "+rs.getString("first_name")+" "+rs.getString("last_name")
-                 //           +", με κωδικό :"+Integer.toString(rs.getInt("id")));
-                 //   dialog.setContentText("Παρακαλώ καταχωρείστε την επιδότηση ΙΚΑ");                 
-                 //   Optional<String> result = dialog.showAndWait();
-                  //  if (result.isPresent()){
-                 //       return result.get();
-                 //   }
-                //return "0";          
+          List<Double> epidotiseis = new ArrayList<>();
+          while(rs5.next()){ 
             
             if(!(rs5.getDate("start_day").equals(rs5.getDate("end_day"))) && (rs5.getInt("real_days") > 0)) {  //The case where it is actually <3 i.e. the beginning of >3, e.g. 30/5, 31/5
-                RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('misthodosiaDlgWV').show();");
-              //  epidotisi = Double.parseDouble(futureTask.get());
-                epidotisiTotal += epidotisi;
+              
+                epidotiseis.add(new Double(0));
             }
+            }
+          this.epidotisiMap.put(rs.getInt("id"), epidotiseis);
+         }else {
+             List<Double> epid = this.epidotisiMap.getOrDefault(rs.getInt("id"), new ArrayList<Double>(Arrays.asList(new Double(0))));
+             
+             for(double epidotisi : epid){                 
+                         
+                epidotisiTotal += epidotisi;
+            
                   query = "INSERT INTO "+salaryTableStr+" (id, first_name, last_name, father_name,"
                 + "AM_IKA, salary, TA, ensima, hours_misthou, reason_salary, adjusted_salary, "
                 + "isfores_ergazomenou, ergodotikes_isfores, mee, total, reason_isfores, reason_isfores_text, "
@@ -655,7 +676,7 @@ public class CreateSalaryReport {
         ensimaTotalMore3 += rs5.getInt("ika_days");
        
       }        
-            
+      }      
        if(rs5 != null)rs5.close();
        if(stm5 != null)stm5.close();
        
@@ -1077,7 +1098,10 @@ while (rs4.next()){
          Thread.sleep(1000);   
         } catch (Exception ex) {
         };
-    
+    if(!this.epidotisiMap.isEmpty()){
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('misthodosiaDlgWV').show();");
+    }
     return salaryTableStr;
     
     }

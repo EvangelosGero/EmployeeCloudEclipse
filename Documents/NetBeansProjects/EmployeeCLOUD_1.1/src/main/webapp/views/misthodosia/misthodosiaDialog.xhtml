@@ -3,14 +3,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
    
-    <p:dialog id="misthodosiaDialog" widgetVar="misthodosiaDlgWV"  modal="true" dynamic="true" width="420"  height="200">
+    <p:dialog id="misthodosiaDialog" widgetVar="misthodosiaDlgWV"  
+                      modal="true"
+                      closable="true"
+                      position="center"                     
+                      showEffect="slide"
+                      draggable="true"
+                      resizable="false"
+                      visible="false"
+                      header="Επιδοτηση ΙΚΑ Ασθενειας μεγαλυτερης των 3 ημερων">
         <h:form id='misthodosiaGT3'>
-            <p:outputPanel>
-                <p:inputTextarea  value="#{systemtableController.items.get(0).aboutUs}" cols="60" 
-                                  rows="10" readonly="true"/>
-            </p:outputPanel>
+            <h:panelGrid id="GT3Box" columns="2" cellpadding="3" 
+                             style="margin: 0 auto; border: 0px; padding-top: 20px;">
+                <f:facet name="header">
+                    <p:outputLabel value="'Εργαζόμενος :' +rs.getString('first_name')+rs.getString('last_name')
+                            +', με κωδικό :'+Integer.toString(rs.getInt('id')));"/>
+                </f:facet>
+                                 
+                    <h:outputLabel for="j_epidotisi" value="Παρακαλώ καταχωρείστε την επιδότηση ΙΚΑ"/>
+                    
+                    <p:keyboard id="j_epidotisi" required="true" widgetVar="usernameKeyBoard"
+                                value="#{misthodosiaController.epidotisi}" label="Επιδότηση ΙΚΑ" showMode="button">                   
+                        <p:clientValidator/>       
+                    </p:keyboard>                                 
+                    
+                    <p:commandButton id="OKBtn" value="Save" ajax="true" immediate="false"
+                                     update=":growl"  actionListener="#{misthodosiaController.saveEpidotisi()}" 
+                                     oncomplete="PF('misthodosiaDlgWV').hide()">                        
+                    </p:commandButton>                   
+                    <p:commandButton value="Cancel"  
+                                     oncomplete="PF('misthodosiaDlgWV').hide()"/>
+                    <p:defaultCommand target="OKBtn"/>                    
+            </h:panelGrid>
         </h:form>
     </p:dialog> 
     
