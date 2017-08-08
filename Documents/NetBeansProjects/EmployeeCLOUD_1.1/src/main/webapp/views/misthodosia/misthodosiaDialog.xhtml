@@ -17,18 +17,20 @@
                       header="Επιδοτηση ΙΚΑ Ασθενειας μεγαλυτερης των 3 ημερων">
         <h:form id='misthodosiaGT3'>
             <h:panelGrid id="GT3Box" columns="2" cellpadding="3" 
-                             style="margin: 0 auto; border: 0px; padding-top: 20px;">
-                <f:facet name="header">
-                    <p:outputLabel value="'Εργαζόμενος :' +rs.getString('first_name')+rs.getString('last_name')
-                            +', με κωδικό :'+Integer.toString(rs.getInt('id')));"/>
-                </f:facet>
+                             style="margin: 0 auto; border: 0px; padding-top: 20px;">                
                                  
-                    <h:outputLabel for="j_epidotisi" value="Παρακαλώ καταχωρείστε την επιδότηση ΙΚΑ"/>
-                    
-                    <p:keyboard id="j_epidotisi" required="true" widgetVar="usernameKeyBoard"
-                                value="#{misthodosiaController.epidotisi}" label="Επιδότηση ΙΚΑ" showMode="button">                   
-                        <p:clientValidator/>       
-                    </p:keyboard>                                 
+                <p:dataTable var="t" value="#{misthodosiaController.createSalaryReport.epidotisiMap.entrySet()}" id="testTable">
+                        <p:column headerText="Κωδικός Εργαζομένου">
+                            <p:inputText value="#{t.key}"/>
+                        </p:column>
+                        <p:column headerText="Επιδότηση">
+                            <p:dataTable var="q" value="#{t.value}">
+                                <p:column>
+                                    <p:inputText value="#{t}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:column>
+                    </p:dataTable>                               
                     
                     <p:commandButton id="OKBtn" value="Save" ajax="true" immediate="false"
                                      update=":growl"  actionListener="#{misthodosiaController.saveEpidotisi()}" 

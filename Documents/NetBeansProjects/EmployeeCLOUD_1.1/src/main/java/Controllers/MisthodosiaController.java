@@ -9,6 +9,7 @@ import Controllers.Logic.Misthodosia.CreateSalaryReport;
 import Controllers.util.JsfUtil;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +64,8 @@ public class MisthodosiaController implements Serializable {
     
     public void saveEpidotisi(){
         try {
-            if(new Double(this.epidotisi) == null)this.epidotisi = 0;
+            for(int pk : this.createSalaryReport.getEpidotisiMap().keySet())
+                Collections.replaceAll(this.createSalaryReport.getEpidotisiMap().get(pk), null, new Double(0));
             this.createSalaryReport.setFirstRun(false);
             salaryTableStr = createSalaryReport.CreateDBSalaryReport(this.emplAdminsController.getCon(), null);
         } catch (SQLException ex) {
