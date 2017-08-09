@@ -47,7 +47,7 @@ public class MisthodosiaController implements Serializable {
             }
     }
     
-     public void createΧμαςReport() {
+     public void createXmasReport() {
         try {         
             new CreateDoroXmasReport().createDBDoroXmasReport(this.emplAdminsController.getCon(), 0);
             } catch (SQLException ex) {
