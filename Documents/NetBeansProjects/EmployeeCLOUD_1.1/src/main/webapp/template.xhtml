@@ -84,9 +84,15 @@
                                 <p:submenu label="Δημιουργία Report Μισθοδοσίας" >
                                     <p:menuitem value="Μήνα" actionListener="#{createSalaryReport.createMisthodosiaReport()}" 
                                                 disabled="#{not emplAdminsController.loggedIn}" update=":growl, :misthodosiaGT3:testTable"/>
-                                    <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                    <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                    <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                    <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                actionListener="#{misthodosiaController.createDoroPashaReport()}"                                                
+                                                update=":growl"/>
+                                    <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                actionListener="#{misthodosiaController.createEAReport()}"
+                                                update=":growl"/>
+                                    <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                
+                                                update=":growl"/>
                                 </p:submenu>
                                 <p:submenu label="Εμφάνιση Report Μισθοδοσίας" >
                                     <p:submenu label="Εμφάνιση Μισθοδοτικής Κατάστασης" >
