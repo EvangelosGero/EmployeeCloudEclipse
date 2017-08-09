@@ -14,31 +14,36 @@
                       draggable="true"
                       resizable="false"
                       visible="false"
-                      header="Επιδοτηση ΙΚΑ Ασθενειας μεγαλυτερης των 3 ημερων">
+                      header="Επιδοτηση ΙΚΑ Ασθενειας μεγαλυτερης των 3 ημερων" dynamic="true" 
+                      onShow="updateDialog();" >
+        
         <h:form id='misthodosiaGT3'>
+            
             <h:panelGrid id="GT3Box" columns="2" cellpadding="3" 
-                             style="margin: 0 auto; border: 0px; padding-top: 20px;">                
+                         style="margin: 0 auto; border: 0px; padding-top: 20px;" width="300px">               
                                  
-                <p:dataTable var="t" value="#{misthodosiaController.createSalaryReport.epidotisiMap.entrySet()}" id="testTable">
-                        <p:column headerText="Κωδικός Εργαζομένου">
-                            <p:inputText value="#{t.key}"/>
-                        </p:column>
-                        <p:column headerText="Επιδότηση">
+                <p:dataTable var="t" value="#{createSalaryReport.epidotisiMap.entrySet()}" id="testTable">
+                    <p:column headerText="Κωδικός Εργαζομένου" style="width: 100px" >
+                            <p:outputLabel value="#{t.key}"/>                            
+                    </p:column>
+                    <p:column headerText="Επιδότηση" style="width: 100px">
                             <p:dataTable var="q" value="#{t.value}">
                                 <p:column>
-                                    <p:inputText value="#{t}"/>
+                                    <p:inputText value="#{q}"/>
                                 </p:column>
                             </p:dataTable>
-                        </p:column>
-                    </p:dataTable>                               
-                    
-                    <p:commandButton id="OKBtn" value="Save" ajax="true" immediate="false"
-                                     update=":growl"  actionListener="#{misthodosiaController.saveEpidotisi()}" 
+                    </p:column>                                              
+                    <f:facet name="footer">   
+                        <p:commandButton id="OKBtn" value="Save" ajax="true" immediate="false"
+                                     update=":growl"  actionListener="#{createSalaryReport.saveEpidotisi()}" 
                                      oncomplete="PF('misthodosiaDlgWV').hide()">                        
-                    </p:commandButton>                   
-                    <p:commandButton value="Cancel"  
+                        </p:commandButton>                   
+                        <p:commandButton value="Cancel"  
                                      oncomplete="PF('misthodosiaDlgWV').hide()"/>
-                    <p:defaultCommand target="OKBtn"/>                    
+                        <p:defaultCommand target="OKBtn"/>
+                    </f:facet>
+                </p:dataTable> 
+                                        
             </h:panelGrid>
         </h:form>
     </p:dialog> 

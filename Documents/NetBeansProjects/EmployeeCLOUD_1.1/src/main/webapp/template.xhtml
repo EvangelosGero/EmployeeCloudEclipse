@@ -82,8 +82,8 @@
                             </p:submenu>
                             <p:submenu label="Μισθοδοσία" >
                                 <p:submenu label="Δημιουργία Report Μισθοδοσίας" >
-                                    <p:menuitem value="Μήνα" actionListener="#{misthodosiaController.createMisthodosiaReport()}" 
-                                                disabled="#{not emplAdminsController.loggedIn}"/>
+                                    <p:menuitem value="Μήνα" actionListener="#{createSalaryReport.createMisthodosiaReport()}" 
+                                                disabled="#{not emplAdminsController.loggedIn}" update=":growl, :misthodosiaGT3:testTable"/>
                                     <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
                                     <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
                                     <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>

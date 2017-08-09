@@ -1,9 +1,11 @@
 package Controllers.Logic.Misthodosia;
 
+import Controllers.EmplAdminsController;
 import Controllers.MisthodosiaController;
 import Controllers.util.DropIfExists;
 import Controllers.util.JsfUtil;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -13,14 +15,18 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 
@@ -28,8 +34,12 @@ import org.primefaces.context.RequestContext;
  *
  * @author evgero
  */
-public class CreateSalaryReport {   
+@Named("createSalaryReport")
+@SessionScoped
+public class CreateSalaryReport implements Serializable {
     
+    @Inject
+    private EmplAdminsController emplAdminsController;
     private MisthodosiaController misthodosiaController;
     private Connection con = null, con1 = null;
     private ResultSet rs = null, rs1 = null, rs2 = null, rs3 = null, rs4 = null, rschldrn = null, rs5 = null, rs6 = null;
@@ -40,7 +50,7 @@ public class CreateSalaryReport {
     private Map<Integer, Double> misthotosDaysMisthouMap, imeromisthiosDaysMisthouMap ;
     private double metalCoef; 
     private String reportTableStr, salaryTableStr;
-    public double isforaAlilegiis;    
+    private double isforaAlilegiis;    
     private Map<Integer, Integer> generatedSickMore3UnpaidMap; 
     private Map<Integer, List<Double>> epidotisiMap = new HashMap<>(); 
     private boolean firstRun;
@@ -53,8 +63,14 @@ public class CreateSalaryReport {
         this.epidotisiMap = epidotisiMap;
     }
 
-    
+    public String getSalaryTableStr() {
+        return salaryTableStr;
+    }
 
+    public void setSalaryTableStr(String salaryTableStr) {
+        this.salaryTableStr = salaryTableStr;
+    }
+    
     public boolean isFirstRun() {
         return firstRun;
     }
@@ -62,13 +78,49 @@ public class CreateSalaryReport {
     public void setFirstRun(boolean firstRun) {
         this.firstRun = firstRun;
     }
+
+    public double getIsforaAlilegiis() {
+        return isforaAlilegiis;
+    }
+
+    public void setIsforaAlilegiis(double isforaAlilegiis) {
+        this.isforaAlilegiis = isforaAlilegiis;
+    }
+
+    public EmplAdminsController getEmplAdminsController() {
+        return emplAdminsController;
+    }
+
+    public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
+        this.emplAdminsController = emplAdminsController;
+    }  
     
+    public void createMisthodosiaReport() {
+        try {            
+            this.setFirstRun(true);            
+            CreateDBSalaryReport(this.emplAdminsController.getCon(), null);
+            } catch (InterruptedException | SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            }
+    }
     
+    public void saveEpidotisi(){
+        try {
+            for(int pk : this.getEpidotisiMap().keySet())
+                Collections.replaceAll(this.getEpidotisiMap().get(pk), null, new Double(0));
+            this.setFirstRun(false);
+            CreateDBSalaryReport(this.emplAdminsController.getCon(), null);
+        } catch (SQLException | InterruptedException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+           JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+    }
            
-    public String CreateDBSalaryReport(Connection con, LocalDate paretisiDate) throws SQLException, InterruptedException {        
+    public void CreateDBSalaryReport(Connection con, LocalDate paretisiDate) throws SQLException, InterruptedException {        
         
         this.con = con;                      
-        boolean reportTableExists = true;  
+        boolean reportTableExists = true;         
         
         /* find which is the previous month */
          
@@ -1085,31 +1137,23 @@ while (rs4.next()){
        if(stm != null)stm.close(); 
        if(stm3 != null)stm3.close(); 
       }
-    //if (ExceptionsRaised == false)
-    //    showInformationAlert("Η διαδικασία τελείωσε επιτυχώς !",null,null);
-    //else
-    //{    
-    // showErrorAlert("Συνέβησαν προβλήματα ! Η διαδικασία θα διακοπεί !",null,null);
-    // return null;                        
-    //}
-    //CreateOldSalaryReportsController.setThreadProgress(100);    
-    
-     try{
-         Thread.sleep(1000);   
-        } catch (Exception ex) {
-        };
+     
+      //  this.epidotisiMap.put(1, Arrays.asList(new Double(0),new Double(0),new Double(0)));
     if(!this.epidotisiMap.isEmpty()){
-        RequestContext context = RequestContext.getCurrentInstance();
-        context.execute("PF('misthodosiaDlgWV').show();");
-    }
-    return salaryTableStr;
+        System.out.println(this.salaryTableStr);
+        RequestContext context = RequestContext.getCurrentInstance();        
+        context.execute("PF('misthodosiaDlgWV').show();");        
+        context.update("misthodosiaGT3:GT3Box");
+        
+    }else
+    JsfUtil.addSuccessMessage("Το Report μισθοδοσίας Ολοκληρώθηκε");    
     
     }
         else{           
             JsfUtil.addErrorMessage("Ο πίνακας "+reportTableStr+" δεν έχει δημιουργηθεί ακόμη. Παρακαλώ "
                     + "δημιουργείστε το timer Report " + Integer.toString(previousMonth)+ "/"
                     + Integer.toString(tableYear) + "και προσπαθείστε ξανά");           
-            return null;
+            return ;
         }
 }                  
         

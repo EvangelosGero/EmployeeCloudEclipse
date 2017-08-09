@@ -48,33 +48,6 @@ public class MisthodosiaController implements Serializable {
         this.createSalaryReport = createSalaryReport;
     }
     
-    public void createMisthodosiaReport() {
-        try {
-            this.createSalaryReport = new CreateSalaryReport();
-            this.createSalaryReport.setFirstRun(true);            
-            salaryTableStr = createSalaryReport.CreateDBSalaryReport(this.emplAdminsController.getCon(), null);
-            } catch (InterruptedException ex) {
-               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
-            } catch (SQLException ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            }
-    }
     
-    public void saveEpidotisi(){
-        try {
-            for(int pk : this.createSalaryReport.getEpidotisiMap().keySet())
-                Collections.replaceAll(this.createSalaryReport.getEpidotisiMap().get(pk), null, new Double(0));
-            this.createSalaryReport.setFirstRun(false);
-            salaryTableStr = createSalaryReport.CreateDBSalaryReport(this.emplAdminsController.getCon(), null);
-        } catch (SQLException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-           JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        } catch (InterruptedException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-           JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
     
 }
