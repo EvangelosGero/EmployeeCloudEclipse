@@ -5,6 +5,9 @@
  */
 package Controllers;
 
+import Controllers.Logic.Misthodosia.CreateDoroXmasReport;
+import Controllers.Logic.Misthodosia.CreateEAReport;
+import Controllers.Logic.Misthodosia.CreatePashaReport;
 import Controllers.util.JsfUtil;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,18 +29,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -51,34 +44,126 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 @SessionScoped
 public class ShowMisthodotiki implements Serializable{  
     
+    @Inject
+    private EmplAdminsController emplAdminsController;
     private Connection con = null;
     Statement stm = null;
     ResultSet rs = null;
-    String tableString = null;
-    
+    String tableString = null;    
     private List<List<String>> data ;
     private DecimalFormatSymbols symbols ;
     private DecimalFormat numFormat ;
     int formerSubsidiary;
     private Map<Integer, List<String>> subtotalsMap = new HashMap<>();
-    private final Map<Integer, String> subsidiariesMap = new HashMap<>();
-    private Label messageLabel = new Label();
+    private final Map<Integer, String> subsidiariesMap = new HashMap<>();    
     private FileOutputStream out = null;
     private FileInputStream in = null;
+    private int previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
+    private int tableYear = LocalDate.now().minusMonths(1).getYear();
+    private String ReportTableString ;
+    private List<List<String>> dataRegular ;    
+    private List<List<String>> dataDoro;    
 
     public List<List<String>> getData() {
         return data;
     }
 
     public void setData(List<List<String>> data) {
-        this.data = data;
+        this.data = data;     
     }
+
+    public EmplAdminsController getEmplAdminsController() {
+        return emplAdminsController;
+    }
+
+    public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
+        this.emplAdminsController = emplAdminsController;
+    }
+    
+    
         
-    public void showMisthodotiki(Connection con, String tableString, List<List<String>> data) throws SQLException{
+     public String handleShowMisthodotiki(){
+        try {  
+            int previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
+            if(previousMonth == 4 || previousMonth == 7 || previousMonth == 12)
+             showMisthodotikiMerger(this.emplAdminsController.getCon(),  -1, -1, null);
+            else
+                showMisthodotiki(this.emplAdminsController.getCon(), null, null);
+               
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            }        
+        return "/views/misthodosia/Misthodotiki.xhtml?faces-redirect=true";        
+    }
+     
+    public String handleShowMisthodotikiDoroPasha(){
+        try {
+            showMisthodotiki(this.emplAdminsController.getCon(),
+                    "DORO_PASHA_REPORT_"+Integer.toString(LocalDate.now().getYear()), null);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));   
+        }
+      return "/views/misthodosia/Misthodotiki.xhtml?faces-redirect=true";
+    }
+    
+    public String handleShowMisthodotikiEpidomaAdeias(){
+        try {
+            showMisthodotiki(this.emplAdminsController.getCon(), 
+                "EPIDOMA_ADEIAS_REPORT_"+Integer.toString(LocalDate.now().getYear()), null);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));   
+        }
+      return "/views/misthodosia/Misthodotiki.xhtml?faces-redirect=true"; 
+    }
+    
+    public String handleShowMisthodotikiDoroXmas(){
+        try {
+            showMisthodotiki(this.emplAdminsController.getCon(), 
+                "DORO_XMAS_REPORT_"+Integer.toString(LocalDate.now().minusMonths(1).getYear()), null);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));   
+        }
+      return "/views/misthodosia/Misthodotiki.xhtml?faces-redirect=true"; 
+    }    
+    
+    public void showMisthodotikiMerger(Connection con, int prevMonth, int tablYear, String tableString) throws SQLException{
+         
+        this.con = con;
+        if(prevMonth != -1)this.previousMonth = prevMonth;
+        if(tablYear != -1)this.tableYear = tablYear;
+        String prefix = previousMonth == 4 ? "DORO_PASHA_REPORT_" : previousMonth == 7 ? "EPIDOMA_ADEIAS_REPORT_" :
+                "DORO_XMAS_REPORT_" ;                
+        ReportTableString = prefix+Integer.toString(tableYear);
+        
+        // Run the final report
+        
+        switch (previousMonth){
+            case 5 : new CreatePashaReport().createDBDoroPashaReport(con, 0);
+                    break;
+            case 7 : new CreateEAReport().createDBEpidomaAdeiasReport(con, 0); 
+                    break;
+            case 12 : new CreateDoroXmasReport().createDBDoroXmasReport(con, 0);
+                    break;
+        }        
+        dataRegular = new ArrayList<>();
+        showMisthodotiki(con, tableString, null);  
+        dataRegular = this.data;
+        dataDoro = new ArrayList<>();
+        showMisthodotiki(con, ReportTableString, null);
+        dataDoro = data;       
+        dataRegular.addAll(dataDoro);
+        showMisthodotiki(con, tableString, dataRegular); 
+    }
+    
+    public void showMisthodotiki(Connection con, String tableString, List<List<String>> data1) throws SQLException{
         
        
        this.con = con;
-       this.data = data;
+       this.data = data1;
        this.tableString = tableString;
        
        /* find which is the previous month */
@@ -120,7 +205,7 @@ public class ShowMisthodotiki implements Serializable{
             while(rs.next()){
                 if((rs.getInt("ta") != 1) || (rs.getInt("ta") == 1 && (rs.getString("astheneia_text").equals("A-TOTAL")
                         || rs.getString("astheneia_text").equals("") || rs.getString("astheneia_text") == null))){
-                ObservableList<String> row1 = FXCollections.observableArrayList();
+                List<String> row1 = new ArrayList<>();
                 row1.add(Integer.toString(counter++));
                 row1.add(Integer.toString(rs.getInt("id")));
                 row1.add(rs.getString("last_name"));
@@ -142,7 +227,7 @@ public class ShowMisthodotiki implements Serializable{
                 
                 this.data.add(row1); //split the rows so that they fit in the screen.
                 
-                ObservableList<String> row2 = FXCollections.observableArrayList();
+                List<String> row2 = new ArrayList<>();
                 row2.add((rs.getInt("ta") == 1 ? "ΤΑ" :(rs.getInt("ta") == 2 ? "ΑΛ" :
                         (rs.getInt("ta") == 3 ? "ΔΠ" : (rs.getInt("ta") == 4 ? "ΕΑ" :(rs.getInt("ta") == 5 ? "ΔΧ" : 
                                (rs.getInt("ta") == 6 ? "AA" : "ΜΛ")))))));
@@ -171,7 +256,7 @@ public class ShowMisthodotiki implements Serializable{
                 
                 if ((rs.getInt("tapit") != 0)||(rs.getInt("ta") == 3)||(rs.getInt("ta") == 5)
                         ||(rs.getInt("ta") == 6)||(rs.getInt("ta") == 1 && rs.getDouble("epidotisi_astheneias") != 0 )){ //add tapit row or ΔΠ or ΔΧ or AA or ΜΛ                       
-                ObservableList<String> row3 = FXCollections.observableArrayList();
+                List<String> row3 = new ArrayList<>();
                 row3.add(" ");
                 row3.add(" ");
                 row3.add(" ");
@@ -211,7 +296,7 @@ public class ShowMisthodotiki implements Serializable{
                 this.data.add(row3);  
                 }
                 
-                ObservableList<String> row4 = FXCollections.observableArrayList();
+                List<String> row4 = new ArrayList<>();
                 row4.add(" ");
                 row4.add(" ");
                 row4.add(" ");
@@ -271,7 +356,7 @@ public class ShowMisthodotiki implements Serializable{
             int currentPosition = this.data.indexOf(r);
             int insertionPosition = (Integer.parseInt((String)(this.data.get(currentPosition - 1)
                     .get(17))) == -3 ? currentPosition - 3 : currentPosition - 2);
-            ObservableList<String> subtotalRow = FXCollections.observableArrayList();                                    
+            List<String> subtotalRow = new ArrayList<>();                                    
             subtotalRow.add(" ");
             subtotalRow.add(numFormat.format(ensimaTotal - currEnsima));
             subtotalRow.add(numFormat.format(hoursTotal - currHours));
@@ -285,7 +370,7 @@ public class ShowMisthodotiki implements Serializable{
             formerSubsidiary = Integer.parseInt(r.get(17));
     }           
     }
-          ObservableList<String> subtotalRow = FXCollections.observableArrayList();                                    
+            List<String> subtotalRow = new ArrayList<>();                                    
             subtotalRow.add(" ");
             subtotalRow.add(numFormat.format(ensimaTotal - currEnsima));
             subtotalRow.add(numFormat.format(hoursTotal - currHours));
@@ -301,7 +386,7 @@ public class ShowMisthodotiki implements Serializable{
         counter1++;
     }
      //add at the end the grand total row.
-    ObservableList<String> grandTotalRow = FXCollections.observableArrayList();
+    List<String> grandTotalRow = new ArrayList<>();
     double subgrandTotals[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     for (List<String> subRow : subtotalsMap.values()){
         subgrandTotals[0] += Double.valueOf(subRow.get(1));
@@ -316,91 +401,8 @@ public class ShowMisthodotiki implements Serializable{
     
     this.data.add(grandTotalRow);
    } 
-    //prepare the tableView to show the data list
-    
-     
-    TableColumn<ObservableList, String> idCol = new TableColumn<>("Κωδικός\nΗμέρες");
-    idCol.setMinWidth(30);
-    idCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(1).toString());
-    });  
-    TableColumn<ObservableList, String> lastNameCol = new TableColumn<>("Επώνυμο\nΩρες");
-    lastNameCol.setMinWidth(70);
-    lastNameCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(2).toString());
-    }); 
-    TableColumn<ObservableList, String> reasonSalaryCol = new TableColumn<>("\nΑποδοχές");
-    reasonSalaryCol.setMinWidth(70);
-    reasonSalaryCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(3).toString());
-    }); 
-    TableColumn<ObservableList, String> firstNameCol = new TableColumn<>("Ονομα\nΑξία");
-    firstNameCol.setMinWidth(70);
-    firstNameCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(4).toString());
-    });  
-    TableColumn<ObservableList, String> fatherNameCol = new TableColumn<>("Πατρώνυμο\nΕισφ.Εργαζομ.");
-    fatherNameCol.setMinWidth(70);
-    fatherNameCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(5).toString());
-    }); 
-    TableColumn<ObservableList, String> amIKACol = new TableColumn<>("ΑΜ ΙΚΑ\nΕργοδ.Εισφ.");
-    amIKACol.setMinWidth(50);
-    amIKACol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(6).toString());
-    }); 
-    TableColumn<ObservableList, String> meeCol = new TableColumn<>("\nMEE");
-    meeCol.setMinWidth(20);
-    meeCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(7).toString());             
-    }); 
-    TableColumn<ObservableList, String> totalCol = new TableColumn<>("\nΣύνολο");
-    totalCol.setMinWidth(70);
-    totalCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(8).toString());
-     }); 
-    TableColumn<ObservableList, String> paratirisisCol = new TableColumn<>("Παρατηρήσεις\nΧαρ/μο");
-    paratirisisCol.setMinWidth(70);
-    paratirisisCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(9).toString());
-     }); 
-    TableColumn<ObservableList, String> ogaCol = new TableColumn<>("\nΟ.Γ.Α.");
-    ogaCol.setMinWidth(30);
-    ogaCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(10).toString());
-     }); 
-    TableColumn<ObservableList, String> fmyCol = new TableColumn<>("\nΦ.Μ.Υ.");
-    fmyCol.setMinWidth(30);
-    fmyCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(11).toString());
-     }); 
-    TableColumn<ObservableList, String> kratisisCol = new TableColumn<>("\nΚρατήσεις");
-    kratisisCol.setMinWidth(70);
-    kratisisCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(12).toString());
-     }); 
-    TableColumn<ObservableList, String> katharaCol = new TableColumn<>("\nΚαθ.Αποδ.");
-    katharaCol.setMinWidth(70);
-    katharaCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(13).toString());
-     });
-    TableColumn<ObservableList, String> kostosCol = new TableColumn<>("Μ.Κ.\nΚόστος");
-    kostosCol.setMinWidth(70);
-    kostosCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(14).toString());
-     }); 
-    TableColumn<ObservableList, String> prokatavoliCol = new TableColumn<>("Δάνειο\nΠροκ/λή");
-    prokatavoliCol.setMinWidth(30);
-    prokatavoliCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(15).toString());
-     }); 
-    TableColumn<ObservableList, String> miktaCol = new TableColumn<>("Μικτ.Αποδ.\nΠληρωτέο");
-    miktaCol.setMinWidth(70);
-    miktaCol.setCellValueFactory(param -> {                                                             
-             return new SimpleStringProperty(param.getValue().get(16).toString());
-     });     
-      
-    }
+   
+}
     public void showXL() throws IOException{
         HSSFWorkbook workbook = null;
         HSSFSheet misthodotikiSheet = null;
@@ -442,7 +444,7 @@ public class ShowMisthodotiki implements Serializable{
                 misthodotikiSheet.autoSizeColumn(columnIndex);
         out = new FileOutputStream(excelFile);
         workbook.write(out);           
-        messageLabel.setText("Excel written successfully..");
+        JsfUtil.addSuccessMessage("Excel written successfully..");
              
         } catch (FileNotFoundException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

@@ -11,6 +11,7 @@ import Controllers.Logic.Misthodosia.CreatePashaReport;
 import Controllers.util.JsfUtil;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,26 @@ public class MisthodosiaController implements Serializable {
     
     @Inject
     private EmplAdminsController emplAdminsController;
+    @Inject
+    private ShowMisthodotiki showMisthodotiki;
+
+    public EmplAdminsController getEmplAdminsController() {
+        return emplAdminsController;
+    }
+
+    public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
+        this.emplAdminsController = emplAdminsController;
+    }
+
+    public ShowMisthodotiki getShowMisthodotiki() {
+        return showMisthodotiki;
+    }
+
+    public void setShowMisthodotiki(ShowMisthodotiki showMisthodotiki) {
+        this.showMisthodotiki = showMisthodotiki;
+    }
+    
+    
     
     public void createDoroPashaReport() {
         try {         
@@ -54,6 +75,21 @@ public class MisthodosiaController implements Serializable {
                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
             }
+    }
+     
+    public String handleShowMisthodotiki(){
+        try {  
+            int previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
+           // if(previousMonth == 4 || previousMonth == 7 || previousMonth == 12)
+             //   new ShowMisthodotikiMerger().showMisthodotikiMerger(this.emplAdminsController.getCon(),  -1, -1, null);
+           // else
+                new ShowMisthodotiki().showMisthodotiki(this.emplAdminsController.getCon(), null, null);
+               
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            } 
+        return "/views/misthodosia/Misthodotiki.xhtml?faces-redirect=true";
     }
     
     

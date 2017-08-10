@@ -96,7 +96,9 @@
                                 </p:submenu>
                                 <p:submenu label="Εμφάνιση Report Μισθοδοσίας" >
                                     <p:submenu label="Εμφάνιση Μισθοδοτικής Κατάστασης" >
-                                        <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"                                                    
+                                                    action="#{showMisthodotiki.handleShowMisthodotiki()}"
+                                                    update=" :growl"/>
                                         <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
