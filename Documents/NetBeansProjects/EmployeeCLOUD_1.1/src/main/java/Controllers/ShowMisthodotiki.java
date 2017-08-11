@@ -78,14 +78,12 @@ public class ShowMisthodotiki implements Serializable{
 
     public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
         this.emplAdminsController = emplAdminsController;
-    }
-    
-    
-        
+    }    
+      
      public String handleShowMisthodotiki(){
         try {  
-            int previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
-            if(previousMonth == 4 || previousMonth == 7 || previousMonth == 12)
+            int previousMonthL = LocalDate.now().minusMonths(1).getMonthValue();
+            if(previousMonthL == 4 || previousMonthL == 7 || previousMonthL == 12)
              showMisthodotikiMerger(this.emplAdminsController.getCon(),  -1, -1, null);
             else
                 showMisthodotiki(this.emplAdminsController.getCon(), null, null);

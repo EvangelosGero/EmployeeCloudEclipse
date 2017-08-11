@@ -75,22 +75,7 @@ public class MisthodosiaController implements Serializable {
                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
             }
-    }
-     
-    public String handleShowMisthodotiki(){
-        try {  
-            int previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
-           // if(previousMonth == 4 || previousMonth == 7 || previousMonth == 12)
-             //   new ShowMisthodotikiMerger().showMisthodotikiMerger(this.emplAdminsController.getCon(),  -1, -1, null);
-           // else
-                new ShowMisthodotiki().showMisthodotiki(this.emplAdminsController.getCon(), null, null);
-               
-            } catch (SQLException ex) {
-               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
-            } 
-        return "/views/misthodosia/Misthodotiki.xhtml?faces-redirect=true";
-    }
+    }     
     
     
 }

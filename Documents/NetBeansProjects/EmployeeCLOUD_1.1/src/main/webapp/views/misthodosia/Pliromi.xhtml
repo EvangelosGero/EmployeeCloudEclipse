@@ -10,34 +10,46 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ArthroTitle}"></h:outputText>
+            <h:outputText value="#{bundle.PliromiTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ArthroListForm">
-                <p:panel header="#{bundle.ArthroTitle}">
-                    <p:dataTable id="datalist" value="#{showArthro.data}" var="item"                                 
+            <h:form id="PliromiListForm">
+                <p:panel header="#{bundle.PliromiTitle}">
+                    <p:dataTable id="datalist" value="#{showPliromi.data}" var="item"                                 
                                  paginator="true"                                
                                  rows="20"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:column style="width: 400px">                            
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="Πληρωτέο"/>
+                            </f:facet>
                             <h:outputText value="#{item.get(0)}"/>
                         </p:column>
-                        <p:column style="width: 150px">                            
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="Κωδικός\nΗμέρες"/>
+                            </f:facet>
                             <h:outputText value="#{item[1]}"/>
                         </p:column>
-                        <p:column style="width: 150px">                            
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="Επώνυμο\nΩρες"/>
+                            </f:facet>
                             <h:outputText value="#{item[2]}"/>
                         </p:column>
-                        <p:column style="width: 150px">                            
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="\nΑποδοχές"/>
+                            </f:facet>
                             <h:outputText value="#{item[3]}"/>
-                        </p:column>
+                        </p:column>   
                         
                         <f:facet name="footer">
                             <p:commandButton id="ExcelButton" icon="ui-icon-plus"   value="Excel" 
-                                             actionListener="#{showArthro.showXL()}"  
+                                             actionListener="#{showMisthodotiki.showXL()}"  
                                              update=":growl" />                            
                         </f:facet>
                     </p:dataTable>

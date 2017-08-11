@@ -99,27 +99,57 @@
                                         <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"                                                    
                                                     action="#{showMisthodotiki.handleShowMisthodotiki()}"
                                                     update=" :growl"/>
-                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showMisthodotiki.handleShowMisthodotikiDoroPasha()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showMisthodotiki.handleShowMisthodotikiEpidomaAdeias()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showMisthodotiki.handleShowMisthodotikiDoroXmas()}"
+                                                    update=" :growl"/>
                                     </p:submenu>
                                     <p:submenu label="Εμφάνιση Λογιστικού Άρθρου" >
-                                        <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showArthro.handleShowArthro()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showArthro.handleShowArthroDoroPasha()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showArthro.handleShowArthroEpidomaAdeias()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showArthro.handleShowArthroDoroXmas()}"
+                                                    update=" :growl"/>
                                     </p:submenu>
                                     <p:submenu label="Εμφάνιση Κατάστασης ΙΚΑ" >
-                                        <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showIKA.handleShowIKA()}"
+                                                    update=" :growl"/>                                        
+                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showIKA.handleShowIKADoroPasha()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showIKA.handleShowIKAEpidomaAdeias()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showIKA.handleShowIKADoroXmas()}"
+                                                    update=" :growl"/>
                                     </p:submenu>
                                     <p:submenu label="Πληρωμή" >
-                                        <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showPliromi.handleShowPliromi()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showPliromi.handleShowPliromiDoroPasha()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showPliromi.handleShowPliromiEpidomaAdeias()}"
+                                                    update=" :growl"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                    action="#{showPliromi.handleShowPliromiDoroXmas()}"
+                                                    update=" :growl"/>
                                     </p:submenu>
                                 </p:submenu>
                                 <p:submenu label="ΑΠΔ" >

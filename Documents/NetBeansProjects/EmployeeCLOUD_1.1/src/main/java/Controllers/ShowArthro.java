@@ -16,12 +16,16 @@ package Controllers;
 */
 
 
+import Controllers.Logic.Misthodosia.CreateDoroXmasReport;
+import Controllers.Logic.Misthodosia.CreateEAReport;
+import Controllers.Logic.Misthodosia.CreatePashaReport;
 import Controllers.util.JsfUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,6 +43,9 @@ import java.util.ResourceBundle;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -47,8 +54,13 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  *
  * @author egdyn_000
  */
-public class ShowArthro {
+
+@Named("showArthro")
+@SessionScoped
+public class ShowArthro implements Serializable {
     
+    @Inject
+    private EmplAdminsController emplAdminsController;
     private Connection con = null;
     private Statement stm = null;
     private ResultSet rs = null; 
@@ -57,7 +69,7 @@ public class ShowArthro {
     private String tableString, reasonSalary;
     private final Map<Integer, String> subsidiariesMap = new HashMap<>();
     private final Map<Integer, List<String>> companyMap = new HashMap<>();
-    public List<List<String>> data;
+    private List<List<String>> data;
     private int company = -1, subsidiary = -1, ta = -1, firstCompany;
     private int previousMonth, tableYear, currentYear;   
     private double logar600000 = 0, logar600100 = 0, logar600005 = 0, logar600105 = 0, logar600300 = 0, logar600400 = 0,
@@ -70,7 +82,106 @@ public class ShowArthro {
     private double hreosi = 0, pistosi = 0, totalHreosi = 0, totalPistosi = 0;    
     private FileOutputStream out = null;
     private FileInputStream in = null;
-            
+    private String ReportTableString ;
+    private List<List<String>> dataRegular ;    
+    private List<List<String>> dataDoro;
+
+    public EmplAdminsController getEmplAdminsController() {
+        return emplAdminsController;
+    }
+
+    public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
+        this.emplAdminsController = emplAdminsController;
+    }
+
+    public List<List<String>> getData() {
+        return data;
+    }
+
+    public void setData(List<List<String>> data) {
+        this.data = data;
+    }
+
+    
+    
+    
+    public String handleShowArthro(){
+        try {  
+            int previousMonthL = LocalDate.now().minusMonths(1).getMonthValue();
+            if(previousMonthL == 4 || previousMonthL == 7 || previousMonthL == 12)
+             showArthroMerger(this.emplAdminsController.getCon(),  -1, -1, null);
+            else
+                showArthro(this.emplAdminsController.getCon(), null, null);
+               
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            }        
+        return "/views/misthodosia/Arthro.xhtml?faces-redirect=true";        
+    }
+     
+    public String handleShowArthroDoroPasha(){
+        try {
+            showArthro(this.emplAdminsController.getCon(),
+                    "DORO_PASHA_REPORT_"+Integer.toString(LocalDate.now().getYear()), null);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));   
+        }
+      return "/views/misthodosia/Arthro.xhtml?faces-redirect=true";
+    }
+    
+    public String handleShowArthroEpidomaAdeias(){
+        try {
+            showArthro(this.emplAdminsController.getCon(), 
+                "EPIDOMA_ADEIAS_REPORT_"+Integer.toString(LocalDate.now().getYear()), null);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));   
+        }
+      return "/views/misthodosia/Arthro.xhtml?faces-redirect=true"; 
+    }
+    
+    public String handleShowArthroDoroXmas(){
+        try {
+            showArthro(this.emplAdminsController.getCon(), 
+                "DORO_XMAS_REPORT_"+Integer.toString(LocalDate.now().minusMonths(1).getYear()), null);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));   
+        }
+      return "/views/misthodosia/Arthro.xhtml?faces-redirect=true"; 
+    }    
+    
+    public void showArthroMerger(Connection con, int prevMonth, int tablYear, String tableString) throws SQLException{
+         
+        this.con = con;
+        if(prevMonth != -1)this.previousMonth = prevMonth;
+        if(tablYear != -1)this.tableYear = tablYear;
+        String prefix = previousMonth == 4 ? "DORO_PASHA_REPORT_" : previousMonth == 7 ? "EPIDOMA_ADEIAS_REPORT_" :
+                "DORO_XMAS_REPORT_" ;                
+        ReportTableString = prefix+Integer.toString(tableYear);
+        
+        // Run the final report
+        
+        switch (previousMonth){
+            case 5 : new CreatePashaReport().createDBDoroPashaReport(con, 0);
+                    break;
+            case 7 : new CreateEAReport().createDBEpidomaAdeiasReport(con, 0); 
+                    break;
+            case 12 : new CreateDoroXmasReport().createDBDoroXmasReport(con, 0);
+                    break;
+        }        
+        dataRegular = new ArrayList<>();
+        showArthro(con, tableString, null);  
+        dataRegular = this.data;
+        dataDoro = new ArrayList<>();
+        showArthro(con, ReportTableString, null);
+        dataDoro = data;       
+        dataRegular.addAll(dataDoro);
+        showArthro(con, tableString, dataRegular); 
+    }
+
     public void showArthro (Connection con, String tableString, List<List<String>> data1) throws SQLException{
          //initialize the Maps
         try {
