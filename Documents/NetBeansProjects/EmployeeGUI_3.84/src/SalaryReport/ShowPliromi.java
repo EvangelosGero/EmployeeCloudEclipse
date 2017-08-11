@@ -77,9 +77,12 @@ public class ShowPliromi {
         if (tableString == null)this.tableString = "SALARY_"+reportTableStr;                           
         
         DropIfExists.exec("VIEW", "TOTALS");
-        
-        String query = "CREATE VIEW totals AS SELECT SUM(pliroteo) AS total, id  FROM "+this.tableString+
+        String query;
+        if(this.tableString.charAt(0) == 'S')   //Astheneia exists only in TA=1 Taktikes apodoxes
+            query = "CREATE VIEW totals AS SELECT SUM(pliroteo) AS total, id  FROM "+this.tableString+
                 " WHERE (ta != 1) OR (ta=1 AND  (astheneia_text = 'A-TOTAL' OR astheneia_text = '' OR astheneia_text IS NULL ))"
+                + " GROUP BY id ";
+        else    query = "CREATE VIEW totals AS SELECT SUM(pliroteo) AS total, id  FROM "+this.tableString                
                 + " GROUP BY id ";
         
          stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
