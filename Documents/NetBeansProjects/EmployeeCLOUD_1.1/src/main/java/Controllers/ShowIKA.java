@@ -58,7 +58,8 @@ public class ShowIKA implements Serializable{
     private final Map<Integer, List<String>> companyMap = new HashMap<>();
     private List<List<String>> data; 
     private int company = -1, subsidiary = -1, ta = -1, counter =0;
-    private int previousMonth, tableYear, currentYear;
+    private int previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
+    private int tableYear = LocalDate.now().minusMonths(1).getYear();
     private double totals[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     private double ika = 0, ikaEK = 0, ikaVarea = 0, tapitOld = 0, tapitNew = 0;    
     private FileOutputStream out = null;
@@ -177,8 +178,7 @@ public class ShowIKA implements Serializable{
             
                  // find which is the previous month 
             previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
-            tableYear = LocalDate.now().minusMonths(1).getYear();
-            currentYear = LocalDate.now().getYear();
+            tableYear = LocalDate.now().minusMonths(1).getYear();            
             String reportTableStr = "REPORT_"+Integer.toString(previousMonth)
                     +"_"+Integer.toString(tableYear);
             if (tableString == null)this.tableString = "SALARY_"+reportTableStr;

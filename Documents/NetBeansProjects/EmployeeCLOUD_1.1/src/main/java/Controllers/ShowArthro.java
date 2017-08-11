@@ -71,7 +71,8 @@ public class ShowArthro implements Serializable {
     private final Map<Integer, List<String>> companyMap = new HashMap<>();
     private List<List<String>> data;
     private int company = -1, subsidiary = -1, ta = -1, firstCompany;
-    private int previousMonth, tableYear, currentYear;   
+    private int previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
+    private int tableYear = LocalDate.now().minusMonths(1).getYear();   
     private double logar600000 = 0, logar600100 = 0, logar600005 = 0, logar600105 = 0, logar600300 = 0, logar600400 = 0,
             logar550000IKA = 0 , logar550000IKAEK = 0, logar550300tapitOld = 0, logar550300tapitNew = 0,
             logar550000IKAVarea = 0, logar540300imeromisth = 0, logar540300misth = 0, 
@@ -155,7 +156,7 @@ public class ShowArthro implements Serializable {
     
     public void showArthroMerger(Connection con, int prevMonth, int tablYear, String tableString) throws SQLException{
          
-        this.con = con;
+        this.con = con;        
         if(prevMonth != -1)this.previousMonth = prevMonth;
         if(tablYear != -1)this.tableYear = tablYear;
         String prefix = previousMonth == 4 ? "DORO_PASHA_REPORT_" : previousMonth == 7 ? "EPIDOMA_ADEIAS_REPORT_" :
@@ -182,12 +183,12 @@ public class ShowArthro implements Serializable {
         showArthro(con, tableString, dataRegular); 
     }
 
-    public void showArthro (Connection con, String tableString, List<List<String>> data1) throws SQLException{
+    public void showArthro (Connection con, String tableString1, List<List<String>> data1) throws SQLException{
          //initialize the Maps
         try {
             this.con = con;
             this.data = data1;
-            this.tableString = tableString;
+            this.tableString = tableString1;
             
             symbols = new DecimalFormatSymbols();
             symbols.setDecimalSeparator('.');
@@ -195,8 +196,7 @@ public class ShowArthro implements Serializable {
             
                  // find which is the previous month 
             previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
-            tableYear = LocalDate.now().minusMonths(1).getYear();
-            currentYear = LocalDate.now().getYear();
+            tableYear = LocalDate.now().minusMonths(1).getYear();            
             String reportTableStr = "REPORT_"+Integer.toString(previousMonth)
                     +"_"+Integer.toString(tableYear);
             if (tableString == null)this.tableString = "SALARY_"+reportTableStr;

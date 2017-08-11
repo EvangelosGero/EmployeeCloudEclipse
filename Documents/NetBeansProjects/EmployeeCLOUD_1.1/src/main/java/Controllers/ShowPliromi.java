@@ -52,7 +52,8 @@ public class ShowPliromi implements Serializable{
     private double total = 0;
     private FileOutputStream out;
     private FileInputStream in = null;    
-    private int previousMonth, tableYear, currentYear, update; 
+    private int tableYear = LocalDate.now().minusMonths(1).getYear();
+    private int previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
 
     public EmplAdminsController getEmplAdminsController() {
         return emplAdminsController;
@@ -114,11 +115,11 @@ public class ShowPliromi implements Serializable{
       return "/views/misthodosia/Pliromi.xhtml?faces-redirect=true"; 
     }     
   
-  public void showPliromi(Connection con, String tableString1) throws SQLException{
+  public void showPliromi(Connection con, String tableString) throws SQLException{
     
     try{  
         this.con = con;
-        this.tableString = tableString1;
+        this.tableString = tableString;
         
         symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
@@ -126,16 +127,18 @@ public class ShowPliromi implements Serializable{
         
                  /* find which is the previous month */         
         previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
-        tableYear = LocalDate.now().minusMonths(1).getYear(); 
-        currentYear = LocalDate.now().getYear();                                              
+        tableYear = LocalDate.now().minusMonths(1).getYear();                                                       
         String reportTableStr = "REPORT_"+Integer.toString(previousMonth)
                     +"_"+Integer.toString(tableYear);
         if (tableString == null)this.tableString = "SALARY_"+reportTableStr;                           
         
         DropIfExists.exec(emplAdminsController.getCon() ,"VIEW", "TOTALS");
-        
-        String query = "CREATE VIEW totals AS SELECT SUM(pliroteo) AS total, id  FROM "+this.tableString+
+        String query;
+        if(this.tableString.charAt(0) == 'S')   //Astheneia exists only in TA=1 Taktikes apodoxes
+            query = "CREATE VIEW totals AS SELECT SUM(pliroteo) AS total, id  FROM "+this.tableString+
                 " WHERE (ta != 1) OR (ta=1 AND  (astheneia_text = 'A-TOTAL' OR astheneia_text = '' OR astheneia_text IS NULL ))"
+                + " GROUP BY id ";
+        else    query = "CREATE VIEW totals AS SELECT SUM(pliroteo) AS total, id  FROM "+this.tableString                
                 + " GROUP BY id ";
         
          stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,

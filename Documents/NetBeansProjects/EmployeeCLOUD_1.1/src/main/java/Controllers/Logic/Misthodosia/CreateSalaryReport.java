@@ -171,8 +171,7 @@ public class CreateSalaryReport implements Serializable {
     + "start_date DATE, end_date DATE)";                      
         try {
             stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);   
-    // stm.close(); test for exception
+                    ResultSet.CONCUR_UPDATABLE);     
             update = stm.executeUpdate(query);
           } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
