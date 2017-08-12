@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApolisiTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ApolisiForm">
+                <h:panelGrid  columns="2" id="display">
+              <p:panel header="#{bundle.ApolisiTitle}">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.ApolisiFrom}" for="startDate" />
+                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{apolisiController.paretisiDatePicker}" 
+                                title="#{bundle.ApolisiFrom}"  showOn="button" required="true" >
+                        <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
+                    </p:calendar>                    
+                </h:panelGrid> 
+                <p:selectOneRadio id="customRadio" value="#{apolisiController.warningBtn}">
+                    <f:selectItem itemLabel="ΝΑΙ" itemValue="true" />
+                    <f:selectItem itemLabel="ΟΧΙ" itemValue="false" />                         
+                </p:selectOneRadio>               
+                
+                <p:dataTable id="datalist" value="#{workersController.items}" var="worker"
+                                selection="#{goyaController1.selected}"
+                                rowSelectMode="checkbox"
+                                sortMode="multiple" 
+                                selectionMode="single"
+                                paginator="true"
+                                rowKey="#{worker.id}"
+                                rows="10"
+                                rowsPerPageTemplate="10,20,30,40,50"                                
+                                 >
+                        <p:ajax event="rowSelect"  
+                                update="datalist:viewButton1"/>
+                        <p:ajax event="rowUnselect" 
+                                update="datalist:viewButton1"/>                        
+
+                        <p:column filterBy="#{worker.id}" sortBy="#{worker.id}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle_vacation_days.ListVacationDaysTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.lastName}" sortBy="#{worker.lastName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.lastName}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.firstName}" sortBy="#{worker.firstName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.firstName}"/>
+                        </p:column>
+                        <p:column filterBy="#{worker.fatherName}" sortBy="#{worker.fatherName}"  >                                                            
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWorkersTitle_fatherName}"/>
+                            </f:facet>
+                            <h:outputText value="#{worker.fatherName}"/>
+                        </p:column>                        
+                        <f:facet name="footer">                            
+                            <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.ApolisiExec}"
+                                             actionListener="#{apolisiController.handleIpologismosBtn()}"
+                                             update=":TimerIntervalForm:datalistTimer, :growl"  
+                                             disabled="#{apolisiController.paretisiDatePicker eq null
+                                                         || empty goyaController1.selected}"/>                            
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+                <p:panel header="#{bundle.TimerIntervalTODO}">
+                    <p:dataTable id="datalistTimer" value="#{goyaController1.data}" var="item"
+                                 selectionMode="single" selection="#{goyaController1.selectedTimer}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rowIndexVar="myRow"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   
+                                update="createButton  editButton deleteButton rb1Button rb2Button rb3Button rb4Button"/>
+                        <p:ajax event="rowUnselect" 
+                                update="createButton  editButton deleteButton rb1Button rb2Button rb3Button rb4Button"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lastName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.firstName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.TimerInterval_startTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.starttime}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.TimerInterval_endTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.endtime}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.TimerInterval_intervalTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{(item.intervalTime/60000)-480}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.TimerInterval_TimerId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>                       
+                        <f:facet name="footer">  
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton id="rb1Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursEntryBased}" 
+                                             actionListener="#{goyaController1.eightEntry()}" update="datalistTimer, :growl" 
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                                </f:facet>
+                                <f:facet name="right">
+                                    <p:commandButton id="rb2Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursExitBased}" 
+                                             actionListener="#{goyaController1.eightExit()}" update="datalistTimer, :growl" 
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                                </f:facet>
+                            </p:toolbar>
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton id="rb3Button"   icon="ui-icon-pencil" value="#{bundle.EightHours}" 
+                                             actionListener="#{goyaController1.eight()}" update="datalistTimer, :growl"  
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                                </f:facet>
+                                <f:facet name="right">   
+                                    <p:commandButton id="rb4Button"   icon="ui-icon-pencil" value="#{bundle.Recalculation}" 
+                                             actionListener="#{goyaController1.recalculation()}" update="datalistTimer, :growl" 
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                                </f:facet> 
+                            </p:toolbar>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                             actionListener="#{goyaController1.prepareCreate}" 
+                                             disabled="#{empty goyaController1.data}"
+                                             update=":TimerIntervalCreateForm" oncomplete="PF('TimerIntervalCreateDialog').show()"/>                            
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             update=":TimerIntervalEditForm" oncomplete="PF('TimerIntervalEditDialog').show()" 
+                                             disabled="#{empty goyaController1.selectedTimer}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}"
+                                             actionListener="#{goyaController1.destroy}"
+                                             update=":growl, datalistTimer" 
+                                             disabled="#{empty goyaController1.selectedTimer || empty goyaController1.data}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+                </h:panelGrid>
+            </h:form>
+            <ui:include src="CreateTimerInterval.xhtml"/>
+            <ui:include src="EditTimerInterval.xhtml"/>
+        </ui:define>
+    </ui:composition>
+</html>
