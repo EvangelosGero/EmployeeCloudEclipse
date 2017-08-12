@@ -154,7 +154,9 @@
                                 </p:submenu>
                                 <p:submenu label="ΑΠΔ" >
                                     <p:submenu label="PDF Αναλυτικής ΑΠΔ">
-                                        <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>                                        
+                                        <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.createApdPdf()}"
+                                                    update=":growl"/>
                                     </p:submenu>
                                     <p:submenu label="Δημιουργία CSL01" >
                                         <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>                                        

@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Controllers.Logic.Misthodosia.ApdPdf;
 import Controllers.Logic.Misthodosia.CreateDoroXmasReport;
 import Controllers.Logic.Misthodosia.CreateEAReport;
 import Controllers.Logic.Misthodosia.CreatePashaReport;
@@ -68,14 +69,23 @@ public class MisthodosiaController implements Serializable {
             }
     }
     
-     public void createXmasReport() {
+    public void createXmasReport() {
         try {         
             new CreateDoroXmasReport().createDBDoroXmasReport(this.emplAdminsController.getCon(), 0);
             } catch (SQLException ex) {
                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
             }
-    }     
+    }  
+    
+    public void createApdPdf() {
+        try {         
+            new ApdPdf().apdPdf(this.emplAdminsController.getCon(), null);           
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            }
+    } 
     
     
 }
