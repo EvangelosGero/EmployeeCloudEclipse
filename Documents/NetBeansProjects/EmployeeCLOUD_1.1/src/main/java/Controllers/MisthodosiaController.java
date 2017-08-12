@@ -6,10 +6,12 @@
 package Controllers;
 
 import Controllers.Logic.Misthodosia.ApdPdf;
+import Controllers.Logic.Misthodosia.CSL01;
 import Controllers.Logic.Misthodosia.CreateDoroXmasReport;
 import Controllers.Logic.Misthodosia.CreateEAReport;
 import Controllers.Logic.Misthodosia.CreatePashaReport;
 import Controllers.util.JsfUtil;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -85,6 +87,18 @@ public class MisthodosiaController implements Serializable {
                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
             }
+    } 
+    
+    public void createCSL01() {
+        try {         
+            new CSL01().csl01(this.emplAdminsController.getCon(), null);           
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            } catch (IOException ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));  
+        }
     } 
     
     

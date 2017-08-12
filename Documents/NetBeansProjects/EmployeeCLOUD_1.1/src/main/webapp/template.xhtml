@@ -159,7 +159,9 @@
                                                     update=":growl"/>
                                     </p:submenu>
                                     <p:submenu label="Δημιουργία CSL01" >
-                                        <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>                                        
+                                        <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.createCSL01()}"
+                                                    update=":growl"/>
                                     </p:submenu>
                                     <p:submenu label="Αποδείξεις Πληρωμής" >
                                         <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>
