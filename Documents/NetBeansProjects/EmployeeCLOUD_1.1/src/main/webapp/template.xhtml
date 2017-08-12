@@ -164,10 +164,18 @@
                                                     update=":growl"/>
                                     </p:submenu>
                                     <p:submenu label="Αποδείξεις Πληρωμής" >
-                                        <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.createApodixisPDF()}"
+                                                    update=":growl"/>
+                                        <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.createDPApodixisPDF()}"
+                                                    update=":growl"/>
+                                        <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.createEAApodixisPDF()}"
+                                                    update=":growl"/>
+                                        <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.createDXApodixisPDF()}"
+                                                    update=":growl"/>
                                     </p:submenu>                                    
                                 </p:submenu>
                                 <p:submenu label="Διακοπή Εργασιακής Σχέσης" >

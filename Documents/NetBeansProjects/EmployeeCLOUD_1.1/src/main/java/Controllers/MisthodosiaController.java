@@ -6,6 +6,7 @@
 package Controllers;
 
 import Controllers.Logic.Misthodosia.ApdPdf;
+import Controllers.Logic.Misthodosia.ApodixisPDF;
 import Controllers.Logic.Misthodosia.CSL01;
 import Controllers.Logic.Misthodosia.CreateDoroXmasReport;
 import Controllers.Logic.Misthodosia.CreateEAReport;
@@ -99,7 +100,47 @@ public class MisthodosiaController implements Serializable {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));  
         }
+    }
+    
+ public void createApodixisPDF() {
+        try {         
+            new ApodixisPDF().apodixisPDF(this.emplAdminsController.getCon(), null);           
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            }
     } 
+ 
+ public void createDPApodixisPDF() {
+        try {         
+            new ApodixisPDF().apodixisPDF(this.emplAdminsController.getCon(), 
+                    "DORO_PASHA_REPORT_"+Integer.toString(LocalDate.now().getYear()));           
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            }
+  } 
+ 
+ public void createEAApodixisPDF() {
+        try {         
+            new ApodixisPDF().apodixisPDF(this.emplAdminsController.getCon(), 
+                    "EPIDOMA_ADEIAS_REPORT_"+Integer.toString(LocalDate.now().getYear()));           
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            }
+  }
+ 
+ public void createDXApodixisPDF() {
+        try {         
+            new ApodixisPDF().apodixisPDF(this.emplAdminsController.getCon(), 
+                    "DORO_XMAS_REPORT_"+Integer.toString(LocalDate.now().minusMonths(1).getYear()));           
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
+            }
+  }
+     
     
     
 }
