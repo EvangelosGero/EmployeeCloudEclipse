@@ -53,10 +53,10 @@ public class ApodixisPDF {
     private final Map<Integer, Double> cutHoursMap = new HashMap<>();
     private int previousMonth, tableYear, currentYear;
 
-    public void apodixisPDF(Connection con, String tableString) throws SQLException{
+    public void apodixisPDF(Connection con, String tableString1) throws SQLException{
         try {
             this.con = con;
-            this.tableString = tableString;
+            this.tableString = tableString1;
                          
                  // find which is the previous month 
            previousMonth = LocalDate.now().minusMonths(1).getMonthValue();
@@ -92,7 +92,8 @@ public class ApodixisPDF {
                    + "t2.afm, t2.am_ika, t2.kentro_kostous, t2.am_epikourikou "
                    + " FROM "+this.tableString+" AS t1, workers AS t2 "
                    + "WHERE t1.id = t2.id "
-                   + "ORDER BY company, t1.last_name, t1.first_name, ta, reason_salary, astheneia_text ");
+                   + "ORDER BY company, t1.last_name, t1.first_name, ta, reason_salary "
+                   + (this.tableString.charAt(0) == 'S' ? " , astheneia_text " : "" )); //astheneia_text field exists only if ta=1 (monthly salaryReport)
             String [] param = new String[69];
             Arrays.fill(param, " ");               
             
