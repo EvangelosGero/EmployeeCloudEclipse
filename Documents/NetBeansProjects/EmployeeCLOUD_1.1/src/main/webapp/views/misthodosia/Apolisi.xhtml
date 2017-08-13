@@ -15,8 +15,8 @@
 
         <ui:define name="body">
             <h:form id="ApolisiForm">
-                <h:panelGrid  columns="2" id="display">
-              <p:panel header="#{bundle.ApolisiTitle}" style="width:50%">
+                <p:panelGrid  columns="2" id="display" layout="grid">
+              <p:panel header="#{bundle.ApolisiTitle}">
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ApolisiFrom}" for="startDate" />
                     <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{apolisiController.diakopiDate}" 
@@ -40,9 +40,9 @@
                                 rowsPerPageTemplate="10,20,30,40,50"                                
                                  >
                         <p:ajax event="rowSelect"  
-                                update="datalist:viewButton1"/>
+                                update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, ApolisiForm:pdfBtn"/>
                         <p:ajax event="rowUnselect" 
-                                update="datalist:viewButton1"/>                        
+                                update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, ApolisiForm:pdfBtn"/>                        
 
                         <p:column filterBy="#{worker.id}" sortBy="#{worker.id}"  >                                                            
                             <f:facet name="header" >
@@ -77,52 +77,55 @@
                         </f:facet>
                     </p:dataTable>
                 </p:panel>                    
-                <p:panelGrid id="ipologismosGrid" columns="4" style="width: 200% >
+                <p:panelGrid id="ipologismosGrid" columns="4"  >
                         <f:facet name="header">
                             <p:outputLabel value="#{bundle.ApolisiIpologismos}"/>
                         </f:facet>
-                        <h:outputText value="Υπολοιλπόμενες ημέρες αδείας:"/>
-                        <h:outputText value="#{apolisiController.ipolipesAdeiesTextField}" />
-                        <h:outputText value="X ημερήσιο κόστος ="/>
-                        <h:outputText value="#{apolisiController.dailyAdeiaCostTextField}" />
-                        <h:outputText value="Κόστος μη ληφθεισών αδειών:"/>                                              
-                        <h:outputText value="#{apolisiController.totalAdeiesCostTextField}" />
+                        <p:outputLabel for="next1" value="Υπολοιπόμενες ημέρες αδείας:"/>
+                        <p:inputText id="next1" value="#{apolisiController.ipolipesAdeiesTextField}"  readonly="true"/>
+                        <p:outputLabel for="next2" value="X ημερήσιο κόστος ="/>
+                        <p:inputText id="next2"  value="#{apolisiController.dailyAdeiaCostTextField}" readonly="true"/>
+                        <p:outputLabel value="Κόστος μη ληφθεισών αδειών:"/>                                              
+                        <p:inputText value="#{apolisiController.totalAdeiesCostTextField}" readonly="true"/>
                         <h:outputText/>
                         <h:outputText/>  
-                        <h:outputText value="Χρόνος προειδοποίησης (μήνες)"/>                        
-                        <h:outputText value="#{apolisiController.proTextField}" />
+                        <p:outputLabel for="next3" value="Χρόνος προειδοποίησης (μήνες)"/>                        
+                        <p:inputText id="next3" value="#{apolisiController.proTextField}" readonly="true"/>
                         <h:outputText/>
                         <h:outputText/>
-                        <h:outputText value="Αποζημίωση απόλυσης:"/>
-                        <h:outputText value="#{apolisiController.apolisiApozimiosiTextField}" />
+                        <p:outputLabel for="next4" value="Αποζημίωση απόλυσης:"/>
+                        <p:inputText id="next4" value="#{apolisiController.apolisiApozimiosiTextField}" readonly="true"/>
                         <h:outputText/>
                         <h:outputText/>
-                        <h:outputText value="Μισθοδοσία τακτική εκκαθάριση:"/>
-                        <h:outputText value="#{apolisiController.misthodosiaTextField}" />
-                        <h:outputText value="Πληρωτέο:"/>
-                        <h:outputText value="#{apolisiController.pliroteoMisthodosiaTextField}" />
-                        <h:outputText value="Αδεια ληφθείσα εκκαθάριση:"/>
-                        <h:outputText value="#{apolisiController.adeiaLifthisaTextField}" />
-                        <h:outputText value="Πληρωτέο:"/>
-                        <h:outputText value="#{apolisiController.pliroteoLiftheisaTextField}" />
-                        <h:outputText value="Επίδομα αδείας:"/>
-                        <h:outputText value="#{apolisiController.epidomaAdeiasTextField}" />
-                        <h:outputText value="Πληρωτέο:"/>
-                        <h:outputText value="#{apolisiController.pliroteoEpidomaAdeiasTextField}" />
-                        <h:outputText value="Συνολικό κόστος:"/>
-                        <h:outputText value="#{apolisiController.totalCostTextField}" />
-                        <h:outputText value="Συνολικό πληρωτέο:"/>
-                        <h:outputText value="#{apolisiController.pliroteoTotal}" />
+                        <p:outputLabel for="next5" value="Μισθοδοσία τακτική εκκαθάριση:"/>
+                        <p:inputText id="next5" value="#{apolisiController.misthodosiaTextField}" readonly="true"/>
+                        <p:outputLabel for="next6" value="Πληρωτέο:"/>
+                        <p:inputText id="next6" value="#{apolisiController.pliroteoMisthodosiaTextField}" readonly="true"/>
+                        <p:outputLabel for="next7" value="Αδεια ληφθείσα εκκαθάριση:"/>
+                        <p:inputText id="next7" value="#{apolisiController.adeiaLifthisaTextField}" readonly="true"/>
+                        <p:outputLabel for="next8" value="Πληρωτέο:"/>
+                        <p:inputText id="next8" value="#{apolisiController.pliroteoLiftheisaTextField}" readonly="true"/>
+                        <p:outputLabel for="next9" value="Επίδομα αδείας:"/>
+                        <p:inputText id="next9" value="#{apolisiController.epidomaAdeiasTextField}" readonly="true"/>
+                        <p:outputLabel for="next10" value="Πληρωτέο:"/>
+                        <p:inputText id="next10" value="#{apolisiController.pliroteoEpidomaAdeiasTextField}" readonly="true"/>
+                        <p:outputLabel for="next11" value="Συνολικό κόστος:"/>
+                        <p:inputText id="next11" value="#{apolisiController.totalCostTextField}" readonly="true"/>
+                        <p:outputLabel for="next12" value="Συνολικό πληρωτέο:"/>
+                        <p:inputText id="next12" value="#{apolisiController.pliroteoTotal}" readonly="true"/>
                         <f:facet name="footer">
-                            <p:commandButton actionListener="#{apolisiController.handleOristikopoiisiBtn()}" value="Οριστικοποίηση" 
-                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>
-                            <p:commandButton actionListener="#{apolisiController.handleExcelBtn()}" value="Excel" 
-                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>
-                            <p:commandButton actionListener="#{apolisiController.handlePdf()}" value="PDF Απόδειξης" 
-                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>                            
+                            <p:commandButton id="oristikpopoiisiBtn" actionListener="#{apolisiController.handleOristikopoiisiBtn()}" value="Οριστικοποίηση" 
+                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"
+                                            disabled="#{not apolisiController.selected}"/>
+                            <p:commandButton id="excelBtn" actionListener="#{apolisiController.handleExcelBtn()}" value="Excel" 
+                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"
+                                            disabled="#{not apolisiController.selected}"/>/>
+                            <p:commandButton  id="pdfBtn" actionListener="#{apolisiController.handlePdf()}" value="PDF Απόδειξης" 
+                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"
+                                            disabled="#{not apolisiController.selected}"/>/>                            
                         </f:facet>   
                     </p:panelGrid>
-                </h:panelGrid>
+                </p:panelGrid>
             </h:form>            
         </ui:define>
     </ui:composition>
