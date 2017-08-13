@@ -19,7 +19,7 @@
               <p:panel header="#{bundle.ApolisiTitle}">
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ApolisiFrom}" for="startDate" />
-                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{apolisiController.paretisiDatePicker}" 
+                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{apolisiController.diakopiDate}" 
                                 title="#{bundle.ApolisiFrom}"  showOn="button" required="true" >
                         <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
                     </p:calendar>                    
@@ -72,7 +72,7 @@
                             <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.ApolisiExec}"
                                              actionListener="#{apolisiController.handleIpologismosBtn()}"
                                              update=":TimerIntervalForm:datalistTimer, :growl"  
-                                             disabled="#{apolisiController.paretisiDatePicker eq null
+                                             disabled="#{apolisiController.diakopiDate eq null
                                                          || empty goyaController1.selected}"/>                            
                         </f:facet>
                     </p:dataTable>

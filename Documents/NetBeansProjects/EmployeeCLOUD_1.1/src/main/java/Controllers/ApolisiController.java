@@ -5,6 +5,12 @@
  */
 package Controllers;
 
+import Controllers.Logic.CreateReport;
+import Controllers.Logic.CreateVacationReport;
+import Controllers.Logic.Misthodosia.ApodixisPDF;
+import Controllers.Logic.Misthodosia.CreateEAReport;
+import Controllers.Logic.Misthodosia.CreateSalaryReport;
+import Controllers.util.JsfUtil;
 import com.dynamotors.timer1._rest.Workers;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -38,6 +44,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -52,17 +59,16 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 @SessionScoped
 public class ApolisiController implements Serializable {
     
-    
+    @Inject
+    private EmplAdminsController emplAdminsController;
     private String nameTextField;    
     private String fatherNameTextField;    
-    private String lastNameTextField;    
-    private Date paretisiDatePicker;   
+    private String lastNameTextField; 
     private String ipolipesAdeiesTextField;    
     private String dailyAdeiaCostTextField;   
     private String totalAdeiesCostTextField;    
     private String totalCostTextField;
-    private Workers selected;
-    //private Connection con = null;
+    private Workers selected;    
     private Statement stm = null;
     private PreparedStatement prs = null;
     private ResultSet rs = null, rs1 = null;
@@ -73,24 +79,13 @@ public class ApolisiController implements Serializable {
     
     private boolean warningBtn;
     
-    private RadioButton noRadioBtn;
+    private String apolisiApozimiosiTextField;
     
-    private TextField apolisiApozimiosiTextField;
+    private String proTextField;
     
-    private TextField proTextField;
     
-    private ToggleGroup myToggleGroup;
     
-    private AnchorPane root;
     
-    private Button oristikopoiisiBtn;
-    
-    private Button excelBtn;
-    
-    private Button PDFButton;
-    
-    private ChoiceBox<Integer> idChoiceBox;
-    private  ObservableList<Integer> idItems;
     private final Map<Integer, List<String>> idMap  = new HashMap<>();
     private FileOutputStream out;
     private FileInputStream in = null;
@@ -121,19 +116,15 @@ public class ApolisiController implements Serializable {
     
     private String pliroteoMisthodosiaTextField;
     private double pliroteoMisthodosia, pliroteoLiftheisa, misthodosia, adeiaLifthisa;
-    
+    private Date diakopiDate;
     private String pliroteoLiftheisaTextField;
 
-    
-    
-    
-    public Date getParetisiDatePicker() {
-        return paretisiDatePicker;
-        
-    }    
+    public Date getDiakopiDate() {
+        return diakopiDate;
+    }
 
-    public void setParetisiDatePicker(Date paretisiDatePicker) {
-        this.paretisiDatePicker = paretisiDatePicker;
+    public void setDiakopiDate(Date diakopiDate) {
+        this.diakopiDate = diakopiDate;
     }
 
     public boolean isWarningBtn() {
@@ -151,31 +142,155 @@ public class ApolisiController implements Serializable {
     public void setSelected(Workers selected) {
         this.selected = selected;
     }
-    
-    
 
+    public EmplAdminsController getEmplAdminsController() {
+        return emplAdminsController;
+    }
+
+    public void setEmplAdminsController(EmplAdminsController emplAdminsController) {
+        this.emplAdminsController = emplAdminsController;
+    }
+
+    public String getEpidomaAdeiasTextField() {
+        return epidomaAdeiasTextField;
+    }
+
+    public void setEpidomaAdeiasTextField(String epidomaAdeiasTextField) {
+        this.epidomaAdeiasTextField = epidomaAdeiasTextField;
+    }
+
+    public String getPliroteoEpidomaAdeiasTextField() {
+        return pliroteoEpidomaAdeiasTextField;
+    }
+
+    public void setPliroteoEpidomaAdeiasTextField(String pliroteoEpidomaAdeiasTextField) {
+        this.pliroteoEpidomaAdeiasTextField = pliroteoEpidomaAdeiasTextField;
+    }
+
+    public String getNameTextField() {
+        return nameTextField;
+    }
+
+    public void setNameTextField(String nameTextField) {
+        this.nameTextField = nameTextField;
+    }
+
+    public String getFatherNameTextField() {
+        return fatherNameTextField;
+    }
+
+    public void setFatherNameTextField(String fatherNameTextField) {
+        this.fatherNameTextField = fatherNameTextField;
+    }
+
+    public String getLastNameTextField() {
+        return lastNameTextField;
+    }
+
+    public void setLastNameTextField(String lastNameTextField) {
+        this.lastNameTextField = lastNameTextField;
+    }
+
+    public String getIpolipesAdeiesTextField() {
+        return ipolipesAdeiesTextField;
+    }
+
+    public void setIpolipesAdeiesTextField(String ipolipesAdeiesTextField) {
+        this.ipolipesAdeiesTextField = ipolipesAdeiesTextField;
+    }
+
+    public String getDailyAdeiaCostTextField() {
+        return dailyAdeiaCostTextField;
+    }
+
+    public void setDailyAdeiaCostTextField(String dailyAdeiaCostTextField) {
+        this.dailyAdeiaCostTextField = dailyAdeiaCostTextField;
+    }
+
+    public String getTotalAdeiesCostTextField() {
+        return totalAdeiesCostTextField;
+    }
+
+    public void setTotalAdeiesCostTextField(String totalAdeiesCostTextField) {
+        this.totalAdeiesCostTextField = totalAdeiesCostTextField;
+    }
+
+    public String getTotalCostTextField() {
+        return totalCostTextField;
+    }
+
+    public void setTotalCostTextField(String totalCostTextField) {
+        this.totalCostTextField = totalCostTextField;
+    }
+
+    public String getApolisiApozimiosiTextField() {
+        return apolisiApozimiosiTextField;
+    }
+
+    public void setApolisiApozimiosiTextField(String apolisiApozimiosiTextField) {
+        this.apolisiApozimiosiTextField = apolisiApozimiosiTextField;
+    }
+
+    public String getProTextField() {
+        return proTextField;
+    }
+
+    public void setProTextField(String proTextField) {
+        this.proTextField = proTextField;
+    }
+
+    public String getMisthodosiaTextField() {
+        return misthodosiaTextField;
+    }
+
+    public void setMisthodosiaTextField(String misthodosiaTextField) {
+        this.misthodosiaTextField = misthodosiaTextField;
+    }
+
+    public String getAdeiaLifthisaTextField() {
+        return adeiaLifthisaTextField;
+    }
+
+    public void setAdeiaLifthisaTextField(String adeiaLifthisaTextField) {
+        this.adeiaLifthisaTextField = adeiaLifthisaTextField;
+    }
+
+    public String getPliroteoTotal() {
+        return pliroteoTotal;
+    }
+
+    public void setPliroteoTotal(String pliroteoTotal) {
+        this.pliroteoTotal = pliroteoTotal;
+    }
+
+    public String getPliroteoMisthodosiaTextField() {
+        return pliroteoMisthodosiaTextField;
+    }
+
+    public void setPliroteoMisthodosiaTextField(String pliroteoMisthodosiaTextField) {
+        this.pliroteoMisthodosiaTextField = pliroteoMisthodosiaTextField;
+    }
+
+    public String getPliroteoLiftheisaTextField() {
+        return pliroteoLiftheisaTextField;
+    }
+
+    public void setPliroteoLiftheisaTextField(String pliroteoLiftheisaTextField) {
+        this.pliroteoLiftheisaTextField = pliroteoLiftheisaTextField;
+    }
+    
+    
+    
     @PostConstruct
-    public void init() {
-        paretisiDatePicker.setConverter(utilities.DateFormatterGreek.converter);
-        paretisiDatePicker.setPromptText(utilities.DateFormatterGreek.promptText);        
+    public void init() {               
         symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
         numFormat = new DecimalFormat(".00", symbols);
         
-        oristikopoiisiBtn.setDisable(true);
-        excelBtn.setDisable(true);
-        PDFButton.setDisable(true);
+        
         try {
-            stm = employeegui.EmployeeGUI.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String sql = "SELECT id, first_name, last_name, father_name FROM workers";
-            rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                List <String> idList = new ArrayList<>();
-                idList.add(rs.getString("first_name"));
-                idList.add(rs.getString("father_name"));
-                idList.add(rs.getString("last_name"));
-                idMap.put(rs.getInt("id"), idList);
-            }
+            
+            stm = emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);            
             if (rs != null)rs.close();
             rs = stm.executeQuery("SELECT * FROM subsidiaries");
             while (rs.next())subsidiariesMap.put(rs.getInt("id"), rs.getString("name"));
@@ -190,41 +305,23 @@ public class ApolisiController implements Serializable {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(ParaitisiController.class.getName()).log(Level.SEVERE, null, ex);
-            ErrorStage.showErrorStage(ex.getMessage());
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{try {
             if (rs != null)rs.close() ;
             if (stm != null)stm.close();
             //if (con != null) con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ApolisiController.class.getName()).log(Level.SEVERE, null, ex);
-            ErrorStage.showErrorStage(ex.getMessage());            
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));         
         }
-        }
-        idItems = FXCollections.observableArrayList(idMap.keySet());
-        idChoiceBox.setItems(idItems);
-        idChoiceBox.setValue(idItems.get(0));
-        nameTextField.setText(idMap.get((Integer)idMap.keySet().toArray()[0]).get(0));
-        fatherNameTextField.setText(idMap.get((Integer)idMap.keySet().toArray()[0]).get(1));
-        lastNameTextField.setText(idMap.get((Integer)idMap.keySet().toArray()[0]).get(2));
-        idChoiceBox.valueProperty().addListener(new ChangeListener <Integer>(){
-                
-            @Override
-            public void changed(ObservableValue<? extends Integer> observableValue, Integer oldValue, Integer newValue) {
-                nameTextField.setText(idMap.get(newValue).get(0));
-                fatherNameTextField.setText(idMap.get(newValue).get(1));
-                lastNameTextField.setText(idMap.get(newValue).get(2));
-            }
-        });
-    }    
-
-    @FXML
-    private void handleOristikopoiisiBtn(ActionEvent event) throws SQLException {
-        String id = Integer.toString(idChoiceBox.getValue());
-        Date diakopiDate = Date.valueOf(paretisiDatePicker.getValue());
+        }  
+    } 
+    private void handleOristikopoiisiBtn(){
+        
         try {
-            stm = employeegui.EmployeeGUI.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String sql = "select * from workers WHERE id = "+id;
+            stm = emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql = "select * from workers WHERE id = "+this.selected.getId().toString();
             rs = stm.executeQuery(sql);
             rs.first();
             rs.updateInt("apolisi", 1);
@@ -233,20 +330,20 @@ public class ApolisiController implements Serializable {
             rs.updateRow();
             if (rs != null)rs.close();
             
-            sql = "SELECT * FROM apozimioseis WHERE id = "+id;
+            sql = "SELECT * FROM apozimioseis WHERE id = "+this.selected.getId().toString();
             rs = stm.executeQuery(sql);
             if (rs.first() == false){
               rs.close();              
               sql = "INSERT INTO apozimioseis VALUES (?, ?, ?, ?, ? )";
-              prs = employeegui.EmployeeGUI.con.prepareStatement(sql);
-              prs.setInt(1, idChoiceBox.getValue());
+              prs = emplAdminsController.getCon().prepareStatement(sql);
+              prs.setInt(1, this.selected.getId());
               prs.setDouble(2, apozimiosi);
               prs.setDouble(3, apozimiosiMiLifthisasAdeias);
               prs.setInt(4, remainingDays);
               prs.setInt(5, (int)imeresErgasias);
               prs.executeUpdate();                 
             }else{
-              rs.updateInt("id", idChoiceBox.getValue());
+              rs.updateInt("id", this.selected.getId());
               rs.updateDouble("apozimiosi", apozimiosi);
               rs.updateDouble("mi_lifthises_adeies", apozimiosiMiLifthisasAdeias);
               rs.updateInt("imeres_adeias", remainingDays);
@@ -255,21 +352,26 @@ public class ApolisiController implements Serializable {
             }
                         
         } catch (SQLException ex) {
-         Logger.getLogger(ParaitisiController.class.getName()).log(Level.SEVERE, null, ex);
-         ErrorStage.showErrorStage(ex.getMessage());
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
-            if (rs != null)rs.close();
-            if (stm != null)stm.close();
-            if (prs != null)prs.close();
+            try {
+                if (rs != null)rs.close();
+                if (stm != null)stm.close();
+                if (prs != null)prs.close();
+            } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+               JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
         }
             }
 
-    @FXML
-    private void handleExcelBtn(ActionEvent event) throws IOException{
+    
+    private void handleExcelBtn() throws IOException{
          
         HSSFWorkbook workbook = null;
         String excelPath = "C:\\EmployeeGUI\\EmployeeGUIOutput\\"
-                   +lastNameTextField.getText()+"_"+nameTextField.getText()+"_apolisi.xls"; 
+                   +this.selected.getLastName()+"_"+this.selected.getFirstName()+"_apolisi.xls"; 
         try {
         File excelFile = new File(excelPath);
         if (excelFile.exists()){
@@ -303,35 +405,33 @@ public class ApolisiController implements Serializable {
         counter++;
         }       
         HSSFRow dataRow = pliromiSheet.createRow(1);
-        dataRow.createCell(0).setCellValue(nameTextField.getText());
-        dataRow.createCell(1).setCellValue(lastNameTextField.getText());
-        dataRow.createCell(2).setCellValue(fatherNameTextField.getText());
-        dataRow.createCell(3).setCellValue(apolisiApozimiosiTextField.getText());
-        dataRow.createCell(4).setCellValue(proTextField.getText());
-        dataRow.createCell(5).setCellValue(totalAdeiesCostTextField.getText());
-        dataRow.createCell(6).setCellValue(misthodosiaTextField.getText());
-        dataRow.createCell(7).setCellValue(adeiaLifthisaTextField.getText());
-        dataRow.createCell(8).setCellValue(epidomaAdeiasTextField.getText());
-        dataRow.createCell(9).setCellValue(totalCostTextField.getText());
-        dataRow.createCell(10).setCellValue(pliroteoMisthodosiaTextField.getText());
-        dataRow.createCell(11).setCellValue(pliroteoLiftheisaTextField.getText());
-        dataRow.createCell(12).setCellValue(pliroteoEpidomaAdeiasTextField.getText());
-        dataRow.createCell(13).setCellValue(pliroteoTotal.getText());
+        dataRow.createCell(0).setCellValue(this.selected.getFirstName());
+        dataRow.createCell(1).setCellValue(this.selected.getLastName());
+        dataRow.createCell(2).setCellValue(this.selected.getFatherName());
+        dataRow.createCell(3).setCellValue(apolisiApozimiosiTextField);
+        dataRow.createCell(4).setCellValue(proTextField);
+        dataRow.createCell(5).setCellValue(totalAdeiesCostTextField);
+        dataRow.createCell(6).setCellValue(misthodosiaTextField);
+        dataRow.createCell(7).setCellValue(adeiaLifthisaTextField);
+        dataRow.createCell(8).setCellValue(epidomaAdeiasTextField);
+        dataRow.createCell(9).setCellValue(totalCostTextField);
+        dataRow.createCell(10).setCellValue(pliroteoMisthodosiaTextField);
+        dataRow.createCell(11).setCellValue(pliroteoLiftheisaTextField);
+        dataRow.createCell(12).setCellValue(pliroteoEpidomaAdeiasTextField);
+        dataRow.createCell(13).setCellValue(pliroteoTotal);
                
         for (int columnIndex = 0; columnIndex < 14; columnIndex++)
                 pliromiSheet.autoSizeColumn(columnIndex);        
             out = new FileOutputStream(excelFile);
             workbook.write(out);           
-            messageLabel.setText("Excel written successfully..");
+            JsfUtil.addSuccessMessage("Excel written successfully..");
              
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            messageLabel.setText(e.getMessage());
-            ErrorStage.showErrorStage(e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-            messageLabel.setText(e.getMessage());
-            ErrorStage.showErrorStage(e.getMessage());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        } catch (IOException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
            if(out != null)out.close();
            if(in != null)in.close();
@@ -339,10 +439,9 @@ public class ApolisiController implements Serializable {
   }
     
 
-    @FXML
-    private void handleCancelBtn(ActionEvent event) {
-       // Stage stage = (Stage)root.getScene().getWindow();
-       root.getChildren().clear();
+   
+    private void handleCancelBtn() {
+       
     }
 
       
@@ -352,42 +451,41 @@ public class ApolisiController implements Serializable {
         
         /* Create a recent employee_vacation table to capture the latest vacation days */
         
-        new employeegui.CreateVacationReport().CreateVacationDBTable(employeegui.EmployeeGUI.con);
+        new CreateVacationReport().CreateVacationDBTable(this.emplAdminsController.getCon());
         
         
         
         /* find which is the current Year */        
         
-        currentYear = paretisiDatePicker.getValue().getYear();   
+        currentYear = this.getDiakopiDate().toLocalDate().getYear();   
         
         epidomaAdeias = 0;
         pliroteoEpidomaAdeias = 0;
-            
-        if (idChoiceBox.getValue() != null && idChoiceBox.getValue() != 0 && paretisiDatePicker.getValue() != null){
+        
         try {
-            stm = employeegui.EmployeeGUI.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stm = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
             // Now compute epidoma adeias
         
-            if (paretisiDatePicker.getValue().isBefore(LocalDate.of(currentYear, 8, 1))){
-                computeEpidomaAdeias(idChoiceBox.getValue());            
-                query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+Integer.toString(idChoiceBox.getValue());
+            if (this.diakopiDate.toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){
+                computeEpidomaAdeias(this.selected.getId());            
+                query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+this.selected.getId().toString();
                 rs = stm.executeQuery(query);
                 rs.first();
                 epidomaAdeias = rs.getDouble(1);
                 pliroteoEpidomaAdeias = rs.getDouble(2);                
                 if (rs != null)rs.close(); 
             }
-            epidomaAdeiasTextField.setText(numFormat.format(epidomaAdeias));
-            pliroteoEpidomaAdeiasTextField.setText(numFormat.format(pliroteoEpidomaAdeias));
+            epidomaAdeiasTextField =  numFormat.format(epidomaAdeias);
+            pliroteoEpidomaAdeiasTextField = numFormat.format(pliroteoEpidomaAdeias);
             
             //Compute the salary 
             
-            computeSalary(idChoiceBox.getValue());
-            misthodosiaTextField.setText(numFormat.format(misthodosia));
-            pliroteoMisthodosiaTextField.setText(numFormat.format(pliroteoMisthodosia));
-            adeiaLifthisaTextField.setText(numFormat.format(adeiaLifthisa));
-            pliroteoLiftheisaTextField.setText(numFormat.format(pliroteoLiftheisa));
+            computeSalary(this.selected.getId());
+            misthodosiaTextField = numFormat.format(misthodosia);
+            pliroteoMisthodosiaTextField = numFormat.format(pliroteoMisthodosia);
+            adeiaLifthisaTextField = numFormat.format(adeiaLifthisa);
+            pliroteoLiftheisaTextField = numFormat.format(pliroteoLiftheisa);
            
             //Now compute the rest
             
@@ -396,16 +494,16 @@ public class ApolisiController implements Serializable {
                     + "t1.kat_asfalisis, t1.job_title, "
                    + "t1.afm, t1.kentro_kostous, t1.am_epikourikou , t1.am_ika"
                     + " FROM workers AS t1, employee_vacation AS t2 WHERE t1.id = "
-                    +Integer.toString(idChoiceBox.getValue())
+                    + this.selected.getId().toString()
                     +" AND t1.id = t2.id";
               
             rs = stm.executeQuery(query);
             rs.first();
-            nameTextField.setText(rs.getString(1));
-            fatherNameTextField.setText(rs.getString(2));
-            lastNameTextField.setText(rs.getString(3));
+            nameTextField = rs.getString(1);
+            fatherNameTextField = rs.getString(2);
+            lastNameTextField = rs.getString(3);
             hireDate = rs.getDate(4).toLocalDate();
-            apolisiDate = paretisiDatePicker.getValue();
+            apolisiDate = this.diakopiDate.toLocalDate();
             remainingDays = rs.getInt(5);
             salary = rs.getDouble(6);
             relation = rs.getInt(7);
@@ -418,40 +516,38 @@ public class ApolisiController implements Serializable {
             amEpikourikou = rs.getString(14);
             amIka = rs.getString(15);
             
-            ipolipesAdeiesTextField.setText(Integer.toString(remainingDays));
-            dailyAdeiaCostTextField.setText(numFormat.format(relation == 0 ? salary/25 : salary));
+            ipolipesAdeiesTextField = Integer.toString(remainingDays);
+            dailyAdeiaCostTextField = numFormat.format(relation == 0 ? salary/25 : salary);
             apozimiosiMiLifthisasAdeias = computeApozimiosiMiLifthisasAdeias(remainingDays, salary, relation);            
-            apozimiosi = computeApozimiosi(hireDate, apolisiDate, salary, relation, yesRadioBtn.isSelected());
+            apozimiosi = computeApozimiosi(hireDate, apolisiDate, salary, relation, this.warningBtn);
             imeresErgasias = imeromisthia == 0 ? misthoi * 25 :
                     imeromisthia;
             
-            apolisiApozimiosiTextField.setText(numFormat.format(apozimiosi));
-            totalAdeiesCostTextField.setText(numFormat.format(apozimiosiMiLifthisasAdeias));
-            totalCostTextField.setText(numFormat.format(apozimiosiMiLifthisasAdeias + apozimiosi+
-                    misthodosia+adeiaLifthisa+epidomaAdeias));
-            pliroteoTotal.setText(numFormat.format(apozimiosiMiLifthisasAdeias + apozimiosi+
-                pliroteoMisthodosia+ pliroteoLiftheisa+pliroteoEpidomaAdeias));   
+            apolisiApozimiosiTextField = numFormat.format(apozimiosi);
+            totalAdeiesCostTextField = numFormat.format(apozimiosiMiLifthisasAdeias);
+            totalCostTextField = numFormat.format(apozimiosiMiLifthisasAdeias + apozimiosi+
+                    misthodosia+adeiaLifthisa+epidomaAdeias);
+            pliroteoTotal = numFormat.format(apozimiosiMiLifthisasAdeias + apozimiosi+
+                pliroteoMisthodosia+ pliroteoLiftheisa+pliroteoEpidomaAdeias);   
             
             if (relation == 0){
-                if (yesRadioBtn.isSelected()){
-            proTextField.setText(Integer.toString(proMonths));            
+                if (this.warningBtn){
+            proTextField = Integer.toString(proMonths);            
         }else{
-            proTextField.setText("0");            
+            proTextField = "0";            
         }
        }else {
-            proTextField.setText("0");            
+            proTextField = "0";            
        }
-            oristikopoiisiBtn.setDisable(false);
-            excelBtn.setDisable(false);
-            PDFButton.setDisable(false);
+          //  oristikopoiisiBtn.setDisable(false);
+          //  excelBtn.setDisable(false);
+          //  PDFButton.setDisable(false);
         } catch (SQLException ex) {
-            Logger.getLogger(ParaitisiController.class.getName()).log(Level.SEVERE, null, ex);
-            ErrorStage.showErrorStage(ex.getMessage());
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
             if (rs != null)rs.close();
-        }
-        }else Alerts.showErrorAlert("Παρακαλώ συμπληρώστε σωστά τo πεδίo ημερομηνίας και ID"
-                    , "ΣΦΑΛΜΑ", "Σφάλμα κενών πεδίων ημερομηνίας");
+        }        
     }
     
     public double computeApozimiosi(LocalDate hireDate, LocalDate apolisiDate, double salary, int relation, boolean yesRadioBtn){
@@ -675,20 +771,7 @@ public class ApolisiController implements Serializable {
     }
    
     
-    public void showMessage(String str){
-        Stage stage = new Stage(StageStyle.DECORATED);
-        Label label = new Label(str);
-        VBox vBox = new VBox(label);
-        vBox.setPadding(new Insets(5, 5, 5, 5));
-        Button btn = new Button("OK");
-        btn.setOnAction(ev ->{
-          stage.close();
-        });         
-        Scene scene = new Scene(vBox, 100, 100);
-        stage.setScene(scene);
-        stage.showAndWait();
-        
-    }
+    
     public double computeApozimiosiMiLifthisasAdeias(int remainingDays, double salary, int relation){
         
         double salaryFinal;
@@ -698,11 +781,10 @@ public class ApolisiController implements Serializable {
     }
     public void initConn(Connection con){
         //this.con = con;
-    }  
-
-    @FXML
-    private void handlePdf(ActionEvent event) throws FileNotFoundException, DocumentException, IOException, SQLException {
-        String fileString = nameTextField.getText()+"_"+lastNameTextField.getText()+"_apodixi_apolisis.pdf";
+    } 
+    
+    private void handlePdf() throws FileNotFoundException, DocumentException, IOException, SQLException {
+        String fileString = this.selected.getLastName()+"_"+this.selected.getFirstName()+"_apodixi_apolisis.pdf";
         File newFile = new File("C:\\EmployeeGUI\\EmployeeGUIOutput\\"+fileString);
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(newFile));
@@ -717,11 +799,11 @@ public class ApolisiController implements Serializable {
         param[4] = companyMap.get(company).get(7);
         param[5] = "Αποζημίωση Απόλυσης";
         param[6] = companyMap.get(company).get(8);
-        param[7] = lastNameTextField.getText();
+        param[7] = this.selected.getLastName();
         param[8] = jobTitle;
-        param[9] = nameTextField.getText();
+        param[9] = this.selected.getFirstName();
         param[10] = subsidiariesMap.get(subsidiary);
-        param[11] = fatherNameTextField.getText();
+        param[11] = this.selected.getFatherName();
         param[12] = kentroKostous;
         param[13] = afm;
         param[14] = (relation==0 ? "ΥΠΑΛΛΗΛΟΣ" : "ΗΜΕΡΟΜΙΣΘΙΟΣ");
@@ -738,7 +820,7 @@ public class ApolisiController implements Serializable {
         param[67] = param[64];
         param[68] = param[64];
         
-        SalaryReport.ApodixisPDF apodixisPDF = new SalaryReport.ApodixisPDF();
+        ApodixisPDF apodixisPDF = new ApodixisPDF();
         apodixisPDF.createPDF(param, document);
         
         //Create the second apodixi of the page.
@@ -756,10 +838,10 @@ public class ApolisiController implements Serializable {
         document.newPage();
         
         try {
-            if(stm.isClosed())stm = employeegui.EmployeeGUI.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            if (paretisiDatePicker.getValue().isBefore(LocalDate.of(currentYear, 8, 1))){
+            if(stm.isClosed())stm = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            if (this.diakopiDate.toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){
                 rs1 = stm.executeQuery("SELECT * FROM "+temporaryTableStr+" WHERE id = "
-                    +Integer.toString(idChoiceBox.getValue()));
+                    +this.selected.getId().toString());
                 rs1.first();        
         
                 param[5] = "Επίδομα Αδείας";
@@ -799,7 +881,7 @@ public class ApolisiController implements Serializable {
         double isforaAllilegiisBuffer = 0;
         double adjSalaryBuffer = 0;
         rs1 = stm.executeQuery("SELECT *  FROM "+salaryTableStr+" WHERE  id = "
-                +Integer.toString(idChoiceBox.getValue())
+                + this.selected.getId().toString()
                 +" ORDER BY ta, reason_salary");
         while(rs1.next()){
           if (rs1.getInt("ta")==1 || rs1.getInt("ta")==2){
@@ -853,8 +935,8 @@ public class ApolisiController implements Serializable {
         }
         }
         } catch (SQLException ex) {
-            Logger.getLogger(ApolisiController.class.getName()).log(Level.SEVERE, null, ex);
-            ErrorStage.showErrorStage(ex.getMessage());
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{ if (rs1 != null)rs1.close();}
         
         document.close();
@@ -867,14 +949,14 @@ public class ApolisiController implements Serializable {
         try {
             String qry = "UPDATE workers SET apolisi = 0 WHERE id = "+Integer.toString(id);//To make epidoma adeias run
             stm.executeUpdate(qry);
-            new SalaryReport.CreateEpidomaAdeiasReport().createDBEpidomaAdeiasReport(employeegui.EmployeeGUI.con, 0);
+            new CreateEAReport().createDBEpidomaAdeiasReport(this.emplAdminsController.getCon(), 0);
             String epidomaAdeiasTableStr = "EPIDOMA_ADEIAS_REPORT_"+
                 Integer.toString(currentYear) ;
             temporaryTableStr = "EPIDOMA_ADEIAS_TEMPORARY_"+Integer.toString(currentYear) ;
             
             //Check if temporaryTable exists and if not create it            
             
-            DatabaseMetaData databaseMetaData = employeegui.EmployeeGUI.con.getMetaData();            
+            DatabaseMetaData databaseMetaData = this.emplAdminsController.getCon().getMetaData();            
             rs1 = databaseMetaData.getTables(null, null, temporaryTableStr , null);
             if (!rs1.next()) {                                                      
                 stm.executeUpdate("CREATE TABLE "+temporaryTableStr+" (ID SMALLINT, First_Name VARCHAR(20), "
@@ -897,8 +979,8 @@ public class ApolisiController implements Serializable {
         stm.executeUpdate("DROP TABLE "+epidomaAdeiasTableStr);           
                                         
         } catch (SQLException ex) {
-            Logger.getLogger(ApolisiController.class.getName()).log(Level.SEVERE, null, ex);
-            ErrorStage.showErrorStage(ex.getMessage());
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
            if(rs1 != null)rs1.close();
         }
@@ -911,21 +993,21 @@ public class ApolisiController implements Serializable {
             adeiaLifthisa = 0;
             pliroteoLiftheisa = 0;
             
-            reportTableStr = "REPORT_"+Integer.toString(paretisiDatePicker.getValue().getMonthValue())
-                    +"_"+Integer.toString(paretisiDatePicker.getValue().getYear());
+            reportTableStr = "REPORT_"+Integer.toString(this.diakopiDate.toLocalDate().getMonthValue())
+                    +"_"+Integer.toString(this.diakopiDate.toLocalDate().getYear());
             salaryTableStr = "SALARY_"+reportTableStr;
             
             //if the tables exist read the data out of them. If they don't exist create them
             
-            DatabaseMetaData databaseMetaData = employeegui.EmployeeGUI.con.getMetaData();
+            DatabaseMetaData databaseMetaData = this.emplAdminsController.getCon().getMetaData();
             rs1 = databaseMetaData.getTables(null, null, reportTableStr , null);
             if (!rs1.next()){
-                new employeegui.CreateReport().CreateMonthlyDBTable(employeegui.EmployeeGUI.con, paretisiDatePicker.getValue() );
+                new CreateReport().CreateMonthlyDBTable(this.emplAdminsController.getCon(), this.diakopiDate.toLocalDate());
             }
             if(rs1 != null)rs1.close();
             rs1 = databaseMetaData.getTables(null, null, salaryTableStr , null);
             if (!rs1.next()){
-                new SalaryReport.CreateSalaryReport().CreateDBSalaryReport(employeegui.EmployeeGUI.con, paretisiDatePicker.getValue() );
+                new CreateSalaryReport().CreateDBSalaryReport(this.emplAdminsController.getCon(), this.diakopiDate.toLocalDate());
             }
             if(rs1 != null)rs1.close();
             rs1 = stm.executeQuery("SELECT kostos, pliroteo, ta  FROM "+salaryTableStr+" WHERE id = "+Integer.toString(id));
@@ -943,8 +1025,8 @@ public class ApolisiController implements Serializable {
                     }
                 }
                 } catch (SQLException ex) {
-            Logger.getLogger(ApolisiController.class.getName()).log(Level.SEVERE, null, ex);
-            ErrorStage.showErrorStage(ex.getMessage());
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
            if(rs1 != null)rs1.close();
         }
