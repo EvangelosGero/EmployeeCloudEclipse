@@ -16,7 +16,7 @@
         <ui:define name="body">
             <h:form id="ApolisiForm">
                 <h:panelGrid  columns="2" id="display">
-              <p:panel header="#{bundle.ApolisiTitle}">
+              <p:panel header="#{bundle.ApolisiTitle}" style="width:50%">
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ApolisiFrom}" for="startDate" />
                     <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{apolisiController.diakopiDate}" 
@@ -71,110 +71,59 @@
                         <f:facet name="footer">                            
                             <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.ApolisiExec}"
                                              actionListener="#{apolisiController.handleIpologismosBtn()}"
-                                             update=":TimerIntervalForm:datalistTimer, :growl"  
+                                             update="ApolisiForm:ipologismosGrid, :growl"  
                                              disabled="#{apolisiController.diakopiDate eq null
                                                          || empty goyaController1.selected}"/>                            
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
-                <p:panel header="#{bundle.TimerIntervalTODO}">
-                    <p:dataTable id="datalistTimer" value="#{goyaController1.data}" var="item"
-                                 selectionMode="single" selection="#{goyaController1.selectedTimer}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rowIndexVar="myRow"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
-
-                        <p:ajax event="rowSelect"   
-                                update="createButton  editButton deleteButton rb1Button rb2Button rb3Button rb4Button"/>
-                        <p:ajax event="rowUnselect" 
-                                update="createButton  editButton deleteButton rb1Button rb2Button rb3Button rb4Button"/>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_lastName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.lastName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWorkersTitle_firstName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.firstName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.TimerInterval_startTime}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.starttime}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3"/>
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.TimerInterval_endTime}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.endtime}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT+3"/>
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.TimerInterval_intervalTime}"/>
-                            </f:facet>
-                            <h:outputText value="#{(item.intervalTime/60000)-480}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.TimerInterval_TimerId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>                       
-                        <f:facet name="footer">  
-                            <p:toolbar>
-                                <f:facet name="left">
-                                    <p:commandButton id="rb1Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursEntryBased}" 
-                                             actionListener="#{goyaController1.eightEntry()}" update="datalistTimer, :growl" 
-                                             disabled="#{empty goyaController1.selectedTimer}"/>
-                                </f:facet>
-                                <f:facet name="right">
-                                    <p:commandButton id="rb2Button"   icon="ui-icon-pencil" value="#{bundle.EightHoursExitBased}" 
-                                             actionListener="#{goyaController1.eightExit()}" update="datalistTimer, :growl" 
-                                             disabled="#{empty goyaController1.selectedTimer}"/>
-                                </f:facet>
-                            </p:toolbar>
-                            <p:toolbar>
-                                <f:facet name="left">
-                                    <p:commandButton id="rb3Button"   icon="ui-icon-pencil" value="#{bundle.EightHours}" 
-                                             actionListener="#{goyaController1.eight()}" update="datalistTimer, :growl"  
-                                             disabled="#{empty goyaController1.selectedTimer}"/>
-                                </f:facet>
-                                <f:facet name="right">   
-                                    <p:commandButton id="rb4Button"   icon="ui-icon-pencil" value="#{bundle.Recalculation}" 
-                                             actionListener="#{goyaController1.recalculation()}" update="datalistTimer, :growl" 
-                                             disabled="#{empty goyaController1.selectedTimer}"/>
-                                </f:facet> 
-                            </p:toolbar>
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
-                                             actionListener="#{goyaController1.prepareCreate}" 
-                                             disabled="#{empty goyaController1.data}"
-                                             update=":TimerIntervalCreateForm" oncomplete="PF('TimerIntervalCreateDialog').show()"/>                            
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
-                                             update=":TimerIntervalEditForm" oncomplete="PF('TimerIntervalEditDialog').show()" 
-                                             disabled="#{empty goyaController1.selectedTimer}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}"
-                                             actionListener="#{goyaController1.destroy}"
-                                             update=":growl, datalistTimer" 
-                                             disabled="#{empty goyaController1.selectedTimer || empty goyaController1.data}"/>
+                </p:panel>                    
+                <p:panelGrid id="ipologismosGrid" columns="4" style="width: 200% >
+                        <f:facet name="header">
+                            <p:outputLabel value="#{bundle.ApolisiIpologismos}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
+                        <h:outputText value="Υπολοιλπόμενες ημέρες αδείας:"/>
+                        <h:outputText value="#{apolisiController.ipolipesAdeiesTextField}" />
+                        <h:outputText value="X ημερήσιο κόστος ="/>
+                        <h:outputText value="#{apolisiController.dailyAdeiaCostTextField}" />
+                        <h:outputText value="Κόστος μη ληφθεισών αδειών:"/>                                              
+                        <h:outputText value="#{apolisiController.totalAdeiesCostTextField}" />
+                        <h:outputText/>
+                        <h:outputText/>  
+                        <h:outputText value="Χρόνος προειδοποίησης (μήνες)"/>                        
+                        <h:outputText value="#{apolisiController.proTextField}" />
+                        <h:outputText/>
+                        <h:outputText/>
+                        <h:outputText value="Αποζημίωση απόλυσης:"/>
+                        <h:outputText value="#{apolisiController.apolisiApozimiosiTextField}" />
+                        <h:outputText/>
+                        <h:outputText/>
+                        <h:outputText value="Μισθοδοσία τακτική εκκαθάριση:"/>
+                        <h:outputText value="#{apolisiController.misthodosiaTextField}" />
+                        <h:outputText value="Πληρωτέο:"/>
+                        <h:outputText value="#{apolisiController.pliroteoMisthodosiaTextField}" />
+                        <h:outputText value="Αδεια ληφθείσα εκκαθάριση:"/>
+                        <h:outputText value="#{apolisiController.adeiaLifthisaTextField}" />
+                        <h:outputText value="Πληρωτέο:"/>
+                        <h:outputText value="#{apolisiController.pliroteoLiftheisaTextField}" />
+                        <h:outputText value="Επίδομα αδείας:"/>
+                        <h:outputText value="#{apolisiController.epidomaAdeiasTextField}" />
+                        <h:outputText value="Πληρωτέο:"/>
+                        <h:outputText value="#{apolisiController.pliroteoEpidomaAdeiasTextField}" />
+                        <h:outputText value="Συνολικό κόστος:"/>
+                        <h:outputText value="#{apolisiController.totalCostTextField}" />
+                        <h:outputText value="Συνολικό πληρωτέο:"/>
+                        <h:outputText value="#{apolisiController.pliroteoTotal}" />
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{apolisiController.handleOristikopoiisiBtn()}" value="Οριστικοποίηση" 
+                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>
+                            <p:commandButton actionListener="#{apolisiController.handleExcelBtn()}" value="Excel" 
+                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>
+                            <p:commandButton actionListener="#{apolisiController.handlePdf()}" value="PDF Απόδειξης" 
+                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"/>                            
+                        </f:facet>   
+                    </p:panelGrid>
                 </h:panelGrid>
-            </h:form>
-            <ui:include src="CreateTimerInterval.xhtml"/>
-            <ui:include src="EditTimerInterval.xhtml"/>
+            </h:form>            
         </ui:define>
     </ui:composition>
 </html>

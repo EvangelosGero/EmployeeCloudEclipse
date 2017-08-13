@@ -317,7 +317,7 @@ public class ApolisiController implements Serializable {
         }
         }  
     } 
-    private void handleOristikopoiisiBtn(){
+    public void handleOristikopoiisiBtn(){
         
         try {
             stm = emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -367,7 +367,7 @@ public class ApolisiController implements Serializable {
             }
 
     
-    private void handleExcelBtn() throws IOException{
+    public void handleExcelBtn() throws IOException{
          
         HSSFWorkbook workbook = null;
         String excelPath = "C:\\EmployeeGUI\\EmployeeGUIOutput\\"
@@ -783,7 +783,7 @@ public class ApolisiController implements Serializable {
         //this.con = con;
     } 
     
-    private void handlePdf() throws FileNotFoundException, DocumentException, IOException, SQLException {
+    public void handlePdf() throws FileNotFoundException, DocumentException, IOException, SQLException {
         String fileString = this.selected.getLastName()+"_"+this.selected.getFirstName()+"_apodixi_apolisis.pdf";
         File newFile = new File("C:\\EmployeeGUI\\EmployeeGUIOutput\\"+fileString);
         Document document = new Document();
