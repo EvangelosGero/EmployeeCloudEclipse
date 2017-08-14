@@ -40,10 +40,10 @@
                                  >
                         <p:ajax event="rowSelect"  
                                 update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
-                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid"/>
+                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid"  />
                         <p:ajax event="rowUnselect" 
                                 update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
-                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid"/>                        
+                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" />                        
 
                         <p:column filterBy="#{worker.id}" sortBy="#{worker.id}"  >                                                            
                             <f:facet name="header" >
@@ -123,7 +123,7 @@
                                              value="Οριστικοποίηση" update=":growl" 
                                             disabled="#{empty apolisiController.diakopiDate
                                                          || empty apolisiController.selected
-                                                         || empty  apolisiController.totalCostTextField}}"/>
+                                                         || empty  apolisiController.totalCostTextField}"/>
                             <p:commandButton id="excelBtn" actionListener="#{apolisiController.handleExcelBtn()}" 
                                              value="Excel" update=":growl" 
                                             disabled="#{empty apolisiController.diakopiDate
