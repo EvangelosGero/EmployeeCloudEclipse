@@ -784,8 +784,19 @@ public class ApolisiController implements Serializable {
         apozimiosi = remainingDays * 1.2 * salaryFinal; 
         return apozimiosi;
     }
-    public void initConn(Connection con){
-        //this.con = con;
+    public void resetIpologismosForm(){
+        this.adeiaLifthisaTextField = null;
+        this.apolisiApozimiosiTextField = null;
+        this.dailyAdeiaCostTextField = null;
+        this.epidomaAdeiasTextField = null;
+        this.ipolipesAdeiesTextField = null;
+        this.misthodosiaTextField = null;
+        this.pliroteoEpidomaAdeiasTextField = null;
+        this.pliroteoLiftheisaTextField = null;
+        this.proTextField = null;
+        this.pliroteoMisthodosiaTextField = null;
+        this.totalAdeiesCostTextField = null;
+        this.totalCostTextField = null;
     } 
     
     public void handlePdf() {

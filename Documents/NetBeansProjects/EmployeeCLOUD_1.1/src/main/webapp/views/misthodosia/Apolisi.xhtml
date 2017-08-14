@@ -21,12 +21,15 @@
                     <p:outputLabel value="#{bundle.ApolisiFrom}" for="startDate" />
                     <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{apolisiController.diakopiDate}" 
                                 title="#{bundle.ApolisiFrom}"  showOn="button" required="true" >
-                        <p:ajax event="dateSelect"   update="datalist:viewButton1"/>
+                        <p:ajax event="dateSelect"   update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
+                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{apolisiController.resetIpologismosForm()}"/>
                     </p:calendar>                    
                 </h:panelGrid> 
-                <p:selectOneRadio id="customRadio" value="#{apolisiController.warningBtn}">
+                  <p:selectOneRadio id="customRadio" value="#{apolisiController.warningBtn}" >
                     <f:selectItem itemLabel="ΝΑΙ" itemValue="true" />
-                    <f:selectItem itemLabel="ΟΧΙ" itemValue="false" />                         
+                    <f:selectItem itemLabel="ΟΧΙ" itemValue="false" />
+                    <p:ajax event="change"   update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
+                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{apolisiController.resetIpologismosForm()}"/>
                 </p:selectOneRadio>               
                 
                 <p:dataTable id="datalist" value="#{workersController.items}" var="worker"
@@ -40,7 +43,7 @@
                                  >
                         <p:ajax event="rowSelect"  
                                 update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
-                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid"  />
+                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{apolisiController.resetIpologismosForm()}"  />
                         <p:ajax event="rowUnselect" 
                                 update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
                                 ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" />                        
