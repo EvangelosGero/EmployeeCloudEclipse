@@ -21,10 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,6 +30,7 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -116,14 +115,14 @@ public class ApolisiController implements Serializable {
     
     private String pliroteoMisthodosiaTextField;
     private double pliroteoMisthodosia, pliroteoLiftheisa, misthodosia, adeiaLifthisa;
-    private Date diakopiDate;
+    private java.util.Date diakopiDate;
     private String pliroteoLiftheisaTextField;
 
-    public Date getDiakopiDate() {
+    public java.util.Date getDiakopiDate() {
         return diakopiDate;
     }
 
-    public void setDiakopiDate(Date diakopiDate) {
+    public void setDiakopiDate(java.util.Date diakopiDate) {
         this.diakopiDate = diakopiDate;
     }
 
@@ -325,7 +324,7 @@ public class ApolisiController implements Serializable {
             rs = stm.executeQuery(sql);
             rs.first();
             rs.updateInt("apolisi", 1);
-            rs.updateDate("diakopi", diakopiDate);
+            rs.updateDate("diakopi", java.sql.Date.valueOf(diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
             
             rs.updateRow();
             if (rs != null)rs.close();
@@ -457,7 +456,7 @@ public class ApolisiController implements Serializable {
         
         /* find which is the current Year */        
         
-        currentYear = this.getDiakopiDate().toLocalDate().getYear();   
+        currentYear = this.getDiakopiDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear();   
         
         epidomaAdeias = 0;
         pliroteoEpidomaAdeias = 0;
@@ -467,7 +466,7 @@ public class ApolisiController implements Serializable {
             
             // Now compute epidoma adeias
         
-            if (this.diakopiDate.toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){
+            if (this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){
                 computeEpidomaAdeias(this.selected.getId());            
                 query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+this.selected.getId().toString();
                 rs = stm.executeQuery(query);
@@ -503,7 +502,7 @@ public class ApolisiController implements Serializable {
             fatherNameTextField = rs.getString(2);
             lastNameTextField = rs.getString(3);
             hireDate = rs.getDate(4).toLocalDate();
-            apolisiDate = this.diakopiDate.toLocalDate();
+            apolisiDate = this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             remainingDays = rs.getInt(5);
             salary = rs.getDouble(6);
             relation = rs.getInt(7);
@@ -839,7 +838,7 @@ public class ApolisiController implements Serializable {
         
         try {
             if(stm.isClosed())stm = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            if (this.diakopiDate.toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){
+            if (this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){
                 rs1 = stm.executeQuery("SELECT * FROM "+temporaryTableStr+" WHERE id = "
                     +this.selected.getId().toString());
                 rs1.first();        
@@ -993,8 +992,8 @@ public class ApolisiController implements Serializable {
             adeiaLifthisa = 0;
             pliroteoLiftheisa = 0;
             
-            reportTableStr = "REPORT_"+Integer.toString(this.diakopiDate.toLocalDate().getMonthValue())
-                    +"_"+Integer.toString(this.diakopiDate.toLocalDate().getYear());
+            reportTableStr = "REPORT_"+Integer.toString(this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue())
+                    +"_"+Integer.toString(this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear());
             salaryTableStr = "SALARY_"+reportTableStr;
             
             //if the tables exist read the data out of them. If they don't exist create them
@@ -1002,12 +1001,14 @@ public class ApolisiController implements Serializable {
             DatabaseMetaData databaseMetaData = this.emplAdminsController.getCon().getMetaData();
             rs1 = databaseMetaData.getTables(null, null, reportTableStr , null);
             if (!rs1.next()){
-                new CreateReport().CreateMonthlyDBTable(this.emplAdminsController.getCon(), this.diakopiDate.toLocalDate());
+                new CreateReport().CreateMonthlyDBTable(this.emplAdminsController.getCon(), 
+                        this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             }
             if(rs1 != null)rs1.close();
             rs1 = databaseMetaData.getTables(null, null, salaryTableStr , null);
             if (!rs1.next()){
-                new CreateSalaryReport().CreateDBSalaryReport(this.emplAdminsController.getCon(), this.diakopiDate.toLocalDate());
+                new CreateSalaryReport().CreateDBSalaryReport(this.emplAdminsController.getCon(), 
+                        this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             }
             if(rs1 != null)rs1.close();
             rs1 = stm.executeQuery("SELECT kostos, pliroteo, ta  FROM "+salaryTableStr+" WHERE id = "+Integer.toString(id));
