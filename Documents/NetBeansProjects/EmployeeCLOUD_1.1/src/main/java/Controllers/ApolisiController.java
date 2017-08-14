@@ -66,8 +66,8 @@ public class ApolisiController implements Serializable {
     private String ipolipesAdeiesTextField;    
     private String dailyAdeiaCostTextField;   
     private String totalAdeiesCostTextField;    
-    private String totalCostTextField;
-    private Workers selected;    
+    private String totalCostTextField = null;
+    private Workers selected = null;    
     private Statement stm = null;
     private PreparedStatement prs = null;
     private ResultSet rs = null, rs1 = null;
@@ -115,7 +115,7 @@ public class ApolisiController implements Serializable {
     
     private String pliroteoMisthodosiaTextField;
     private double pliroteoMisthodosia, pliroteoLiftheisa, misthodosia, adeiaLifthisa;
-    private java.util.Date diakopiDate;
+    private java.util.Date diakopiDate = null;
     private String pliroteoLiftheisaTextField;
 
     public java.util.Date getDiakopiDate() {
@@ -349,7 +349,7 @@ public class ApolisiController implements Serializable {
               rs.updateInt("imeres_apozimiosis", (int)imeresErgasias);
               rs.updateRow();
             }
-                        
+         JsfUtil.addSuccessMessage("Η οριστικοποίηση έγινε επιτυχώς");
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -363,10 +363,10 @@ public class ApolisiController implements Serializable {
                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
-            }
+    }
 
     
-    public void handleExcelBtn() throws IOException{
+    public void handleExcelBtn(){
          
         HSSFWorkbook workbook = null;
         String excelPath = "C:\\EmployeeGUI\\EmployeeGUIOutput\\"
@@ -432,8 +432,12 @@ public class ApolisiController implements Serializable {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
-           if(out != null)out.close();
-           if(in != null)in.close();
+            try {
+                if(out != null)out.close();
+                if(in != null)in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ApolisiController.class.getName()).log(Level.SEVERE, null, ex);
+            }
        }
   }
     
@@ -444,109 +448,111 @@ public class ApolisiController implements Serializable {
     }
 
       
-    public void handleIpologismosBtn() throws SQLException, InterruptedException, ExecutionException {
-        String query;
-        numFormat = new DecimalFormat(".00");
-        
-        /* Create a recent employee_vacation table to capture the latest vacation days */
-        
-        new CreateVacationReport().CreateVacationDBTable(this.emplAdminsController.getCon());
-        
-        
-        
-        /* find which is the current Year */        
-        
-        currentYear = this.getDiakopiDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear();   
-        
-        epidomaAdeias = 0;
-        pliroteoEpidomaAdeias = 0;
-        
+    public void handleIpologismosBtn() {
         try {
-            stm = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String query;
+            numFormat = new DecimalFormat(".00");
             
-            // Now compute epidoma adeias
-        
-            if (this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){
-                computeEpidomaAdeias(this.selected.getId());            
-                query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+this.selected.getId().toString();
+            /* Create a recent employee_vacation table to capture the latest vacation days */
+            
+            new CreateVacationReport().CreateVacationDBTable(this.emplAdminsController.getCon());
+            
+            
+            
+            /* find which is the current Year */
+            
+            currentYear = this.getDiakopiDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear();   
+            
+            epidomaAdeias = 0;
+            pliroteoEpidomaAdeias = 0;            
+           
+                stm = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                
+                // Now compute epidoma adeias
+                
+                if (this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){          
+                    computeEpidomaAdeias(this.selected.getId());
+                    query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+this.selected.getId().toString();
+                    rs = stm.executeQuery(query);
+                    rs.first();
+                    epidomaAdeias = rs.getDouble(1);
+                    pliroteoEpidomaAdeias = rs.getDouble(2);
+                    if (rs != null)rs.close();
+                }
+                epidomaAdeiasTextField =  numFormat.format(epidomaAdeias);
+                pliroteoEpidomaAdeiasTextField = numFormat.format(pliroteoEpidomaAdeias);
+                
+                //Compute the salary
+                
+                computeSalary(this.selected.getId());
+                misthodosiaTextField = numFormat.format(misthodosia);
+                pliroteoMisthodosiaTextField = numFormat.format(pliroteoMisthodosia);
+                adeiaLifthisaTextField = numFormat.format(adeiaLifthisa);
+                pliroteoLiftheisaTextField = numFormat.format(pliroteoLiftheisa);
+                
+                //Now compute the rest
+                
+                query = "SELECT t1.first_name, t1.father_name, t1.last_name, t1.hire_date, "
+                        + " t2.remaining_days, t1.salary, t1.relation, t1.subsidiary, t1.company, "
+                        + "t1.kat_asfalisis, t1.job_title, "
+                        + "t1.afm, t1.kentro_kostous, t1.am_epikourikou , t1.am_ika"
+                        + " FROM workers AS t1, employee_vacation AS t2 WHERE t1.id = "
+                        + this.selected.getId().toString()
+                        +" AND t1.id = t2.id";
+                
                 rs = stm.executeQuery(query);
                 rs.first();
-                epidomaAdeias = rs.getDouble(1);
-                pliroteoEpidomaAdeias = rs.getDouble(2);                
-                if (rs != null)rs.close(); 
-            }
-            epidomaAdeiasTextField =  numFormat.format(epidomaAdeias);
-            pliroteoEpidomaAdeiasTextField = numFormat.format(pliroteoEpidomaAdeias);
-            
-            //Compute the salary 
-            
-            computeSalary(this.selected.getId());
-            misthodosiaTextField = numFormat.format(misthodosia);
-            pliroteoMisthodosiaTextField = numFormat.format(pliroteoMisthodosia);
-            adeiaLifthisaTextField = numFormat.format(adeiaLifthisa);
-            pliroteoLiftheisaTextField = numFormat.format(pliroteoLiftheisa);
-           
-            //Now compute the rest
-            
-            query = "SELECT t1.first_name, t1.father_name, t1.last_name, t1.hire_date, "
-                    + " t2.remaining_days, t1.salary, t1.relation, t1.subsidiary, t1.company, "
-                    + "t1.kat_asfalisis, t1.job_title, "
-                   + "t1.afm, t1.kentro_kostous, t1.am_epikourikou , t1.am_ika"
-                    + " FROM workers AS t1, employee_vacation AS t2 WHERE t1.id = "
-                    + this.selected.getId().toString()
-                    +" AND t1.id = t2.id";
-              
-            rs = stm.executeQuery(query);
-            rs.first();
-            nameTextField = rs.getString(1);
-            fatherNameTextField = rs.getString(2);
-            lastNameTextField = rs.getString(3);
-            hireDate = rs.getDate(4).toLocalDate();
-            apolisiDate = this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            remainingDays = rs.getInt(5);
-            salary = rs.getDouble(6);
-            relation = rs.getInt(7);
-            subsidiary = rs.getInt(8);
-            company = rs.getInt(9);
-            katAsfalisis = rs.getInt(10);
-            jobTitle = rs.getString(11);
-            afm = rs.getString(12);
-            kentroKostous = rs.getString(13);
-            amEpikourikou = rs.getString(14);
-            amIka = rs.getString(15);
-            
-            ipolipesAdeiesTextField = Integer.toString(remainingDays);
-            dailyAdeiaCostTextField = numFormat.format(relation == 0 ? salary/25 : salary);
-            apozimiosiMiLifthisasAdeias = computeApozimiosiMiLifthisasAdeias(remainingDays, salary, relation);            
-            apozimiosi = computeApozimiosi(hireDate, apolisiDate, salary, relation, this.warningBtn);
-            imeresErgasias = imeromisthia == 0 ? misthoi * 25 :
-                    imeromisthia;
-            
-            apolisiApozimiosiTextField = numFormat.format(apozimiosi);
-            totalAdeiesCostTextField = numFormat.format(apozimiosiMiLifthisasAdeias);
-            totalCostTextField = numFormat.format(apozimiosiMiLifthisasAdeias + apozimiosi+
-                    misthodosia+adeiaLifthisa+epidomaAdeias);
-            pliroteoTotal = numFormat.format(apozimiosiMiLifthisasAdeias + apozimiosi+
-                pliroteoMisthodosia+ pliroteoLiftheisa+pliroteoEpidomaAdeias);   
-            
-            if (relation == 0){
-                if (this.warningBtn){
-            proTextField = Integer.toString(proMonths);            
-        }else{
-            proTextField = "0";            
-        }
-       }else {
-            proTextField = "0";            
-       }
-          //  oristikopoiisiBtn.setDisable(false);
-          //  excelBtn.setDisable(false);
-          //  PDFButton.setDisable(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }finally{
-            if (rs != null)rs.close();
-        }        
+                nameTextField = rs.getString(1);
+                fatherNameTextField = rs.getString(2);
+                lastNameTextField = rs.getString(3);
+                hireDate = rs.getDate(4).toLocalDate();
+                apolisiDate = this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                remainingDays = rs.getInt(5);
+                salary = rs.getDouble(6);
+                relation = rs.getInt(7);
+                subsidiary = rs.getInt(8);
+                company = rs.getInt(9);
+                katAsfalisis = rs.getInt(10);
+                jobTitle = rs.getString(11);
+                afm = rs.getString(12);
+                kentroKostous = rs.getString(13);
+                amEpikourikou = rs.getString(14);
+                amIka = rs.getString(15);
+                
+                ipolipesAdeiesTextField = Integer.toString(remainingDays);
+                dailyAdeiaCostTextField = numFormat.format(relation == 0 ? salary/25 : salary);
+                apozimiosiMiLifthisasAdeias = computeApozimiosiMiLifthisasAdeias(remainingDays, salary, relation);
+                apozimiosi = computeApozimiosi(hireDate, apolisiDate, salary, relation, this.warningBtn);
+                imeresErgasias = imeromisthia == 0 ? misthoi * 25 :
+                        imeromisthia;
+                
+                apolisiApozimiosiTextField = numFormat.format(apozimiosi);
+                totalAdeiesCostTextField = numFormat.format(apozimiosiMiLifthisasAdeias);
+                totalCostTextField = numFormat.format(apozimiosiMiLifthisasAdeias + apozimiosi+
+                        misthodosia+adeiaLifthisa+epidomaAdeias);
+                pliroteoTotal = numFormat.format(apozimiosiMiLifthisasAdeias + apozimiosi+
+                        pliroteoMisthodosia+ pliroteoLiftheisa+pliroteoEpidomaAdeias);
+                
+                if (relation == 0){
+                    if (this.warningBtn){
+                        proTextField = Integer.toString(proMonths);
+                    }else{
+                        proTextField = "0";
+                    }
+                }else {
+                    proTextField = "0";
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }finally{
+                if (rs != null)try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+            } 
     }
     
     public double computeApozimiosi(LocalDate hireDate, LocalDate apolisiDate, double salary, int relation, boolean yesRadioBtn){
@@ -782,11 +788,14 @@ public class ApolisiController implements Serializable {
         //this.con = con;
     } 
     
-    public void handlePdf() throws FileNotFoundException, DocumentException, IOException, SQLException {
+    public void handlePdf() {
+       
         String fileString = this.selected.getLastName()+"_"+this.selected.getFirstName()+"_apodixi_apolisis.pdf";
         File newFile = new File("C:\\EmployeeGUI\\EmployeeGUIOutput\\"+fileString);
         Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(newFile));
+        PdfWriter writer = null;
+         try {
+        writer = PdfWriter.getInstance(document, new FileOutputStream(newFile));
         document.open();
         String [] param = new String[69];
         Arrays.fill(param, " ");
@@ -836,7 +845,7 @@ public class ApolisiController implements Serializable {
         apodixisPDF.createPDF(param, document);
         document.newPage();
         
-        try {
+        
             if(stm.isClosed())stm = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             if (this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){
                 rs1 = stm.executeQuery("SELECT * FROM "+temporaryTableStr+" WHERE id = "
@@ -931,19 +940,33 @@ public class ApolisiController implements Serializable {
                     fmyBuffer = rs1.getDouble("fmy");
                     isforaAllilegiisBuffer = rs1.getDouble("isfora_allilegiis");
                 }  
+            }
         }
-        }
+        JsfUtil.addSuccessMessage("Το αρχείο PDF δημιουργήθηκε");
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }finally{ if (rs1 != null)rs1.close();}
+        }catch (DocumentException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }catch (IOException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+        finally{ if (rs1 != null)try {
+            rs1.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ApolisiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            document.close();
+            writer.close(); 
+         }
         
-        document.close();
-        writer.close();  
+         
             
         
     }
-    public void computeEpidomaAdeias(int id) throws SQLException{
+    public void computeEpidomaAdeias(int id){
        
         try {
             String qry = "UPDATE workers SET apolisi = 0 WHERE id = "+Integer.toString(id);//To make epidoma adeias run
@@ -981,11 +1004,16 @@ public class ApolisiController implements Serializable {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
-           if(rs1 != null)rs1.close();
+           if(rs1 != null)try {
+               rs1.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+           }
         }
     }
     
-    public void computeSalary(int id) throws SQLException, InterruptedException, ExecutionException{
+    public void computeSalary(int id){
         try {
             misthodosia = 0;
             pliroteoMisthodosia = 0;
@@ -1028,8 +1056,16 @@ public class ApolisiController implements Serializable {
                 } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        } catch (InterruptedException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
-           if(rs1 != null)rs1.close();
+           if(rs1 != null)try {
+               rs1.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+           }
         }
     }
        

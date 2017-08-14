@@ -73,7 +73,7 @@
                             <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.ApolisiExec}"
                                              actionListener="#{apolisiController.handleIpologismosBtn()}"
                                              update="ApolisiForm:ipologismosGrid, :growl"  
-                                             disabled="#{apolisiController.diakopiDate eq null
+                                             disabled="#{empty apolisiController.diakopiDate
                                                          || empty apolisiController.selected}"/>                            
                         </f:facet>
                     </p:dataTable>
@@ -119,15 +119,21 @@
                         <p:outputLabel for="next12" value="Συνολικό πληρωτέο:"/>
                         <p:inputText id="next12" value="#{apolisiController.pliroteoTotal}" readonly="true"/>
                         <f:facet name="footer">
-                            <p:commandButton id="oristikpopoiisiBtn" actionListener="#{apolisiController.handleOristikopoiisiBtn()}" value="Οριστικοποίηση" 
-                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"
-                                            disabled="#{empty apolisiController.selected}"/>
-                            <p:commandButton id="excelBtn" actionListener="#{apolisiController.handleExcelBtn()}" value="Excel" 
-                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"
-                                            disabled="#{empty apolisiController.selected}"/>
-                            <p:commandButton  id="pdfBtn" actionListener="#{apolisiController.handlePdf()}" value="PDF Απόδειξης" 
-                                            update="ipologismosGrid,:growl" oncomplete="handleSubmit(args, 'VacationDaysEditDialog');"
-                                            disabled="#{empty apolisiController.selected}"/>                           
+                            <p:commandButton id="oristikpopoiisiBtn" actionListener="#{apolisiController.handleOristikopoiisiBtn()}" 
+                                             value="Οριστικοποίηση" update=":growl" 
+                                            disabled="#{empty apolisiController.diakopiDate
+                                                         || empty apolisiController.selected
+                                                         || empty  apolisiController.totalCostTextField}}"/>
+                            <p:commandButton id="excelBtn" actionListener="#{apolisiController.handleExcelBtn()}" 
+                                             value="Excel" update=":growl" 
+                                            disabled="#{empty apolisiController.diakopiDate
+                                                         || empty apolisiController.selected
+                                                         || empty  apolisiController.totalCostTextField}"/>
+                            <p:commandButton  id="pdfBtn" actionListener="#{apolisiController.handlePdf()}" 
+                                              value="PDF Απόδειξης" update=":growl" 
+                                            disabled="#{empty apolisiController.diakopiDate
+                                                         || empty apolisiController.selected
+                                                         || empty  apolisiController.totalCostTextField}"/>                           
                         </f:facet>   
                     </p:panelGrid>
                 </p:panelGrid>
