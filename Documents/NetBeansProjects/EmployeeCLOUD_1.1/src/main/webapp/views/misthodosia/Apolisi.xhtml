@@ -24,14 +24,16 @@
                         <p:ajax event="dateSelect"   update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
                                 ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{apolisiController.resetIpologismosForm()}"/>
                     </p:calendar>                    
-                </h:panelGrid> 
+                </h:panelGrid>
+                 <h:panelGrid columns="2">
+                      <p:outputLabel value="#{bundle.ApolisiPro}" for="customRadio" />
                   <p:selectOneRadio id="customRadio" value="#{apolisiController.warningBtn}" >
                     <f:selectItem itemLabel="ΝΑΙ" itemValue="true" />
                     <f:selectItem itemLabel="ΟΧΙ" itemValue="false" />
                     <p:ajax event="change"   update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
                                 ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{apolisiController.resetIpologismosForm()}"/>
                 </p:selectOneRadio>               
-                
+                </h:panelGrid>
                 <p:dataTable id="datalist" value="#{workersController.items}" var="worker"
                                 selection="#{apolisiController.selected}"                                
                                 sortMode="multiple" 

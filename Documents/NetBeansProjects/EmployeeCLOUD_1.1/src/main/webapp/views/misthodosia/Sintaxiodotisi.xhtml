@@ -10,24 +10,33 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ParetisiTitle}"></h:outputText>
+            <h:outputText value="#{bundle.SintaxiosotisiTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <h:form id="ApolisiForm">
                 <p:panelGrid  columns="2" id="display" layout="grid">
-              <p:panel header="#{bundle.ParetisiTitle}">
+              <p:panel header="#{bundle.SintaxiosotisiTitle}">
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.ParetisiFrom}" for="startDate" />
-                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{paretisiController.diakopiDate}" 
-                                title="#{bundle.ApolisiFrom}"  showOn="button" required="true" >
+                    <p:outputLabel value="#{bundle.SintaxiodotisiFrom}" for="startDate" />
+                    <p:calendar id="startDate" pattern="dd/MM/yyyy" timeZone="GMT+3" value="#{sintaxiodotisiiController.diakopiDate}" 
+                                title="#{bundle.SintaxiodotisiFrom}"  showOn="button" required="true" >
                         <p:ajax event="dateSelect"   update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
-                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{paretisiController.resetIpologismosForm()}"/>
+                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{sintaxiodotisiiController.resetIpologismosForm()}"/>
                     </p:calendar>                    
-                </h:panelGrid>                              
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                      <p:outputLabel value="#{bundle.SintaxiodotisiEpik}" for="customRadio" />
+                  <p:selectOneRadio id="customRadio" value="#{sintaxiodotisiiController.warningBtn}" >
+                    <f:selectItem itemLabel="ΝΑΙ" itemValue="true" />
+                    <f:selectItem itemLabel="ΟΧΙ" itemValue="false" />
+                    <p:ajax event="change"   update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
+                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{sintaxiodotisiiController.resetIpologismosForm()}"/>
+                </p:selectOneRadio>
+                </h:panelGrid>
                 
                 <p:dataTable id="datalist" value="#{workersController.items}" var="worker"
-                                selection="#{paretisiController.selected}"                                
+                                selection="#{sintaxiodotisiiController.selected}"                                
                                 sortMode="multiple" 
                                 selectionMode="single"
                                 paginator="true"
@@ -37,7 +46,7 @@
                                  >
                         <p:ajax event="rowSelect"  
                                 update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
-                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{paretisiController.resetIpologismosForm()}"  />
+                                ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" listener="#{sintaxiodotisiiController.resetIpologismosForm()}"  />
                         <p:ajax event="rowUnselect" 
                                 update="datalist:viewButton1, ApolisiForm:oristikpopoiisiBtn, ApolisiForm:excelBtn, 
                                 ApolisiForm:pdfBtn, ApolisiForm:ipologismosGrid" />                        
@@ -68,10 +77,10 @@
                         </p:column>                        
                         <f:facet name="footer">                            
                             <p:commandButton id="viewButton1"   icon="ui-icon-search" value="#{bundle.ApolisiExec}"
-                                             actionListener="#{paretisiController.handleIpologismosBtn()}"
+                                             actionListener="#{sintaxiodotisiiController.handleIpologismosBtn()}"
                                              update="ApolisiForm:ipologismosGrid, :growl"  
-                                             disabled="#{empty paretisiController.diakopiDate
-                                                         || empty paretisiController.selected}"/>                            
+                                             disabled="#{empty sintaxiodotisiiController.diakopiDate
+                                                         || empty sintaxiodotisiiController.selected}"/>                            
                         </f:facet>
                     </p:dataTable>
                 </p:panel>                    
@@ -80,49 +89,57 @@
                             <p:outputLabel value="#{bundle.ApolisiIpologismos}"/>
                         </f:facet>
                         <p:outputLabel for="nextid" value="Στοιχεία εργαζομένου:"/>
-                        <p:inputText id="nextid" value="#{paretisiController.selected.id}"  readonly="true"/>
-                        <p:inputText id="nextid1" value="#{paretisiController.selected.lastName}"  readonly="true"/>
-                        <p:inputText id="nextid2" value="#{paretisiController.selected.firstName}"  readonly="true"/>
+                        <p:inputText id="nextid" value="#{sintaxiodotisiiController.selected.id}"  readonly="true"/>
+                        <p:inputText id="nextid1" value="#{sintaxiodotisiiController.selected.lastName}"  readonly="true"/>
+                        <p:inputText id="nextid2" value="#{sintaxiodotisiiController.selected.firstName}"  readonly="true"/>
                         <p:outputLabel for="next1" value="Υπολοιπόμενες ημέρες αδείας:"/>
-                        <p:inputText id="next1" value="#{paretisiController.ipolipesAdeiesTextField}"  readonly="true"/>
+                        <p:inputText id="next1" value="#{sintaxiodotisiiController.ipolipesAdeiesTextField}"  readonly="true"/>
                         <p:outputLabel for="next2" value="X ημερήσιο κόστος ="/>
-                        <p:inputText id="next2"  value="#{paretisiController.dailyAdeiaCostTextField}" readonly="true"/>
+                        <p:inputText id="next2"  value="#{sintaxiodotisiiController.dailyAdeiaCostTextField}" readonly="true"/>
                         <p:outputLabel value="Κόστος μη ληφθεισών αδειών:"/>                                              
-                        <p:inputText value="#{paretisiController.totalAdeiesCostTextField}" readonly="true"/>
+                        <p:inputText value="#{sintaxiodotisiiController.totalAdeiesCostTextField}" readonly="true"/>
                         <h:outputText/>
-                        <h:outputText/> 
+                        <h:outputText/>  
+                        <p:outputLabel for="next3" value="Χρόνος προειδοποίησης (μήνες)"/>                        
+                        <p:inputText id="next3" value="#{sintaxiodotisiiController.proTextField}" readonly="true"/>
+                        <h:outputText/>
+                        <h:outputText/>
+                        <p:outputLabel for="next4" value="Αποζημίωση απόλυσης:"/>
+                        <p:inputText id="next4" value="#{sintaxiodotisiiController.apolisiApozimiosiTextField}" readonly="true"/>
+                        <h:outputText/>
+                        <h:outputText/>
                         <p:outputLabel for="next5" value="Μισθοδοσία τακτική εκκαθάριση:"/>
-                        <p:inputText id="next5" value="#{paretisiController.misthodosiaTextField}" readonly="true"/>
+                        <p:inputText id="next5" value="#{sintaxiodotisiiController.misthodosiaTextField}" readonly="true"/>
                         <p:outputLabel for="next6" value="Πληρωτέο:"/>
-                        <p:inputText id="next6" value="#{paretisiController.pliroteoMisthodosiaTextField}" readonly="true"/>
+                        <p:inputText id="next6" value="#{sintaxiodotisiiController.pliroteoMisthodosiaTextField}" readonly="true"/>
                         <p:outputLabel for="next7" value="Αδεια ληφθείσα εκκαθάριση:"/>
-                        <p:inputText id="next7" value="#{paretisiController.adeiaLifthisaTextField}" readonly="true"/>
+                        <p:inputText id="next7" value="#{sintaxiodotisiiController.adeiaLifthisaTextField}" readonly="true"/>
                         <p:outputLabel for="next8" value="Πληρωτέο:"/>
-                        <p:inputText id="next8" value="#{paretisiController.pliroteoLiftheisaTextField}" readonly="true"/>
+                        <p:inputText id="next8" value="#{sintaxiodotisiiController.pliroteoLiftheisaTextField}" readonly="true"/>
                         <p:outputLabel for="next9" value="Επίδομα αδείας:"/>
-                        <p:inputText id="next9" value="#{paretisiController.epidomaAdeiasTextField}" readonly="true"/>
+                        <p:inputText id="next9" value="#{sintaxiodotisiiController.epidomaAdeiasTextField}" readonly="true"/>
                         <p:outputLabel for="next10" value="Πληρωτέο:"/>
-                        <p:inputText id="next10" value="#{paretisiController.pliroteoEpidomaAdeiasTextField}" readonly="true"/>
+                        <p:inputText id="next10" value="#{sintaxiodotisiiController.pliroteoEpidomaAdeiasTextField}" readonly="true"/>
                         <p:outputLabel for="next11" value="Συνολικό κόστος:"/>
-                        <p:inputText id="next11" value="#{paretisiController.totalCostTextField}" readonly="true"/>
+                        <p:inputText id="next11" value="#{sintaxiodotisiiController.totalCostTextField}" readonly="true"/>
                         <p:outputLabel for="next12" value="Συνολικό πληρωτέο:"/>
-                        <p:inputText id="next12" value="#{paretisiController.pliroteoTotal}" readonly="true"/>
+                        <p:inputText id="next12" value="#{sintaxiodotisiiController.pliroteoTotal}" readonly="true"/>
                         <f:facet name="footer">
-                            <p:commandButton id="oristikpopoiisiBtn" actionListener="#{paretisiController.handleOristikopoiisiBtn()}" 
+                            <p:commandButton id="oristikpopoiisiBtn" actionListener="#{sintaxiodotisiiController.handleOristikopoiisiBtn()}" 
                                              value="Οριστικοποίηση" update=":growl" 
-                                            disabled="#{empty paretisiController.diakopiDate
-                                                         || empty paretisiController.selected
-                                                         || empty  paretisiController.totalCostTextField}"/>
-                            <p:commandButton id="excelBtn" actionListener="#{paretisiController.handleExcelBtn()}" 
+                                            disabled="#{empty sintaxiodotisiiController.diakopiDate
+                                                         || empty sintaxiodotisiiController.selected
+                                                         || empty  sintaxiodotisiiController.totalCostTextField}"/>
+                            <p:commandButton id="excelBtn" actionListener="#{sintaxiodotisiiController.handleExcelBtn()}" 
                                              value="Excel" update=":growl" 
-                                            disabled="#{empty paretisiController.diakopiDate
-                                                         || empty paretisiController.selected
-                                                         || empty  paretisiController.totalCostTextField}"/>
-                            <p:commandButton  id="pdfBtn" actionListener="#{paretisiController.handlePdf()}" 
+                                            disabled="#{empty sintaxiodotisiiController.diakopiDate
+                                                         || empty sintaxiodotisiiController.selected
+                                                         || empty  sintaxiodotisiiController.totalCostTextField}"/>
+                            <p:commandButton  id="pdfBtn" actionListener="#{sintaxiodotisiiController.handlePdf()}" 
                                               value="PDF Απόδειξης" update=":growl" 
-                                            disabled="#{empty paretisiController.diakopiDate
-                                                         || empty paretisiController.selected
-                                                         || empty  paretisiController.totalCostTextField}"/>                           
+                                            disabled="#{empty sintaxiodotisiiController.diakopiDate
+                                                         || empty sintaxiodotisiiController.selected
+                                                         || empty  sintaxiodotisiiController.totalCostTextField}"/>                           
                         </f:facet>   
                     </p:panelGrid>
                 </p:panelGrid>
