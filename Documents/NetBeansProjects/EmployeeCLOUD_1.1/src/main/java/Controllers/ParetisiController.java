@@ -85,7 +85,7 @@ public class ParetisiController implements Serializable {
     double misthoi = 0, proMisthoi = 0; 
     private int subsidiary, company, katAsfalisis;
     private String jobTitle, afm, kentroKostous, amEpikourikou, amIka, reportTableStr, salaryTableStr;
-    private double apozimiosiMiLifthisasAdeias,  imeresErgasias, epidomaAdeias,
+    private double apozimiosiMiLifthisasAdeias, epidomaAdeias,
             pliroteoEpidomaAdeias;
     private final DecimalFormat decimalFormat = new DecimalFormat(".##");
     
@@ -286,7 +286,7 @@ public class ParetisiController implements Serializable {
             String sql = "select * from workers WHERE id = "+this.selected.getId().toString();
             rs = stm.executeQuery(sql);
             rs.first();
-            rs.updateInt("apolisi", 1);
+            rs.updateInt("apolisi", 3);
             rs.updateDate("diakopi", java.sql.Date.valueOf(diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
             
             rs.updateRow();
@@ -419,19 +419,19 @@ public class ParetisiController implements Serializable {
             epidomaAdeias = 0;
             pliroteoEpidomaAdeias = 0;            
            
-                stm = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stm = this.emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 
                 // Now compute epidoma adeias
                 
-                if (this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){          
-                    computeEpidomaAdeias(this.selected.getId());
-                    query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+this.selected.getId().toString();
-                    rs = stm.executeQuery(query);
-                    rs.first();
-                    epidomaAdeias = rs.getDouble(1);
-                    pliroteoEpidomaAdeias = rs.getDouble(2);
-                    if (rs != null)rs.close();
-                }
+            if (this.diakopiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.of(currentYear, 8, 1))){          
+                computeEpidomaAdeias(this.selected.getId());
+                query = "SELECT kostos, pliroteo FROM "+temporaryTableStr+" WHERE id = "+this.selected.getId().toString();
+                rs = stm.executeQuery(query);
+                rs.first();
+                epidomaAdeias = rs.getDouble(1);
+                pliroteoEpidomaAdeias = rs.getDouble(2);
+                if (rs != null)rs.close();
+            }
                 epidomaAdeiasTextField =  numFormat.format(epidomaAdeias);
                 pliroteoEpidomaAdeiasTextField = numFormat.format(pliroteoEpidomaAdeias);
                 
@@ -474,9 +474,7 @@ public class ParetisiController implements Serializable {
                 
                 ipolipesAdeiesTextField = Integer.toString(remainingDays);
                 dailyAdeiaCostTextField = numFormat.format(relation == 0 ? salary/25 : salary);
-                apozimiosiMiLifthisasAdeias = computeApozimiosiMiLifthisasAdeias(remainingDays, salary, relation);                
-                imeresErgasias = imeromisthia == 0 ? misthoi * 25 :
-                        imeromisthia;
+                apozimiosiMiLifthisasAdeias = computeApozimiosiMiLifthisasAdeias(remainingDays, salary, relation);
                 totalAdeiesCostTextField = numFormat.format(apozimiosiMiLifthisasAdeias);
                 totalCostTextField = numFormat.format(apozimiosiMiLifthisasAdeias + 
                         misthodosia+adeiaLifthisa+epidomaAdeias);
