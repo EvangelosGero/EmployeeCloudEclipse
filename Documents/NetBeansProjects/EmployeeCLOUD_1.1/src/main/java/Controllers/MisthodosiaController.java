@@ -171,4 +171,202 @@ public class MisthodosiaController implements Serializable {
         }
     }
  
+   public void handleShowMisthodotikiHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.MISTHODOTIKH);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowMisthodotikiDoroPashaHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.MISTHODOTIKHDP);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowMisthodotikiEpidomaAdeiasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.MISTHODOTIKHEA);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowMisthodotikiDoroXmasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.MISTHODOTIKHXMAS);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowArthroHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.ARTHRO);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowArthroDoroPashaHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.ARTHRODP);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowArthroEpidomaAdeiasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.ARTHROEA);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowArthroDoroXmasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.ARTHROXMAS);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowIKAHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.IKA);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowIkaDoroPashaHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.IKADP);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowIkaEpidomaAdeiasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.IKAEA);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowIkaDoroXmasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.IKAXMAS);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowPliromiHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.PLIROMI);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowPliromiDoroPashaHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.PLIROMIDP);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowPliromiEpidomaAdeiasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.PLIROMIEA);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowPliromiDoroXmasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.PLIROMIXMAS);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowApodixisHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.APODIXIS);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowApodixisDoroPashaHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.APODIXISDP);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowApodixisEpidomaAdeiasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.APODIXISEA);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowApodixisDoroXmasHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.APODIXISXMAS);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowAPDHistory(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.APD);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+   
+   public void handleShowCSL01History(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.CSL01);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+   }
+ 
 }

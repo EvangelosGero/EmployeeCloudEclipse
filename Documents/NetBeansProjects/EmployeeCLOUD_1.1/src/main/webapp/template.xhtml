@@ -198,40 +198,84 @@
                                                     action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/>                                                    
                                         <p:submenu label="Εμφάνιση ΠΑλαιών Reports Μισθοδοσίας" >
                                             <p:submenu label="Εμφάνιση Μισθοδοτικής Κατάστασης" >
-                                                <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                                <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowMisthodotikiHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/>  
+                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowMisthodotikiDoroPashaHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/>  
+                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowMisthodotikiEpidomaAdeiasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/>  
+                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowMisthodotikiDoroXmasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/>  
                                             </p:submenu>
                                             <p:submenu label="Εμφάνιση Λογιστικού Άρθρου" >
-                                                <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                                <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowArthroHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/>  
+                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowArthroDoroPashaHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowArthroEpidomaAdeiasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowArthroDoroXmasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
                                             </p:submenu>
                                             <p:submenu label="Εμφάνιση Κατάστασης ΙΚΑ" >
-                                                <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                                <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowIKAHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowIkaDoroPashaHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowIkaEpidomaAdeiasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowIkaDoroXmasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
                                             </p:submenu>
                                             <p:submenu label="Πληρωμή" >
-                                                <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                                <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowPliromiHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowPliromiDoroPashaHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowPliromiEpidomaAdeiasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowPliromiDoroXmasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
                                             </p:submenu>
                                             <p:submenu label="Αποδείξεις Πληρωμής" >
-                                                <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                                <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowApodixisHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Δώρο Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowApodixisDoroPashaHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Επίδομα Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowApodixisEpidomaAdeiasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
+                                                <p:menuitem value="Δώρο Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowApodixisDoroXmasHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
                                             </p:submenu>
                                             <p:submenu label="ΑΠΔ" >
-                                                <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>
+                                                <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowAPDHistory()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
                                             </p:submenu>
                                             <p:submenu label="CSL01" >
-                                                <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>
+                                                <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"
+                                                            actionListener="#{misthodosiaController.handleShowCSL01History()}"
+                                                            action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/> 
                                             </p:submenu>
                                         </p:submenu>
                                         <p:menuitem value="Παλαιά Reports Αδειών" disabled="#{not emplAdminsController.loggedIn}"
