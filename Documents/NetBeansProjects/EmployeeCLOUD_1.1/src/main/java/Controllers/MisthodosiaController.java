@@ -161,4 +161,14 @@ public class MisthodosiaController implements Serializable {
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
  }
+ 
+ public void handleOldVacationReports(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.VACATION);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+    }
+ 
 }

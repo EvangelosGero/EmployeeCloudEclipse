@@ -45,6 +45,7 @@ public class showVacationReport implements Serializable{
     
     public void ProduceReportTable(Connection con, String tbl) throws SQLException {
       try{  
+          list.clear();
            stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
             String sql = "select * from "+tbl; 
             tableStr = tbl;

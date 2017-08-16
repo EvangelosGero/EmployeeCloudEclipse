@@ -234,7 +234,9 @@
                                                 <p:menuitem value="Μήνας" disabled="#{not emplAdminsController.loggedIn}"/>
                                             </p:submenu>
                                         </p:submenu>
-                                        <p:menuitem value="Παλαιά Reports Αδειών" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Παλαιά Reports Αδειών" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.handleOldVacationReports()}"
+                                                    action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/>
                                         <p:menuitem value="Δημιουργία Παλαιών Timer Reports" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Δημιουργία Παλαιού Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Δημιουργία Παλαιών Report Μισθοδοσίας" disabled="#{not emplAdminsController.loggedIn}"/>
