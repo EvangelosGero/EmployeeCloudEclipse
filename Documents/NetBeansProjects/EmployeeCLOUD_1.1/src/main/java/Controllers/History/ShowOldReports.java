@@ -9,6 +9,7 @@ import static Controllers.History.ReportEnum.APODIXIS;
 import static Controllers.History.ReportEnum.APODIXISDP;
 import static Controllers.History.ReportEnum.APODIXISEA;
 import static Controllers.History.ReportEnum.APODIXISXMAS;
+import Controllers.Logic.ShowReport;
 import Controllers.util.JsfUtil;
 import java.io.IOException;
 import java.io.Serializable;
@@ -40,6 +41,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -50,6 +52,8 @@ import javax.inject.Named;
 @SessionScoped
 public class ShowOldReports implements Serializable{
     
+    @Inject
+    ShowReport showReport;
     private Connection con;
     private ResultSet rs;
     private List<String> list = new ArrayList<>();    
@@ -75,6 +79,7 @@ public class ShowOldReports implements Serializable{
 
                         
     public void oldReportsList(Connection con, ReportEnum type1) throws SQLException{
+       this.type = type1;
        this.con = con;
         try {
             DatabaseMetaData dm = con.getMetaData();            
@@ -179,12 +184,13 @@ public class ShowOldReports implements Serializable{
         }
     }    
         
-    public String navigateToReport(){
+ /*   public String navigateToReport(){
             String navString = null;
            try {  
                switch (type){                   
                    case TIMER :{                    
-                        navString = new ShowReport().ProduceReportTable(con, selectedReport);                                                   
+                         showReport.ProduceReportTable(con, selectedReport); 
+                         navString = "/views/timer/ShowReport.xhtml?faces-redirect=true";                                                 
                         break;
                     }
                    case VACATION :{                    
@@ -290,7 +296,7 @@ public class ShowOldReports implements Serializable{
            }
         });
         
-    }
+    }*/
     
 }
 

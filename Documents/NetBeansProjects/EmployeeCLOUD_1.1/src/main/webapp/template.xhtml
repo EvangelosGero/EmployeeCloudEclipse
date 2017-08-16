@@ -193,7 +193,9 @@
                                         <p:menuitem value="Ανοιγμα αρχείων EXCEL" disabled="#{not emplAdminsController.loggedIn}"/>                                        
                             </p:submenu>
                             <p:submenu label="Ιστορικό" >
-                                        <p:menuitem value="Εμφάνιση Παλαιών Timer Reports" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Εμφάνιση Παλαιών Timer Reports" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.showTimerReports()}"
+                                                    action="/views/history/ShowOldReports.xhtml?faces-redirect=true"/>                                                    
                                         <p:submenu label="Εμφάνιση ΠΑλαιών Reports Μισθοδοσίας" >
                                             <p:submenu label="Εμφάνιση Μισθοδοτικής Κατάστασης" >
                                                 <p:menuitem value="Μήνα" disabled="#{not emplAdminsController.loggedIn}"/>

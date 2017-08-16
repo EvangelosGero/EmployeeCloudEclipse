@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import Controllers.History.ReportEnum;
+import Controllers.History.ShowOldReports;
 import Controllers.Logic.Misthodosia.ApdPdf;
 import Controllers.Logic.Misthodosia.ApodixisPDF;
 import Controllers.Logic.Misthodosia.CSL01;
@@ -35,6 +37,8 @@ public class MisthodosiaController implements Serializable {
     private EmplAdminsController emplAdminsController;
     @Inject
     private ShowMisthodotiki showMisthodotiki;
+    @Inject
+    ShowOldReports showOldReports;
 
     public EmplAdminsController getEmplAdminsController() {
         return emplAdminsController;
@@ -50,6 +54,14 @@ public class MisthodosiaController implements Serializable {
 
     public void setShowMisthodotiki(ShowMisthodotiki showMisthodotiki) {
         this.showMisthodotiki = showMisthodotiki;
+    }
+
+    public ShowOldReports getShowOldReports() {
+        return showOldReports;
+    }
+
+    public void setShowOldReports(ShowOldReports showOldReports) {
+        this.showOldReports = showOldReports;
     }
     
     
@@ -140,7 +152,13 @@ public class MisthodosiaController implements Serializable {
                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
             }
   }
-     
-    
-    
+ 
+ public void showTimerReports(){
+        try { 
+            showOldReports.oldReportsList(this.emplAdminsController.getCon(), ReportEnum.TIMER);
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+ }
 }
