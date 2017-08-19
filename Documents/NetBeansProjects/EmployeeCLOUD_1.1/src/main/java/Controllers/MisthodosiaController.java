@@ -7,6 +7,7 @@ package Controllers;
 
 import Controllers.History.ReportEnum;
 import Controllers.History.ShowOldReports;
+import Controllers.Logic.CreateReport;
 import Controllers.Logic.Misthodosia.ApdPdf;
 import Controllers.Logic.Misthodosia.ApodixisPDF;
 import Controllers.Logic.Misthodosia.CSL01;
@@ -18,6 +19,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +43,9 @@ public class MisthodosiaController implements Serializable {
     private ShowMisthodotiki showMisthodotiki;
     @Inject
     ShowOldReports showOldReports;
+    private String historyTitle;
+    private String historyLabel;
+    private java.util.Date historyDate;
 
     public EmplAdminsController getEmplAdminsController() {
         return emplAdminsController;
@@ -63,6 +70,31 @@ public class MisthodosiaController implements Serializable {
     public void setShowOldReports(ShowOldReports showOldReports) {
         this.showOldReports = showOldReports;
     }
+
+    public String getHistoryTitle() {
+        return historyTitle;
+    }
+
+    public void setHistoryTitle(String historyTitle) {
+        this.historyTitle = historyTitle;
+    }
+
+    public String getHistoryLabel() {
+        return historyLabel;
+    }
+
+    public void setHistoryLabel(String historyLabel) {
+        this.historyLabel = historyLabel;
+    }
+
+    public Date getHistoryDate() {
+        return historyDate;
+    }
+
+    public void setHistoryDate(Date historyDate) {
+        this.historyDate = historyDate;
+    }
+    
     
     
     
@@ -367,6 +399,17 @@ public class MisthodosiaController implements Serializable {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
+   }
+   
+   public void handlePrepareCreateOldTimerReports(){
+       this.historyTitle = "ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ TIMER REPORT";
+       this.historyLabel = "Παρακαλώ επιλέξτε μήνα και έτος :";
+       
+   }
+   
+   public void createOldTimerReports(){
+       LocalDate localDate = this.historyDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+       new CreateReport().CreateMonthlyDBTable(this.emplAdminsController.getCon(), localDate);
    }
  
 }

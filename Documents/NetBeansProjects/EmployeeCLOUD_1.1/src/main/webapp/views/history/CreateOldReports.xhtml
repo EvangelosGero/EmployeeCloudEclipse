@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{misthodosiaController.historyTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="HistoryForm"> 
+                <p:panel header="#{misthodosiaController.historyTitle}">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="#{misthodosiaController.historyLabel}" for="startDate" />
+                        <p:calendar id="startDate" pattern="MM/yyyy" timeZone="GMT+3" value="#{misthodosiaController.historyDate}" 
+                                title="#{bundle.AbsentReportFromTitle}"  showOn="button" required="true" >
+                            <p:ajax event="dateSelect"   update="HistoryForm:createButton1"/>
+                        </p:calendar>
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton1"   icon="ui-icon-plus" value="#{bundle.historyBTN}"
+                                         actionListener="#{misthodosiaController.createOldTimerReports()}"
+                                             update=":growl"  
+                                             disabled="#{empty misthodosiaController.historyDate}"/>
+                    </f:facet>
+                </p:panel>                               
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
