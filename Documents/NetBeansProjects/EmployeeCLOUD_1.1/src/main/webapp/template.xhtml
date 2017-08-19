@@ -284,15 +284,21 @@
                                         <p:menuitem value="Δημιουργία Παλαιών Timer Reports" disabled="#{not emplAdminsController.loggedIn}"
                                                     actionListener="#{misthodosiaController.handlePrepareCreateOldTimerReports()}"
                                                     action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
-                                        <p:menuitem value="Δημιουργία Παλαιού Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Δημιουργία Παλαιού Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.prepareCreateOldVacationReport()}"
+                                                    action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
                                         <p:menuitem value="Δημιουργία Παλαιών Report Μισθοδοσίας" disabled="#{not emplAdminsController.loggedIn}"
                                                     actionListener="#{misthodosiaController.prepareCreateOldSalaryReport()}"
                                                     action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
                                         <p:menuitem value="Δημιουργία Παλαιού Report Δώρου Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
                                                     actionListener="#{misthodosiaController.prepareCreateOldDPReport()}"
                                                     action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
-                                        <p:menuitem value="Δημιουργία Παλαιού Report Επιδόματος Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value="Δημιουργία Παλαιού Report Δώρου Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Δημιουργία Παλαιού Report Επιδόματος Αδείας" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.prepareCreateOldEAReport()}"
+                                                    action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
+                                        <p:menuitem value="Δημιουργία Παλαιού Report Δώρου Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.prepareCreateOldXmasReport()}"
+                                                    action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
                             </p:submenu>
                             <p:submenu label="Παράμετροι" >
                                         <p:menuitem value="Στοιχεία Επιχείρησης" disabled="#{not emplAdminsController.loggedIn}"/>

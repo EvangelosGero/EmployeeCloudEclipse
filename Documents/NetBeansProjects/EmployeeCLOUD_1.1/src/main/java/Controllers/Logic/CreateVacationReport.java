@@ -201,7 +201,7 @@ public class CreateVacationReport {
             Statement ssss = null;
             ResultSet rsss = null;
             try {
-                createLastYearDayReport(currentYear-1, popStage);
+                createLastYearDayReport(currentYear-1);
                 String query2 = "SELECT id, remaining_days FROM VACATION_REPORT_" +Integer.toString(currentYear-1);
                 ssss = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                         ResultSet.CONCUR_UPDATABLE);
@@ -419,7 +419,7 @@ public class CreateVacationReport {
         return entitledDaysMap;
 }
     
-    public void createLastYearDayReport(int refYear, Stage stage){
+    public void createLastYearDayReport(int refYear){
        
             //Run entitled days with 31/12 , watch for fired
             

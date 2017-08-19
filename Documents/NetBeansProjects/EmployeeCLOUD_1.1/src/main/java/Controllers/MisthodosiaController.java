@@ -8,6 +8,7 @@ package Controllers;
 import Controllers.History.ReportEnum;
 import Controllers.History.ShowOldReports;
 import Controllers.Logic.CreateReport;
+import Controllers.Logic.CreateVacationReport;
 import Controllers.Logic.Misthodosia.ApdPdf;
 import Controllers.Logic.Misthodosia.ApodixisPDF;
 import Controllers.Logic.Misthodosia.CSL01;
@@ -471,6 +472,28 @@ public class MisthodosiaController implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
            }
            }
+           case 4:{
+           try {
+               new CreateEAReport().createDBEpidomaAdeiasReport(this.emplAdminsController.getCon(), this.selectedYear);
+               break;
+           } catch (SQLException ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+           }
+           }
+           case 5:{
+           try {
+               new CreateDoroXmasReport().createDBDoroXmasReport(this.emplAdminsController.getCon(), this.selectedYear);
+               break;
+           } catch (SQLException ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+           }
+           }
+           case 6:{          
+               new CreateVacationReport(this.emplAdminsController.getCon()).createLastYearDayReport(this.selectedYear);
+               break;           
+           }
        }
        
    }
@@ -485,6 +508,24 @@ public class MisthodosiaController implements Serializable {
        this.historyTitle="ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ REPORT ΔΩΡΟΥ ΠΑΣΧΑ";
        this.historyLabel = "Παρακαλώ επιλέξτε έτος :";
        this.report = 3;
+   }
+   
+   public void prepareCreateOldEAReport(){
+       this.historyTitle="ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ REPORT ΕΠΙΔΟΜΑΤΟΣ ΑΔΕΙΑΣ";
+       this.historyLabel = "Παρακαλώ επιλέξτε έτος :";
+       this.report = 4;
+   }
+   
+   public void prepareCreateOldXmasReport(){
+       this.historyTitle="ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ REPORT ΔΩΡΟΥ ΧΡΙΣΤΟΥΓΕΝΝΩΝ";
+       this.historyLabel = "Παρακαλώ επιλέξτε έτος :";
+       this.report = 5;
+   }
+   
+   public void prepareCreateOldVacationReport(){
+       this.historyTitle="ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ REPORT ΑΔΕΙΩΝ";
+       this.historyLabel = "Παρακαλώ επιλέξτε έτος :";
+       this.report = 6;
    }
    
 }

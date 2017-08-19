@@ -27,7 +27,8 @@
                          <p:outputLabel value="#{misthodosiaController.historyLabel}" for="startDate1" 
                                        rendered="#{misthodosiaController.report eq 3 || misthodosiaController.report eq 4}"/>
                         <p:selectOneMenu id="startDate1" converter="javax.faces.Integer" value="#{misthodosiaController.selectedYear}" 
-                                         rendered="#{misthodosiaController.report eq 3 || misthodosiaController.report eq 4}">
+                                         rendered="#{misthodosiaController.report eq 3 || misthodosiaController.report eq 4 
+                                                     || misthodosiaController.report eq 5 || misthodosiaController.report eq 6}">
                                     <f:selectItem itemLabel="Επιλέξτε Ετος" itemValue="" />
                                     <f:selectItems value="#{misthodosiaController.yearList}" var="year"
                                                    itemLabel="#{year}" itemValue="#{year}"/>
