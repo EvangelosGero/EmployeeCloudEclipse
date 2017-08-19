@@ -14,6 +14,7 @@ import Controllers.Logic.Misthodosia.CSL01;
 import Controllers.Logic.Misthodosia.CreateDoroXmasReport;
 import Controllers.Logic.Misthodosia.CreateEAReport;
 import Controllers.Logic.Misthodosia.CreatePashaReport;
+import Controllers.Logic.Misthodosia.CreateSalaryReport;
 import Controllers.util.JsfUtil;
 import java.io.IOException;
 import java.io.Serializable;
@@ -21,7 +22,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +49,32 @@ public class MisthodosiaController implements Serializable {
     private String historyTitle;
     private String historyLabel;
     private java.util.Date historyDate;
+    private int report;
+    private List<Integer> yearList = new ArrayList<>();
+    private int selectedYear;
+
+    public MisthodosiaController() {
+        int currentYear = LocalDate.now().getYear();
+        for (int i = currentYear - 20 ; i < currentYear + 21; i++)yearList.add(i);
+    } 
+
+    public int getReport() {
+        return report;
+    }
+
+    public void setReport(int report) {
+        this.report = report;
+    }
+
+    public List<Integer> getYearList() {
+        return yearList;
+    }
+
+    public void setYearList(List<Integer> yearList) {
+        this.yearList = yearList;
+    }
+    
+    
 
     public EmplAdminsController getEmplAdminsController() {
         return emplAdminsController;
@@ -93,6 +122,14 @@ public class MisthodosiaController implements Serializable {
 
     public void setHistoryDate(Date historyDate) {
         this.historyDate = historyDate;
+    }
+
+    public int getSelectedYear() {
+        return selectedYear;
+    }
+
+    public void setSelectedYear(int selectedYear) {
+        this.selectedYear = selectedYear;
     }
     
     
@@ -404,12 +441,39 @@ public class MisthodosiaController implements Serializable {
    public void handlePrepareCreateOldTimerReports(){
        this.historyTitle = "ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ TIMER REPORT";
        this.historyLabel = "Παρακαλώ επιλέξτε μήνα και έτος :";
-       
+       this.report = 1;       
    }
    
    public void createOldTimerReports(){
        LocalDate localDate = this.historyDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-       new CreateReport().CreateMonthlyDBTable(this.emplAdminsController.getCon(), localDate);
+       switch(this.report){
+           case 1:{
+               new CreateReport().CreateMonthlyDBTable(this.emplAdminsController.getCon(), localDate);
+               break;
+           }
+           case 2:{
+           try {
+               new CreateSalaryReport().CreateDBSalaryReport(this.emplAdminsController.getCon(), localDate);
+               break;
+           } catch (SQLException ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+           }
+           }
+       }
+       
    }
  
+   public void prepareCreateOldSalaryReport(){
+       this.historyTitle="ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ REPORT ΜΙΣΘΟΔΟΣΙΑΣ ";
+       this.historyLabel = "Παρακαλώ επιλέξτε μήνα και έτος :";
+       this.report = 2;
+   }
+   
+   public void prepareCreateOldDPReport(){
+       this.historyTitle="ΕΠΑΝΑΔΗΜΙΟΥΡΓΙΑ ΠΑΛΑΙΟΥ REPORT ΔΩΡΟΥ ΠΑΣΧΑ";
+       this.historyLabel = "Παρακαλώ επιλέξτε έτος :";
+       this.report = 3;
+   }
+   
 }

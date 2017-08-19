@@ -96,28 +96,31 @@ public class CreateSalaryReport implements Serializable {
     }  
     
     public void createMisthodosiaReport() {
+                  
         try {            
-            this.setFirstRun(true);            
+            this.setFirstRun(true);
             CreateDBSalaryReport(this.emplAdminsController.getCon(), null);
-            } catch (InterruptedException | SQLException ex) {
-               Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
-            }
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+           
     }
     
-    public void saveEpidotisi(){
+    public void saveEpidotisi(){        
         try {
             for(int pk : this.getEpidotisiMap().keySet())
                 Collections.replaceAll(this.getEpidotisiMap().get(pk), null, new Double(0));
             this.setFirstRun(false);
             CreateDBSalaryReport(this.emplAdminsController.getCon(), null);
-        } catch (SQLException | InterruptedException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-           JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
+       
     }
            
-    public void CreateDBSalaryReport(Connection con, LocalDate paretisiDate) throws SQLException, InterruptedException {        
+    public void CreateDBSalaryReport(Connection con, LocalDate paretisiDate) throws SQLException{        
         
         this.con = con;                      
         boolean reportTableExists = true;         
