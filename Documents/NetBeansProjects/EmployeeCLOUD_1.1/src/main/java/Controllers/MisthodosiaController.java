@@ -56,6 +56,8 @@ public class MisthodosiaController implements Serializable {
     public MisthodosiaController() {
         int currentYear = LocalDate.now().getYear();
         for (int i = currentYear - 20 ; i < currentYear + 21; i++)yearList.add(i);
+        this.historyDate = null;
+        this.selectedYear = 0;
     } 
 
     public int getReport() {
@@ -445,7 +447,7 @@ public class MisthodosiaController implements Serializable {
    }
    
    public void createOldTimerReports(){
-       LocalDate localDate = this.historyDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+       LocalDate localDate = this.historyDate != null ? this.historyDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
        switch(this.report){
            case 1:{
                new CreateReport().CreateMonthlyDBTable(this.emplAdminsController.getCon(), localDate);
@@ -454,6 +456,15 @@ public class MisthodosiaController implements Serializable {
            case 2:{
            try {
                new CreateSalaryReport().CreateDBSalaryReport(this.emplAdminsController.getCon(), localDate);
+               break;
+           } catch (SQLException ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+           }
+           }
+           case 3:{
+           try {
+               new CreatePashaReport().createDBDoroPashaReport(this.emplAdminsController.getCon(), this.selectedYear);
                break;
            } catch (SQLException ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

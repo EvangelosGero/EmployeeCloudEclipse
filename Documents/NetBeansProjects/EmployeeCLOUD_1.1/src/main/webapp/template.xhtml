@@ -288,7 +288,9 @@
                                         <p:menuitem value="Δημιουργία Παλαιών Report Μισθοδοσίας" disabled="#{not emplAdminsController.loggedIn}"
                                                     actionListener="#{misthodosiaController.prepareCreateOldSalaryReport()}"
                                                     action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
-                                        <p:menuitem value="Δημιουργία Παλαιού Report Δώρου Πάσχα" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Δημιουργία Παλαιού Report Δώρου Πάσχα" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{misthodosiaController.prepareCreateOldDPReport()}"
+                                                    action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
                                         <p:menuitem value="Δημιουργία Παλαιού Report Επιδόματος Αδείας" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Δημιουργία Παλαιού Report Δώρου Χριστουγέννων" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>

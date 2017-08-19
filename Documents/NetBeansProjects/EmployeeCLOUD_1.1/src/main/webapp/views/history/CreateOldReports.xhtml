@@ -17,17 +17,28 @@
             <h:form id="HistoryForm"> 
                 <p:panel header="#{misthodosiaController.historyTitle}">
                     <h:panelGrid columns="2">
-                        <p:outputLabel value="#{misthodosiaController.historyLabel}" for="startDate" />
+                        <p:outputLabel value="#{misthodosiaController.historyLabel}" for="startDate" 
+                                       rendered="#{misthodosiaController.report eq 1 || misthodosiaController.report eq 2}"/>
                         <p:calendar id="startDate" pattern="MM/yyyy" timeZone="GMT+3" value="#{misthodosiaController.historyDate}" 
-                                title="#{bundle.AbsentReportFromTitle}"  showOn="button" required="true" >
+                                title="#{bundle.AbsentReportFromTitle}"  showOn="button" required="true" 
+                                rendered="#{misthodosiaController.report eq 1 || misthodosiaController.report eq 2}">
                             <p:ajax event="dateSelect"   update="HistoryForm:createButton1"/>
                         </p:calendar>
+                         <p:outputLabel value="#{misthodosiaController.historyLabel}" for="startDate1" 
+                                       rendered="#{misthodosiaController.report eq 3 || misthodosiaController.report eq 4}"/>
+                        <p:selectOneMenu id="startDate1" converter="javax.faces.Integer" value="#{misthodosiaController.selectedYear}" 
+                                         rendered="#{misthodosiaController.report eq 3 || misthodosiaController.report eq 4}">
+                                    <f:selectItem itemLabel="Επιλέξτε Ετος" itemValue="" />
+                                    <f:selectItems value="#{misthodosiaController.yearList}" var="year"
+                                                   itemLabel="#{year}" itemValue="#{year}"/>
+                            <p:ajax event="change"   update="HistoryForm:createButton1"/>
+                        </p:selectOneMenu>           
                     </h:panelGrid>
                     <f:facet name="footer">
                         <p:commandButton id="createButton1"   icon="ui-icon-plus" value="#{bundle.historyBTN}"
                                          actionListener="#{misthodosiaController.createOldTimerReports()}"
                                              update=":growl"  
-                                             disabled="#{empty misthodosiaController.historyDate}"/>
+                                             disabled="#{(empty misthodosiaController.historyDate) and (misthodosiaController.selectedYear eq 0)}"/>
                     </f:facet>
                 </p:panel>                               
             </h:form>
