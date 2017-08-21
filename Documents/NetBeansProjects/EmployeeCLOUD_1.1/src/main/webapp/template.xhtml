@@ -193,7 +193,9 @@
                                         <p:menuitem value="Άνοιγμα Browser" 
                                                     target="_blank" url="http://www.ika.gr"
                                                     disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value='Ανοιγμα αρχείων PDF' disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value='Ανοιγμα αρχείων PDF' disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{fileDownloadComponent.populatePDFFileList()}"
+                                                    action="/views/fileDownloads/FileDownloads.xhtml?faces-redirect=true"/>  
                                         <p:menuitem value="Ανοιγμα αρχείων EXCEL" disabled="#{not emplAdminsController.loggedIn}"/>                                        
                             </p:submenu>
                             <p:submenu label="Ιστορικό" >
