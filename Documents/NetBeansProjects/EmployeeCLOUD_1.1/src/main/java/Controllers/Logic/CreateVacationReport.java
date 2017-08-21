@@ -6,6 +6,7 @@
 package Controllers.Logic;
 
 import Controllers.util.DropIfExists;
+import Controllers.util.JsfUtil;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.Date;
@@ -21,19 +22,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
-import javafx.geometry.Insets;;;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -184,69 +176,7 @@ public class CreateVacationReport {
     if (prStm != null) {prStm.close();}
     }
     
-     /* Update lastYear_days if currentmonth = JAN and user clicks button  */    
-    
-    if ( LocalDate.now().getMonth() == Month.JANUARY){ 
-        
-        popStage = new Stage(StageStyle.DECORATED);
-        popStage.setTitle("Μεταφορά ημερών αδείας από προηγούμενο έτος");
-        Text text = new Text("Εφόσον δεν έχετε κάνει μεταφορά των ημερών αδείας "+
-                "από το προηγούμενο έτος παρακαλώ πατείστε ΝΑΙ");
-        text.setWrappingWidth(300);        
-        Button btn = new Button("ΝΑΙ");
-        btn.setFocusTraversable(false);
-        Button btn2 = new Button("Το έχω ήδη κάνει");
-        btn2.setFocusTraversable(true);        
-        btn.setOnAction((ActionEvent event) -> {
-            Statement ssss = null;
-            ResultSet rsss = null;
-            try {
-                createLastYearDayReport(currentYear-1);
-                String query2 = "SELECT id, remaining_days FROM VACATION_REPORT_" +Integer.toString(currentYear-1);
-                ssss = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                        ResultSet.CONCUR_UPDATABLE);
-                rsss = ssss.executeQuery(query2);
-                while (rsss.next()){
-                    query1 = "UPDATE temp SET lastyear_days = "+Integer.toString(rsss.getInt("remaining_days"))+
-                            " WHERE temp.id = "+Integer.toString(rsss.getInt("id"));
-                    stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                        ResultSet.CONCUR_UPDATABLE);
-                    int update1 = stm.executeUpdate(query1);
-                    if(stm != null)stm.close();
-                }                
-                popStage.close();                
-            }catch (SQLException ex) {
-                Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);                
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
-            } finally {
-                {try {
-                    if (stm != null)stm.close();
-                    if (rsss != null)rsss.close();
-                    if (ssss != null)ssss.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);
-                   facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
-                }
-                }
-            }
-        });
-        btn2.setOnAction((ActionEvent event) -> {
-            popStage.close();            
-        });
-        BorderPane border = new BorderPane();
-        border.setPadding(new Insets(25, 25, 25, 25));
-        BorderPane.setAlignment(text, Pos.CENTER);
-        border.setTop(text);
-        HBox hBox = new HBox();
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setSpacing(120);
-        hBox.getChildren().addAll(btn, btn2);
-        border.setBottom(hBox);
-        Scene scene = new Scene(border, 500, 250);        
-        popStage.setScene(scene);
-        popStage.showAndWait();
-        
-        }           
+     
         /* Now compute the remaining days correctly */
     
         query = "UPDATE temp SET remaining_days = entitled_days + lastyear_days - consumed_days ";                            
@@ -259,8 +189,8 @@ public class CreateVacationReport {
                   "ΟΛΟΚΛΗΡΩΘΗΚΕ"));         
         
         } catch (SQLException ex) {
-            Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
         finally{
             
@@ -334,15 +264,15 @@ public class CreateVacationReport {
         if (stm != null) {stm.close();} 
             
         } catch (SQLException ex) {
-            Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         } finally{
             {try {
                 if (rs != null)rs.close() ; 
                 if (stm != null) stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);
-                    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
                 }
             }            
         }
@@ -405,15 +335,15 @@ public class CreateVacationReport {
                 }
             }
       } catch (SQLException ex) {
-            Logger.getLogger(ComputeEntitledDays.class.getName()).log(Level.SEVERE, null, ex);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }finally{
             try {
                 rs12.close();
                 statmnt.close();
             } catch (SQLException ex) {
-                Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
         return entitledDaysMap;
@@ -519,14 +449,14 @@ public class CreateVacationReport {
                  +Integer.toString(refYear)+" ολοκληρώθηκε!", "ΟΛΟΚΛΗΡΩΘΗΚΕ"));           
             
         } catch (SQLException ex) {
-            Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         } finally{
             if (statem!= null)try {
                 statem.close();
             } catch (SQLException ex) {
-                Logger.getLogger(CreateVacationReport.class.getName()).log(Level.SEVERE, null, ex);
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SQL Error", ex.getMessage()));
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
         

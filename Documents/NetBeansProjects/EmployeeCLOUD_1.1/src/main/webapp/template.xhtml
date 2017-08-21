@@ -54,8 +54,10 @@
                                 <p:menuitem value="Λίστα Timer" outcome="/views/timer/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>
                             <p:submenu label="Άδειες" >
-                                <p:menuitem value="Επίσημες Αργίες" outcome="/views/holidays/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>                                
-                                <p:menuitem value="Καταχώρηση/Καρτέλες Αδειών Εργαζομένων" outcome="/views/vacationDays/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Επίσημες Αργίες" outcome="/views/holidays/List.xhtml" 
+                                            disabled="#{not emplAdminsController.loggedIn}"/>                                
+                                <p:menuitem value="Καταχώρηση/Καρτέλες Αδειών Εργαζομένων" outcome="/views/vacationDays/List.xhtml" 
+                                            disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Δημιουργία Report Αδειών"  actionListener="#{vacationDaysController.createVacationReport()}"  
                                      update=":growl" disabled="#{not emplAdminsController.loggedIn}"/>
                                 <p:menuitem value="Εμφάνιση Report Αδειών" disabled="#{not emplAdminsController.loggedIn}"
@@ -188,7 +190,9 @@
                                 </p:submenu>                            
                             </p:submenu>
                             <p:submenu label="Εργαλεία" >
-                                        <p:menuitem value="Άνοιγμα Browser" disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value="Άνοιγμα Browser" 
+                                                    target="_blank" url="http://www.ika.gr"
+                                                    disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value='Ανοιγμα αρχείων PDF' disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Ανοιγμα αρχείων EXCEL" disabled="#{not emplAdminsController.loggedIn}"/>                                        
                             </p:submenu>

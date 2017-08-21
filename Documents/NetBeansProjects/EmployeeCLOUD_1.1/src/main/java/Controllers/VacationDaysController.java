@@ -9,7 +9,11 @@ import EJBs.VacationDaysFacade;
 import com.dynamotors.timer1._rest.Workers;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,6 +28,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import org.primefaces.context.RequestContext;
 
 @Named("vacationDaysController")
 @SessionScoped
@@ -33,6 +38,7 @@ public class VacationDaysController implements Serializable {
     private EJBs.VacationDaysFacade ejbFacade;
     private List<VacationDays> items = null;
     private VacationDays selected;
+    private boolean vacationRadio;
     private Workers selectedWorker;
     @Inject
     private WorkersController workersController;
@@ -42,6 +48,7 @@ public class VacationDaysController implements Serializable {
     private showVacationReport showVR;
 
     public VacationDaysController() {
+        this.setVacationRadio(true);
     }
 
     public VacationDays getSelected() {
@@ -67,8 +74,14 @@ public class VacationDaysController implements Serializable {
     public void setShowVR(showVacationReport showVR) {
         this.showVR = showVR;
     }
-    
-    
+
+    public boolean isVacationRadio() {
+        return vacationRadio;
+    }
+
+    public void setVacationRadio(boolean vacationRadio) {
+        this.vacationRadio = vacationRadio;
+    }
 
     public Workers getSelectedWorker() {
         return selectedWorker;
@@ -115,15 +128,61 @@ public class VacationDaysController implements Serializable {
     }
     
     public void createVacationReport() throws SQLException{
-        new CreateVacationReport().CreateVacationDBTable(emplAdminsController.getCon());
+        if ( LocalDate.now().getMonth() == Month.JANUARY){
+            RequestContext context = RequestContext.getCurrentInstance();        
+            context.execute("PF('vacationDlgWV').show();");        
+            context.update("vacationGT2:GT2Box");
+        }
+        else new CreateVacationReport().CreateVacationDBTable(emplAdminsController.getCon());
     }
+    
+    public void metaforaVacation(){
+        int currentYear = LocalDate.now().getYear();
+        Statement stm = null;
+        Statement ssss = null;
+        ResultSet rsss = null;
+        try {
+            if (this.isVacationRadio()){
+                new CreateVacationReport().createLastYearDayReport(currentYear-1);
+                String query2 = "SELECT id, remaining_days FROM VACATION_REPORT_" +Integer.toString(currentYear-1);
+                ssss = emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_UPDATABLE);
+                rsss = ssss.executeQuery(query2);
+                while (rsss.next()){
+                    String query1 = "UPDATE temp SET lastyear_days = "+Integer.toString(rsss.getInt("remaining_days"))+
+                            " WHERE temp.id = "+Integer.toString(rsss.getInt("id"));
+                    stm = emplAdminsController.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_UPDATABLE);
+                    int update1 = stm.executeUpdate(query1);
+                    if(stm != null)stm.close();
+                
+                }
+            }
+            new CreateVacationReport().CreateVacationDBTable(emplAdminsController.getCon());
+        } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }finally {
+                {try {
+                    if (stm != null)stm.close();
+                    if (rsss != null)rsss.close();
+                    if (ssss != null)ssss.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+                }
+          }
+    }
+    
+    
     
     public String showReportNow(){
         try {
             showVR.ProduceReportTable(emplAdminsController.getCon(), "EMPLOYEE_VACATION");
             return "/views/vacationDays/ShowVacationReport.xhtml?faces-redirect=true";
         } catch (SQLException ex) {
-            Logger.getLogger(TimerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }       

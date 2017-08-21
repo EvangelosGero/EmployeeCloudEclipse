@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+    <p:dialog id="vacationDialog" widgetVar="vacationDlgWV"  
+                      modal="true"
+                      closable="true"
+                      position="center"                     
+                      showEffect="slide"
+                      draggable="true"
+                      resizable="false"
+                      visible="false"
+                      header="Μεταφορά ημερών αδείας από προηγούμενο έτος" dynamic="true" 
+                      >
+        
+        <h:form id='vacationGT2'>
+            
+            <h:panelGrid id="GT2Box" columns="2" cellpadding="3" 
+                         style="margin: 0 auto; border: 0px; padding-top: 20px;" width="300px">               
+                                 
+                <p:outputLabel value="Εφόσον δεν έχετε κάνει μεταφορά των ημερών αδείας 
+                                      από το προηγούμενο έτος παρακαλώ πατείστε ΝΑΙ"/>
+                  
+                                                                
+                <f:facet name="footer">   
+                    <p:selectOneRadio id="vacationRadio" value="#{vacationDaysController.vacationRadio}" >
+                        <f:selectItem itemLabel="ΝΑΙ" itemValue="true" />
+                        <f:selectItem itemLabel="ΟΧΙ Το εχω ηδη κανει" itemValue="false" />
+                        <p:ajax event="change"   update=":growl" listener="#{vacationDaysController.metaforaVacation()}"
+                                oncomplete="PF('vacationDlgWV').hide();"/>
+                    </p:selectOneRadio>
+                </f:facet>
+                                        
+            </h:panelGrid>
+        </h:form>
+    </p:dialog> 
+    
+</html>
