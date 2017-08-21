@@ -14,7 +14,7 @@
                       draggable="true"
                       resizable="false"
                       visible="false"
-                      header="Μεταφορά ημερών αδείας από προηγούμενο έτος" dynamic="true" 
+                      header="Μεταφορα ημερων αδειας απο προηγουμενο ετος" dynamic="true" 
                       >
         
         <h:form id='vacationGT2'>
@@ -30,9 +30,10 @@
                     <p:selectOneRadio id="vacationRadio" value="#{vacationDaysController.vacationRadio}" >
                         <f:selectItem itemLabel="ΝΑΙ" itemValue="true" />
                         <f:selectItem itemLabel="ΟΧΙ Το εχω ηδη κανει" itemValue="false" />
-                        <p:ajax event="change"   update=":growl" listener="#{vacationDaysController.metaforaVacation()}"
-                                oncomplete="PF('vacationDlgWV').hide();"/>
                     </p:selectOneRadio>
+                    <p:commandButton id="btn12" value="OK" update=":growl" actionListener="#{vacationDaysController.metaforaVacation()}"
+                                     oncomplete="PF('vacationDlgWV').hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('vacationDlgWV').hide()"/>
                 </f:facet>
                                         
             </h:panelGrid>
