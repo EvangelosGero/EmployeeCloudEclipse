@@ -28,5 +28,9 @@
             <base-name>/Bundle_Sick_Days</base-name>
             <var>bundle_Sick_Days</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle_Subsidiaries</base-name>
+            <var>bundle_Subsidiaries</var>
+        </resource-bundle>
     </application>
 </faces-config>

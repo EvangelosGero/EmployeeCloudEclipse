@@ -13,7 +13,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{companyInformationController.selected != null}">
                         <p:outputLabel value="#{bundle.EditCompanyInformationLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{companyInformationController.selected.id}" title="#{bundle.EditCompanyInformationTitle_id}" required="true" requiredMessage="#{bundle.EditCompanyInformationRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{companyInformationController.selected.id}" disabled="true" 
+                                     title="#{bundle.EditCompanyInformationTitle_id}" required="true" 
+                                     requiredMessage="#{bundle.EditCompanyInformationRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditCompanyInformationLabel_name}" for="name" />
                         <p:inputText id="name" value="#{companyInformationController.selected.name}" title="#{bundle.EditCompanyInformationTitle_name}" />
                         <p:outputLabel value="#{bundle.EditCompanyInformationLabel_idosEpihirisis}" for="idosEpihirisis" />
@@ -44,7 +46,7 @@
                         <p:inputText id="kodikosIpokIka" value="#{companyInformationController.selected.kodikosIpokIka}" title="#{bundle.EditCompanyInformationTitle_kodikosIpokIka}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{companyInformationController.update}" value="#{bundle.Save}" update="display,:CompanyInformationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CompanyInformationEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CompanyInformationEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CompanyInformationEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

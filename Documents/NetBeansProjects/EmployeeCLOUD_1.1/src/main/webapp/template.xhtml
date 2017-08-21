@@ -301,9 +301,12 @@
                                                     action="/views/history/CreateOldReports.xhtml?faces-redirect=true"/>
                             </p:submenu>
                             <p:submenu label="Παράμετροι" >
-                                        <p:menuitem value="Στοιχεία Επιχείρησης" disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value='Υποκαταστήματα' disabled="#{not emplAdminsController.loggedIn}"/>
-                                        <p:menuitem value='Διαχείριση Administrators' outcome="/views/emplAdmins/List.xhtml" disabled="#{not emplAdminsController.loggedIn}"/>
+                                <p:menuitem value="Στοιχεία Επιχείρησης" outcome="/views/companyInformation/List.xhtml" 
+                                            disabled="#{not emplAdminsController.loggedIn}"/>
+                                        <p:menuitem value='Υποκαταστήματα' disabled="#{not emplAdminsController.loggedIn}"
+                                                    outcome="/views/subsidiaries/List.xhtml"/>
+                                        <p:menuitem value='Διαχείριση Administrators' outcome="/views/emplAdmins/List.xhtml" 
+                                                    disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Προκαταβολές" disabled="#{not emplAdminsController.loggedIn}"/>
                                         <p:menuitem value="Δάνεια" disabled="#{not emplAdminsController.loggedIn}"/>
                             </p:submenu>

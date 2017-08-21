@@ -43,7 +43,7 @@
                         <h:outputText value="#{bundle.ViewCompanyInformationLabel_kodikosIpokIka}"/>
                         <h:outputText value="#{companyInformationController.selected.kodikosIpokIka}" title="#{bundle.ViewCompanyInformationTitle_kodikosIpokIka}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CompanyInformationViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('CompanyInformationViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -16,8 +16,9 @@
     <class>Entities.SickDaysLessThanThree</class>
     <class>Entities.SickDaysMoreThanThree</class>
     <class>com.dynamotors.timer1._rest.Workers</class>
-     <class>com.dynamotors.timer1._rest.Timer</class>    
+    <class>com.dynamotors.timer1._rest.Timer</class>
+    <class>Entities.Subsidiaries</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
-    <properties/>    
+    <properties/>
   </persistence-unit>
 </persistence>
