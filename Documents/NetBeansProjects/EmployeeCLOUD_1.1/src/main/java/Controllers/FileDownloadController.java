@@ -19,6 +19,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -221,23 +222,23 @@ public class FileDownloadController implements Serializable{
     }
     
     public void populateCSL01FileList(){        
-        this.csl01DirectoriesList = new ArrayList<>();
-        this.csl01SubDirectoriesList = new ArrayList<>();
-        this.csl01DirectoriesFilesList = new ArrayList<>();
+        this.csl01DirectoriesList = new HashMap<>();
+       
         dir = Paths.get("C:", "EmployeeGUI", "EmployeeGUIOutput");
         if (Files.exists(dir)){
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "CSL01*")){
                 for(Path entry : stream){
-                    csl01DirectoriesList.add(entry.getFileName().toString());
+                    List<String> helper = new ArrayList<>();
+                    try (DirectoryStream<Path> subStream = Files.newDirectoryStream(dir.resolve(entry))){                        
+                        for(Path subEntry : subStream){
+                            helper.add(subEntry.getFileName().toString());
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                        JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                    }
+                    csl01DirectoriesList.put(entry.getFileName().toString(), helper);
                 } 
-                Collections.sort(csl01DirectoriesList, new Comparator<String>(){                    
-           
-                @Override
-                public int compare(String t1, String t2){
-                    return t1.substring(6).
-                            compareTo(t2.substring(6));
-                }
-                });   
             } catch (IOException ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
