@@ -15,24 +15,71 @@
 
         <ui:define name="body">
             <h:form id="DownloadListForm">
-                <p:panel header="#{bundle_Subsidiaries.ListSubsidiariesTitle}">
-                    <p:dataGrid var="fileName" value="#{fileDownloadComponent.fileList}" columns="3" rows="12"
+                <p:tabView dynamic="false" cache="false">
+                    <p:tab title="ΑΠΟΔΕΙΞΕΙΣ">
+                        <p:dataGrid var="fileName" value="#{fileDownloadController.apodixisFileList}" columns="3" rows="12"
                                 paginator="true" >
-                        <p:panel header="#{fileName}">
-                            <p:commandLink>
-                                <f:setPropertyActionListener value="#{fileName}"
-                                                             target="#{fileDownloadComponent.selectedFile}"/>
-                            <h:outputText value="#{fileName}" />
-                            </p:commandLink>
-                        </p:panel>
-
-                        <f:facet name="footer">
-                            <p:commandButton value="Download File">                                
-                            </p:commandButton>
-                        </f:facet>
-                   </p:dataGrid>
-                </p:panel>
+                            <p:panel header="#{fileName}">
+                                <h:outputText value="#{fileName}" />                           
+                                <f:facet name="footer">
+                                    <p:commandButton value="Preview" update=":PDFPreviewForm" 
+                                                 oncomplete="PF('PDFPreviewDialog').show()" 
+                                                 actionListener="#{fileDownloadController.fileDownloadStream(fileName)}">                                     
+                                    </p:commandButton>
+                                    <p:commandButton value="Download"  actionListener="#{fileDownloadController.fileDownloadStream(fileName)}" 
+                                                     ajax="false"> 
+                                        <p:fileDownload value="#{fileDownloadController.file}" />
+                                    </p:commandButton>
+                                </f:facet>
+                            </p:panel>
+                        </p:dataGrid>
+                    </p:tab> 
+                    <p:tab title="ΑΠΔ">
+                        <p:dataGrid var="apd" value="#{fileDownloadController.apdFileList}" columns="3" rows="12"
+                                paginator="true" >
+                            <p:panel header="#{apd}">
+                                <h:outputText value="#{apd}" />                           
+                                <f:facet name="footer">
+                                    <p:commandButton value="Preview" update=":PDFPreviewForm" 
+                                                 oncomplete="PF('PDFPreviewDialog').show()" 
+                                                 actionListener="#{fileDownloadController.fileDownloadStream(apd)}">                                     
+                                    </p:commandButton>
+                                    <p:commandButton value="Download" actionListener="#{fileDownloadController.fileDownloadStream(apd)}" 
+                                                     ajax="false">
+                                        <p:fileDownload value="#{fileDownloadController.file}" />
+                                    </p:commandButton>
+                                </f:facet>
+                            </p:panel>
+                        </p:dataGrid>
+                    </p:tab>
+                    <p:tab title="ΔΙΑΚΟΠΗ ΕΡΓ. ΣΧΕΣΗΣ">
+                        <p:dataGrid var="diakopi" value="#{fileDownloadController.diakopiFileList}" columns="3" rows="12"
+                                paginator="true" >
+                            <p:panel header="#{diakopi}">
+                                <h:outputText value="#{diakopi}" />                           
+                                <f:facet name="footer">
+                                    <p:commandButton value="Preview" update=":PDFPreviewForm" 
+                                                 oncomplete="PF('PDFPreviewDialog').show()" 
+                                                 actionListener="#{fileDownloadController.fileDownloadStream(diakopi)}">                                     
+                                    </p:commandButton>
+                                    <p:commandButton value="Download" actionListener="#{fileDownloadController.fileDownloadStream(diakopi)}" 
+                                                     ajax="false">
+                                        <p:fileDownload value="#{fileDownloadController.file}" />
+                                    </p:commandButton>
+                                </f:facet>
+                            </p:panel>
+                        </p:dataGrid>
+                    </p:tab>
+                </p:tabView>
             </h:form>
+            <p:dialog id="PDFPreviewDlg" widgetVar="PDFPreviewDialog" modal="true"  fitViewport="true"
+                      resizable="false" appendTo="@(body)" header="Preview PDF" >
+                <h:form id="PDFPreviewForm">                    
+                    <p:media value="#{fileDownloadController.file}"  player="pdf" width="1000" height="800" cache="false">
+                             
+                    </p:media>                             
+                </h:form>
+            </p:dialog>
         </ui:define>
     </ui:composition>
 

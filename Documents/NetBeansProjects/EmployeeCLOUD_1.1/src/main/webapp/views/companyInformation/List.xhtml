@@ -118,7 +118,8 @@
                             <h:outputText value="#{item.kodikosIpokIka}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{companyInformationController.prepareCreate}" update=":CompanyInformationCreateForm" oncomplete="PF('CompanyInformationCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{companyInformationController.prepareCreate}" 
+                                             update=":CompanyInformationCreateForm" oncomplete="PF('CompanyInformationCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CompanyInformationViewForm" oncomplete="PF('CompanyInformationViewDialog').show()" disabled="#{empty companyInformationController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CompanyInformationEditForm" oncomplete="PF('CompanyInformationEditDialog').show()" disabled="#{empty companyInformationController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{companyInformationController.destroy}" update=":growl,datalist" disabled="#{empty companyInformationController.selected}"/>
