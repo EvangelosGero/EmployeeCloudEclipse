@@ -196,7 +196,12 @@
                                         <p:menuitem value='Ανοιγμα αρχείων PDF' disabled="#{not emplAdminsController.loggedIn}"
                                                     actionListener="#{fileDownloadController.populatePDFFileList()}"
                                                     action="/views/fileDownloads/FileDownloads.xhtml?faces-redirect=true"/>  
-                                        <p:menuitem value="Ανοιγμα αρχείων EXCEL" disabled="#{not emplAdminsController.loggedIn}"/>                                        
+                                        <p:menuitem value="Ανοιγμα αρχείων EXCEL" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{fileDownloadController.populateExcelFileList()}"
+                                                    action="/views/fileDownloads/ExcelDownloads.xhtml?faces-redirect=true"/> 
+                                        <p:menuitem value="Ανοιγμα αρχείων CSL01" disabled="#{not emplAdminsController.loggedIn}"
+                                                    actionListener="#{fileDownloadController.populateCSL01FileList()}"
+                                                    action="/views/fileDownloads/CSLDownloads.xhtml?faces-redirect=true"/> 
                             </p:submenu>
                             <p:submenu label="Ιστορικό" >
                                         <p:menuitem value="Εμφάνιση Παλαιών Timer Reports" disabled="#{not emplAdminsController.loggedIn}"

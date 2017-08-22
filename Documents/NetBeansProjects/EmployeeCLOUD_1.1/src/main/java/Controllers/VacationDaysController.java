@@ -135,7 +135,7 @@ public class VacationDaysController implements Serializable {
     }
     
     public void createVacationReport() throws SQLException{
-        if ( LocalDate.now().getMonth() == Month.AUGUST){
+        if ( LocalDate.now().getMonth() == Month.JANUARY){
             RequestContext context = RequestContext.getCurrentInstance();        
             context.execute("PF('vacationDlgWV').show();");        
             context.update("vacationGT2:GT2Box");
