@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 23, 2015, 12:57:12 PM
+    Author     : e
+*/
+.loginGrid{
+    -fx-background-color:#efccff;
+    -fx-background-image: url("employeeList.png");
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;   
+}
+.text-field:validation-error{
+    -fx-background-color: #ffa0a0;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 3, 2, 2;
+    -fx-border-color: derive(-fx-background, -60%) transparent transparent transparent;
+    -fx-border-insets: 0, 1, 2;
+    -fx-border-radius: 3, 2, 2;
+}
+.pane{
+    -fx-background-color: blanchedalmond;
+}
+.workArea{
+    -fx-background-color:   aliceblue;
+}
+
+
+    
+    

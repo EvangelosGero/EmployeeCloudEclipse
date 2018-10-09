@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="669.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Enter_Data_vacation_Days.VacationCardController">
+   <children>
+      <Label alignment="CENTER" layoutX="133.0" layoutY="36.0" text="ΚΑΡΤΕΛΑ ΑΔΕΙΩΝ ΕΡΓΑΖΟΜΕΝΟΥ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="94.0" text="Κωδικός Εργαζομένου :" />
+      <Label layoutX="53.0" layoutY="184.0" text="Απο :" />
+      <Label layoutX="205.0" layoutY="185.0" text="Εως :" />
+      <DatePicker fx:id="fromDatePicker" layoutX="43.0" layoutY="209.0" prefHeight="25.0" prefWidth="116.0" />
+      <DatePicker fx:id="toDatePicker" layoutX="172.0" layoutY="209.0" prefHeight="25.0" prefWidth="107.0" />
+      <TableView fx:id="vacationCardTable" editable="true" layoutX="43.0" layoutY="243.0" prefHeight="356.0" prefWidth="432.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="30.0" text="ID" />
+          <TableColumn fx:id="firstNameColumn" prefWidth="100.0" text="Όνομα" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="100.0" text="Επώνυμο" />
+            <TableColumn fx:id="fromColumn" prefWidth="100.0" text="Από" />
+            <TableColumn fx:id="toColumn" prefWidth="100.0" text="Έως" />
+        </columns>
+      </TableView>
+      <Button layoutX="46.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleShowCard" text="Εμφάνιση αδειών" />
+      <ChoiceBox fx:id="idChoiceBox" layoutX="181.0" layoutY="90.0" prefHeight="25.0" prefWidth="69.0" />
+      <Label layoutX="48.0" layoutY="132.0" text="Ονομα:" />
+      <TextField fx:id="nameTextField" editable="false" layoutX="43.0" layoutY="153.0" prefHeight="25.0" prefWidth="117.0" />
+      <Label layoutX="179.0" layoutY="132.0" text="Επώνυμο:" />
+      <TextField fx:id="lastNameTextField" editable="false" layoutX="163.0" layoutY="153.0" prefHeight="25.0" prefWidth="163.0" />
+      <Label layoutX="346.0" layoutY="132.0" text="Πατρώνυμο:" />
+      <TextField fx:id="fatherNameTextField" editable="false" layoutX="335.0" layoutY="153.0" prefHeight="25.0" prefWidth="137.0" />
+   </children>
+</AnchorPane>

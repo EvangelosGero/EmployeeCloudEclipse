@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="697.0" prefWidth="931.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AbsentReport.MazikiDiorthosiController">
+   <children>
+      <Label layoutX="302.0" layoutY="41.0" prefHeight="20.0" prefWidth="327.0" text="ΜΑΖΙΚΗ ΔΙΟΡΘΩΣΗ ΡΟΛΟΓΙΩΝ ΕΡΓΑΖΟΜΕΝΩΝ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="117.0" text="ΑΠΟ :" />
+      <Label layoutX="562.0" layoutY="117.0" text="ΕΩΣ:" />
+      <DatePicker fx:id="fromDate" layoutX="118.0" layoutY="113.0" />
+      <DatePicker fx:id="toDate" layoutX="615.0" layoutY="113.0" />
+      <TableView fx:id="sourceTable" layoutX="53.0" layoutY="195.0" prefHeight="395.0" prefWidth="385.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="firstNameCol" prefWidth="75.0" text="Ονομα" />
+            <TableColumn fx:id="lastNameCol" prefWidth="75.0" text="Επώνυμο" />
+            <TableColumn fx:id="fatherNameCol" prefWidth="75.0" text="Πατρώνυμο" />
+            <TableColumn fx:id="codeCol" prefWidth="75.0" text="Κωδικός" />
+        </columns>
+      </TableView>
+      <TableView fx:id="targetTable" layoutX="568.0" layoutY="195.0" prefHeight="395.0" prefWidth="309.0">
+        <columns>
+          <TableColumn fx:id="idTargetCol" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="firstNameTargetCol" prefWidth="75.0" text="Ονομα" />
+            <TableColumn fx:id="lastNameTargetCol" prefWidth="75.0" text="Επώνυμο" />
+            <TableColumn fx:id="fatherNameTargetCol" prefWidth="75.0" text="Πατρώνυμο" />
+        </columns>
+      </TableView>
+      <Button fx:id="diorthoseBtn" layoutX="632.0" layoutY="624.0" mnemonicParsing="false" onAction="#handleDiorthoseBtn" prefHeight="25.0" prefWidth="182.0" text="Διόρθωσε όλους σε 8ωρο" />
+      <Button fx:id="cancelBtn" layoutX="182.0" layoutY="624.0" mnemonicParsing="false" onAction="#handleCancelBtn" prefHeight="25.0" prefWidth="129.0" text="Ακύρωσε Επιλογή" />
+      <Label layoutX="206.0" layoutY="172.0" text="ΕΡΓΑΖΟΜΕΝΟΙ" />
+      <Label layoutX="643.0" layoutY="172.0" text="ΕΡΓΑΖΟΜΕΝΟΙ ΓΙΑ ΑΛΛΑΓΗ" />
+   </children>
+</AnchorPane>

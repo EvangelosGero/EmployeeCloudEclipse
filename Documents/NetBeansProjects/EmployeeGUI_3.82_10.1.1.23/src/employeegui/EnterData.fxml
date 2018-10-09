@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane fx:id="gp" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="971.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="employeegui.EnterDataController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="324.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="462.0" minWidth="10.0" prefWidth="462.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="0.0" prefWidth="0.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="322.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="68.0" minHeight="0.0" prefHeight="31.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <HBox alignment="CENTER" prefHeight="59.0" prefWidth="622.0" spacing="10.0" GridPane.columnSpan="3">
+         <children>
+            <Label text="ID" />
+            <TextField fx:id="identif" prefWidth="50.0" />
+            <Label text="Μικρό Όνομα" />
+            <TextField fx:id="fn" />
+            <Label text="Επωνυμο" />
+            <TextField fx:id="ln" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="81.0" prefWidth="655.0" spacing="10.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+         <children>
+            <Label text="Ειδικότητα" />
+            <TextField fx:id="job" />
+            <Label text="Ημερομηνία Πρόσληψης" />
+            <DatePicker fx:id="hire" />
+            <Label text="Μισθός" />
+            <TextField fx:id="sal" prefWidth="100.0" />
+         </children></HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
+         <children>
+            <Label text="Συνθηματικό" />
+            <TextField fx:id="codeTextField" prefWidth="100.0">
+               </TextField>
+            <Label text="Σχεση" />
+            <ChoiceBox fx:id="RelationChoiceBox" prefWidth="150.0" value="Μισθωτός">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Μισθωτός" />
+                        <String fx:value="Ημερομίσθιος" />                        
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <Label text="Τηλ. 1" />
+            <TextField fx:id="Phone1Textfield" />
+            <Label text="E-mail:" />
+            <TextField fx:id="emailTextField" prefHeight="25.0" prefWidth="292.0" />
+         </children></HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+         <children>
+            <Button fx:id="firstBtn" mnemonicParsing="false" onAction="#handleFirstBtn" text="Πρώτος" />
+            <Button fx:id="previousBtn" mnemonicParsing="false" onAction="#handlePreviousBtn" text="Προηγούμενος" />
+            <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#handleNextBtn" text="Επόμενος" />
+            <Button fx:id="lastBtn" mnemonicParsing="false" onAction="#handleLastBtn" text="Τελευταίος" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="17.0" prefWidth="629.0" spacing="180.0" GridPane.columnSpan="3" GridPane.rowIndex="6">
+         <children>
+            <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#handleUpdateBtn" text="Αποθήκευση Αλλαγών" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#handleDeleteBtn" text="Διαγραφή Εργαζομένου" />
+            <Button fx:id="newBtn" alignment="CENTER" mnemonicParsing="false" onAction="#handleNewBtn" text="Νέος Εργαζόμενος" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="51.0" prefWidth="629.0" spacing="400.0" GridPane.columnSpan="3" GridPane.rowIndex="7">
+         <children>
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#handleSaveBtn" text="Αποθήκευση νέας εγγραφής" />
+            <Button fx:id="cancelBtn" alignment="CENTER" mnemonicParsing="false" onAction="#handleCancelBtn" text="Ακύρωση νέας εγγραφής" />
+         </children>
+      </HBox>
+      <HBox fx:id="msgHBox" alignment="BOTTOM_RIGHT" prefHeight="305.0" prefWidth="462.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets></HBox>
+      <AnchorPane prefHeight="312.0" prefWidth="712.0" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+         <children>
+            <Label layoutX="9.0" layoutY="2.0" prefHeight="37.0" prefWidth="44.0" text="Τηλ. 2" wrapText="true" />
+            <Label layoutX="8.0" layoutY="84.0" prefHeight="37.0" prefWidth="109.0" text="Έτη προυπηρεσίας σε άλλο εργοδότη" wrapText="true" />
+            <TextField fx:id="Phone2TextField" layoutX="62.0" layoutY="8.0" prefHeight="25.0" prefWidth="91.0" />
+            <TextField fx:id="StreetTextField" layoutX="62.0" layoutY="45.0" prefHeight="25.0" prefWidth="109.0" />
+            <TextField fx:id="ExperienceTextField" layoutX="117.0" layoutY="84.0" prefHeight="25.0" prefWidth="32.0" />
+            <Label layoutX="185.0" layoutY="12.0" text="ΑΔΤ" />
+            <Label layoutX="185.0" layoutY="49.0" text="Αριθμός" />
+            <Label layoutX="153.0" layoutY="88.0" text="Μόρφωση" />
+            <TextField fx:id="ADTTextField" layoutX="218.0" layoutY="8.0" prefHeight="25.0" prefWidth="81.0" />
+            <TextField fx:id="StreetNumberTextField" layoutX="267.0" layoutY="45.0" prefHeight="25.0" prefWidth="32.0" />
+            <Label layoutX="328.0" layoutY="12.0" text="ΑΜΚΑ" />
+            <Label layoutX="328.0" layoutY="49.0" text="Δήμος" />
+            <Label layoutX="323.0" layoutY="88.0" text="Γαμος" />
+            <TextField fx:id="AMKATextField" layoutX="383.0" layoutY="8.0" prefHeight="25.0" prefWidth="109.0" />
+            <TextField fx:id="DemosTextField" layoutX="383.0" layoutY="45.0" prefHeight="25.0" prefWidth="109.0" />
+            <Label layoutX="8.0" layoutY="49.0" prefHeight="17.0" prefWidth="45.0" text="Οδός" />
+            <Label layoutX="528.0" layoutY="49.0" text="Ταχ. Κωδικας" />
+            <TextField fx:id="TKTextField" layoutX="624.0" layoutY="45.0" prefHeight="25.0" prefWidth="67.0" />
+            <Label layoutX="503.0" layoutY="12.0" text="ΑΦΜ" />
+            <TextField fx:id="AFMTextField" layoutX="537.0" layoutY="8.0" prefHeight="25.0" prefWidth="109.0" />
+            <ChoiceBox fx:id="education" layoutX="213.0" layoutY="84.0" prefHeight="25.0" prefWidth="91.0" value="Πρωτοβάθμια">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Πρωτοβάθμια" />
+                        <String fx:value="Δευτεροβάθμια" />
+                        <String fx:value="Τριτοβάθμια" />
+                        <String fx:value="Μεταπτυχιακό" /> 
+                        <String fx:value="Διδακτορικό" />                      
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <ChoiceBox fx:id="marriage" layoutX="370.0" layoutY="84.0" prefHeight="25.0" prefWidth="45.0" value="NAI">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="NAI" />
+                        <String fx:value="OXI" />                        
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <Label layoutX="428.0" layoutY="78.0" prefHeight="37.0" prefWidth="49.0" text="Αριθμός Τέκνων" wrapText="true" />
+            <TextField fx:id="ChildrenTextfield" layoutX="483.0" layoutY="84.0" prefHeight="25.0" prefWidth="34.0" />
+            <Label layoutX="528.0" layoutY="88.0" text="A.M.IKA" />
+            <TextField fx:id="amIkaTextField" layoutX="582.0" layoutY="84.0" prefHeight="25.0" prefWidth="109.0" />
+            <Label layoutX="659.0" layoutY="12.0" text="Ημερομ. Γεννησης" />
+            <DatePicker fx:id="birthDatePicker" layoutX="784.0" layoutY="8.0" prefHeight="25.0" prefWidth="174.0" />
+            <Label layoutX="293.0" layoutY="136.0" text="Ημερομ. Πρώτης Πρόσληψης" />
+            <DatePicker fx:id="firstEverHireDatePicker" layoutX="462.0" layoutY="132.0" prefHeight="25.0" prefWidth="174.0" />
+            <Label layoutX="7.0" layoutY="183.0" text="Ονομα Πατρός" />
+            <TextField fx:id="fatherName" layoutX="111.0" layoutY="179.0" />
+            <Label layoutX="716.0" layoutY="136.0" text="Πακέτο Εισφορων" />
+            <ChoiceBox fx:id="packageIKAChoiceBox" layoutX="847.0" layoutY="132.0" prefHeight="25.0" prefWidth="91.0">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="101" />
+                        <String fx:value="102" />
+                        <String fx:value="106" />                       
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <Label layoutX="9.0" layoutY="219.0" text="Ταμείο Μετάλλου" />
+            <ChoiceBox fx:id="tapitChoiceBox" layoutX="111.0" layoutY="215.0" prefHeight="25.0" prefWidth="253.0">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="ΟΧΙ" />
+                        <String fx:value="ΠΡΟΝΟΙΑ ΕΡΓ/ΛΩΝ ΜΕΤΑΛΛΟΥ (ΠΑΛ)" />
+                        <String fx:value="ΠΡΟΝΟΙΑ ΕΡΓ/ΛΩΝ ΜΕΤΑΛΛΟΥ (ΝΕΟΙ)" />                       
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <Label layoutX="374.0" layoutY="219.0" prefHeight="3.0" prefWidth="83.0" text="Υποκαταστημα" />
+            <ChoiceBox fx:id="subsidiaryChoiceBox" layoutX="462.0" layoutY="215.0" prefWidth="150.0" />                     
+            <Separator layoutX="1.0" layoutY="278.0" prefHeight="1.0" prefWidth="960.0" />
+            <Label layoutX="642.0" layoutY="219.0" text="Εταιρία" />
+            <ChoiceBox fx:id="companyChoiceBox" layoutX="703.0" layoutY="215.0" prefHeight="25.0" prefWidth="253.0" />
+            <Label layoutX="528.0" layoutY="183.0" text="Κατ. Ασφαλισης" />
+            <TextField fx:id="katAsfalTextField" layoutX="628.0" layoutY="179.0" prefHeight="25.0" prefWidth="34.0" />
+            <Label layoutX="718.0" layoutY="88.0" text="Α.Μ. Επικουρικού" />
+            <TextField fx:id="amEpikourikouTextField" layoutX="829.0" layoutY="84.0" prefHeight="25.0" prefWidth="109.0" />
+            <Label layoutX="685.0" layoutY="183.0" text="Κεντρο Κόστους" />
+            <TextField fx:id="kentroKostousTextField" layoutX="789.0" layoutY="179.0" />
+            <Label layoutX="269.0" layoutY="183.0" text="Όνομα Μητρός" />
+            <TextField fx:id="motherNameTextField" layoutX="363.0" layoutY="179.0" />
+            <Label layoutX="9.0" layoutY="249.0" text="ΑΡ. ΠΑΡΑΡΤ." />
+            <TextField fx:id="arParartTextField" layoutX="89.0" layoutY="245.0" prefHeight="25.0" prefWidth="50.0" />
+            <Label layoutX="149.0" layoutY="249.0" text="ΚΑΔ" />
+            <TextField fx:id="kadTextField" layoutX="186.0" layoutY="245.0" prefHeight="25.0" prefWidth="50.0" />
+            <Label layoutX="6.0" layoutY="136.0" text="Κωδικός Ειδικότητας" />
+            <TextField fx:id="kodikosIdikotitasTextField" layoutX="136.0" layoutY="134.0" prefHeight="25.0" prefWidth="114.0" />
+            <Label layoutX="243.0" layoutY="249.0" text="Ειδική Περίπτωση Ασφαλισης" />
+            <TextField fx:id="idikiPeriptosiAsfalisisTextField" layoutX="413.0" layoutY="245.0" prefHeight="25.0" prefWidth="50.0" />
+            <Label layoutX="469.0" layoutY="249.0" text="Κατασταση" />
+            <ChoiceBox fx:id="katastasiChoiceBox" layoutX="537.0" layoutY="245.0" prefWidth="150.0">
+                 <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="ΕΝΕΡΓΟΣ" />
+                        <String fx:value="ΑΠΟΛΥΣΗ" />
+                        <String fx:value="ΣΥΝΤΑΞΙΟΔΟΤΗΣΗ" />
+                        <String fx:value="ΠΑΡΑΙΤΗΣΗ" />                       
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <Label layoutX="694.0" layoutY="249.0" text="Ημερομ. Διακοπής" />
+            <DatePicker fx:id="diakopiDatePicker" layoutX="796.0" layoutY="245.0" prefHeight="25.0" prefWidth="167.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

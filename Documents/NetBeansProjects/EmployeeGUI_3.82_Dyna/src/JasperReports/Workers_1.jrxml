@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2016-09-20T17:45:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Employees Basic Report" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="df013db5-f76e-44d3-b0df-bcbc46d93160">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="employee_dataAdapter.xml"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT c.NAME AS c_name,s.NAME AS s_name,f.NAME AS isfores_name,r.NAME AS relation_name,t.NAME AS tapit_name,w.* FROM workers w
+LEFT JOIN company_information c ON c.id = w.company
+LEFT JOIN subsidiaries s ON s.ID=w.SUBSIDIARY
+LEFT JOIN EISFORES_INFO f ON f.ID=w.REASON_ISFORES
+LEFT JOIN RELATION_INFO r ON r.ID=w.RELATION
+LEFT JOIN TAPIT_INFO t ON t.ID=w.TAPIT
+WHERE HIRE_DATE IS NOT NULL AND COMPANY >0 ORDER BY COMPANY,SUBSIDIARY,LAST_NAME]]>
+	</queryString>
+	<field name="C_NAME" class="java.lang.String"/>
+	<field name="S_NAME" class="java.lang.String"/>
+	<field name="ISFORES_NAME" class="java.lang.String"/>
+	<field name="RELATION_NAME" class="java.lang.String"/>
+	<field name="TAPIT_NAME" class="java.lang.String"/>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="FIRST_NAME" class="java.lang.String"/>
+	<field name="LAST_NAME" class="java.lang.String"/>
+	<field name="JOB_TITLE" class="java.lang.String"/>
+	<field name="HIRE_DATE" class="java.sql.Date"/>
+	<field name="SALARY" class="java.lang.Double"/>
+	<field name="CODE" class="java.lang.String"/>
+	<field name="PHONE1" class="java.lang.String"/>
+	<field name="PHONE2" class="java.lang.String"/>
+	<field name="ADT" class="java.lang.String"/>
+	<field name="AMKA" class="java.lang.String"/>
+	<field name="AFM" class="java.lang.String"/>
+	<field name="STREET" class="java.lang.String"/>
+	<field name="STREET_NUMBER" class="java.lang.Integer"/>
+	<field name="DEMOS" class="java.lang.String"/>
+	<field name="TK" class="java.lang.String"/>
+	<field name="YEARS_BEFORE" class="java.lang.Integer"/>
+	<field name="EDUCATION" class="java.lang.String"/>
+	<field name="MARRIAGE" class="java.lang.String"/>
+	<field name="CHILDREN" class="java.lang.Integer"/>
+	<field name="ENTITLED_DAYS" class="java.lang.Integer"/>
+	<field name="AM_IKA" class="java.lang.String"/>
+	<field name="BIRTHDATE" class="java.sql.Date"/>
+	<field name="FIRST_HIRE_DATE" class="java.sql.Date"/>
+	<field name="FATHER_NAME" class="java.lang.String"/>
+	<field name="REASON_ISFORES" class="java.lang.Integer"/>
+	<field name="SUBSIDIARY" class="java.lang.Integer"/>
+	<field name="COMPANY" class="java.lang.Integer"/>
+	<field name="KAT_ASFALISIS" class="java.lang.Integer"/>
+	<field name="TAPIT" class="java.lang.Integer"/>
+	<field name="RELATION" class="java.lang.Integer"/>
+	<field name="KENTRO_KOSTOUS" class="java.lang.String"/>
+	<field name="AM_EPIKOURIKOU" class="java.lang.String"/>
+	<field name="MOTHER_NAME" class="java.lang.String"/>
+	<field name="AR_PARARTIMATOS" class="java.lang.String"/>
+	<field name="KAD" class="java.lang.String"/>
+	<field name="KODIKOS_IDIKOTITAS" class="java.lang.String"/>
+	<field name="IDIKI_PER_ASFALISIS" class="java.lang.String"/>
+	<field name="APOLISI" class="java.lang.Integer"/>
+	<field name="DIAKOPI" class="java.sql.Date"/>
+	<field name="EMAIL" class="java.lang.String"/>
+	<group name="Group1" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{COMPANY}]]></groupExpression>
+		<groupHeader>
+			<band height="48">
+				<frame>
+					<reportElement mode="Opaque" x="-21" y="7" width="843" height="24" forecolor="#B89F7D" backcolor="#F2EBDF" uuid="ff649bda-bbd1-4c2d-bd67-21f69ad64bbf"/>
+					<textField>
+						<reportElement style="SubTitle" x="590" y="5" width="22" height="19" forecolor="#B89F7D" uuid="b5a25815-f4ed-4382-9712-d113dc519d4e"/>
+						<textElement>
+							<font fontName="Arial Greek" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{COMPANY}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="90" y="0" width="440" height="24" uuid="9380a64b-0695-41f4-8210-60d29623f1ec"/>
+						<textElement>
+							<font size="18"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{C_NAME}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="21" y="-1" width="68" height="26" uuid="64134d9c-397f-4425-a5bc-832f944c1335"/>
+						<textElement verticalAlignment="Middle">
+							<font size="16"/>
+						</textElement>
+						<text><![CDATA[Εταιρία :]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{SUBSIDIARY}]]></groupExpression>
+		<groupHeader>
+			<band height="65">
+				<textField>
+					<reportElement style="SubTitle" x="567" y="10" width="26" height="20" forecolor="#FFFFFF" uuid="f12f6bf3-7d7e-4d80-a7a9-29937604f672"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUBSIDIARY}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="5" width="389" height="30" uuid="3cf86d88-c2a6-4d80-b8df-f5f9bdee3ec1"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{S_NAME}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="4" width="125" height="26" uuid="15b0dadc-b52c-40dd-a099-54f0eae75df7"/>
+					<textElement verticalAlignment="Middle">
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Υποκατάστημα:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="270" y="0" width="500" height="40" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Κατάσταση Εργαζομένων]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="309" y="40" width="246" height="22" uuid="f6a78448-8260-4445-a9e0-e3fb53b080d9"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[ανα εταιρία / υποκατάστημα]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="80" height="80" uuid="74aab89f-9c1d-418a-9ed3-75ebcf18ddba"/>
+				<imageExpression><![CDATA["images/Employees_in_series.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="24" width="802" height="1" uuid="e9d2002a-c8ee-4649-a258-640dad29110c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="20" height="15" forecolor="#736343" uuid="c831c455-2591-47b7-a3ac-469aaffe43ec"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="20" y="0" width="90" height="15" forecolor="#736343" uuid="2cff3b07-6d1f-4dce-b420-05b2533a5784"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Επίθετο]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="110" y="0" width="61" height="15" forecolor="#736343" uuid="1da46adb-7e91-467c-9eb7-732846d85002"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Oνομα]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="180" y="10" width="126" height="15" forecolor="#736343" uuid="e460b013-5378-4615-8d23-b9609296030a"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Ειδικότητα]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="310" y="1" width="70" height="15" forecolor="#736343" uuid="d83aadc2-6252-4a14-be85-7cb8d7b4a68e"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Ημ.Πρόσληψης]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="380" y="0" width="30" height="15" forecolor="#736343" uuid="608b4cb7-a7ba-481e-b4af-4fbdd2f61f2a"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Ημ.Αδ.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="418" y="0" width="44" height="15" forecolor="#736343" uuid="efa13ec3-5a48-444c-bada-6b5777a405a3"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[ΑΜ.ΙΚΑ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="470" y="1" width="61" height="15" forecolor="#736343" uuid="e6db5d8e-225f-4198-9921-99fde4e787cf"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[ΑΜΚΑ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="540" y="0" width="61" height="15" forecolor="#736343" uuid="8084a2e5-816a-4905-965d-292032f6022f"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Α.Φ.Μ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="610" y="1" width="61" height="15" forecolor="#736343" uuid="dea484c2-29ca-4997-8aa0-a9bc21a71d48"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Ημ.Γέννησης]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="680" y="1" width="40" height="15" forecolor="#736343" uuid="49b0109d-b93e-461f-a7ac-d9d54714ae01"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Μισθός]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="740" y="0" width="61" height="15" forecolor="#736343" uuid="e0de107a-3ab1-42aa-a3fa-045cd83427b9"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Α.Δ.Τ.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="680" y="10" width="61" height="14" forecolor="#736343" uuid="b4998b1c-1a65-4f60-980b-70d502801111"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Αρ.Παιδιών]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="629" y="10" width="42" height="15" forecolor="#736343" uuid="ce0bf106-6f56-4258-b491-8e38e275feea"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Έγγαμος]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="470" y="10" width="121" height="14" forecolor="#736343" uuid="b18369ec-a4c4-48c3-b999-26fefdccc887"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Τ.Πρόνοιας Μετάλλου]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="310" y="10" width="61" height="14" forecolor="#736343" uuid="4dd405d8-e3e1-4a57-8436-077ec499e203"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Εισφορές]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="180" y="1" width="97" height="14" forecolor="#736343" uuid="feddae35-98fd-4e91-83c1-81d0f349ff1a"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Σχέση Εργασίας]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="735" y="10" width="70" height="15" forecolor="#736343" uuid="4f12da58-e797-4bbe-b225-5ca57df6fc70"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Ημ.Απόλυσης]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="fa7cec56-4ec1-48e6-a26e-7266a995d174"/>
+				<textField isStretchWithOverflow="true" pattern="#,000.###;(#,000.###-)">
+					<reportElement style="Detail" x="0" y="0" width="20" height="15" uuid="8e836666-41df-4e66-ad6d-853274488263"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="20" y="0" width="90" height="15" uuid="48cb5949-b9fc-4c46-a0dd-6d2df6b2af16"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LAST_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="110" y="0" width="73" height="15" uuid="5d278ab9-606b-44e5-ba98-f0787181f4fe"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FIRST_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="190" y="13" width="120" height="15" uuid="2ea92eba-bc92-42cc-93b5-a3a20c7f59af"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{JOB_TITLE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement style="Detail" x="320" y="0" width="61" height="15" uuid="4e81bf25-7dfd-4738-afdd-2994b24e34fc"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{HIRE_DATE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="390" y="0" width="15" height="15" uuid="65835f40-f5a0-4b66-aa73-5441f36adf9d"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ENTITLED_DAYS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="410" y="0" width="61" height="15" uuid="90a36428-8103-4bea-9043-4ec7d8cf2c0d"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AM_IKA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="470" y="0" width="61" height="15" uuid="03cebdb6-32eb-4fb5-ad24-2589eb681bc7"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AMKA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="540" y="0" width="61" height="15" uuid="83098388-0516-4ce2-ac9b-6de066617fb2"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AFM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement style="Detail" x="610" y="0" width="61" height="15" uuid="c92023a4-cca1-4f33-8a70-f4c2e5c03aeb"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{BIRTHDATE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="680" y="0" width="40" height="15" uuid="fe1d895a-d8a2-473f-804d-ca0d61557171"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SALARY}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="730" y="0" width="61" height="15" uuid="93bd18a7-40ac-433d-aafa-f86c3aa46aa5"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ADT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="190" y="0" width="100" height="15" uuid="5bdd172e-b5d1-40d0-a2e7-10b5c695573e"/>
+					<textElement>
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{RELATION_NAME}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="320" y="13" width="137" height="15" uuid="0e83f9fa-1f71-490d-9949-437e3ca40272"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ISFORES_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="471" y="13" width="137" height="15" uuid="9dddfe1f-519c-4fa0-816d-08b7f254c3fa"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TAPIT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="694" y="13" width="32" height="15" uuid="49f7a9e7-5768-4eec-9a73-e2d21ee6bc3c">
+					<printWhenExpression><![CDATA[$F{CHILDREN} >0]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CHILDREN}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="639" y="13" width="32" height="15" uuid="f5ad47f2-d415-445c-b7ef-b218443130a8"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MARRIAGE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="730" y="13" width="61" height="15" uuid="ab5dc18f-68fc-4ca8-a43b-23b8c8ecfc04">
+					<printWhenExpression><![CDATA[$F{DIAKOPI} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DIAKOPI}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="fa5e88d5-a011-4e32-8f12-ce923f903111"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="5d8169bd-4a75-48c8-8a68-6d3ad5ba9402"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343" uuid="e5e27efa-b599-499b-9ca3-848cb511cb7b"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343" uuid="18cfe1ca-f7d6-48b0-9827-28578b42a5e0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="fbce24bb-3cb1-44a3-8eec-8c067ddbe5b5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

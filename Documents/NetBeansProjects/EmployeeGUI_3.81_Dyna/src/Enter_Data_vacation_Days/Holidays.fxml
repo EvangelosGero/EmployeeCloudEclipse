@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Enter_Data_vacation_Days.HolidaysController">
+   <children>
+      <Label layoutX="204.0" layoutY="33.0" text="ΠΙΝΑΚΑΣ ΕΠΙΣΗΜΩΝ ΑΡΓΙΩΝ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="76.0" text="Παρακαλώ καταχωρείστε ή διαγράψτε μία αργία :" />
+      <DatePicker fx:id="holidaysDatePicker" layoutX="338.0" layoutY="72.0" />
+      <ListView fx:id="HolidaysList" layoutX="197.0" layoutY="136.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="50.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleSubmitBtn" text="Καταχώρηση" />
+      <Button layoutX="164.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleDeleteBtn" text="Διαγραφή" />
+      <Label fx:id="resultLabel" layoutX="66.0" layoutY="363.0" />
+   </children>
+</AnchorPane>
